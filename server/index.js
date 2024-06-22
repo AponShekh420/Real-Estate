@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 
 // internal file imports
 const stateRouter = require('./routers/stateRouter');
+const areaRouter = require('./routers/areaRouter');
 
 
 
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, "public")))
 // Root routes
 
 app.use('/state', stateRouter);
+app.use('/area', areaRouter);
 
 
 
