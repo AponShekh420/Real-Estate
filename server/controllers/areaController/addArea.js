@@ -10,14 +10,19 @@ const addArea = async (req, res) => {
       state: [...stateId]
     })
 
-    console.log(Area)
+    // console.log(Area)
     // updating the state collection to add area in area field on state
     if(Area) {
-      const state = await StateModel.findByIdAndUpdate(stateId, {
-        $push: {
-          area: [...stateId]
-        }
-      })
+      const state = [];
+      for(let eachId of stateId) {
+        const eachState = await StateModel.findByIdAndUpdate(eachId, {
+          $push: {
+            area: Area
+          }
+        })
+
+        state.push(eachState)
+      }
 
       // check validation: is state has updated or not
       if(state) {
