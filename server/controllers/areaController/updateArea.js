@@ -10,17 +10,19 @@ const updateArea = async (req, res) => {
       state: [...stateId]
     })
 
-    // console.log(Area)
     // updating the state collection to add area in area field on state
     if(Area) {
 
       // remove the old state
-      const oldState = await StateModel.deleteMany({
+      const oldState = await StateModel.updateMany({
         area: {
           $in: areaId
         }
+      }, {
+        $pull: {
+          area: areaId
+        }
       })
-
       // adding the area in new state
       if(oldState) {
         const state = [];
@@ -37,7 +39,7 @@ const updateArea = async (req, res) => {
         // check validation: is state has updated or not
         if(state) {
           res.status(200).json({
-            msg: "The State Has Added Successfully"
+            msg: "The Area Has updated Successfully"
           })
         } else {
           res.status(500).json({
@@ -46,13 +48,14 @@ const updateArea = async (req, res) => {
             }
           })
         }
-    } else{
-      res.status(500).json({
-        errors: {
-          msg: "There was an server side error"
-        }
-      })
-    }
+
+      } else{
+        res.status(500).json({
+          errors: {
+            msg: "There was an server side error"
+          }
+        })
+      }
     } else {
       res.status(500).json({
         errors: {
