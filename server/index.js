@@ -2,19 +2,32 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const path = require('path');
-const cors = require('cors')
+const cors = require('cors');
+const cookieParser = require('cookie-parser')
+const mongoose = require('mongoose');
+
 // internal file imports
+const stateRouter = require('./routers/stateRouter');
 
 
 
 // configure funtionality
 const app = express();
+
 dotenv.config();
 app.use(cors({
   origin: "https://localhost:3000",
 }))
 
 
+mongoose.connect(process.env.MONGOOSE_URL, {
+  // useNewUrlParser: true,
+  // useUnifiedTopology: true,
+})
+.then(()=> console.log('database connection successfully'))
+.catch((err)=> console.log(err))
+
+app.use(cookieParser(process.env.COOKIE_SECRET))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, "public")))
@@ -22,7 +35,7 @@ app.use(express.static(path.join(__dirname, "public")))
 
 // Root routes
 
-
+app.use('/state', stateRouter);
 
 
 
