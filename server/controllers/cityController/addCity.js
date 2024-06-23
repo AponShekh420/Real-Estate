@@ -7,21 +7,16 @@ const addCity = async (req, res) => {
     const City = await CityModel.insertMany({
       name,
       desc,
-      state: [...stateId]
+      state: stateId
     })
 
     // updating the state collection to add area in area field on state
     if(City) {
-      const state = [];
-      for(let eachId of stateId) {
-        const eachState = await StateModel.findByIdAndUpdate(eachId, {
+      const state = await StateModel.findByIdAndUpdate(stateId, {
           $push: {
             city: City[0]._id
           }
         })
-
-        state.push(eachState)
-      }
 
       // check validation: is state has updated or not
       if(state) {

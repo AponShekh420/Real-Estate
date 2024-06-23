@@ -36,7 +36,7 @@ const addCommunity = async (req, res) => {
     if(uploadStatus) {
       res.status(200).json({
         msg: "The community has added Successfully"
-      })
+      });
     } else {
       res.status(500).json({
         errors: {

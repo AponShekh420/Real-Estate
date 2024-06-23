@@ -7,7 +7,7 @@ const updateCity = async (req, res) => {
     const City = await CityModel.findByIdAndUpdate(cityId, {
       name,
       desc,
-      state: [...stateId]
+      state: stateId
     })
 
     // updating the state collection to add city in city field on state
@@ -26,16 +26,11 @@ const updateCity = async (req, res) => {
       
       // adding the city in new state
       if(oldState) {
-        const state = [];
-        for(let eachId of stateId) {
-          const eachState = await StateModel.findByIdAndUpdate(eachId, {
+        const state = await StateModel.findByIdAndUpdate(stateId, {
             $push: {
               city: City._id
             }
           })
-
-          state.push(eachState)
-        }
 
         // check validation: is state has updated or not
         if(state) {

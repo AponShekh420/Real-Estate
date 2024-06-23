@@ -8,12 +8,10 @@ const citySchema = mongoose.Schema({
     required: true
   },
   desc: String,
-  state: [
-    {
-      type: mongoose.Types.ObjectId,
-      required: true,
-    }
-  ],
+  state: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+  },
   area: [
     {
       type: mongoose.Types.ObjectId,
