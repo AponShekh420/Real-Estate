@@ -40,7 +40,7 @@ const updateCity = async (req, res) => {
         // check validation: is state has updated or not
         if(state) {
           res.status(200).json({
-            msg: "The Area Has updated Successfully"
+            msg: "The City Has updated Successfully"
           })
         } else {
           res.status(500).json({
