@@ -61,7 +61,7 @@ const CommunitySchema = mongoose.Schema({
     type: String,
     required: true
   },
-  Overview: {
+  overview: {
     type: String
   },
   imgs: [
@@ -78,7 +78,7 @@ const CommunitySchema = mongoose.Schema({
     type: Number,
     default: 0
   },
-  Garages: {
+  garages: {
     type: Number,
     default: 0
   },

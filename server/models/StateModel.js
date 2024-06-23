@@ -13,6 +13,11 @@ const StateSchema = mongoose.Schema({
       type: mongoose.Types.ObjectId,
       default: []
     }
+  ],
+  community: [
+    {
+      type: mongoose.Types.ObjectId
+    }
   ]
 })
 

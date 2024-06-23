@@ -15,7 +15,12 @@ const AreaSchema = mongoose.Schema({
   city: {
     type: mongoose.Types.ObjectId,
     required: true,
-  }
+  },
+  community: [
+    {
+      type: mongoose.Types.ObjectId
+    }
+  ]
 })
 
 

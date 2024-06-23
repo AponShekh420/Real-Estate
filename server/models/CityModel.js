@@ -17,6 +17,11 @@ const citySchema = mongoose.Schema({
       type: mongoose.Types.ObjectId,
       default: []
     }
+  ],
+  community: [
+    {
+      type: mongoose.Types.ObjectId
+    }
   ]
 })
 

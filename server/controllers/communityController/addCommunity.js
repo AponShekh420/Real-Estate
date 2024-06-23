@@ -1,11 +1,15 @@
 const CommunityModel = require("../../models/CommunityModel");
+const StateModel = require("../../models/StateModel");
+const CityModel = require("../../models/CityModel");
+const AreaModel = require("../../models/AreaModel");
 
 const addCommunity = async (req, res) => {
 
   const {title, website, phone, address, stateId, cityId, areaId, zip, minPrice, maxPrice, homeTypes, communitySize, ageRestrictions, gated, builtStart, builtEnd, overview, imgs, bedrooms, bathrooms, garages, active, status, sqft} = req.body
 
   try {
-    const Community = new CommunityModel({
+    // upload the community in database
+    const community = await CommunityModel.insertMany({
       title,
       website, 
       phone,
@@ -32,11 +36,43 @@ const addCommunity = async (req, res) => {
       communitySize
     })
 
-    const uploadStatus = await Community.save();
-    if(uploadStatus) {
-      res.status(200).json({
-        msg: "The community has added Successfully"
-      });
+    // check: the community has upload in database or not
+    if(community) {
+      // push the community in state community list
+      const stateUpdate = await StateModel.findByIdAndUpdate(stateId, {
+        $push: {
+          community: community[0]._id
+        }
+      })
+
+      // push the community in city community list
+      const cityUpdate = await CityModel.findByIdAndUpdate(cityId, {
+        $push: {
+          community: community[0]._id
+        }
+      })
+
+      // push the community in area community list
+      const areaUpdate = await AreaModel.findByIdAndUpdate(areaId, {
+        $push: {
+          community: community[0]._id
+        }
+      })
+
+      // check: those cityModel, StateModel and areaModel has updated or not
+      if(stateUpdate && cityUpdate && areaUpdate) {
+        res.status(200).json({
+          msg: "The community has added Successfully"
+        })
+      } else {
+        // the community has uploaded, but the community field has not updated from cityModel, stateModel or areaModel, that's why we should delete the community and to send the server side error 
+        await CommunityModel.findByIdAndDelete(community[0]._id);
+        res.status(500).json({
+          errors: {
+            msg: "There was an server side error"
+          }
+        })
+      }
     } else {
       res.status(500).json({
         errors: {
