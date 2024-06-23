@@ -1,31 +1,27 @@
 const mongoose = require('mongoose');
 
 
-// schema of area
+// schema of city
 const AreaSchema = mongoose.Schema({
   name: {
     type: String,
     required: true
   },
   desc: String,
-  state: [
-    {
-      type: mongoose.Types.ObjectId,
-      required: true,
-    }
-  ],
-  city: [
-    {
-      type: mongoose.Types.ObjectId,
-      default: []
-    }
-  ]
+  state: {
+    type: mongoose.Types.ObjectId,
+    required: true
+  },
+  city: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+  }
 })
 
 
-// model of area
+// model of city
 const AreaModel = mongoose.models.Area || mongoose.model("Area", AreaSchema);
 
 
-
 module.exports = AreaModel;
+

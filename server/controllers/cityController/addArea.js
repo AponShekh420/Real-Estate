@@ -4,25 +4,25 @@ const CityModel = require("../../models/CityModel");
 
 const addCity = async (req, res) => {
   try {
-    const {name, desc, stateId, areaId} = req.body;
-    const City = await CityModel.insertMany({
+    const {name, desc, stateId, cityId} = req.body;
+    const Area = await AreaModel.insertMany({
       name,
       desc,
       state: stateId,
-      area: areaId
+      city: cityId
     });
 
     // updating the areaModel collection to add city in area field on areaModel
-    if(City) {
-      const area = await AreaModel.findByIdAndUpdate(areaId, {
+    if(Area) {
+      const city = await CityModel.findByIdAndUpdate(cityId, {
         $push: {
-          city: City[0]._id
+          area: Area[0]._id
         }
       })
       // check validation: is area has updated or not
-      if(area) {
+      if(city) {
         res.status(200).json({
-          msg: "The City Has Added Successfully"
+          msg: "The Area Has Added Successfully"
         })
       } else {
         res.status(500).json({

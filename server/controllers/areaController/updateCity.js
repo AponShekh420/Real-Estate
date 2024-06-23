@@ -1,36 +1,36 @@
-const AreaModel = require("../../models/AreaModel");
+const CityModel = require("../../models/CityModel");
 const StateModel = require("../../models/StateModel");
 
-const updateArea = async (req, res) => {
+const updateCity = async (req, res) => {
   try {
-    const {name, desc, stateId, areaId } = req.body;
-    const Area = await AreaModel.findByIdAndUpdate(areaId, {
+    const {name, desc, stateId, cityId } = req.body;
+    const City = await CityModel.findByIdAndUpdate(cityId, {
       name,
       desc,
       state: [...stateId]
     })
 
-    // updating the state collection to add area in area field on state
-    if(Area) {
+    // updating the state collection to add city in city field on state
+    if(City) {
 
-      // remove the old state
+      // remove the old city of state
       const oldState = await StateModel.updateMany({
-        area: {
-          $in: areaId
+        city: {
+          $in: cityId
         }
       }, {
         $pull: {
-          area: areaId
+          city: cityId
         }
       })
       
-      // adding the area in new state
+      // adding the city in new state
       if(oldState) {
         const state = [];
         for(let eachId of stateId) {
           const eachState = await StateModel.findByIdAndUpdate(eachId, {
             $push: {
-              area: Area
+              city: City._id
             }
           })
 
@@ -69,4 +69,4 @@ const updateArea = async (req, res) => {
   }
 }
 
-module.exports = updateArea;
+module.exports = updateCity;

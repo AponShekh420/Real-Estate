@@ -5,39 +5,39 @@ const updateCity = async (req, res) => {
   
   try {
     const {name, desc, stateId, areaId, cityId } = req.body;
-    const City = await CityModel.findByIdAndUpdate(cityId, {
+    const Area = await AreaModel.findByIdAndUpdate(areaId, {
       name,
       desc,
       state: stateId,
-      area: areaId
+      city: cityId
     });
 
     // updating the state collection to add area in area field on state
-    if(City) {
+    if(Area) {
 
       // remove the old state
-      const OldArea = await AreaModel.updateMany({
-        city: {
-          $in: cityId
+      const OldArea = await CityModel.updateMany({
+        area: {
+          $in: areaId
         }
       }, {
         $pull: {
-          city: cityId
+          area: areaId
         }
       })
       
-      // adding the area in new state
+      // adding the area in city
       if(OldArea) {
-        const area = await AreaModel.findByIdAndUpdate(areaId, {
+        const city = await CityModel.findByIdAndUpdate(cityId, {
           $push: {
-            city: City._id
+            area: Area._id
           }
         })
 
         // check validation: is state has updated or not
-        if(area) {
+        if(city) {
           res.status(200).json({
-            msg: "The Area Has updated Successfully"
+            msg: "The City Has updated Successfully"
           })
         } else {
           res.status(500).json({
