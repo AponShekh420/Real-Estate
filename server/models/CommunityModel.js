@@ -86,8 +86,14 @@ const CommunitySchema = mongoose.Schema({
     type: Boolean,
     default: true
   },
-  listIn: {
-    type: String,
+  status: [
+    {
+      type: String,
+      required: true
+    }
+  ],
+  sqft: {
+    type: Number,
     required: true
   }
 });
