@@ -7,8 +7,8 @@ const updateArea = async (req, res) => {
     const {name, desc, stateId, areaId, cityId } = req.body;
 
     // slug making
-    const duplicateArea = await AreaModel.find({name, _id: {$ne: cityId}});
-    const currentArea = await AreaModel.findById(cityId);
+    const duplicateArea = await AreaModel.find({name, _id: {$ne: areaId}});
+    const currentArea = await AreaModel.findById(areaId);
 
     let slug;
     if(name === currentArea.name) {

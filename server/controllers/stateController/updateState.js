@@ -6,8 +6,8 @@ const updateState = async (req, res)=> {
     const {stateId, name, desc} = req.body;
 
     // slug making
-    const duplicateState = await StateModel.find({name, _id: {$ne: cityId}});
-    const currentState = await StateModel.findById(cityId);
+    const duplicateState = await StateModel.find({name, _id: {$ne: stateId}});
+    const currentState = await StateModel.findById(stateId);
 
     let slug;
     if(name === currentState.name) {
