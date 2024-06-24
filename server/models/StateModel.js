@@ -7,6 +7,10 @@ const StateSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  slug: {
+    type: String,
+    required: true
+  },
   desc: String,
   city: [
     {

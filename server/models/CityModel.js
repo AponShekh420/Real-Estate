@@ -8,6 +8,10 @@ const citySchema = mongoose.Schema({
     required: true
   },
   desc: String,
+  slug: {
+    type: String,
+    required: true
+  },
   state: {
     type: mongoose.Types.ObjectId,
     required: true,

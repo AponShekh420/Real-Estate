@@ -1,12 +1,25 @@
 const AreaModel = require("../../models/AreaModel");
 const CityModel = require("../../models/CityModel");
 
-const updateCity = async (req, res) => {
+const updateArea = async (req, res) => {
   
   try {
     const {name, desc, stateId, areaId, cityId } = req.body;
+
+    // slug making
+    const duplicateArea = await AreaModel.find({name: name});
+
+    let slug;
+    if(duplicateArea.length > 0){
+      slug = name.toLowerCase().trim().split(' ') + "-" + duplicateArea.length
+    } else {
+      slug = name.toLowerCase().trim().split(' ')
+    }
+
+
     const Area = await AreaModel.findByIdAndUpdate(areaId, {
       name,
+      slug,
       desc,
       state: stateId,
       city: cityId
@@ -66,4 +79,4 @@ const updateCity = async (req, res) => {
   }
 }
 
-module.exports = updateCity;
+module.exports = updateArea;

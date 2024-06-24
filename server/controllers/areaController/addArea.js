@@ -2,14 +2,27 @@ const AreaModel = require("../../models/AreaModel");
 const CityModel = require("../../models/CityModel");
 
 
-const addCity = async (req, res) => {
+const addArea = async (req, res) => {
   try {
     const {name, desc, stateId, cityId} = req.body;
+
+    // slug making
+    const duplicateArea = await AreaModel.find({name: name});
+
+    let slug;
+    if(duplicateArea.length > 0){
+      slug = name.toLowerCase().trim().split(' ') + "-" + duplicateArea.length
+    } else {
+      slug = name.toLowerCase().trim().split(' ')
+    }
+
+
     const Area = await AreaModel.insertMany({
       name,
       desc,
       state: stateId,
-      city: cityId
+      city: cityId,
+      slug,
     });
 
     // updating the areaModel collection to add city in area field on areaModel
@@ -44,4 +57,4 @@ const addCity = async (req, res) => {
   }
 }
 
-module.exports = addCity;
+module.exports = addArea;

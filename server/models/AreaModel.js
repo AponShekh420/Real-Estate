@@ -7,6 +7,10 @@ const AreaSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  slug: {
+    type: String,
+    required: true
+  },
   desc: String,
   state: {
     type: mongoose.Types.ObjectId,

@@ -5,6 +5,10 @@ const CommunitySchema = mongoose.Schema({
     type: String,
     required: true
   },
+  slug: {
+    type: String,
+    required: true
+  },
   website: String,
   phone: {
     type: String,
