@@ -10,9 +10,9 @@ const addState = async (req, res)=> {
 
     let slug;
     if(duplicateArea.length > 0){
-      slug = name.toLowerCase().trim().split(' ') + "-" + duplicateArea.length
+      slug = name.toLowerCase().trim().split(' ').join("-") + "-" + duplicateArea.length
     } else {
-      slug = name.toLowerCase().trim().split(' ')
+      slug = name.toLowerCase().trim().split(' ').join("-")
     }
 
 

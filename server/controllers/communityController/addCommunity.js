@@ -15,9 +15,9 @@ const addCommunity = async (req, res) => {
 
     let slug;
     if(duplicateArea.length > 0){
-      slug = title.toLowerCase().trim().split(' ') + "-" + duplicateArea.length
+      slug = title.toLowerCase().trim().split(' ').join("-") + "-" + duplicateArea.length;
     } else {
-      slug = title.toLowerCase().trim().split(' ')
+      slug = title.toLowerCase().trim().split(' ').join("-");
     }
 
 

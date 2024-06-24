@@ -6,13 +6,18 @@ const updateCity = async (req, res) => {
     const {name, desc, stateId, cityId } = req.body;
 
     // slug making
-    const duplicateArea = await CityModel.find({name});
+    const duplicateCity = await CityModel.find({name, _id: {$ne: cityId}});
+    const currentCity = await CityModel.findById(cityId);
 
     let slug;
-    if(duplicateArea.length > 0){
-      slug = name.toLowerCase().trim().split(' ') + "-" + duplicateArea.length
+    if(name === currentCity.name) {
+      slug = currentCity.slug
     } else {
-      slug = name.toLowerCase().trim().split(' ')
+      if(duplicateCity.length > 0){
+        slug = name.toLowerCase().trim().split(' ').join("-") + "-" + duplicateCity.length;
+      } else {
+        slug = name.toLowerCase().trim().split(' ').join("-");
+      }
     }
 
     const City = await CityModel.findByIdAndUpdate(cityId, {

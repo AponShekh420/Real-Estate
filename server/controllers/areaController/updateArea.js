@@ -7,13 +7,18 @@ const updateArea = async (req, res) => {
     const {name, desc, stateId, areaId, cityId } = req.body;
 
     // slug making
-    const duplicateArea = await AreaModel.find({name: name});
+    const duplicateArea = await AreaModel.find({name, _id: {$ne: cityId}});
+    const currentArea = await AreaModel.findById(cityId);
 
     let slug;
-    if(duplicateArea.length > 0){
-      slug = name.toLowerCase().trim().split(' ') + "-" + duplicateArea.length
+    if(name === currentArea.name) {
+      slug = currentArea.slug
     } else {
-      slug = name.toLowerCase().trim().split(' ')
+      if(duplicateArea.length > 0){
+        slug = name.toLowerCase().trim().split(' ').join("-") + "-" + duplicateArea.length;
+      } else {
+        slug = name.toLowerCase().trim().split(' ').join("-");
+      }
     }
 
 
