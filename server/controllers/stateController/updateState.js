@@ -4,6 +4,18 @@ const StateModel = require("../../models/StateModel");
 const updateState = async (req, res)=> {
   try {
     const {stateId, name, desc} = req.body;
+
+    // slug making
+    const duplicateArea = await StateModel.find({name});
+
+    let slug;
+    if(duplicateArea.length > 0){
+      slug = name.toLowerCase().trim().split(' ') + "-" + duplicateArea.length
+    } else {
+      slug = name.toLowerCase().trim().split(' ')
+    }
+
+
     const status = await StateModel.findByIdAndUpdate(stateId, {
       name,
       desc

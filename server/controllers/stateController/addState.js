@@ -4,8 +4,21 @@ const StateModel = require("../../models/StateModel");
 const addState = async (req, res)=> {
   try {
     const {name, desc} = req.body;
+
+    // slug making
+    const duplicateArea = await StateModel.find({name});
+
+    let slug;
+    if(duplicateArea.length > 0){
+      slug = name.toLowerCase().trim().split(' ') + "-" + duplicateArea.length
+    } else {
+      slug = name.toLowerCase().trim().split(' ')
+    }
+
+
     const State = new StateModel({
       name,
+      slug,
       desc
     })
 

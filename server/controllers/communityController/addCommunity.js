@@ -9,9 +9,22 @@ const addCommunity = async (req, res) => {
   const {title, website, phone, address, stateId, cityId, areaId, zip, minPrice, maxPrice, homeTypes, communitySize, ageRestrictions, gated, builtStart, builtEnd, overview, imgs, bedrooms, bathrooms, garages, active, status, sqft} = req.body
 
   try {
+
+    // slug making
+    const duplicateArea = await CommunityModel.find({title});
+
+    let slug;
+    if(duplicateArea.length > 0){
+      slug = title.toLowerCase().trim().split(' ') + "-" + duplicateArea.length
+    } else {
+      slug = title.toLowerCase().trim().split(' ')
+    }
+
+
     // upload the community in database
     const community = await CommunityModel.insertMany({
       title,
+      slug,
       website, 
       phone,
       address,

@@ -4,7 +4,20 @@ const StateModel = require("../../models/StateModel");
 const addCity = async (req, res) => {
   try {
     const {name, desc, stateId} = req.body;
+
+    // slug making
+    const duplicateArea = await CityModel.find({name});
+
+    let slug;
+    if(duplicateArea.length > 0){
+      slug = name.toLowerCase().trim().split(' ') + "-" + duplicateArea.length
+    } else {
+      slug = name.toLowerCase().trim().split(' ')
+    }
+
+    
     const City = await CityModel.insertMany({
+      slug,
       name,
       desc,
       state: stateId
