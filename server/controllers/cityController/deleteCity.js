@@ -35,7 +35,7 @@ const deleteCity = async (req, res) => {
 
       // update the community collection to delete this state id
       const communtiyUpdateStatus = await CommunityModel.updateMany({city: cityId}, {
-        state: null,
+        city: null,
         active: false
       });
 
