@@ -20,6 +20,7 @@ const addArea = async (req, res) => {
     const Area = await AreaModel.insertMany({
       name,
       desc,
+      active: true,
       state: stateId,
       city: cityId,
       slug,

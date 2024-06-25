@@ -82,6 +82,9 @@ const updateCommuity = async (req, res) => {
       communitySize
     })
 
+    console.log(community);
+
+
     // check: the community has upload in database or not
     if(community) {
       // push the community in state community list
@@ -111,8 +114,8 @@ const updateCommuity = async (req, res) => {
           msg: "The community has updated Successfully"
         })
       } else {
-        // the community has uploaded, but the community field has not updated from cityModel, stateModel or areaModel, that's why we should delete the community and to send the server side error 
-        await CommunityModel.findByIdAndDelete(community[0]._id);
+        // the community has updated, but the community field has not updated from cityModel, stateModel or areaModel, that's why we should delete the community and to send the server side error 
+        await CommunityModel.findByIdAndUpdate(community._id, community);
         res.status(500).json({
           errors: {
             msg: "There was an server side error"

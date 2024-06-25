@@ -19,7 +19,8 @@ const addState = async (req, res)=> {
     const State = new StateModel({
       name,
       slug,
-      desc
+      desc,
+      active: true,
     })
 
     const status = await State.save();

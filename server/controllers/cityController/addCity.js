@@ -18,6 +18,7 @@ const addCity = async (req, res) => {
     
     const City = await CityModel.insertMany({
       slug,
+      active: true,
       name,
       desc,
       state: stateId
