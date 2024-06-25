@@ -53,8 +53,15 @@ const updateArea = async (req, res) => {
           }
         })
 
+        // change the state from communtiy
+        const communityUpdateStatus = await CommunityModel.updateMany({area: areaId}, {
+          state: stateId,
+          city: cityId,
+        });
+
+
         // check validation: is state has updated or not
-        if(city) {
+        if(city && communityUpdateStatus) {
           res.status(200).json({
             msg: "The Area Has updated Successfully"
           })

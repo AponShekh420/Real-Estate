@@ -1,5 +1,6 @@
 const CityModel = require("../../models/CityModel");
 const StateModel = require("../../models/StateModel");
+const CommunityModel = require("../../models/CommunityModel");
 
 const updateCity = async (req, res) => {
   try {
@@ -50,8 +51,14 @@ const updateCity = async (req, res) => {
             }
           })
 
+        // change the state from communtiy
+        const communityUpdateStatus = await CommunityModel.updateMany({city: cityId}, {
+          state: stateId
+        });
+
+
         // check validation: is state has updated or not
-        if(state) {
+        if(state && communityUpdateStatus) {
           res.status(200).json({
             msg: "The City Has updated Successfully"
           })
