@@ -24,7 +24,8 @@ const updateState = async (req, res)=> {
     const status = await StateModel.findByIdAndUpdate(stateId, {
       name,
       desc,
-      slug
+      slug,
+      active: true,
     })
 
     if(status) {

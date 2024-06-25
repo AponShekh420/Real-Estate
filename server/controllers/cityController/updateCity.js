@@ -23,6 +23,7 @@ const updateCity = async (req, res) => {
     const City = await CityModel.findByIdAndUpdate(cityId, {
       name,
       slug,
+      active: true,
       desc,
       state: stateId
     })

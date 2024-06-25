@@ -22,7 +22,11 @@ const StateSchema = mongoose.Schema({
     {
       type: mongoose.Types.ObjectId
     }
-  ]
+  ],
+  active: {
+    type: Boolean,
+    default: true
+  }
 })
 
 // module of state

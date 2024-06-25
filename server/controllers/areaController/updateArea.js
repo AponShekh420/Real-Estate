@@ -25,6 +25,7 @@ const updateArea = async (req, res) => {
     const Area = await AreaModel.findByIdAndUpdate(areaId, {
       name,
       slug,
+      active: true,
       desc,
       state: stateId,
       city: cityId

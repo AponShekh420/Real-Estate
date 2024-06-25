@@ -13,6 +13,6 @@ const router = express.Router();
 // route controller
 router.post('/add', addState);
 router.put('/update', updateState);
-// router.delete('/delete', deleteState);
+router.delete('/delete', deleteState);
 
 module.exports = router;
