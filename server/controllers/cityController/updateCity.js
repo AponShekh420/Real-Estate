@@ -5,13 +5,13 @@ const CommunityModel = require("../../models/CommunityModel");
 const updateCity = async (req, res) => {
   try {
     const {name, desc, stateId, cityId } = req.body;
-
+    
     // slug making
     const duplicateCity = await CityModel.find({name, _id: {$ne: cityId}});
     const currentCity = await CityModel.findById(cityId);
 
     let slug;
-    if(name === currentCity.name) {
+    if(name === currentCity?.name) {
       slug = currentCity.slug
     } else {
       if(duplicateCity.length > 0){
@@ -32,6 +32,16 @@ const updateCity = async (req, res) => {
     // updating the state collection to add city in city field on state
     if(City) {
 
+      const communitisList = await CommunityModel.find({city: cityId}).select('_id');
+
+
+       // change the state from communtiy
+      const communityUpdateStatus = await CommunityModel.updateMany({city: cityId}, {
+        state: stateId
+      });
+
+
+
       // remove the old city of state
       const oldState = await StateModel.updateMany({
         city: {
@@ -39,26 +49,27 @@ const updateCity = async (req, res) => {
         }
       }, {
         $pull: {
-          city: cityId
+          city: cityId,
+        },
+        $pullAll: {
+          community: communitisList
         }
       })
       
       // adding the city in new state
-      if(oldState) {
+      if(oldState && communitisList && communityUpdateStatus) {
         const state = await StateModel.findByIdAndUpdate(stateId, {
             $push: {
-              city: City._id
+              city: City._id,
+              community: {
+                $each: communitisList
+              }
             }
           })
 
-        // change the state from communtiy
-        const communityUpdateStatus = await CommunityModel.updateMany({city: cityId}, {
-          state: stateId
-        });
-
 
         // check validation: is state has updated or not
-        if(state && communityUpdateStatus) {
+        if(state) {
           res.status(200).json({
             msg: "The City Has updated Successfully"
           })

@@ -32,9 +32,6 @@ const deleteState = async (req, res) => {
         active: false
       });
 
-      console.log("cityUpdateStatu:", cityUpdateStatus)
-      console.log("areaUpdateStatus:", areaUpdateStatus)
-      console.log("communtiyUpdateStatus:", communtiyUpdateStatus)
       // try to check those cities, areas, and communities has update or not
       if(cityUpdateStatus && communtiyUpdateStatus && areaUpdateStatus) {
         res.status(200).json({

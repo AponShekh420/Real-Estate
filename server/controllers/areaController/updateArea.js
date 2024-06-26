@@ -1,5 +1,7 @@
 const AreaModel = require("../../models/AreaModel");
 const CityModel = require("../../models/CityModel");
+const CommunityModel = require("../../models/CommunityModel");
+const StateModel = require("../../models/StateModel");
 
 const updateArea = async (req, res) => {
   
@@ -34,34 +36,64 @@ const updateArea = async (req, res) => {
     // updating the state collection to add area in area field on state
     if(Area) {
 
-      // remove the old state
-      const OldArea = await CityModel.updateMany({
+      const communitisList = await CommunityModel.find({area: areaId}).select('_id');
+
+       // change the state from communtiy
+       const communityUpdateStatus = await CommunityModel.updateMany({area: areaId}, {
+        city: cityId,
+        state: stateId
+      });
+
+      console.log(Area)
+
+      // remove the old city and the communtiy from old city
+      const OldCity = await CityModel.updateMany({
         area: {
           $in: areaId
         }
       }, {
         $pull: {
           area: areaId
+        },
+        $pullAll: {
+          community: communitisList
         }
       })
+
+
+      // remove the old city of state
+      const oldState = await StateModel.updateMany({
+        _id: Area.state
+      }, 
+      {
+        $pullAll: {
+          community: communitisList
+        }
+      })
+
       
       // adding the area in city
-      if(OldArea) {
+      if(OldCity && oldState && communitisList && communityUpdateStatus) {
         const city = await CityModel.findByIdAndUpdate(cityId, {
           $push: {
-            area: Area._id
+            area: Area._id,
+            community: {
+              $each: communitisList
+            }
           }
         })
 
-        // change the state from communtiy
-        const communityUpdateStatus = await CommunityModel.updateMany({area: areaId}, {
-          state: stateId,
-          city: cityId,
-        });
-
+        // push community in new state community field or aray
+        const state = await StateModel.findByIdAndUpdate(stateId, {
+          $push: {
+            community: {
+              $each: communitisList
+            }
+          }
+        })
 
         // check validation: is state has updated or not
-        if(city && communityUpdateStatus) {
+        if(city && state) {
           res.status(200).json({
             msg: "The Area Has updated Successfully"
           })
