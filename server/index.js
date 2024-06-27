@@ -11,6 +11,7 @@ const stateRouter = require('./routers/stateRouter');
 const areaRouter = require('./routers/areaRouter');
 const cityRouter = require('./routers/cityRouter');
 const communityRouter = require('./routers/communityRouter');
+const CMTRouter = require('./routers/CMTRouter');
 
 
 
@@ -42,6 +43,7 @@ app.use('/state', stateRouter);
 app.use('/area', areaRouter);
 app.use('/city', cityRouter);
 app.use('/community', communityRouter);
+app.use('/models', CMTRouter);
 
 
 
