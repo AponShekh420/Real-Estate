@@ -21,7 +21,9 @@ const updateModelsTab = async (req, res) => {
     } else {
       res.status(500).json({
         errors: {
-          msg: "There was an server side error"
+          update: {
+            msg: "The model hasn't updated, please try again"
+          }
         }
       })
     }

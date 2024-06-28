@@ -24,7 +24,9 @@ const addModelsTab = async (req, res) => {
     } else {
       res.status(500).json({
         errors: {
-          msg: "There was an server side error"
+          upload: {
+            msg: "The Model hasn't uploaded, plese try again"
+          }
         }
       })
     }

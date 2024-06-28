@@ -11,7 +11,9 @@ const deleteModelsTab = async (req, res) => {
     } else {
       res.status(500).json({
         errors: {
-          msg: "There was an server side error"
+          delete: {
+            msg: "The model hasn't deleted, please try again"
+          }
         }
       })
     }

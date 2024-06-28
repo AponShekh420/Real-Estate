@@ -28,7 +28,9 @@ const activeCommunity = async (req, res) => {
     } else {
       res.status(400).json({
         errors: {
-          msg: "Check the location etc and try again"
+          locationProblem: {
+            msg: "Check the location etc and try again"
+          }
         }
       })
     }

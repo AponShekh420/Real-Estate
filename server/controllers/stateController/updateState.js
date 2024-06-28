@@ -35,7 +35,9 @@ const updateState = async (req, res)=> {
     } else {
       res.status(500).json({
         errors: {
-          msg: "There was an server side error"
+          locationUpdate: {
+            msg: "The state hasn't updated, please try again"
+          }
         }
       })
     }

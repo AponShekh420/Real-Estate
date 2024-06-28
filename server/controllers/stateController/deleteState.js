@@ -40,7 +40,9 @@ const deleteState = async (req, res) => {
       } else {
         res.status(500).json({
           errors: {
-            msg: "There was an server side error"
+            locationUpdate: {
+              msg: "The state hasn't deleted, please try again"
+            }
           }
         })
       }
@@ -48,7 +50,9 @@ const deleteState = async (req, res) => {
     } else {
       res.status(500).json({
         errors: {
-          msg: "There was an server side error"
+          server: {
+            msg: "There was an server side error"
+          }
         }
       })
     }

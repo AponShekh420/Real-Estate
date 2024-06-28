@@ -14,7 +14,9 @@ const deactiveCommunity = async (req, res) => {
     } else {
       res.status(500).json({
         errors: {
-          msg: "There was an server side error"
+          server: {
+            msg: "There was an server side error"
+          }
         }
       })
     }

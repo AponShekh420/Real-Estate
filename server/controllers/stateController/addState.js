@@ -31,7 +31,9 @@ const addState = async (req, res)=> {
     } else {
       res.status(500).json({
         errors: {
-          msg: "There was an server side error"
+          locationUpdate: {
+            msg: "The State hasn't added, please try again"
+          }
         }
       })
     }

@@ -76,7 +76,9 @@ const updateCity = async (req, res) => {
         } else {
           res.status(500).json({
             errors: {
-              msg: "There was an server side error"
+              locationUpdate: {
+                msg: "There was an server side error"
+              }
             }
           })
         }
@@ -84,14 +86,18 @@ const updateCity = async (req, res) => {
       } else{
         res.status(500).json({
           errors: {
-            msg: "There was an server side error"
+            locationUpdate: {
+              msg: "There was an server side error"
+            }
           }
         })
       }
     } else {
       res.status(500).json({
         errors: {
-          msg: "There was an server side error"
+          server: {
+            msg: "There was an server side error"
+          }
         }
       })
     }

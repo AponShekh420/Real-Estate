@@ -29,14 +29,18 @@ const deactiveState = async (req, res) => {
       } else {
         res.status(500).json({
           errors: {
-            msg: "There was an server side error"
+            locationUpdate: {
+              msg: "The state hasn't deactivated, please try again"
+            }
           }
         })
       }
     } else {
       res.status(500).json({
         errors: {
-          msg: "There was an server side error"
+          server: {
+            msg: "There was an server side error"
+          }
         }
       })
     }

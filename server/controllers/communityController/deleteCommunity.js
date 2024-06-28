@@ -50,7 +50,9 @@ const deleteCommunity = async (req, res) => {
       } else {
         res.status(500).json({
           errors: {
-            msg: "There was an server side error"
+            locationUpdate: {
+              msg: "Somehow this community has not deleted from location"
+            }
           }
         })
       }

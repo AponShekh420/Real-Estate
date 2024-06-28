@@ -118,7 +118,9 @@ const updateCommuity = async (req, res) => {
         await CommunityModel.findByIdAndUpdate(community._id, community);
         res.status(500).json({
           errors: {
-            msg: "There was an server side error"
+            locationUpdate: {
+              msg: "Communtiy hasn't deleted for server side error"
+            }
           }
         })
       }

@@ -9,7 +9,7 @@ const UploadPhotoGallery = () => {
 
   const handleUpload = (files) => {
     const newImages = [...uploadedImages];
-
+    
     for (const file of files) {
       const reader = new FileReader();
       reader.onload = (e) => {
