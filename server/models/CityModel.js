@@ -20,7 +20,8 @@ const citySchema = mongoose.Schema({
   area: [
     {
       type: mongoose.Types.ObjectId,
-      default: []
+      default: [],
+      ref: "Area"
     }
   ],
   community: [

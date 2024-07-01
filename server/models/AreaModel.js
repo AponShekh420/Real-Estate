@@ -14,11 +14,13 @@ const AreaSchema = mongoose.Schema({
   desc: String,
   state: {
     type: mongoose.Types.ObjectId,
-    required: true
+    required: true,
+    ref: "State"
   },
   city: {
     type: mongoose.Types.ObjectId,
     required: true,
+    ref: "City"
   },
   community: [
     {

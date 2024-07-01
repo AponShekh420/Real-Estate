@@ -15,7 +15,8 @@ const StateSchema = mongoose.Schema({
   city: [
     {
       type: mongoose.Types.ObjectId,
-      default: []
+      default: [],
+      ref: "City",
     }
   ],
   community: [

@@ -20,7 +20,7 @@ const app = express();
 
 dotenv.config();
 app.use(cors({
-  origin: "https://localhost:3000",
+  origin: "http://localhost:3000",
 }))
 
 

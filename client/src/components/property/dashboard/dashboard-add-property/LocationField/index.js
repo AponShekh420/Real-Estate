@@ -30,7 +30,7 @@ const LocationField = () => {
         </div>
         {/* End col-4 */}
 
-        <div className="col-sm-6 col-xl-4">
+        {/* <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
               Neighborhood
@@ -41,7 +41,7 @@ const LocationField = () => {
               placeholder="Neighborhood"
             />
           </div>
-        </div>
+        </div> */}
         {/* End col-4 */}
 
         <div className="col-sm-12">
