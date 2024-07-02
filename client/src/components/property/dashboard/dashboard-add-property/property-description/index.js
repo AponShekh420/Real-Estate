@@ -1,28 +1,34 @@
 "use client";
+import { addCommunityFieldValue } from "@/redux/communitySlice";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 
 const PropertyDescription = () => {
-  const catergoryOptions = [
-    { value: "Apartments", label: "Apartments" },
-    { value: "Bungalow", label: "Bungalow" },
-    { value: "Houses", label: "Houses" },
-    { value: "Loft", label: "Loft" },
-    { value: "Office", label: "Office" },
-    { value: "Townhome", label: "Townhome" },
-    { value: "Villa", label: "Villa" },
+  const {title, homeTypes, active, status, maxPrice, minPrice} = useSelector((state)=> state.community)
+  const dispatch = useDispatch();
+
+  const homeTypeOptions= [
+    { value: "Single", label: "Single" },
+    { value: "Family", label: "Family" },
+    { value: "Condos", label: "Condos" },
+    { value: "Manufactured", label: "Manufactured" },
+    { value: "Attached", label: "Attached" },
   ];
   const listedIn = [
-    { value: "All Listing", label: "All Listing" },
     { value: "Active", label: "Active" },
-    { value: "Sold", label: "Sold" },
-    { value: "Processing", label: "Processing" },
-  ];
-  const PropertyStatus = [
-    { value: "All Cities", label: "All Cities" },
     { value: "Pending", label: "Pending" },
-    { value: "Processing", label: "Processing" },
-    { value: "Published", label: "Published" },
   ];
+  const communityStatus = [
+    { value: "Rent", label: "Rent" },
+    { value: "Sold", label: "Sold" },
+    { value: "Buy", label: "Buy" },
+  ];
+
+  const valueChecker = (e) => {
+    console.log("eventvalue:", e)
+    console.log(title, homeTypes, active, status, minPrice, maxPrice)
+  }
 
   const customStyles = {
     option: (styles, { isFocused, isSelected, isHovered }) => {
@@ -48,42 +54,39 @@ const PropertyDescription = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Your Name"
+              placeholder="Type your community title"
+              onChange={(e)=> {
+                valueChecker(e)
+                dispatch(addCommunityFieldValue({
+                  title: e.target.value
+                }))
+              }}
+              value={title}
             />
           </div>
         </div>
         {/* End .col-12 */}
 
-        <div className="col-sm-12">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
-              Description
-            </label>
-            <textarea
-              cols={30}
-              rows={5}
-              placeholder="There are many variations of passages."
-              defaultValue={""}
-            />
-          </div>
-        </div>
-        {/* End .col-6 */}
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Select Category
+              Home Type
             </label>
             <div className="location-area">
               <Select
-                defaultValue={[catergoryOptions[1]]}
                 name="colors"
-                options={catergoryOptions}
+                options={homeTypeOptions}
                 styles={customStyles}
                 className="select-custom pl-0"
                 classNamePrefix="select"
                 required
                 isMulti
+                onChange={(e)=> {
+                  dispatch(addCommunityFieldValue({
+                    homeTypes: e.map((eachElement)=> eachElement.value)
+                  }))
+                }}
               />
             </div>
           </div>
@@ -97,14 +100,19 @@ const PropertyDescription = () => {
             </label>
             <div className="location-area">
               <Select
-                defaultValue={[listedIn[1]]}
+                defaultValue={[listedIn[0]]}
                 name="colors"
                 options={listedIn}
                 styles={customStyles}
                 className="select-custom pl-0"
                 classNamePrefix="select"
                 required
-                isMulti
+                onChange={(e)=> {
+                  valueChecker(e)
+                  dispatch(addCommunityFieldValue({
+                    active: e.value === "Pending" ? false : true
+                  }))
+                }}
               />
             </div>
           </div>
@@ -114,18 +122,24 @@ const PropertyDescription = () => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Property Status
+              Community Status
             </label>
             <div className="location-area">
               <Select
-                defaultValue={[PropertyStatus[1]]}
+                defaultValue={[communityStatus[1]]}
                 name="colors"
-                options={PropertyStatus}
+                options={communityStatus}
                 styles={customStyles}
                 className="select-custom pl-0"
                 classNamePrefix="select"
                 required
                 isMulti
+                onChange={(e)=> {
+                  valueChecker(e)
+                  dispatch(addCommunityFieldValue({
+                    status: e.map((eachElement)=> eachElement.value)
+                  }))
+                }}
               />
             </div>
           </div>
@@ -135,44 +149,46 @@ const PropertyDescription = () => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb30">
             <label className="heading-color ff-heading fw600 mb10">
-              Price in $
+              Min Price in $
             </label>
             <input
-              type="text"
+              type="number"
               className="form-control"
-              placeholder="Your Name"
+              placeholder="Number"
+              onChange={(e)=> {
+                valueChecker(e)
+                dispatch(addCommunityFieldValue({
+                  minPrice: e.target.value
+                }))
+              }}
+              value={minPrice}
+            />
+          </div>
+        </div>
+        {/* End .col-6 */}
+        
+        <div className="col-sm-6 col-xl-4">
+          <div className="mb30">
+            <label className="heading-color ff-heading fw600 mb10">
+              Max Price in $
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Number"
+              onChange={(e)=> {
+                valueChecker(e)
+                dispatch(addCommunityFieldValue({
+                  maxPrice: e.target.value
+                }))
+              }}
+              value={maxPrice}
             />
           </div>
         </div>
         {/* End .col-6 */}
 
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb30">
-            <label className="heading-color ff-heading fw600 mb10">
-              Yearly Tax Rate
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Your Name"
-            />
-          </div>
-        </div>
-        {/* End .col-6 */}
 
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb30">
-            <label className="heading-color ff-heading fw600 mb10">
-              After Price Label
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Your Name"
-            />
-          </div>
-        </div>
-        {/* End .col-6 */}
       </div>
     </form>
   );

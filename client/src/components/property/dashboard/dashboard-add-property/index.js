@@ -101,7 +101,7 @@ const AddPropertyTabContent = () => {
             aria-labelledby="nav-item1-tab"
           >
             <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-              <h4 className="title fz17 mb30">Property Description</h4>
+              <h4 className="title fz17 mb30">Community Description</h4>
               <PropertyDescription />
             </div>
           </div>
