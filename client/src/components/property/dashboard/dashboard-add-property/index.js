@@ -8,6 +8,8 @@ import DetailsFiled from "./details-field";
 import Amenities from "./Amenities";
 import store from "@/redux/store";
 import {Provider} from "react-redux"
+import ModelMangement from "./models-data/ModelMangement"
+
 
 const AddPropertyTabContent = () => {
   return (
@@ -74,6 +76,18 @@ const AddPropertyTabContent = () => {
               aria-selected="false"
             >
               5. Amenities
+            </button>
+            <button
+              className="nav-link fw600"
+              id="nav-item6-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#nav-item6"
+              type="button"
+              role="tab"
+              aria-controls="nav-item6"
+              aria-selected="false"
+            >
+              6. Models
             </button>
           </div>
         </nav>
@@ -143,6 +157,23 @@ const AddPropertyTabContent = () => {
             </div>
           </div>
           {/* End tab for Select Amenities */}
+
+          
+          <div
+            className="tab-pane fade"
+            id="nav-item6"
+            role="tabpanel"
+            aria-labelledby="nav-item6-tab"
+          >
+            <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
+              <h4 className="title fz17 mb30">Select Amenities</h4>
+              <div className="row">
+                <ModelMangement/>
+              </div>
+            </div>
+          </div>
+          {/* End tab for make models */}
+
         </div>
       </Provider>
     </>
