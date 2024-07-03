@@ -6,7 +6,7 @@ const AreaModel = require("../../models/AreaModel");
 const addCommunity = async (req, res) => {
 
   // send these data from front-end to add a community in database
-  const {title, website, phone, address, stateId, cityId, areaId, zip, minPrice, maxPrice, homeTypes, communitySize, ageRestrictions, gated, builtStart, builtEnd, overview, imgs, bedrooms, bathrooms, garages, active, status, sqft} = req.body
+  const {title, lat, long, website, phone, address, stateId, cityId, areaId, zip, minPrice, maxPrice, homeTypes, communitySize, ageRestrictions, gated, builtStart, builtEnd, overview, imgs, bedrooms, bathrooms, garages, active, status, sqft} = req.body
 
   try {
 
@@ -23,6 +23,8 @@ const addCommunity = async (req, res) => {
 
     // upload the community in database
     const community = await CommunityModel.insertMany({
+      lat,
+      long,
       title,
       slug,
       website, 

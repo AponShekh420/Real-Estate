@@ -99,7 +99,9 @@ const CommunitySchema = mongoose.Schema({
   sqft: {
     type: Number,
     required: true
-  }
+  },
+  lat: Number,
+  long: Number,
 });
 
 

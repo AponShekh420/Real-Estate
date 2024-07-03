@@ -7,7 +7,7 @@ const updateCommuity = async (req, res) => {
 
   try {
     // send these data from front-end to add a community in database
-    const {communityId, title, website, phone, address, stateId, cityId, areaId, zip, minPrice, maxPrice, homeTypes, communitySize, ageRestrictions, gated, builtStart, builtEnd, overview, imgs, bedrooms, bathrooms, garages, active, status, sqft} = req.body
+    const {lat, long, communityId, title, website, phone, address, stateId, cityId, areaId, zip, minPrice, maxPrice, homeTypes, communitySize, ageRestrictions, gated, builtStart, builtEnd, overview, imgs, bedrooms, bathrooms, garages, active, status, sqft} = req.body
 
 
     // slug making
@@ -57,6 +57,8 @@ const updateCommuity = async (req, res) => {
     const community = await CommunityModel.findByIdAndUpdate(communityId, {
       title,
       slug,
+      lat,
+      long,
       website, 
       phone,
       address,
