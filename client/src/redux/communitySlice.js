@@ -6,9 +6,9 @@ const initialState = {
   website: "",
   phone: "",
   address: "",
-  state: "",
-  city: "",
-  area: "",
+  stateId: "",
+  cityId: "",
+  areaId: "",
   minPrice: 0,
   maxPrice: 0,
   homeTypes: [],
@@ -37,12 +37,15 @@ const communitySlice = createSlice({
         ...state,
         ...action.payload
       }
+    },
+    removeAllCommunityFieldValue: (state) => {
+      return initialState
     }
   }
 });
 
 
-export const {addCommunityFieldValue} = communitySlice.actions;
+export const {addCommunityFieldValue, removeAllCommunityFieldValue} = communitySlice.actions;
 
 
 export default communitySlice.reducer;

@@ -3,7 +3,8 @@ import MobileMenu from "@/components/common/mobile-menu";
 import DboardMobileNavigation from "@/components/property/dashboard/DboardMobileNavigation";
 import Footer from "@/components/property/dashboard/Footer";
 import SidebarDashboard from "@/components/property/dashboard/SidebarDashboard";
-import AddPropertyTabContent from "@/components/property/dashboard/dashboard-add-property";
+import TabAndHeader from "@/components/property/dashboard/dashboard-add-property/TabAndHeader";
+
 
 export const metadata = {
   title: "Dashboard Add Property || Homez - Real Estate NextJS Template",
@@ -36,26 +37,7 @@ const DashboardAddProperty = () => {
               </div>
               {/* End .row */}
 
-              <div className="row align-items-center pb40">
-                <div className="col-lg-12">
-                  <div className="dashboard_title_area">
-                    <h2>Add New Property</h2>
-                    <p className="text">We are glad to see you again!</p>
-                  </div>
-                </div>
-              </div>
-              {/* End .row */}
-
-              <div className="row">
-                <div className="col-xl-12">
-                  <div className="ps-widget bgc-white bdrs12 default-box-shadow2 pt30 mb30 overflow-hidden position-relative">
-                    <div className="navtab-style1">
-                      <AddPropertyTabContent />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* End .row */}
+              <TabAndHeader/>
             </div>
             {/* End dashboard__content */}
 

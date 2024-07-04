@@ -25,7 +25,7 @@ const customStyles = {
 
 
 const SelectMultiField = () => {
-  const {state, city, area} = useSelector((state)=> state.community)
+  const {stateId, cityId, areaId} = useSelector((state)=> state.community)
   const dispatch = useDispatch()
 
   // options
@@ -35,8 +35,8 @@ const SelectMultiField = () => {
 
   const cityHanlder = (currentState) => {
     dispatch(addCommunityFieldValue({
-      city: "",
-      area: ""
+      cityId: "",
+      areaId: ""
     }))
     const cityOptionValues = currentState.value.city
     setAreaOptions([])
@@ -46,7 +46,7 @@ const SelectMultiField = () => {
 
   const areaHandler = (currentCity) => {
     dispatch(addCommunityFieldValue({
-      area: ""
+      areaId: ""
     }))
     const areaOptionValues = currentCity.value.area
     setAreaOptions(areaOptionValues);
@@ -55,7 +55,7 @@ const SelectMultiField = () => {
 
   const fetchStateData = async () => {
     try {
-      const res = await fetch('http://localhost:5000/state/getall');
+      const res = await fetch('http://localhost:5000/api/state/getall');
       const stateData = await res.json();
       setStateOptions(stateData.data);
     } catch(err){
@@ -88,9 +88,8 @@ const SelectMultiField = () => {
               }))}
               onChange={(e)=> {
                 cityHanlder(e);
-                dispatch(addCommunityFieldValue({state: e.value._id}))
+                dispatch(addCommunityFieldValue({stateId: e.value._id}))
               }}
-              defaultValue={state}
             />
           </div>
         </div>
@@ -113,9 +112,8 @@ const SelectMultiField = () => {
               }))}
               onChange={(e)=> {
                 areaHandler(e)
-                dispatch(addCommunityFieldValue({city: e.value._id}))
+                dispatch(addCommunityFieldValue({cityId: e.value._id}))
               }}
-              defaultValue={city}
               placeholder="please select"
             />
           </div>
@@ -137,8 +135,7 @@ const SelectMultiField = () => {
                 value: item,
                 label: item.name,
               }))}
-              onChange={(e)=> dispatch(addCommunityFieldValue({area: e.value._id}))}
-              defaultValue={area}
+              onChange={(e)=> dispatch(addCommunityFieldValue({areaId: e.value._id}))}
             />
           </div>
         </div>

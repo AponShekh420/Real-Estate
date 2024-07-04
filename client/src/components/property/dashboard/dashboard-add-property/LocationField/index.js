@@ -24,6 +24,7 @@ const LocationField = () => {
               onChange={(e)=> {
                 dispatch(addCommunityFieldValue({address: e.target.value}))
               }}
+              value={address}
             />
           </div>
         </div>
@@ -38,6 +39,7 @@ const LocationField = () => {
               onChange={(e)=> {
                 dispatch(addCommunityFieldValue({zip: e.target.value}))
               }}
+              value={zip}
             />
           </div>
         </div>

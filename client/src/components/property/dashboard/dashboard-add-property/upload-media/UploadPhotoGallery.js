@@ -20,7 +20,7 @@ const UploadPhotoGallery = () => {
     });
 
     try {
-      const res = await fetch("http://localhost:5000/community/upload", {
+      const res = await fetch("http://localhost:5000/api/community/upload", {
         method: "POST",
         body: formData
       })
@@ -46,7 +46,7 @@ const UploadPhotoGallery = () => {
     const deletedImage = newImages.splice(index, 1);
     const DeletedImageUrl = deletedImage[0];
     try {
-      const res = await fetch("http://localhost:5000/community/imgdelete", {
+      const res = await fetch("http://localhost:5000/api/community/imgdelete", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"

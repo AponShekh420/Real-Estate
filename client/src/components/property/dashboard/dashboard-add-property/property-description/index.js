@@ -25,10 +25,7 @@ const PropertyDescription = () => {
     { value: "Buy", label: "Buy" },
   ];
 
-  const valueChecker = (e) => {
-    console.log("eventvalue:", e)
-    console.log(title, homeTypes, active, status, minPrice, maxPrice)
-  }
+ 
 
   const customStyles = {
     option: (styles, { isFocused, isSelected, isHovered }) => {
@@ -45,6 +42,7 @@ const PropertyDescription = () => {
     },
   };
 
+
   return (
     <form className="form-style1">
       <div className="row">
@@ -56,7 +54,6 @@ const PropertyDescription = () => {
               className="form-control"
               placeholder="Type your community title"
               onChange={(e)=> {
-                valueChecker(e)
                 dispatch(addCommunityFieldValue({
                   title: e.target.value
                 }))
@@ -87,6 +84,7 @@ const PropertyDescription = () => {
                     homeTypes: e.map((eachElement)=> eachElement.value)
                   }))
                 }}
+                value={homeTypes.map(eachElement => ({value: eachElement, label: eachElement}))}
               />
             </div>
           </div>
@@ -108,11 +106,11 @@ const PropertyDescription = () => {
                 classNamePrefix="select"
                 required
                 onChange={(e)=> {
-                  valueChecker(e)
                   dispatch(addCommunityFieldValue({
                     active: e.value === "Pending" ? false : true
                   }))
                 }}
+                value={{value: active ? "Active" : "Pending", label: active ? "Active" : "Pending"}}
               />
             </div>
           </div>
@@ -126,7 +124,6 @@ const PropertyDescription = () => {
             </label>
             <div className="location-area">
               <Select
-                defaultValue={[communityStatus[1]]}
                 name="colors"
                 options={communityStatus}
                 styles={customStyles}
@@ -135,11 +132,11 @@ const PropertyDescription = () => {
                 required
                 isMulti
                 onChange={(e)=> {
-                  valueChecker(e)
                   dispatch(addCommunityFieldValue({
                     status: e.map((eachElement)=> eachElement.value)
                   }))
                 }}
+                value={status.map(eachElement => ({value: eachElement, label: eachElement}))}
               />
             </div>
           </div>
@@ -156,7 +153,6 @@ const PropertyDescription = () => {
               className="form-control"
               placeholder="Number"
               onChange={(e)=> {
-                valueChecker(e)
                 dispatch(addCommunityFieldValue({
                   minPrice: e.target.value
                 }))
@@ -177,7 +173,6 @@ const PropertyDescription = () => {
               className="form-control"
               placeholder="Number"
               onChange={(e)=> {
-                valueChecker(e)
                 dispatch(addCommunityFieldValue({
                   maxPrice: e.target.value
                 }))
