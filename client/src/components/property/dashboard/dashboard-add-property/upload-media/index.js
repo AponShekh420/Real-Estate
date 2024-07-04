@@ -14,13 +14,13 @@ const UploadMedia = () => {
         </div>
         {/* End col-12 */}
 
-        <div className="row">
+        {/* <div className="row">
           <h4 className="title fz17 mb30">Video Option</h4>
           <VideoOptionFiled />
-        </div>
+        </div> */}
         {/* End .row */}
 
-        <div className="row">
+        {/* <div className="row">
           <h4 className="title fz17 mb30">Virtual Tour</h4>
           <div className="col-sm-6 col-xl-12">
             <div className="mb30">
@@ -34,7 +34,7 @@ const UploadMedia = () => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
         {/* End .row */}
       </form>
     </div>

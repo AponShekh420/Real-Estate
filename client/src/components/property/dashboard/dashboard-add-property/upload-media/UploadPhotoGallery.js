@@ -2,10 +2,15 @@
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import React, { useState, useRef } from "react";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import { addCommunityFieldValue } from "@/redux/communitySlice";
 
 const UploadPhotoGallery = () => {
-  const [uploadedImages, setUploadedImages] = useState([]);
   const fileInputRef = useRef(null);
+
+  // redux
+  const {imgs} = useSelector((state)=> state.community);
+  const dispatch = useDispatch();
 
   const handleUpload = async (files) => {
     
@@ -21,8 +26,10 @@ const UploadPhotoGallery = () => {
       })
       const {message: imgsData} = await res.json();
       console.log(imgsData)
-      const newImages = [...uploadedImages, ...imgsData];
-      setUploadedImages(newImages)
+      const newImages = [...imgs, ...imgsData];
+      dispatch(addCommunityFieldValue({
+        imgs: newImages
+      }))
     } catch(err) {
       console.log(err.message)
     }
@@ -35,7 +42,7 @@ const UploadPhotoGallery = () => {
   };
 
   const handleDelete = async (index) => {
-    const newImages = [...uploadedImages];
+    const newImages = [...imgs];
     const deletedImage = newImages.splice(index, 1);
     const DeletedImageUrl = deletedImage[0];
     try {
@@ -49,7 +56,9 @@ const UploadPhotoGallery = () => {
         })
       })
       await res.json();
-      setUploadedImages(newImages);
+      dispatch(addCommunityFieldValue({
+        imgs: newImages
+      }));
     } catch(err){
       console.log(err.message)
     }
@@ -83,7 +92,7 @@ const UploadPhotoGallery = () => {
 
       {/* Display uploaded images */}
       <div className="row profile-box position-relative d-md-flex align-items-end mb50">
-        {uploadedImages.map((imageData, index) => (
+        {imgs.map((imageData, index) => (
           <div className="col-2" key={index}>
             <div className="profile-img mb20 position-relative">
               <Image
