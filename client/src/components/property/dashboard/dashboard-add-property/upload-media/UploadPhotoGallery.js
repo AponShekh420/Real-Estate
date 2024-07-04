@@ -7,46 +7,58 @@ const UploadPhotoGallery = () => {
   const [uploadedImages, setUploadedImages] = useState([]);
   const fileInputRef = useRef(null);
 
-  const handleUpload = (files) => {
-    const newImages = [...uploadedImages];
+  const handleUpload = async (files) => {
     
-    for (const file of files) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        newImages.push(e.target.result);
-        setUploadedImages(newImages);
-      };
-      reader.readAsDataURL(file);
+    const formData = new FormData();
+    Array.from(files).forEach((file, index) => {
+      formData.append(`file${index}`, file);
+    });
+
+    try {
+      const res = await fetch("http://localhost:5000/community/upload", {
+        method: "POST",
+        body: formData
+      })
+      const {message: imgsData} = await res.json();
+      console.log(imgsData)
+      const newImages = [...uploadedImages, ...imgsData];
+      setUploadedImages(newImages)
+    } catch(err) {
+      console.log(err.message)
     }
   };
 
-  const handleDrop = (event) => {
-    event.preventDefault();
-    const files = event.dataTransfer.files;
-    handleUpload(files);
-  };
-
-  const handleDragOver = (event) => {
-    event.preventDefault();
-  };
 
   const handleButtonClick = () => {
     // Programmatically trigger the hidden file input
     fileInputRef.current.click();
   };
 
-  const handleDelete = (index) => {
+  const handleDelete = async (index) => {
     const newImages = [...uploadedImages];
-    newImages.splice(index, 1);
-    setUploadedImages(newImages);
+    const deletedImage = newImages.splice(index, 1);
+    const DeletedImageUrl = deletedImage[0];
+    try {
+      const res = await fetch("http://localhost:5000/community/imgdelete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          imgUrl: DeletedImageUrl
+        })
+      })
+      await res.json();
+      setUploadedImages(newImages);
+    } catch(err){
+      console.log(err.message)
+    }
   };
 
   return (
     <>
       <div
         className="upload-img position-relative overflow-hidden bdrs12 text-center mb30 px-2"
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
       >
         <div className="icon mb30">
           <span className="flaticon-upload" />
@@ -78,7 +90,7 @@ const UploadPhotoGallery = () => {
                 width={212}
                 height={194}
                 className="w-100 bdrs12 cover"
-                src={imageData}
+                src={`http://localhost:5000/assets/communityImgs/${imageData}`}
                 alt={`Uploaded Image ${index + 1}`}
               />
               <button

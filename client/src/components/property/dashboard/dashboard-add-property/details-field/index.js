@@ -18,7 +18,7 @@ const gatedOption = [
 
 const DetailsFiled = () => {
 
-  const {title} = useSelector((state)=> state.community);
+  const {ageRestrictions, gated, website, sqft, garages, builtEnd, builtStart, bathrooms, bedrooms, communitySize, phone} = useSelector((state)=> state.community);
   const dispatch = useDispatch();
 
   const customStyles = {
@@ -35,6 +35,8 @@ const DetailsFiled = () => {
       };
     },
   };
+
+
 
 
   return (
@@ -60,6 +62,7 @@ const DetailsFiled = () => {
                     ageRestrictions: e.value === "Yes" ? true : false
                   }))
                 }}
+                value={{value: ageRestrictions ? "Yes" : "No", label: ageRestrictions ? "Yes" : "No"}}
               />
             </div>
           </div>
@@ -85,6 +88,7 @@ const DetailsFiled = () => {
                     gated: e.value === "Yes" ? true : false
                   }))
                 }}
+                value={{value: gated ? "Yes" : "No", label: gated ? "Yes" : "No"}}
               />
             </div>
           </div>
@@ -101,6 +105,12 @@ const DetailsFiled = () => {
               type="text"
               className="form-control"
               placeholder="https://placeholder.com"
+              onChange={(e)=> {
+                dispatch(addCommunityFieldValue({
+                  website: e.target.value
+                }))
+              }}
+              value={website}
             />
           </div>
         </div>
@@ -115,6 +125,12 @@ const DetailsFiled = () => {
               type="number"
               className="form-control"
               placeholder="Type your phone number"
+              onChange={(e)=> {
+                dispatch(addCommunityFieldValue({
+                  phone: e.target.value
+                }))
+              }}
+              value={phone}
             />
           </div>
         </div>
@@ -127,6 +143,12 @@ const DetailsFiled = () => {
               type="number"
               className="form-control"
               placeholder="Type the community size"
+              onChange={(e)=> {
+                dispatch(addCommunityFieldValue({
+                  communitySize: e.target.value
+                }))
+              }}
+              value={communitySize}
             />
           </div>
         </div>
@@ -141,6 +163,12 @@ const DetailsFiled = () => {
               type="number"
               className="form-control"
               placeholder="Type the room number"
+              onChange={(e)=> {
+                dispatch(addCommunityFieldValue({
+                  bedrooms: e.target.value
+                }))
+              }}
+              value={bedrooms}
             />
           </div>
         </div>
@@ -155,6 +183,12 @@ const DetailsFiled = () => {
               type="number"
               className="form-control"
               placeholder="Type the number"
+              onChange={(e)=> {
+                dispatch(addCommunityFieldValue({
+                  bathrooms: e.target.value
+                }))
+              }}
+              value={bathrooms}
             />
           </div>
         </div>
@@ -169,6 +203,12 @@ const DetailsFiled = () => {
               type="text"
               className="form-control"
               placeholder="Type the date"
+              onChange={(e)=> {
+                dispatch(addCommunityFieldValue({
+                  builtStart: e.target.value
+                }))
+              }}
+              value={builtStart}
             />
           </div>
         </div>
@@ -183,6 +223,12 @@ const DetailsFiled = () => {
               type="text"
               className="form-control"
               placeholder="Type the date"
+              onChange={(e)=> {
+                dispatch(addCommunityFieldValue({
+                  builtEnd: e.target.value
+                }))
+              }}
+              value={builtEnd}
             />
           </div>
         </div>
@@ -197,6 +243,12 @@ const DetailsFiled = () => {
               type="number"
               className="form-control"
               placeholder="Type the number"
+              onChange={(e)=> {
+                dispatch(addCommunityFieldValue({
+                  garages: e.target.value
+                }))
+              }}
+              value={garages}
             />
           </div>
         </div>
@@ -211,6 +263,12 @@ const DetailsFiled = () => {
               type="number"
               className="form-control"
               placeholder="Type the Sqft Number"
+              onChange={(e)=> {
+                dispatch(addCommunityFieldValue({
+                  sqft: e.target.value
+                }))
+              }}
+              value={sqft}
             />
           </div>
         </div>
