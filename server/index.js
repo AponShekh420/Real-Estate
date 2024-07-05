@@ -39,11 +39,11 @@ app.use(express.static(path.join(__dirname, "public")))
 
 // Root routes
 
-app.use('/state', stateRouter);
-app.use('/area', areaRouter);
-app.use('/city', cityRouter);
-app.use('/community', communityRouter);
-app.use('/models', CMTRouter);
+app.use('/api/state', stateRouter);
+app.use('/api/area', areaRouter);
+app.use('/api/city', cityRouter);
+app.use('/api/community', communityRouter);
+app.use('/api/models', CMTRouter);
 
 
 

@@ -1,11 +1,12 @@
 "use client"
 import HashLoader from "react-spinners/HashLoader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ImUpload } from "react-icons/im";
 import { useDispatch, useSelector } from "react-redux";
 import { removeAllCommunityFieldValue } from "@/redux/communitySlice";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useParams, usePathname } from "next/navigation";
 
 const override = {
   display: "block",
@@ -16,9 +17,18 @@ const override = {
 const CommunityPublish = () => {
   const [loading, setLoading] = useState(false);
 
+  // url data 
+  const pathname = usePathname();
+  const params = useParams();
+
   // redux
   const community = useSelector((state)=> state.community)
   const dispatch = useDispatch();
+
+
+  const editPageValidation = pathname.split("/")[2] === "edit-community" ? true : false;
+
+
 
   const addCommunity = async () => {
     try {
@@ -44,12 +54,33 @@ const CommunityPublish = () => {
     }
   }
 
+  const updateCommunity = async () => {
+    console.log("edit community")
+  }
 
+
+  const getExistingDataToUpdate = async () => {
+    try {
+      const res = await fetch("");
+      const existingCommunityData = res.json();
+    } catch(err) {
+      console.log(err.message)
+    }
+  }
+
+  useEffect(()=> {
+    if(editPageValidation) {
+      getExistingDataToUpdate();
+    }
+
+    console.log("params:", params);
+    console.log("path:", editPageValidation);
+  }, [])
 
 
   return (
     <div className="dashboard_title_area">
-      <button onClick={addCommunity} className={`bdr1 bg-black text-white rounded-3 shadow mb-5 py-2 px-3 d-flex gap-2 justify-content-center align-items-center fs-6 ${loading? "opacity-50" : "opacity-100"}`} disabled={loading}>
+      <button onClick={editPageValidation ? updateCommunity : addCommunity} className={`bdr1 bg-black text-white rounded-3 shadow mb-5 py-2 px-3 d-flex gap-2 justify-content-center align-items-center fs-6 ${loading? "opacity-50" : "opacity-100"}`} disabled={loading}>
         Add Community
         {!loading ? <ImUpload /> : <HashLoader
         color="#ffffff"
