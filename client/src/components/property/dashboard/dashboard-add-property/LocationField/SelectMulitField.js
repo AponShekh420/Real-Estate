@@ -88,8 +88,9 @@ const SelectMultiField = () => {
               }))}
               onChange={(e)=> {
                 cityHanlder(e);
-                dispatch(addCommunityFieldValue({stateId: e.value._id}))
+                dispatch(addCommunityFieldValue({stateId: e.value}))
               }}
+              value={{value: stateId.name, label: stateId.name}}
             />
           </div>
         </div>
@@ -112,9 +113,10 @@ const SelectMultiField = () => {
               }))}
               onChange={(e)=> {
                 areaHandler(e)
-                dispatch(addCommunityFieldValue({cityId: e.value._id}))
+                dispatch(addCommunityFieldValue({cityId: e.value}))
               }}
               placeholder="please select"
+              value={{value: cityId.name, label: cityId.name}}
             />
           </div>
         </div>
@@ -135,7 +137,8 @@ const SelectMultiField = () => {
                 value: item,
                 label: item.name,
               }))}
-              onChange={(e)=> dispatch(addCommunityFieldValue({areaId: e.value._id}))}
+              onChange={(e)=> dispatch(addCommunityFieldValue({areaId: e.value}))}
+              value={{value: areaId.name, label: areaId.name}}
             />
           </div>
         </div>

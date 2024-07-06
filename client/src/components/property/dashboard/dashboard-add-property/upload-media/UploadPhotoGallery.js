@@ -4,13 +4,19 @@ import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommunityFieldValue } from "@/redux/communitySlice";
+import { usePathname } from "next/navigation";
 
 const UploadPhotoGallery = () => {
   const fileInputRef = useRef(null);
+  const pathname = usePathname();
 
   // redux
-  const {imgs} = useSelector((state)=> state.community);
+  const {imgs, deleteImgUrls} = useSelector((state)=> state.community);
   const dispatch = useDispatch();
+
+
+  const editPageValidation = pathname.split("/")[2] === "edit-community" ? true : false;
+
 
   const handleUpload = async (files) => {
     
@@ -46,16 +52,27 @@ const UploadPhotoGallery = () => {
     const deletedImage = newImages.splice(index, 1);
     const DeletedImageUrl = deletedImage[0];
     try {
-      const res = await fetch("http://localhost:5000/api/community/imgdelete", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          imgUrl: DeletedImageUrl
+      if(!editPageValidation) {
+        const res = await fetch("http://localhost:5000/api/community/imgdelete", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            imgUrl: DeletedImageUrl
+          })
         })
-      })
-      await res.json();
+        await res.json();
+        dispatch(addCommunityFieldValue({
+          imgUrl: newImages,
+        }));
+      } else {
+        dispatch(addCommunityFieldValue({
+          imgs: newImages,
+          deleteImgUrls: [...deleteImgUrls, DeletedImageUrl]
+        }));
+        console.log("deleteImgs:", deleteImgUrls)
+      }
       dispatch(addCommunityFieldValue({
         imgs: newImages
       }));

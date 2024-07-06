@@ -3,10 +3,10 @@ import HashLoader from "react-spinners/HashLoader";
 import { useEffect, useState } from "react";
 import { ImUpload } from "react-icons/im";
 import { useDispatch, useSelector } from "react-redux";
-import { removeAllCommunityFieldValue } from "@/redux/communitySlice";
+import { addCommunityFieldValue, removeAllCommunityFieldValue } from "@/redux/communitySlice";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useParams, usePathname } from "next/navigation";
+import { notFound, useParams, usePathname } from "next/navigation";
 
 const override = {
   display: "block",
@@ -19,7 +19,7 @@ const CommunityPublish = () => {
 
   // url data 
   const pathname = usePathname();
-  const params = useParams();
+  const {slug} = useParams();
 
   // redux
   const community = useSelector((state)=> state.community)
@@ -45,8 +45,18 @@ const CommunityPublish = () => {
       const dataRes = await res.json();
       setLoading(false)
       if(dataRes.msg) {
-        dispatch(removeAllCommunityFieldValue())
-        toast(dataRes.msg)
+        dispatch(removeAllCommunityFieldValue());
+        toast.success(dataRes.msg, {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       }
       console.log(dataRes)
     } catch(err) {
@@ -55,14 +65,77 @@ const CommunityPublish = () => {
   }
 
   const updateCommunity = async () => {
-    console.log("edit community")
+    try {
+      setLoading(true);
+      console.log("title:", community.title)
+      const res = await fetch("http://localhost:5000/api/community/update", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          ...community,
+        })
+      })
+      const dataRes = await res.json();
+      setLoading(false)
+      if(dataRes.msg) {
+        toast.success(dataRes.msg, {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
+    } catch(err) {
+      console.log(err.message)
+    }
   }
 
 
   const getExistingDataToUpdate = async () => {
     try {
-      const res = await fetch("");
-      const existingCommunityData = res.json();
+      const res = await fetch(`http://localhost:5000/api/community/single-community/${slug}`);
+      const existingCommunityData = await res.json();
+      console.log(existingCommunityData)
+      if(existingCommunityData?.errors?.notFound) {
+        notFound();
+      } else {
+        const {title, website, phone, address, lat, long, sqft, active, status, garages, bathrooms, bedrooms, imgs, builtEnd, builtStart, gated, ageRestrictions, communitySize, homeTypes, maxPrice, minPrice, zip, area, city, state, _id } = existingCommunityData.data
+        dispatch(addCommunityFieldValue({
+          communityId: _id,
+          title,
+          website, 
+          phone, 
+          address, 
+          lat, 
+          long, 
+          sqft, 
+          active, 
+          status, 
+          garages, 
+          bathrooms, 
+          bedrooms, 
+          imgs, 
+          builtEnd, 
+          builtStart, 
+          gated, 
+          ageRestrictions, 
+          communitySize, 
+          homeTypes, 
+          maxPrice, 
+          minPrice, 
+          zip, 
+          areaId: area, 
+          cityId: city,
+          stateId: state
+        }));
+      }
     } catch(err) {
       console.log(err.message)
     }
@@ -71,10 +144,9 @@ const CommunityPublish = () => {
   useEffect(()=> {
     if(editPageValidation) {
       getExistingDataToUpdate();
+    } else {
+      dispatch(removeAllCommunityFieldValue());
     }
-
-    console.log("params:", params);
-    console.log("path:", editPageValidation);
   }, [])
 
 

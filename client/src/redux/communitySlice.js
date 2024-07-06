@@ -24,7 +24,9 @@ const initialState = {
   active: true,
   status: [],
   sqft: 0,
-  
+  lat: 0,
+  long: 0,
+  deleteImgUrls: []
 }
 
 

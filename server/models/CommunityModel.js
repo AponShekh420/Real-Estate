@@ -20,15 +20,18 @@ const CommunitySchema = mongoose.Schema({
   },
   state: {
     type: mongoose.Types.ObjectId,
-    required: true
+    required: true,
+    ref: "State"
   },
   city: {
     type: mongoose.Types.ObjectId,
-    required: true
+    required: true,
+    ref: "City"
   },
   area: {
     type: mongoose.Types.ObjectId,
-    required: true
+    required: true,
+    ref: "Area"
   },
   zip: String,
   minPrice: {

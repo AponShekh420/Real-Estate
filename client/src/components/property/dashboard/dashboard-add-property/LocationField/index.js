@@ -9,6 +9,7 @@ const LocationField = () => {
   const dispatch = useDispatch();
 
 
+
   return (
     <form className="form-style1">
       <div className="row">
@@ -43,21 +44,7 @@ const LocationField = () => {
             />
           </div>
         </div>
-        {/* End col-4 */}
 
-        {/* <div className="col-sm-6 col-xl-4">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
-              Neighborhood
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Neighborhood"
-            />
-          </div>
-        </div> */}
-        {/* End col-4 */}
 
         <div className="col-sm-12">
           <div className="mb20 mt30">
@@ -81,6 +68,7 @@ const LocationField = () => {
               onChange={(e)=> {
                 dispatch(addCommunityFieldValue({lat: e.target.value}))
               }}
+              value={lat}
             />
           </div>
         </div>
@@ -91,10 +79,11 @@ const LocationField = () => {
             <label className="heading-color ff-heading fw600 mb10">
               Longitude
             </label>
-            <input type="number" className="form-control" 
+            <input type="number" className="form-control"
               onChange={(e)=> {
                 dispatch(addCommunityFieldValue({long: e.target.value}))
               }}
+              value={long}
             />
           </div>
         </div>
