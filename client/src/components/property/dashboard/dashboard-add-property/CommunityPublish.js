@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { ImUpload } from "react-icons/im";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommunityFieldValue, removeAllCommunityFieldValue } from "@/redux/communitySlice";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { notFound, useParams, usePathname } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { notFound, useParams, usePathname, useRouter } from "next/navigation";
 
 const override = {
   display: "block",
@@ -20,6 +20,7 @@ const CommunityPublish = () => {
   // url data 
   const pathname = usePathname();
   const {slug} = useParams();
+  const router = useRouter();
 
   // redux
   const community = useSelector((state)=> state.community)
@@ -49,13 +50,6 @@ const CommunityPublish = () => {
         toast.success(dataRes.msg, {
           position: "top-right",
           autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: false,
-          draggable: false,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
         });
       }
       console.log(dataRes)
@@ -83,14 +77,10 @@ const CommunityPublish = () => {
         toast.success(dataRes.msg, {
           position: "top-right",
           autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: false,
-          draggable: false,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
         });
+        setTimeout(()=> {
+          router.push('/dashboard/my-communities')
+        }, 1500)
       }
     } catch(err) {
       console.log(err.message)
@@ -104,7 +94,7 @@ const CommunityPublish = () => {
       const existingCommunityData = await res.json();
       console.log(existingCommunityData)
       if(existingCommunityData?.errors?.notFound) {
-        notFound();
+        router.push('/dashboard/my-communities');
       } else {
         const {title, website, phone, address, lat, long, sqft, active, status, garages, bathrooms, bedrooms, imgs, builtEnd, builtStart, gated, ageRestrictions, communitySize, homeTypes, maxPrice, minPrice, zip, area, city, state, _id } = existingCommunityData.data
         dispatch(addCommunityFieldValue({

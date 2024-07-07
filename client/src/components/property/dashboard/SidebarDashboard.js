@@ -26,14 +26,14 @@ const SidebarDashboard = () => {
       title: "MANAGE LISTINGS",
       items: [
         {
-          href: "/dashboard/add-property",
+          href: "/dashboard/add-community",
           icon: "flaticon-new-tab",
-          text: "Add New Property",
+          text: "Add New Commmunity",
         },
         {
-          href: "/dashboard/my-properties",
+          href: "/dashboard/my-communities",
           icon: "flaticon-home",
-          text: "My Properties",
+          text: "My Communities",
         },
         {
           href: "/dashboard/my-favourites",
