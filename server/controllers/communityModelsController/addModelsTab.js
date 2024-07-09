@@ -1,18 +1,13 @@
 const CMTModel = require("../../models/CMTModel");
 
 const addModelsTab = async (req, res) => {
-  const {communityId, CMTName, shortDesc, collectionType, sqft, bed, bath, garage} = req.body;
+  const {communityId, CMTName, desc} = req.body;
   try {
     const CMTUpload = new CMTModel({
       name: CMTName,
       community: communityId,
-      shortDesc,
-      collectionType,
-      sqft,
-      bed,
-      bath,
-      img: "placeholader.jpg",
-      garage
+      desc,
+      img: req.files[0].filename,
     });
     
     const CMTUploadStatus = await CMTUpload.save();

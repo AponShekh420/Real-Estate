@@ -28,7 +28,7 @@ const StateSchema = mongoose.Schema({
     type: Boolean,
     default: true
   }
-})
+}, {timestamps: true})
 
 // module of state
 const StateModel = mongoose.models.State || mongoose.model("State", StateSchema);

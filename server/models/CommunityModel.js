@@ -105,7 +105,7 @@ const CommunitySchema = mongoose.Schema({
   },
   lat: Number,
   long: Number,
-});
+}, {timestamps: true});
 
 
 const CommunityModel = mongoose.models.Community || mongoose.model("Community", CommunitySchema);

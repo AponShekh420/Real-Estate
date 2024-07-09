@@ -1,17 +1,12 @@
 const CMTModel = require("../../models/CMTModel");
 
 const updateModelsTab = async (req, res) => {
-  const {CMTId, CMTName, shortDesc, collectionType, sqft, bed, bath, garage} = req.body;
+  const {CMTId, CMTName, desc, img} = req.body;
   try {
     const CMTUpdateStatus = await CMTModel.findByIdAndUpdate(CMTId, {
       name: CMTName,
-      shortDesc,
-      collectionType,
-      sqft,
-      bed,
-      bath,
-      img: "placeholader.jpg",
-      garage
+      desc,
+      img,
     })
 
     if(CMTUpdateStatus) {

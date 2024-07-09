@@ -33,7 +33,7 @@ const citySchema = mongoose.Schema({
     type: Boolean,
     default: true
   }
-})
+}, {timestamps: true})
 
 
 // model of area

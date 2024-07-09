@@ -6,7 +6,7 @@ const CMTSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  shortDesc: {
+  desc: {
     type: String,
     required: true
   },
@@ -19,12 +19,7 @@ const CMTSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  collectionType: String,
-  sqft: Number,
-  bed: Number,
-  bath: Number,
-  garage: Number
-})
+}, {timestamps: true})
 
 
 const CMTModel = mongoose.models.CMTModel || mongoose.model('CMTModel', CMTSchema);

@@ -3,8 +3,8 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 
-const UploadModelImg = () => {
-  const [uploadedImage, setUploadedImage] = useState(null);
+const UploadModelImg = ({uploadedImage, setUploadedImage}) => {
+  
 
   const handleUpload = (event) => {
     const file = event.target.files[0];
@@ -45,6 +45,7 @@ const UploadModelImg = () => {
         <div className="profile-content ml30 ml0-sm">
           <label className="upload-label pointer">
             <input
+              name="img"
               type="file"
               accept="image/jpeg,image/png"
               onChange={handleUpload}
