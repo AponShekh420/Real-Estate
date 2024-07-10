@@ -6,15 +6,18 @@ const addModelsTab = require("../controllers/communityModelsController/addModels
 const updateModelsTab = require("../controllers/communityModelsController/updateModelsTab");
 const deleteModelsTab = require("../controllers/communityModelsController/deleteModelsTab");
 const uploadModelImg = require("../middleware/uploadModelImg");
+const getModels = require("../controllers/communityModelsController/getModels");
 
 // callback function of configure
 const router = express.Router();
 
 
 // route controller
+router.get('/get/:id', getModels);
 router.post('/add', uploadModelImg, addModelsTab);
 router.put('/update', updateModelsTab);
 router.delete('/delete', deleteModelsTab);
+
 
 
 module.exports = router;

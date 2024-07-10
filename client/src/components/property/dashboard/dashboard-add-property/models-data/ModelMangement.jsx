@@ -10,6 +10,7 @@ const ModelMangement = () => {
   const [desc, setDesc] = useState("");
   const [uploadedImage, setUploadedImage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [newDataNotify, setNewDataNotify] = useState(null)
 
   const addModel = async (e) => {
     e.preventDefault();
@@ -41,7 +42,8 @@ const ModelMangement = () => {
         });
         setCMTName("");
         setDesc("");
-        setUploadedImage(null)
+        setUploadedImage(null);
+        setNewDataNotify(currentData)
       } else {
         toast.error("There are somthing is warn, please try again!", {
           position: "top-right",
@@ -57,7 +59,7 @@ const ModelMangement = () => {
 
   return (
     <div>
-      <SingleModel/>
+      <SingleModel newDataNotify={newDataNotify} setNewDataNotify={setNewDataNotify}/>
 
       <div className={`ps-widget ${classes.boxBg} bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative`}>
         <h4 className="title fz17 mb30">Add New Model</h4>
@@ -126,7 +128,7 @@ const ModelMangement = () => {
           </form>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer containerId="containerA"/>
     </div>
   );
 }
