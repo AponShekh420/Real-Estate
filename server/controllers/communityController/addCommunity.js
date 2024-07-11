@@ -78,7 +78,8 @@ const addCommunity = async (req, res) => {
       // check: those cityModel, StateModel and areaModel has updated or not
       if(stateUpdate && cityUpdate && areaUpdate) {
         res.status(200).json({
-          msg: "The community has added Successfully"
+          msg: "The community has added Successfully",
+          data: community[0]
         })
       } else {
         // the community has uploaded, but the community field has not updated from cityModel, stateModel or areaModel, that's why we should delete the community and to send the server side error 

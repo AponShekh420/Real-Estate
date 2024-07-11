@@ -7,9 +7,14 @@ import LocationField from "./LocationField";
 import DetailsFiled from "./details-field";
 import Amenities from "./Amenities";
 import ModelMangement from "./models-data/ModelMangement"
+import { usePathname } from "next/navigation";
 
 
 const AddPropertyTabContent = () => {
+  const pathname = usePathname();
+
+  const editPageValidation = pathname.split("/")[2] === "edit-community" ? true : false;
+  
   return (
     <>
       <nav>
@@ -74,7 +79,9 @@ const AddPropertyTabContent = () => {
           >
             5. Amenities
           </button>
-          <button
+          
+          {editPageValidation ? (
+            <button
             className="nav-link fw600"
             id="nav-item6-tab"
             data-bs-toggle="tab"
@@ -83,9 +90,10 @@ const AddPropertyTabContent = () => {
             role="tab"
             aria-controls="nav-item6"
             aria-selected="false"
-          >
-            6. Models
-          </button>
+            >
+              6. Models
+            </button>
+          ): ""}
         </div>
       </nav>
       {/* End nav tabs */}
@@ -156,20 +164,22 @@ const AddPropertyTabContent = () => {
         {/* End tab for Select Amenities */}
 
         
-        <div
-          className="tab-pane fade"
-          id="nav-item6"
-          role="tabpanel"
-          aria-labelledby="nav-item6-tab"
-        >
-          <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <h4 className="title fz17 mb30">Select Amenities</h4>
-            <div className="row">
-              <ModelMangement/>
+        {editPageValidation ? (
+            <div
+            className="tab-pane fade"
+            id="nav-item6"
+            role="tabpanel"
+            aria-labelledby="nav-item6-tab"
+          >
+            <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
+              <h4 className="title fz17 mb30">Add Models</h4>
+              <div className="row">
+                <ModelMangement/>
+              </div>
             </div>
           </div>
-        </div>
-        {/* End tab for make models */}
+        ): ""}
+        
 
       </div>
     </>

@@ -51,6 +51,9 @@ const CommunityPublish = () => {
           position: "top-right",
           autoClose: 1500,
         });
+        setTimeout(()=> {
+          router.push(`/dashboard/edit-community/${dataRes.data.slug}`)
+        }, 1500)
       }
       console.log(dataRes)
     } catch(err) {
@@ -143,7 +146,7 @@ const CommunityPublish = () => {
   return (
     <div className="dashboard_title_area">
       <button onClick={editPageValidation ? updateCommunity : addCommunity} className={`bdr1 bg-black text-white rounded-3 shadow mb-5 py-2 px-3 d-flex gap-2 justify-content-center align-items-center fs-6 ${loading? "opacity-50" : "opacity-100"}`} disabled={loading}>
-        Add Community
+        {editPageValidation ? "Update Community" : "Add Community"}
         {!loading ? <ImUpload /> : <HashLoader
         color="#ffffff"
         loading={loading}
@@ -152,7 +155,7 @@ const CommunityPublish = () => {
         aria-label="Loading Spinner"
         data-testid="loader"
       />
-}
+      }
       </button>
       <ToastContainer/>
     </div>

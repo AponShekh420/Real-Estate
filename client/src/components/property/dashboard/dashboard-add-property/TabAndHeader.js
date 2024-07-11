@@ -3,14 +3,18 @@ import store from "@/redux/store";
 import {Provider} from "react-redux"
 import CommunityPublish from "./CommunityPublish";
 import AddPropertyTabContent from ".";
+import { usePathname } from "next/navigation";
 
 const TabAndHeader = () => {
+  const pathname = usePathname();
+  const editPageValidation = pathname.split("/")[2] === "edit-community" ? true : false;
+
   return (
     <Provider store={store}>
       <div className="row align-items-center pb40">
         <div className="col-lg-12 d-flex justify-content-between">
           <div className="dashboard_title_area">
-            <h2>Add New Property</h2>
+            <h2>{editPageValidation ? "Edit Community" : "Add New Community"}</h2>
             <p className="text">We are glad to see you again!</p>
           </div>
           <CommunityPublish/>

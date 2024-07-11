@@ -4,6 +4,17 @@ import UploadModelImg from "./UploadModelImg";
 import classes from './communityModel.module.css'
 import { useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
+import { HashLoader } from "react-spinners";
+import { IoIosAddCircleOutline } from "react-icons/io";
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
+
+
+
 const ModelMangement = () => {
   const {communityId} = useSelector((state)=> state.community)
   const [CMTName, setCMTName] = useState("");
@@ -118,8 +129,17 @@ const ModelMangement = () => {
             <div className="row">
               <div className="col-sm-6 col-xl-12">
                 <div className="mb30 d-flex justify-content-end">
-                  <button className={`${classes.addModelBtn} border border-dark bg-white rounded-2`} type="submit">
+                  <button className={`${classes.addModelBtn} border border-dark bg-white rounded-2 d-flex gap-2 justify-content-center align-items-center ${loading? "opacity-50" : "opacity-100"}`} type="submit" disabled={loading}>
                     Add Model
+                    {!loading ? <IoIosAddCircleOutline /> : <HashLoader
+                      color="#ffffff"
+                      loading={loading}
+                      cssOverride={override}
+                      size={17}
+                      aria-label="Loading Spinner"
+                      data-testid="loader"
+                    />
+                    }
                   </button>
                 </div>
               </div>
