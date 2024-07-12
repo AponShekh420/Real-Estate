@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const FilterHeader = () => {
@@ -31,10 +32,10 @@ const FilterHeader = () => {
           </select>
         </div>
       </div>
-      <a href="#" className="ud-btn btn-thm">
-        Add New Property
+      <Link href="/dashboard/add-community" className="ud-btn btn-thm">
+        Add New Community
         <i className="fal fa-arrow-right-long" />
-      </a>
+      </Link>
     </div>
   );
 };

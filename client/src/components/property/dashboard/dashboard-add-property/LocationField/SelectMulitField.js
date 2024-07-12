@@ -90,7 +90,7 @@ const SelectMultiField = () => {
                 cityHanlder(e);
                 dispatch(addCommunityFieldValue({stateId: e.value}))
               }}
-              value={{value: stateId.name, label: stateId.name}}
+              value={{value: stateId?.name, label: stateId?.name}}
             />
           </div>
         </div>
@@ -116,7 +116,7 @@ const SelectMultiField = () => {
                 dispatch(addCommunityFieldValue({cityId: e.value}))
               }}
               placeholder="please select"
-              value={{value: cityId.name, label: cityId.name}}
+              value={{value: cityId?.name, label: cityId?.name}}
             />
           </div>
         </div>
@@ -138,7 +138,7 @@ const SelectMultiField = () => {
                 label: item.name,
               }))}
               onChange={(e)=> dispatch(addCommunityFieldValue({areaId: e.value}))}
-              value={{value: areaId.name, label: areaId.name}}
+              value={{value: areaId?.name, label: areaId?.name}}
             />
           </div>
         </div>

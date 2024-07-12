@@ -27,7 +27,8 @@ const initialState = {
   sqft: 0,
   lat: 0,
   long: 0,
-  deleteImgUrls: []
+  deleteImgUrls: [],
+  loading: true,
 }
 
 

@@ -11,6 +11,7 @@ const uploadCommunityImages = require("../controllers/communityController/upload
 const getSingleCommunity = require("../controllers/communityController/getSingleCommunity");
 const communityImageDelete = require("../controllers/communityController/communityImgDelete");
 const useCommunityImgsDeletor = require("../middleware/useCommunityImgsDeletor");
+const getCommunities = require("../controllers/communityController/getCommunities");
 
 // callback function of configure
 const router = express.Router();
@@ -34,6 +35,11 @@ router.put('/active', activeCommunity);
 // community image uploading and deleting
 router.post('/upload', uploadCommunityImages);
 router.delete('/imgdelete', communityImageDelete);
+
+
+
+// get the communities by area/city/state/title
+router.post('/get-communities', getCommunities)
 
 
 module.exports = router;

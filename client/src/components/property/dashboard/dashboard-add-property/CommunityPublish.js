@@ -30,7 +30,6 @@ const CommunityPublish = () => {
   const editPageValidation = pathname.split("/")[2] === "edit-community" ? true : false;
 
 
-
   const addCommunity = async () => {
     try {
       setLoading(true)
@@ -126,7 +125,8 @@ const CommunityPublish = () => {
           zip, 
           areaId: area, 
           cityId: city,
-          stateId: state
+          stateId: state,
+          loading: false
         }));
       }
     } catch(err) {
@@ -136,9 +136,11 @@ const CommunityPublish = () => {
 
   useEffect(()=> {
     if(editPageValidation) {
+      dispatch(addCommunityFieldValue({loading: true}));
       getExistingDataToUpdate();
     } else {
       dispatch(removeAllCommunityFieldValue());
+      dispatch(addCommunityFieldValue({loading: false}));
     }
   }, [])
 

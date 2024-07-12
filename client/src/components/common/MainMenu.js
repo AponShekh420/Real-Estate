@@ -70,10 +70,10 @@ const MainMenu = () => {
 
       <li className="visible_list dropitem">
         <Link
-          className={`${handleActive("/community")} list-item`}
-          href='/community'
+          className={`${handleActive("/summary")} list-item`}
+          href='/summary'
         >
-           community
+           summary
         </Link>
       </li>
 

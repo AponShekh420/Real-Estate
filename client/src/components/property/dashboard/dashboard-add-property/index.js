@@ -8,10 +8,19 @@ import DetailsFiled from "./details-field";
 import Amenities from "./Amenities";
 import ModelMangement from "./models-data/ModelMangement"
 import { usePathname } from "next/navigation";
+import { MoonLoader } from "react-spinners";
+import { useSelector } from "react-redux";
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
 
 
 const AddPropertyTabContent = () => {
   const pathname = usePathname();
+  const {loading} = useSelector(state=> state.community)
 
   const editPageValidation = pathname.split("/")[2] === "edit-community" ? true : false;
   
@@ -182,6 +191,19 @@ const AddPropertyTabContent = () => {
         
 
       </div>
+      {/* tab loading div */}
+      {loading ? (
+        <div className="w-100 position-absolute h-100 z-10 top-0 d-flex justify-content-center align-items-center text-white" style={{backgroundColor:"rgba(255, 255, 255, 0.5)"}}>
+          <MoonLoader
+            color="black"
+            loading={loading}
+            cssOverride={override}
+            size={30}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      ): ""}
     </>
   );
 };
