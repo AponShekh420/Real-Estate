@@ -3,8 +3,8 @@ import MobileMenu from "@/components/common/mobile-menu";
 import Pagination from "@/components/property/Pagination";
 import Footer from "@/components/property/dashboard/Footer";
 import SidebarDashboard from "@/components/property/dashboard/SidebarDashboard";
-import FilterHeader from "@/components/property/dashboard/dashboard-my-properties/FilterHeader";
-import PropertyDataTable from "@/components/property/dashboard/dashboard-my-properties/PropertyDataTable";
+import FilterHeader from "@/components/property/dashboard/dashboard-my-communities/FilterHeader";
+import PropertyDataTable from "@/components/property/dashboard/dashboard-my-communities/CommunitiesDataTable";
 import DboardMobileNavigation from "@/components/property/dashboard/DboardMobileNavigation";
 import Container from "@/components/property/dashboard/dashboard-my-communities/Container";
 
@@ -38,19 +38,6 @@ const DashboardMyProperties = () => {
                   <DboardMobileNavigation />
                 </div>
                 {/* End .col-12 */}
-              </div>
-              {/* End .row */}
-
-              <div className="row align-items-center pb40">
-                <div className="col-xxl-3">
-                  <div className="dashboard_title_area">
-                    <h2>My Community</h2>
-                    <p className="text">We are glad to see you again!</p>
-                  </div>
-                </div>
-                <div className="col-xxl-9">
-                  <FilterHeader />
-                </div>
               </div>
               {/* End .row */}
 

@@ -2,7 +2,7 @@ const CommunityModel = require("../../models/CommunityModel")
 
 const getCommunities = async (req, res) => {
 
-  const {searchParams, active} = req.body;
+  const {searchParams, active, limitEnd, limitStart} = req.body;
 
   try {
     const getCommunitiesData = await CommunityModel.find({active}).populate('state').populate("city").populate('area');
@@ -18,7 +18,8 @@ const getCommunities = async (req, res) => {
     });
 
     res.status(200).json({
-      data: filteredCommunities
+      data: filteredCommunities.slice(limitStart, limitEnd),
+      lotalNumberOfData: filteredCommunities.length,
     })
 
 

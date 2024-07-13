@@ -1,9 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-const Pagination = () => {
-  const totalPages = 8; // Replace this with your actual total number of pages
-  const [currentPage, setCurrentPage] = useState(2); // Initialize the current page state to 2 (or any other default active page)
+const Pagination = ({totalPages, setCurrentPage, currentPage, communitiesData}) => {
 
   const handlePageClick = (page) => {
     setCurrentPage(page);
@@ -47,7 +45,7 @@ const Pagination = () => {
           <span
             className="page-link pointer"
             href="#"
-            onClick={() => handlePageClick(currentPage - 1)}
+            onClick={() => currentPage != 1 && handlePageClick(currentPage - 1)}
           >
             <span className="fas fa-angle-left" />
           </span>
@@ -57,14 +55,14 @@ const Pagination = () => {
           <span
             className="page-link"
             href="#"
-            onClick={() => handlePageClick(currentPage + 1)}
+            onClick={() => currentPage != totalPages && handlePageClick(currentPage + 1)}
           >
             <span className="fas fa-angle-right" />
           </span>
         </li>
       </ul>
       <p className="mt10 pagination_page_count text-center">
-        1-8 of 300+ property available
+        {currentPage}-{totalPages} of {communitiesData?.lotalNumberOfData}+ communities available
       </p>
     </div>
   );
