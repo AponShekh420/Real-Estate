@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCommunityFieldValue } from "@/redux/communitySlice";
 
 const LocationField = () => {
-  const {address, zip, lat, long} = useSelector((state)=> state.community)
+  const {errors, address, zip, lat, long} = useSelector((state)=> state.community)
   const dispatch = useDispatch();
 
 
@@ -27,6 +27,7 @@ const LocationField = () => {
               }}
               value={address}
             />
+            <p className="text-danger">{errors?.address?.msg}</p>
           </div>
         </div>
         {/* End col-12 */}

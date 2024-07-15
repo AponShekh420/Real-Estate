@@ -18,7 +18,7 @@ const gatedOption = [
 
 const DetailsFiled = () => {
 
-  const {ageRestrictions, gated, website, sqft, garages, builtEnd, builtStart, bathrooms, bedrooms, communitySize, phone} = useSelector((state)=> state.community);
+  const {errors, ageRestrictions, gated, website, sqft, garages, builtEnd, builtStart, bathrooms, bedrooms, communitySize, phone} = useSelector((state)=> state.community);
   const dispatch = useDispatch();
 
   const customStyles = {
@@ -132,6 +132,7 @@ const DetailsFiled = () => {
               }}
               value={phone}
             />
+            <p className="text-danger">{errors?.phone?.msg}</p>
           </div>
         </div>
         {/* End .col-4 */}
@@ -150,6 +151,7 @@ const DetailsFiled = () => {
               }}
               value={communitySize}
             />
+            <p className="text-danger">{errors?.communitySize?.msg}</p>
           </div>
         </div>
         {/* End .col-4 */}
@@ -210,6 +212,7 @@ const DetailsFiled = () => {
               }}
               value={builtStart}
             />
+            <p className="text-danger">{errors?.builtStart?.msg}</p>
           </div>
         </div>
         {/* End .col-4 */}
@@ -230,6 +233,7 @@ const DetailsFiled = () => {
               }}
               value={builtEnd}
             />
+            <p className="text-danger">{errors?.builtEnd?.msg}</p>
           </div>
         </div>
         {/* End .col-4 */}

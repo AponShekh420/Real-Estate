@@ -29,6 +29,7 @@ const initialState = {
   long: 0,
   deleteImgUrls: [],
   loading: true,
+  errors: {}
 }
 
 

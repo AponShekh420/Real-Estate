@@ -21,6 +21,7 @@ const Container = () => {
   const [loading, setLoading] = useState(false);
   const [communitiesData, setCommunitiesData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // Current active page
+  const [deletedData, setDeleteData] = useState({}); // deleted data notification
   let totalPages = 1; // Total number of pages
 
 
@@ -54,7 +55,7 @@ const Container = () => {
 
   useEffect(()=> {
     getCommunityData();
-  }, [active, search])
+  }, [active, search, deletedData])
 
   return (
     <>
@@ -130,7 +131,7 @@ const Container = () => {
                           data-testid="loader"
                         />
                       </div>
-                      ) : communitiesData?.data?.length == 0 ? <h1 style={{height: "400px"}} className="d-flex align-items-center justify-content-center">No Data Found</h1> : <CommunitiesDataTable communitiesData={communitiesData} key={1}/>}
+                      ) : communitiesData?.data?.length == 0 ? <h1 style={{height: "400px"}} className="d-flex align-items-center justify-content-center">No Data Found</h1> : <CommunitiesDataTable communitiesData={communitiesData} setDeleteData={setDeleteData} key={1}/>}
 
                   <div className="mt30">
                     {loading ? (<div></div>) : (<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} communitiesData={communitiesData}/>)}
@@ -165,7 +166,7 @@ const Container = () => {
                         data-testid="loader"
                       />
                     </div>
-                    ) : communitiesData?.data?.length == 0 ? <h1 style={{height: "400px"}} className="d-flex align-items-center justify-content-center">No Data Found</h1> : <CommunitiesDataTable communitiesData={communitiesData} key={2}/>}
+                    ) : communitiesData?.data?.length == 0 ? <h1 style={{height: "400px"}} className="d-flex align-items-center justify-content-center">No Data Found</h1> : <CommunitiesDataTable setDeleteData={setDeleteData} communitiesData={communitiesData} key={2}/>}
 
                   <div className="mt30">
                    {loading ? (<div></div>) : (<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} communitiesData={communitiesData}/>)}

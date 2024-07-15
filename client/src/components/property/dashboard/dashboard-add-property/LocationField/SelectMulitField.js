@@ -25,7 +25,7 @@ const customStyles = {
 
 
 const SelectMultiField = () => {
-  const {stateId, cityId, areaId} = useSelector((state)=> state.community)
+  const {errors, stateId, cityId, areaId} = useSelector((state)=> state.community)
   const dispatch = useDispatch()
 
   // options
@@ -92,6 +92,7 @@ const SelectMultiField = () => {
               }}
               value={{value: stateId?.name, label: stateId?.name}}
             />
+            <p className="text-danger">{errors?.state?.msg}</p>
           </div>
         </div>
       </div>
@@ -118,6 +119,7 @@ const SelectMultiField = () => {
               placeholder="please select"
               value={{value: cityId?.name, label: cityId?.name}}
             />
+            <p className="text-danger">{errors?.city?.msg}</p>
           </div>
         </div>
       </div>
@@ -140,6 +142,7 @@ const SelectMultiField = () => {
               onChange={(e)=> dispatch(addCommunityFieldValue({areaId: e.value}))}
               value={{value: areaId?.name, label: areaId?.name}}
             />
+            <p className="text-danger">{errors?.area?.msg}</p>
           </div>
         </div>
       </div>

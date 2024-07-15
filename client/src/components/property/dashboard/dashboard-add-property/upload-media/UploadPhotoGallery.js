@@ -11,7 +11,7 @@ const UploadPhotoGallery = () => {
   const pathname = usePathname();
 
   // redux
-  const {imgs, deleteImgUrls} = useSelector((state)=> state.community);
+  const {errors, imgs, deleteImgUrls} = useSelector((state)=> state.community);
   const dispatch = useDispatch();
 
 
@@ -139,6 +139,7 @@ const UploadPhotoGallery = () => {
           </div>
         ))}
       </div>
+      <p className="text-danger fs-4">{errors?.imgs?.msg}*</p>
     </>
   );
 };

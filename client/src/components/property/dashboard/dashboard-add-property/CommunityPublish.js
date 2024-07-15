@@ -53,6 +53,9 @@ const CommunityPublish = () => {
         setTimeout(()=> {
           router.push(`/dashboard/edit-community/${dataRes.data.slug}`)
         }, 1500)
+      } else {
+        console.log(dataRes.errors)
+        dispatch(addCommunityFieldValue({errors: dataRes?.errors}))
       }
       console.log(dataRes)
     } catch(err) {

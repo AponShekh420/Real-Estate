@@ -44,7 +44,6 @@ const addCommunity = async (req, res) => {
       sqft,
       homeTypes,
       imgs,
-      overview,
       builtEnd,
       builtStart,
       gated,

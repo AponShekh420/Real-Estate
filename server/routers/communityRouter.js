@@ -12,6 +12,8 @@ const getSingleCommunity = require("../controllers/communityController/getSingle
 const communityImageDelete = require("../controllers/communityController/communityImgDelete");
 const useCommunityImgsDeletor = require("../middleware/useCommunityImgsDeletor");
 const getCommunities = require("../controllers/communityController/getCommunities");
+const checkCommunityValidation = require("../middleware/checkCommunityValidation");
+const useValidationResult = require("../middleware/common/useValidationResult");
 
 // callback function of configure
 const router = express.Router();
@@ -22,7 +24,7 @@ router.get('/single-community/:slug', getSingleCommunity);
 
 
 // route controller
-router.post('/add', addCommunity);
+router.post('/add', checkCommunityValidation, useValidationResult, addCommunity);
 router.put('/update', useCommunityImgsDeletor, updateCommuity);
 router.delete('/delete', deleteCommunity);
 

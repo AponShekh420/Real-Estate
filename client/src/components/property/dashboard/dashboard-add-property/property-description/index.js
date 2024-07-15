@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 
 const PropertyDescription = () => {
-  const {title, homeTypes, active, status, maxPrice, minPrice} = useSelector((state)=> state.community)
+  const {errors, title, homeTypes, active, status, maxPrice, minPrice} = useSelector((state)=> state.community)
   const dispatch = useDispatch();
 
   const homeTypeOptions= [
@@ -60,6 +60,7 @@ const PropertyDescription = () => {
               }}
               value={title}
             />
+            <p className="text-danger">{errors?.title?.msg}</p>
           </div>
         </div>
         {/* End .col-12 */}
@@ -86,6 +87,7 @@ const PropertyDescription = () => {
                 }}
                 value={homeTypes.map(eachElement => ({value: eachElement, label: eachElement}))}
               />
+              <p className="text-danger">{errors?.homeTypes?.msg}</p>
             </div>
           </div>
         </div>
@@ -138,6 +140,7 @@ const PropertyDescription = () => {
                 }}
                 value={status.map(eachElement => ({value: eachElement, label: eachElement}))}
               />
+              <p className="text-danger">{errors?.status?.msg}</p>
             </div>
           </div>
         </div>
@@ -159,6 +162,7 @@ const PropertyDescription = () => {
               }}
               value={minPrice}
             />
+            <p className="text-danger">{errors?.minPrice?.msg}</p>
           </div>
         </div>
         {/* End .col-6 */}
@@ -179,6 +183,7 @@ const PropertyDescription = () => {
               }}
               value={maxPrice}
             />
+            <p className="text-danger">{errors?.maxPrice?.msg}</p>
           </div>
         </div>
         {/* End .col-6 */}

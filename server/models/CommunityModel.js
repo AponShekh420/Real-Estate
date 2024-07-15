@@ -68,9 +68,6 @@ const CommunitySchema = mongoose.Schema({
     type: String,
     required: true
   },
-  overview: {
-    type: String
-  },
   imgs: [
     {
       type: String,
@@ -101,7 +98,6 @@ const CommunitySchema = mongoose.Schema({
   ],
   sqft: {
     type: Number,
-    required: true
   },
   lat: Number,
   long: Number,
