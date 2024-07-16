@@ -4,7 +4,7 @@ import Map from "./Map";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommunityFieldValue } from "@/redux/communitySlice";
 
-const LocationField = () => {
+const AreaList = () => {
   const {errors, address, zip, lat, long} = useSelector((state)=> state.community)
   const dispatch = useDispatch();
 
@@ -94,4 +94,4 @@ const LocationField = () => {
   );
 };
 
-export default LocationField;
+export default AreaList;

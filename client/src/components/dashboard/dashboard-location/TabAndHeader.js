@@ -1,7 +1,6 @@
 "use client"
 import store from "@/redux/store";
 import {Provider} from "react-redux"
-import CommunityPublish from "./CommunityPublish";
 import AddPropertyTabContent from ".";
 
 const TabAndHeader = () => {
@@ -14,7 +13,6 @@ const TabAndHeader = () => {
             <h2>Location Management</h2>
             <p className="text">We are glad to see you again!</p>
           </div>
-          <CommunityPublish/>
         </div>
       </div>
       {/* End .row */}

@@ -1,10 +1,11 @@
 "use client"
 
 import React from "react";
-import LocationField from "./LocationField";
-import { usePathname } from "next/navigation";
 import { MoonLoader } from "react-spinners";
 import { useSelector } from "react-redux";
+import StateList from "./stateList";
+import CityList from "./cityList";
+import AreaList from "./areaList";
 
 const override = {
   display: "block",
@@ -14,10 +15,7 @@ const override = {
 
 
 const AddPropertyTabContent = () => {
-  const pathname = usePathname();
-  const {loading} = useSelector(state=> state.community)
 
-  const editPageValidation = pathname.split("/")[2] === "edit-community" ? true : false;
   
   return (
     <>
@@ -65,19 +63,46 @@ const AddPropertyTabContent = () => {
 
       <div className="tab-content" id="nav-tabContent">
         <div
+          className="tab-pane fade show active"
+          id="nav-item1"
+          role="tabpanel"
+          aria-labelledby="nav-item1-tab"
+        >
+          <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
+            <h4 className="title fz17 mb30">Creating State</h4>
+            <StateList />
+          </div>
+        </div>
+
+        <div
+          className="tab-pane fade"
+          id="nav-item2"
+          role="tabpanel"
+          aria-labelledby="nav-item2-tab"
+        >
+          <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
+            <div className="d-flex justify-content-between align-items-center">
+              <h4 className="title fz17 mb30">Creating City</h4>
+              <button className="bdrs0 btn-primary rounded-2 py-1 px-2">Add New City</button>
+            </div>
+            <CityList />
+          </div>
+        </div>
+
+        <div
           className="tab-pane fade"
           id="nav-item3"
           role="tabpanel"
           aria-labelledby="nav-item3-tab"
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <h4 className="title fz17 mb30">Listing Location</h4>
-            <LocationField />
+            <h4 className="title fz17 mb30">Creating Area</h4>
+            <AreaList />
           </div>
         </div>
       </div>
       {/* tab loading div */}
-      {loading ? (
+      {/* {loading ? (
         <div className="w-100 position-absolute h-100 z-10 top-0 d-flex justify-content-center align-items-center text-white" style={{backgroundColor:"rgba(255, 255, 255, 0.5)"}}>
           <MoonLoader
             color="black"
@@ -88,7 +113,7 @@ const AddPropertyTabContent = () => {
             data-testid="loader"
           />
         </div>
-      ): ""}
+      ): ""} */}
     </>
   );
 };
