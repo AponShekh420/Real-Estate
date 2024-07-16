@@ -2,6 +2,8 @@
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
+import { CiLocationOn } from "react-icons/ci";
+
 
 const SidebarDashboard = () => {
   const pathname = usePathname();
@@ -25,6 +27,11 @@ const SidebarDashboard = () => {
     {
       title: "MANAGE LISTINGS",
       items: [
+        {
+          href: "/dashboard/location",
+          icon: "FaLocationDot",
+          text: "Location",
+        },
         {
           href: "/dashboard/add-community",
           icon: "flaticon-new-tab",
@@ -94,7 +101,11 @@ const SidebarDashboard = () => {
                     pathname == item.href ? "-is-active" : ""
                   } `}
                 >
-                  <i className={`${item.icon} mr15`} />
+                  {item.text === "Location" ? (
+                    <CiLocationOn size={22} className="mr15"/>
+                  ) : (
+                    <i className={`${item.icon} mr15`} />
+                  )}
                   {item.text}
                 </Link>
               </div>

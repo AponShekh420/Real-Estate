@@ -13,16 +13,16 @@ const checkCommunityValidation = [
     .isLength({min: 3})
     .withMessage("Must be a valid address")
     .trim(),
-  check("state")
+  check("stateId")
     .isLength({min: 1})
     .withMessage("Must be select a state")
     .trim(),
-  check("city")
+  check("cityId")
     .isLength({min: 1})
     .withMessage("Must be select a city")
     .trim(),
-  check("area")
-    .isLength({min: 4})
+  check("areaId")
+    .isLength({min: 1})
     .withMessage("Must be select a area")
     .trim(),
   check("minPrice")

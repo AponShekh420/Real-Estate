@@ -3,7 +3,7 @@ import MobileMenu from "@/components/common/mobile-menu";
 import DboardMobileNavigation from "@/components/dashboard/DboardMobileNavigation";
 import Footer from "@/components/dashboard/Footer";
 import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
-import TabAndHeader from "@/components/dashboard/dashboard-add-property/TabAndHeader";
+import TabAndHeader from "@/components/dashboard/dashboard-location/TabAndHeader";
 
 
 export const metadata = {

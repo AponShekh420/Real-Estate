@@ -67,6 +67,9 @@ const SelectMultiField = () => {
     fetchStateData();
   }, [])
 
+  useEffect(()=> {
+    console.log(stateId)
+  }, [stateId, areaId, cityId])
 
   return (
     <>
@@ -84,7 +87,7 @@ const SelectMultiField = () => {
               // isMulti
               options={stateOptions?.map((item) => ({
                 value: item,
-                label: item.name,
+                label: `${item.name} (${item.active ? "Active": "Deactive"})`,
               }))}
               onChange={(e)=> {
                 cityHanlder(e);
@@ -92,7 +95,7 @@ const SelectMultiField = () => {
               }}
               value={{value: stateId?.name, label: stateId?.name}}
             />
-            <p className="text-danger">{errors?.state?.msg}</p>
+            <p className="text-danger">{errors?.stateId?.msg}</p>
           </div>
         </div>
       </div>
@@ -110,7 +113,7 @@ const SelectMultiField = () => {
               // isMulti
               options={cityOptions?.map((item) => ({
                 value: item,
-                label: item.name,
+                label: `${item.name} (${item.active ? "Active": "Deactive"})`,
               }))}
               onChange={(e)=> {
                 areaHandler(e)
@@ -119,7 +122,7 @@ const SelectMultiField = () => {
               placeholder="please select"
               value={{value: cityId?.name, label: cityId?.name}}
             />
-            <p className="text-danger">{errors?.city?.msg}</p>
+            <p className="text-danger">{errors?.cityId?.msg}</p>
           </div>
         </div>
       </div>
@@ -137,12 +140,12 @@ const SelectMultiField = () => {
               // isMulti
               options={areaOptions?.map((item) => ({
                 value: item,
-                label: item.name,
+                label: `${item.name} (${item.active ? "Active": "Deactive"})`,
               }))}
               onChange={(e)=> dispatch(addCommunityFieldValue({areaId: e.value}))}
               value={{value: areaId?.name, label: areaId?.name}}
             />
-            <p className="text-danger">{errors?.area?.msg}</p>
+            <p className="text-danger">{errors?.areaId?.msg}</p>
           </div>
         </div>
       </div>

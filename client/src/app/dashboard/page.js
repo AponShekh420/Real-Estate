@@ -1,11 +1,11 @@
 import DashboardHeader from "@/components/common/DashboardHeader";
 import MobileMenu from "@/components/common/mobile-menu";
-import DboardMobileNavigation from "@/components/property/dashboard/DboardMobileNavigation";
-import Footer from "@/components/property/dashboard/Footer";
-import SidebarDashboard from "@/components/property/dashboard/SidebarDashboard";
-import RecentActivities from "@/components/property/dashboard/dashboard-home/RecentActivities";
-import TopStateBlock from "@/components/property/dashboard/dashboard-home/TopStateBlock";
-import PropertyViews from "@/components/property/dashboard/dashboard-home/property-view";
+import DboardMobileNavigation from "@/components/dashboard/DboardMobileNavigation";
+import Footer from "@/components/dashboard/Footer";
+import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
+import RecentActivities from "@/components/dashboard/dashboard-home/RecentActivities";
+import TopStateBlock from "@/components/dashboard/dashboard-home/TopStateBlock";
+import PropertyViews from "@/components/dashboard/dashboard-home/property-view";
 
 export const metadata = {
   title: "Dashboard Home || Homez - Real Estate NextJS Template",

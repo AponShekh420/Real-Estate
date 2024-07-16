@@ -1,12 +1,12 @@
 import DashboardHeader from "@/components/common/DashboardHeader";
 import MobileMenu from "@/components/common/mobile-menu";
 import Pagination from "@/components/property/Pagination";
-import Footer from "@/components/property/dashboard/Footer";
-import SidebarDashboard from "@/components/property/dashboard/SidebarDashboard";
-import FilterHeader from "@/components/property/dashboard/dashboard-my-communities/FilterHeader";
-import PropertyDataTable from "@/components/property/dashboard/dashboard-my-communities/CommunitiesDataTable";
-import DboardMobileNavigation from "@/components/property/dashboard/DboardMobileNavigation";
-import Container from "@/components/property/dashboard/dashboard-my-communities/Container";
+import Footer from "@/components/dashboard/Footer";
+import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
+import FilterHeader from "@/components/dashboard/dashboard-my-communities/FilterHeader";
+import PropertyDataTable from "@/components/dashboard/dashboard-my-communities/CommunitiesDataTable";
+import DboardMobileNavigation from "@/components/dashboard/DboardMobileNavigation";
+import Container from "@/components/dashboard/dashboard-my-communities/Container";
 
 export const metadata = {
   title: "Dashboard Properties || Homez - Real Estate NextJS Template",

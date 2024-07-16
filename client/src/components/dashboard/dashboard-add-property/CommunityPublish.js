@@ -39,7 +39,10 @@ const CommunityPublish = () => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          ...community
+          ...community,
+          stateId: community?.stateId?._id,
+          areaId: community?.areaId?._id,
+          cityId: community?.cityId?._id,
         })
       })
       const dataRes = await res.json();
@@ -74,6 +77,9 @@ const CommunityPublish = () => {
         },
         body: JSON.stringify({
           ...community,
+          stateId: community?.stateId?._id,
+          areaId: community?.areaId?._id,
+          cityId: community?.cityId?._id,
         })
       })
       const dataRes = await res.json();

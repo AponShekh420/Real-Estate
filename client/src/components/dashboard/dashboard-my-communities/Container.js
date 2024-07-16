@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import PropertyDataTable from "./CommunitiesDataTable";
-import Pagination from "../../Pagination";
+import Pagination from "../../property/Pagination";
 import FilterHeader from "./FilterHeader";
 import CommunitiesDataTable from "./CommunitiesDataTable";
 import { MoonLoader } from "react-spinners";

@@ -1,10 +1,10 @@
 import DashboardHeader from "@/components/common/DashboardHeader";
 import MobileMenu from "@/components/common/mobile-menu";
 import Pagination from "@/components/property/Pagination";
-import DboardMobileNavigation from "@/components/property/dashboard/DboardMobileNavigation";
-import Footer from "@/components/property/dashboard/Footer";
-import SidebarDashboard from "@/components/property/dashboard/SidebarDashboard";
-import AllReviews from "@/components/property/dashboard/dashboard-reviews";
+import DboardMobileNavigation from "@/components/dashboard/DboardMobileNavigation";
+import Footer from "@/components/dashboard/Footer";
+import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
+import AllReviews from "@/components/dashboard/dashboard-reviews";
 
 export const metadata = {
   title: "Dashboard Reviews || Homez - Real Estate NextJS Template",

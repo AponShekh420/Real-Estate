@@ -139,7 +139,7 @@ const UploadPhotoGallery = () => {
           </div>
         ))}
       </div>
-      <p className="text-danger fs-4">{errors?.imgs?.msg}*</p>
+      <p className="text-danger fs-4">{errors?.imgs?.msg}</p>
     </>
   );
 };

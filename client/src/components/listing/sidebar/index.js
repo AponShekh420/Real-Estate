@@ -11,6 +11,7 @@ import Location from "./Location";
 import SquareFeet from "./SquareFeet";
 import YearBuilt from "./YearBuilt";
 import OtherFeatures from "./OtherFeatures";
+import LocationList from "./LocationList";
 
 const ListingSidebar = ({filterFunctions}) => {
   return (
@@ -18,6 +19,15 @@ const ListingSidebar = ({filterFunctions}) => {
       <div className="widget-wrapper">
         <h6 className="list-title">Find your home</h6>
         <SearchBox filterFunctions={filterFunctions} />
+      </div>
+      {/* End .widget-wrapper */}
+
+
+      <div className="widget-wrapper">
+        <h6 className="list-title">Find By Location</h6>
+        <div className="radio-element">
+          <LocationList />
+        </div>
       </div>
       {/* End .widget-wrapper */}
 
