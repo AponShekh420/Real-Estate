@@ -39,7 +39,7 @@ const Contact = () => {
             <div className="col-lg-5 position-relative">
               <div className="home8-contact-form default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white">
                 <h4 className="form-title mb25">
-                  Have questions? Get in touch!
+                  Have questions?  Let us help you find the perfect 55+ community to meet your retirement needs
                 </h4>
                 <Form />
               </div>

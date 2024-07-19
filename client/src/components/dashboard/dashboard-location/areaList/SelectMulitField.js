@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import {useSelector, useDispatch} from "react-redux"
-import { addCommunityFieldValue } from "@/redux/communitySlice";
+import { addAreaFields } from "@/redux/areaSlice";
 
 
 const customStyles = {
@@ -25,31 +25,25 @@ const customStyles = {
 
 
 const SelectMultiField = () => {
-  const {errors, stateId, cityId, areaId} = useSelector((state)=> state.community)
+  const {errors, stateId, cityId, active} = useSelector((state)=> state.area)
   const dispatch = useDispatch()
 
   // options
   const [stateOptions, setStateOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
-  const [areaOptions, setAreaOptions] = useState([]);
+
+
+  const statusOption = [
+    { value: "Active", label: "Active" },
+    { value: "Deactive", label: "Deactive" },
+  ];
 
   const cityHanlder = (currentState) => {
-    dispatch(addCommunityFieldValue({
+    dispatch(addAreaFields({
       cityId: "",
-      areaId: ""
     }))
     const cityOptionValues = currentState.value.city
-    setAreaOptions([])
     setCityOptions(cityOptionValues);
-  }
-
-
-  const areaHandler = (currentCity) => {
-    dispatch(addCommunityFieldValue({
-      areaId: ""
-    }))
-    const areaOptionValues = currentCity.value.area
-    setAreaOptions(areaOptionValues);
   }
 
 
@@ -67,13 +61,9 @@ const SelectMultiField = () => {
     fetchStateData();
   }, [])
 
-  useEffect(()=> {
-    console.log(stateId)
-  }, [stateId, areaId, cityId])
-
   return (
     <>
-      <div className="col-sm-6 col-xl-4">
+      <div className="col-sm-12 col-xl-12">
         <div className="mb20">
           <label className="heading-color ff-heading fw600 mb10">
             State
@@ -91,7 +81,7 @@ const SelectMultiField = () => {
               }))}
               onChange={(e)=> {
                 cityHanlder(e);
-                dispatch(addCommunityFieldValue({stateId: e.value}))
+                dispatch(addAreaFields({stateId: e.value}))
               }}
               value={{value: stateId?.name, label: stateId?.name}}
             />
@@ -99,7 +89,7 @@ const SelectMultiField = () => {
           </div>
         </div>
       </div>
-      <div className="col-sm-6 col-xl-4">
+      <div className="col-sm-12 col-xl-12">
         <div className="mb20">
           <label className="heading-color ff-heading fw600 mb10">
             City
@@ -116,8 +106,7 @@ const SelectMultiField = () => {
                 label: `${item.name} (${item.active ? "Active": "Deactive"})`,
               }))}
               onChange={(e)=> {
-                areaHandler(e)
-                dispatch(addCommunityFieldValue({cityId: e.value}))
+                dispatch(addAreaFields({cityId: e.value}))
               }}
               placeholder="please select"
               value={{value: cityId?.name, label: cityId?.name}}
@@ -126,26 +115,28 @@ const SelectMultiField = () => {
           </div>
         </div>
       </div>
-      <div className="col-sm-6 col-xl-4">
+
+      <div className="col-sm-12 col-xl-12">
         <div className="mb20">
           <label className="heading-color ff-heading fw600 mb10">
-            Neighborhood
+            Status
           </label>
           <div className="location-area">
             <Select
+              defaultValue={[statusOption[0]]}
+              name="colors"
+              options={statusOption}
               styles={customStyles}
               className="select-custom pl-0"
               classNamePrefix="select"
               required
-              // isMulti
-              options={areaOptions?.map((item) => ({
-                value: item,
-                label: `${item.name} (${item.active ? "Active": "Deactive"})`,
-              }))}
-              onChange={(e)=> dispatch(addCommunityFieldValue({areaId: e.value}))}
-              value={{value: areaId?.name, label: areaId?.name}}
+              onChange={(e)=> {
+                dispatch(addAreaFields({
+                  active: e.value === "Deactive" ? false : true
+                }))
+              }}
+              value={{value: active ? "Active" : "Deactive", label: active ? "Active" : "Deactive"}}
             />
-            <p className="text-danger">{errors?.areaId?.msg}</p>
           </div>
         </div>
       </div>

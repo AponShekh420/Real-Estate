@@ -1,7 +1,8 @@
 "use client"
 import store from "@/redux/store";
 import {Provider} from "react-redux"
-import AddPropertyTabContent from ".";
+import AddLocationContent from ".";
+import AllLocationList from "./AllLocationList";
 
 const TabAndHeader = () => {
 
@@ -18,10 +19,19 @@ const TabAndHeader = () => {
       {/* End .row */}
 
       <div className="row">
-        <div className="col-xl-12">
+        <div className="col-xl-6">
           <div className="ps-widget bgc-white bdrs12 default-box-shadow2 pt30 mb30 overflow-hidden position-relative">
             <div className="navtab-style1">
-              <AddPropertyTabContent />
+              <AddLocationContent />
+            </div>
+          </div>
+        </div>
+
+        <div className="col-xl-6">
+          <div className="ps-widget bgc-white bdrs12 default-box-shadow2 mb30 overflow-hidden position-relative">
+            <div className="p30">
+              <h2>All Location List</h2>
+              <AllLocationList/>
             </div>
           </div>
         </div>

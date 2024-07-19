@@ -6,7 +6,7 @@ const StateModel = require("../../models/StateModel");
 const updateArea = async (req, res) => {
   
   try {
-    const {name, desc, stateId, areaId, cityId } = req.body;
+    const {name, desc, stateId, areaId, cityId, active, abbreviation} = req.body;
 
     // slug making
     const duplicateArea = await AreaModel.find({name, _id: {$ne: areaId}});
@@ -27,10 +27,11 @@ const updateArea = async (req, res) => {
     const Area = await AreaModel.findByIdAndUpdate(areaId, {
       name,
       slug,
-      active: true,
+      active,
       desc,
       state: stateId,
-      city: cityId
+      city: cityId,
+      abbreviation
     });
 
     // updating the state collection to add area in area field on state

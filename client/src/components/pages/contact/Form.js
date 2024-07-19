@@ -7,27 +7,12 @@ const Form = () => {
         <div className="col-lg-12">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              First Name
+              Name
             </label>
             <input
               type="text"
               className="form-control"
-              placeholder="Your Name"
-              required
-            />
-          </div>
-        </div>
-        {/* End .col-lg-12 */}
-
-        <div className="col-lg-12">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
-              Last Name
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Your Name"
+              placeholder="Your Full Name"
               required
             />
           </div>
@@ -40,8 +25,21 @@ const Form = () => {
             <input
               type="email"
               className="form-control"
-              placeholder="Your Name"
+              placeholder="Your Email"
               required
+            />
+          </div>
+        </div>
+        {/* End .col-lg-12 */}
+        <div className="col-lg-12">
+          <div className="mb20">
+            <label className="heading-color ff-heading fw600 mb10">
+              Phone (optional)
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Your Phone Number"
             />
           </div>
         </div>
@@ -50,7 +48,7 @@ const Form = () => {
         <div className="col-md-12">
           <div className="mb10">
             <label className="heading-color ff-heading fw600 mb10">
-              Textarea
+              Message
             </label>
             <textarea
               cols={30}

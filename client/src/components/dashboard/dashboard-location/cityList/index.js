@@ -7,15 +7,17 @@ import ReactQuill from "react-quill";
 import EditorToolbar, { modules, formats } from "@/components/common/EditorToolbar";
 import "react-quill/dist/quill.snow.css";
 import "@/components/common/styles/quillEditor.css"
+import { useDispatch, useSelector } from "react-redux";
+import { addCityFields } from "@/redux/citySlice";
 
 const CityList = () => {
-  const [cityName, setCityName] = useState("");
-  const [abbreviationName, setAbbreviation] = useState("");
-  const [description, setDescription] = useState("");
-
+  const {cityName, description, abbreviation} = useSelector((state)=> state.city);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    setDescription(e);
+    dispatch(addCityFields({
+      description: e
+    }))
   }
 
   return (
@@ -24,23 +26,27 @@ const CityList = () => {
         
         <SelectMulitField />
 
-        <div className="col-sm-6 col-xl-4">
+        <div className="col-sm-12 col-xl-12">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">City Name</label>
             <input type="text" className="form-control" 
-              onChange={(e)=> setCityName(e.target.value)}
+              onChange={(e)=> dispatch(addCityFields({
+                cityName: e.target.value
+              }))}
               value={cityName}
               placeholder="Type a city name"
             />
           </div>
         </div>
 
-        <div className="col-sm-6 col-xl-4">
+        <div className="col-sm-12 col-xl-12">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">Abbreviation</label>
             <input type="text" className="form-control" 
-              onChange={(e)=> setAbbreviation(e.target.value)}
-              value={abbreviationName}
+              onChange={(e)=> dispatch(addCityFields({
+                abbreviation: e.target.value
+              }))}
+              value={abbreviation}
               placeholder="Type abbreviations name of the city"
             />
           </div>

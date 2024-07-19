@@ -4,7 +4,7 @@ const CommunityModel = require("../../models/CommunityModel");
 
 const updateCity = async (req, res) => {
   try {
-    const {name, desc, stateId, cityId } = req.body;
+    const {name, desc, stateId, cityId, abbreviation, active } = req.body;
     
     // slug making
     const duplicateCity = await CityModel.find({name, _id: {$ne: cityId}});
@@ -24,7 +24,8 @@ const updateCity = async (req, res) => {
     const City = await CityModel.findByIdAndUpdate(cityId, {
       name,
       slug,
-      active: true,
+      active,
+      abbreviation,
       desc,
       state: stateId
     })

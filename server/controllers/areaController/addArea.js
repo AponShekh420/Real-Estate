@@ -4,7 +4,7 @@ const CityModel = require("../../models/CityModel");
 
 const addArea = async (req, res) => {
   try {
-    const {name, desc, stateId, cityId} = req.body;
+    const {name, desc, stateId, cityId, active, abbreviation} = req.body;
 
     // slug making
     const duplicateArea = await AreaModel.find({name: name});
@@ -20,9 +20,10 @@ const addArea = async (req, res) => {
     const Area = await AreaModel.insertMany({
       name,
       desc,
-      active: true,
+      active,
       state: stateId,
       city: cityId,
+      abbreviation,
       slug,
     });
 
