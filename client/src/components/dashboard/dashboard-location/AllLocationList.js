@@ -5,6 +5,9 @@ import React from 'react'
 
 import { useEffect, useState } from "react";
 import ContentLoader from "react-content-loader";
+import StateItem from "./stateList/StateItem";
+import CityItem from "./cityList/CityItem";
+import AreaItem from "./areaList/AreaItem";
 
 const AllLocationList = () => {
   const path = usePathname();
@@ -15,7 +18,7 @@ const AllLocationList = () => {
   const getExistingDataToUpdate = async () => {
     try {
       setLoading(true)
-      const res = await fetch('http://localhost:5000/api/state/getall');
+      const res = await fetch('http://localhost:5000/api/state/getall/anytype');
       const currentLocationData = await res.json();
       setLoading(false)
       if(currentLocationData?.message) {
@@ -50,25 +53,17 @@ const AllLocationList = () => {
         <ul className="w-100 list-unstyled">
           {locationData.map((state, stateIndex)=> (
             <li className={`${path.split('/')[2] === state.slug ? "text-danger": ""}`} key={stateIndex}>
-              <div className="d-flex justify-content-between align-items-center">
-                <p className={`text-capitalize m-0 ${path.split('/')[2] === state.slug ? "text-danger": ""}`}><b>{state.name} ({state.community.length})</b></p>
-                <IoIosArrowDown className="p-0"/>
-              </div>
+              <StateItem state={state}/>
               {/* fist chiled */}
               <ul className="w-90 list-unstyled ml10" style={{marginTop: "2px", }}> {/**height: 0, overflow: "hidden" */}
                 {state.city.map((eachCity, cityIndex)=> (
                   <li className={`${path.split('/')[3] === eachCity.slug ? "text-danger": ""}`} key={cityIndex}>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <p className={`text-capitalize m-0`}>-{eachCity.name} ({eachCity.community.length})</p>
-                      <IoIosArrowDown className="p-0"/>
-                    </div>
+                    <CityItem eachCity={eachCity} state={state}/>
                     {/* second child */}
                     <ul className="w-90 list-unstyled ml10" style={{marginTop: "2px"}}> {/**height: 0, overflow: "hidden" */}
                       {eachCity.area.map((eachArea, areaIndex)=> (
                         <li className={`${path.split('/')[4] === eachArea.slug ? "text-danger": ""}`} key={areaIndex}>
-                          <div className="d-flex justify-content-between align-items-center">
-                            <p className={`text-capitalize m-0 ${path.split('/')[4] === eachArea.slug ? "text-danger": ""}`}>--{eachArea.name} ({eachArea.community.length})</p>
-                          </div>
+                          <AreaItem eachArea={eachArea} state={state} city={eachCity}/>
                         </li>
                       ))}
                     </ul>

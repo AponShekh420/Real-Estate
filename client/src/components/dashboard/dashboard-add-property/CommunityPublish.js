@@ -92,6 +92,13 @@ const CommunityPublish = () => {
         setTimeout(()=> {
           router.push('/dashboard/my-communities')
         }, 1500)
+      } else if(dataRes.errors.locationUpdate) {
+        toast.error(dataRes.errors.locationUpdate.msg, {
+          position: "top-right",
+          autoClose: 1500,
+        });
+      } else {
+        dispatch(addCommunityFieldValue({errors: dataRes?.errors}))
       }
     } catch(err) {
       console.log(err.message)

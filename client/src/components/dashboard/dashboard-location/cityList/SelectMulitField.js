@@ -25,7 +25,7 @@ const SelectMultiField = () => {
   // options
   const [stateOptions, setStateOptions] = useState([]);
 
-  const {stateId, active} = useSelector((state)=> state.city);
+  const {errors, stateId, active} = useSelector((state)=> state.city);
   const dispatch = useDispatch();
 
   const statusOption = [
@@ -36,7 +36,7 @@ const SelectMultiField = () => {
 
   const fetchStateData = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/state/getall');
+      const res = await fetch('http://localhost:5000/api/state/getall/anytype');
       const stateData = await res.json();
       setStateOptions(stateData.data);
     } catch(err){
@@ -78,6 +78,7 @@ const SelectMultiField = () => {
             />
             {/* <p className="text-danger">{errors?.stateId?.msg}</p> */}
           </div>
+          <p className="text-danger">{errors?.stateId?.msg}</p>
         </div>
       </div>
 

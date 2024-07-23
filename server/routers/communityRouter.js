@@ -25,7 +25,7 @@ router.get('/single-community/:slug', getSingleCommunity);
 
 // route controller
 router.post('/add', checkCommunityValidation, useValidationResult, addCommunity);
-router.put('/update', useCommunityImgsDeletor, updateCommuity);
+router.put('/update', checkCommunityValidation, useValidationResult, useCommunityImgsDeletor, updateCommuity);
 router.delete('/delete', deleteCommunity);
 
 

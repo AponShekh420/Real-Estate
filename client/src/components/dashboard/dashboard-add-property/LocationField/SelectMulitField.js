@@ -38,9 +38,9 @@ const SelectMultiField = () => {
       cityId: "",
       areaId: ""
     }))
-    const cityOptionValues = currentState.value.city
+    const cityOptionValues = currentState.value.city.map(item => item.active && item).length > 0 ? currentState.value.city.map(item => item.active && item) : [];
     setAreaOptions([])
-    setCityOptions(cityOptionValues);
+    setCityOptions(cityOptionValues[0] ? cityOptionValues : []);
   }
 
 
@@ -48,14 +48,14 @@ const SelectMultiField = () => {
     dispatch(addCommunityFieldValue({
       areaId: ""
     }))
-    const areaOptionValues = currentCity.value.area
-    setAreaOptions(areaOptionValues);
+    const areaOptionValues = currentCity.value.area.map(item => item.active && item).length > 0 ? currentCity.value.area.map(item => item.active && item) : [];
+    setAreaOptions(areaOptionValues[0] ? areaOptionValues : []);
   }
 
 
   const fetchStateData = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/state/getall');
+      const res = await fetch('http://localhost:5000/api/state/getall/active');
       const stateData = await res.json();
       setStateOptions(stateData.data);
     } catch(err){
@@ -67,9 +67,7 @@ const SelectMultiField = () => {
     fetchStateData();
   }, [])
 
-  useEffect(()=> {
-    console.log(stateId)
-  }, [stateId, areaId, cityId])
+
 
   return (
     <>

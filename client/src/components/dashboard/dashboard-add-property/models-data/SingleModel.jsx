@@ -5,14 +5,19 @@ import { BsFillPencilFill } from "react-icons/bs";
 import Image from "next/image";
 import classes from './communityModel.module.css'
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
+import { addModelFields } from "@/redux/modelSlice";
 
 
-const SingleModel = ({newDataNotify}) => {
+const SingleModel = () => {
   const [modelsData, setModelsData] = useState([]);
+  const [deletedDataMsg, setDeletedDataMsg] = useState("");
+
+  // redux
   const {communityId} = useSelector(state => state.community);
-  const [deletedDataMsg, setDeletedDataMsg] = useState("")
+  const {newDataNotify} = useSelector(state => state.model);
+  const dispatch = useDispatch();
 
   const getModelsData = async () => {
     try {
@@ -57,6 +62,18 @@ const SingleModel = ({newDataNotify}) => {
     }
   }
 
+  const editHandler = (modelValue) => {
+    console.log(modelValue);
+    dispatch(addModelFields({
+      CMTName: modelValue.name,
+      desc: modelValue.desc,
+      CMTId: modelValue._id,
+      edit: true,
+      oldImgUrl: modelValue.img,
+      uploadedImageChanged: false,
+      uploadedImage: modelValue.img,
+    }))
+  }
 
 
   
@@ -66,31 +83,31 @@ const SingleModel = ({newDataNotify}) => {
 
 
   return (
-    <div>
+    <div className="row mb30 p10 gap-3">
       {modelsData.map((element)=> (
-        <div className={`ps-widget ${classes.boxBg} bdrs12 default-box-shadow2 p30 mb30`}>
+        <div className={`ps-widget ${classes.boxBg} ${classes.modelGridBox} bdrs12 default-box-shadow2 p10`}>
           <div className="title fz17 mb10 d-flex justify-content-end gap-3 align-items-center">
-            <BsFillPencilFill color="green" size={16} cursor="pointer"/>
+            <BsFillPencilFill color="green" size={16} cursor="pointer" onClick={(e) => editHandler(element)}/>
             <MdDeleteForever color="red" size={20} cursor="pointer" onClick={(e)=> {
                 e.preventDefault();
                 deleteModel(element._id)
               }}/>
           </div>
           <div className="row">
-            <div className="agent-single d-sm-flex align-items-center pb25">
+            <div className="agent-single d-sm-flex pb0">
               <div className="single-img mb30-sm">
                 <Image
-                  width={150}
-                  height={150}
-                  className="w150"
+                  width={70}
+                  height={70}
+                  className="w70"
                   src={`http://localhost:5000/assets/communityModels/${element.img}`}
                   alt="agent"
                 />
               </div>
               <div className="single-contant ml30 ml0-xs">
-                <h3 className="title mb-1">{element.name}</h3>
+                <h6 className="title mb-1">{element.name}</h6>
                 <div className="agent-meta mb10 d-md-flex align-items-center">
-                  <p><b>{element.desc}</b></p>
+                  <p>{element.desc}</p>
                 </div>
               </div>
             </div>

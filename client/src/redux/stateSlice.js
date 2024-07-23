@@ -8,6 +8,7 @@ const initialState = {
   abbreviation: "",
   errors: {},
   edit: false,
+  stateId: "",
 }
 
 

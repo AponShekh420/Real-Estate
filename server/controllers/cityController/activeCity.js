@@ -66,7 +66,9 @@ const activeCity = async (req, res) => {
     } else {
       res.status(400).json({
         errors: {
-          msg: "Take care of parents first"
+          locationUpdate: {
+            msg: "Take care of parents first"
+          }
         }
       })
     }

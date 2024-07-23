@@ -28,6 +28,11 @@ const SidebarDashboard = () => {
       title: "MANAGE LISTINGS",
       items: [
         {
+          href: "/dashboard/catagory",
+          icon: "FaLocationDot",
+          text: "Catagory",
+        },
+        {
           href: "/dashboard/location",
           icon: "FaLocationDot",
           text: "Location",

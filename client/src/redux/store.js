@@ -3,6 +3,7 @@ import communitySlice from './communitySlice'
 import citySlice from './citySlice'
 import stateSlice from './stateSlice'
 import areaSlice from './areaSlice'
+import modelSlice from './modelSlice'
 
 
 const store = configureStore({
@@ -10,7 +11,8 @@ const store = configureStore({
     community: communitySlice,
     city: citySlice,
     state: stateSlice,
-    area: areaSlice
+    area: areaSlice,
+    model: modelSlice
   }
 })
 

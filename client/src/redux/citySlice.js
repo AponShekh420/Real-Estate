@@ -7,8 +7,9 @@ const initialState = {
   description: "",
   abbreviation: "",
   stateId: "",
+  edit: false,
   errors: {},
-  
+  cityId: "",
 }
 
 

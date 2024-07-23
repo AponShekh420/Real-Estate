@@ -9,7 +9,7 @@ const initialState = {
   stateId: "",
   cityId: "",
   errors: {},
-  
+  areaId: "",
 }
 
 

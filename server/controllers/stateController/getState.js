@@ -2,8 +2,10 @@ const StateModel = require("../../models/StateModel");
 
 // upload the state on database
 const getState = async (req, res)=> {
+  const {status} = req.params;
+  const validation = status != 'anytype' ? {active: status == "active" ? true : false} : {$or: [{active: true}, {active: false}]};
   try {
-    const state = await StateModel.find().populate({path: "city", populate: {path: "area"}})
+    const state = await StateModel.find(validation).populate({path: "city", populate: {path: "area"}})
     if(state) {
       res.status(200).json({
         message: "Got the all state",

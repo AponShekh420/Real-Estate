@@ -10,7 +10,7 @@ import "@/components/common/styles/quillEditor.css"
 
 
 const AreaList = () => {
-  const {areaName, abbreviation, description} = useSelector((state)=> state.area)
+  const {errors, areaName, abbreviation, description} = useSelector((state)=> state.area)
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -33,6 +33,7 @@ const AreaList = () => {
               }}
               value={areaName}
             />
+            <p className="text-danger">{errors?.name?.msg}</p>
           </div>
         </div>
       </div>
@@ -50,6 +51,7 @@ const AreaList = () => {
               }}
               value={abbreviation}
             />
+            <p className="text-danger">{errors?.abbreviation?.msg}</p>
           </div>
         </div>
         {/* End .col-sm-6 */}

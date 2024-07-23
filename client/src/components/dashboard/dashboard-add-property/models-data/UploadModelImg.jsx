@@ -2,16 +2,23 @@
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import React, { useState, useRef } from "react";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import { addModelFields } from "@/redux/modelSlice";
 
-const UploadModelImg = ({uploadedImage, setUploadedImage}) => {
-  
+const UploadModelImg = () => {
+  // redux
+  const {uploadedImage, uploadedImageChanged, oldImgUrl} = useSelector((state)=> state.model);
+  const dispatch = useDispatch();
 
   const handleUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setUploadedImage(e.target.result);
+        dispatch(addModelFields({
+          uploadedImage: e.target.result,
+          uploadedImageChanged: true
+        }));
       };
       reader.readAsDataURL(file);
     }
@@ -25,7 +32,7 @@ const UploadModelImg = ({uploadedImage, setUploadedImage}) => {
             width={240}
             height={220}
             className="w-100 cover h-100"
-            src={uploadedImage || "/images/listings/profile-1.jpg"}
+            src={(!uploadedImageChanged && oldImgUrl ) ? `http://localhost:5000/assets/communityModels/${oldImgUrl}` : uploadedImage || "/images/listings/profile-1.jpg"}
             alt="profile avatar"
           />
 
@@ -33,7 +40,10 @@ const UploadModelImg = ({uploadedImage, setUploadedImage}) => {
             className="tag-del"
             style={{ border: "none" }}
             data-tooltip-id="profile_del"
-            onClick={() => setUploadedImage(null)}
+            onClick={() => dispatch(addModelFields({
+              uploadedImage: null,
+              uploadedImageChanged: true,
+            }))}
           >
             <span className="fas fa-trash-can" />
           </button>
@@ -52,7 +62,7 @@ const UploadModelImg = ({uploadedImage, setUploadedImage}) => {
               style={{ display: "none" }}
             />
             <div className="ud-btn btn-white2 mb30">
-              Upload Profile Files
+              Upload Model Image
               <i className="fal fa-arrow-right-long" />
             </div>
           </label>

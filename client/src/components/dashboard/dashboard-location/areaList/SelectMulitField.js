@@ -49,7 +49,7 @@ const SelectMultiField = () => {
 
   const fetchStateData = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/state/getall');
+      const res = await fetch('http://localhost:5000/api/state/getall/anytype');
       const stateData = await res.json();
       setStateOptions(stateData.data);
     } catch(err){

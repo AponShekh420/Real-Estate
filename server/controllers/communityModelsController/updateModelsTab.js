@@ -1,13 +1,23 @@
+const { unlink } = require("fs");
 const CMTModel = require("../../models/CMTModel");
-
+const path = require('path');
 const updateModelsTab = async (req, res) => {
-  const {CMTId, CMTName, desc, img} = req.body;
+  const {CMTId, CMTName, desc, oldImgUrl, uploadedImageChanged} = req.body;
   try {
+    // The Image has updated when user had update the model
     const CMTUpdateStatus = await CMTModel.findByIdAndUpdate(CMTId, {
       name: CMTName,
       desc,
-      img,
-    })
+      img: uploadedImageChanged ? req.files[0].filename : oldImgUrl,
+    });
+
+    if(uploadedImageChanged) {
+      unlink(path.join(__dirname, `../../public/assets/communityModels/${oldImgUrl}`), (err)=> {
+        if(err) {
+            console.log(err)
+        }
+      });
+    }
 
     if(CMTUpdateStatus) {
       res.status(200).json({

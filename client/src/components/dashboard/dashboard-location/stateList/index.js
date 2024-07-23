@@ -9,7 +9,7 @@ import { addStateFields } from "@/redux/stateSlice";
 
 
 const StateList = () => {
-  const { stateName, abbreviation, description } = useSelector((state)=> state.state)
+  const { errors, stateName, abbreviation, description } = useSelector((state)=> state.state)
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -30,6 +30,7 @@ const StateList = () => {
               }}
               value={stateName}
             />
+            <p className="text-danger">{errors?.name?.msg}</p>
           </div>
         </div>
       </div>
@@ -47,6 +48,7 @@ const StateList = () => {
               }}
               value={abbreviation}
             />
+            <p className="text-danger">{errors?.abbreviation?.msg}</p>
           </div>
         </div>
         {/* End .col-sm-6 */}

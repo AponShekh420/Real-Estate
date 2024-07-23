@@ -6,11 +6,11 @@ const addState = async (req, res)=> {
     const {name, desc, active, abbreviation} = req.body;
 
     // slug making
-    const duplicateArea = await StateModel.find({name});
+    const duplicateState = await StateModel.find({name});
 
     let slug;
-    if(duplicateArea.length > 0){
-      slug = name.toLowerCase().trim().split(' ').join("-") + "-" + duplicateArea.length
+    if(duplicateState.length > 0){
+      slug = name.toLowerCase().trim().split(' ').join("-") + "-" + duplicateState.length
     } else {
       slug = name.toLowerCase().trim().split(' ').join("-")
     }

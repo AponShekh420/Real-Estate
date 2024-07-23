@@ -15,7 +15,7 @@ const router = express.Router();
 // route controller
 router.get('/get/:id', getModels);
 router.post('/add', uploadModelImg, addModelsTab);
-router.put('/update', updateModelsTab);
+router.put('/update', uploadModelImg, updateModelsTab);
 router.delete('/delete', deleteModelsTab);
 
 

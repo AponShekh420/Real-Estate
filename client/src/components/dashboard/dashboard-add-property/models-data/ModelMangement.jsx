@@ -2,10 +2,11 @@ import { useState } from "react";
 import SingleModel from "./SingleModel";
 import UploadModelImg from "./UploadModelImg";
 import classes from './communityModel.module.css'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import { HashLoader } from "react-spinners";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { addModelFields, removeModelAllFields } from "@/redux/modelSlice";
 
 const override = {
   display: "block",
@@ -16,12 +17,14 @@ const override = {
 
 
 const ModelMangement = () => {
-  const {communityId} = useSelector((state)=> state.community)
-  const [CMTName, setCMTName] = useState("");
-  const [desc, setDesc] = useState("");
-  const [uploadedImage, setUploadedImage] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [newDataNotify, setNewDataNotify] = useState(null)
+
+  // redux state
+  const {communityId} = useSelector((state)=> state.community)
+  const {CMTName, desc, uploadedImage, edit, CMTId, oldImgUrl, uploadedImageChanged} = useSelector((state)=> state.model);
+
+  // redux dispatch for action
+  const dispatch = useDispatch();
 
   const addModel = async (e) => {
     e.preventDefault();
@@ -37,7 +40,6 @@ const ModelMangement = () => {
     formData.set("desc", desc);
     formData.set("communityId", communityId);
     try {
-      console.log("hello1")
       setLoading(true);
       // console.log("img:", img)
       const res = await fetch("http://localhost:5000/api/models/add", {
@@ -51,10 +53,67 @@ const ModelMangement = () => {
           position: "top-right",
           autoClose: 1500,
         });
-        setCMTName("");
-        setDesc("");
-        setUploadedImage(null);
-        setNewDataNotify(currentData)
+
+        dispatch(addModelFields({
+          CMTName: "",
+          desc: "",
+          uploadedImage: null,
+          newDataNotify: currentData,
+        }))
+      } else {
+        toast.error("There are somthing is warn, please try again!", {
+          position: "top-right",
+          autoClose: 1500,
+        });
+      }
+      console.log(currentData)
+    } catch(err) {
+      console.log(err.message)
+    }
+  }
+
+
+  const cancelModelUpdate = () => {
+    dispatch(removeModelAllFields());
+  }
+
+
+  // update the model
+  const updateModel = async (e) => {
+    e.preventDefault();
+    if(uploadedImage == null) {
+      toast.error("Please select the image!", {
+        position: "top-right",
+        autoClose: 1500,
+      });
+      return;
+    }
+    const formData = new FormData(e.target);
+    formData.set("CMTName", CMTName);
+    formData.set("desc", desc);
+    formData.set("uploadedImageChanged", uploadedImageChanged);
+    formData.set("oldImgUrl", oldImgUrl);
+    formData.set("uploadedImage", uploadedImage);
+    formData.set("CMTId", CMTId);
+    try {
+      setLoading(true);
+      // console.log("img:", img)
+      const res = await fetch("http://localhost:5000/api/models/update", {
+        method: "PUT",
+        body: formData
+      });
+      const currentData = await res.json();
+      setLoading(false)
+      if(currentData.msg) {
+        toast.success(currentData.msg, {
+          position: "top-right",
+          autoClose: 1500,
+        });
+
+        dispatch(removeModelAllFields());
+        dispatch(addModelFields({
+          newDataNotify: currentData,
+        }));
       } else {
         toast.error("There are somthing is warn, please try again!", {
           position: "top-right",
@@ -70,21 +129,21 @@ const ModelMangement = () => {
 
   return (
     <div>
-      <SingleModel newDataNotify={newDataNotify} setNewDataNotify={setNewDataNotify}/>
+      <SingleModel />
 
       <div className={`ps-widget ${classes.boxBg} bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative`}>
         <h4 className="title fz17 mb30">Add New Model</h4>
         <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-          <h4 className="title fz17 mb30">Upload photos of your property</h4>
+          <h4 className="title fz17 mb30">Upload photos of your community model</h4>
           <form className="form-style1" 
-            onSubmit={addModel} 
-            action="http://localhost:5000/api/models/add" 
-            method="post" 
+            onSubmit={edit ? updateModel : addModel} 
+            action={edit ? "http://localhost:5000/api/models/update" : "http://localhost:5000/api/models/add"} 
+            method={edit ? "put": "post"} 
             encType="multipart/form-data"
           >
             <div className="row">
               <div className="col-lg-12">
-                <UploadModelImg uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} />
+                <UploadModelImg />
               </div>
             </div>
             {/* End col-12 */}
@@ -97,7 +156,9 @@ const ModelMangement = () => {
                   </label>
                   <input
                     required
-                    onChange={(e)=> setCMTName(e.target.value)}
+                    onChange={(e)=> dispatch(addModelFields({
+                      CMTName: e.target.value
+                    }))}
                     type="text"
                     className="form-control"
                     placeholder="Type The Title Name"
@@ -114,7 +175,9 @@ const ModelMangement = () => {
                   </label>
                   <textarea
                     required
-                    onChange={(e)=> setDesc(e.target.value)}
+                    onChange={(e)=> dispatch(addModelFields({
+                      desc: e.target.value
+                    }))}
                     type="text"
                     className={`form-control ${classes.modelDes}` }
                     placeholder="Write Description For Model"
@@ -128,19 +191,26 @@ const ModelMangement = () => {
 
             <div className="row">
               <div className="col-sm-6 col-xl-12">
-                <div className="mb30 d-flex justify-content-end">
-                  <button className={`${classes.addModelBtn} border border-dark bg-white rounded-2 d-flex gap-2 justify-content-center align-items-center ${loading? "opacity-50" : "opacity-100"}`} type="submit" disabled={loading}>
-                    Add Model
-                    {!loading ? <IoIosAddCircleOutline /> : <HashLoader
+                <div className="mb30 d-flex justify-content-end gap-2">
+                  <button className={`${classes.addModelBtn} bg-white rounded-2 d-flex gap-2 justify-content-center align-items-center ${loading? "opacity-50" : "opacity-100"}`} type="submit" disabled={loading} style={{border: "2px solid green", outline: "none", color: "green", fontWeight: 600}}>
+                    {edit ? "Update Model": 'Add Model'}
+                    {!loading ? <IoIosAddCircleOutline size={18}/> : <HashLoader
                       color="#ffffff"
                       loading={loading}
                       cssOverride={override}
-                      size={17}
+                      size={18}
                       aria-label="Loading Spinner"
                       data-testid="loader"
                     />
                     }
                   </button>
+                  {edit ? (
+                  <button className={`${classes.cancelBtn} btn rounded-2 d-flex gap-2 text-danger justify-content-center align-items-center`} style={{border: "2px solid red", color: "red", fontWeight: 600}} onClick={cancelModelUpdate}>
+                      Cancel
+                    </button>
+                  ): (
+                    ""
+                  )}
                 </div>
               </div>
             </div>

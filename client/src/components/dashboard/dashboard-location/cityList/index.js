@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCityFields } from "@/redux/citySlice";
 
 const CityList = () => {
-  const {cityName, description, abbreviation} = useSelector((state)=> state.city);
+  const {errors, cityName, description, abbreviation} = useSelector((state)=> state.city);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -36,6 +36,7 @@ const CityList = () => {
               value={cityName}
               placeholder="Type a city name"
             />
+            <p className="text-danger">{errors?.name?.msg}</p>
           </div>
         </div>
 
@@ -49,6 +50,7 @@ const CityList = () => {
               value={abbreviation}
               placeholder="Type abbreviations name of the city"
             />
+            <p className="text-danger">{errors?.abbreviation?.msg}</p>
           </div>
         </div>
 

@@ -32,7 +32,7 @@ const CommunitiesDataTable = ({communitiesData, setDeleteData}) => {
           <th scope="col">Listing title</th>
           <th scope="col">Date Published</th>
           <th scope="col">Listed-In</th>
-          <th scope="col">View</th>
+          <th scope="col">Status</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
@@ -54,7 +54,7 @@ const CommunitiesDataTable = ({communitiesData, setDeleteData}) => {
                   <div className="h6 list-title">
                     <Link href={`/community/${community?.slug}`}>{community?.title}</Link>
                   </div>
-                  <p className="list-text mb-0">{community?.city?.name}</p>
+                  <p className="list-text mb-0">{community?.city?.name} city, {community.state.abbreviation}, USA</p>
                   <div className="list-price">
                     <a href="#">Price: ${community.minPrice}-${community?.maxPrice}</a>
                   </div>
@@ -71,14 +71,14 @@ const CommunitiesDataTable = ({communitiesData, setDeleteData}) => {
                 {community?.active ? "Active": "panding"}
               </span>
             </td>
-            <td className="vam">{community?.createdAt}</td>
+            <td className="vam">{community?.status.map((item, index) => (community.status.length > (index + 1)) ? `${item}/`: item)}</td>
             <td className="vam">
               <div className="d-flex">
                 <Link href={`/dashboard/edit-community/${community.slug}`}> 
                   <button
                     className="icon"
                     style={{ border: "none" }}
-                    data-tooltip-id={`edit-${community?._id}`}
+                    data-tooltip-id={`edit-${community?.slug}`}
                   >
                     <span className="fas fa-pen fa" />
                   </button>

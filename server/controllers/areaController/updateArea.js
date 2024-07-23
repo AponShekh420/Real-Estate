@@ -13,7 +13,7 @@ const updateArea = async (req, res) => {
     const currentArea = await AreaModel.findById(areaId);
 
     let slug;
-    if(name === currentArea.name) {
+    if(name == currentArea?.name) {
       slug = currentArea.slug
     } else {
       if(duplicateArea.length > 0){

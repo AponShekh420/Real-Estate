@@ -7,14 +7,17 @@ const updateArea = require("../controllers/areaController/updateArea");
 const deleteArea = require("../controllers/areaController/deleteArea");
 const deactiveArea = require("../controllers/areaController/deactiveArea");
 const activeArea = require("../controllers/areaController/activeArea");
+const checkAreaValidation = require("../middleware/checkAreaValidation");
+const useValidationResult = require("../middleware/common/useValidationResult");
+
 
 // callback function of configure
 const router = express.Router();
 
 
 // route controller
-router.post('/add', addArea);
-router.put('/update', updateArea);
+router.post('/add', checkAreaValidation, useValidationResult, addArea);
+router.put('/update', checkAreaValidation, useValidationResult, updateArea);
 router.delete('/delete', deleteArea);
 
 

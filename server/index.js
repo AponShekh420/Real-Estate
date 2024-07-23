@@ -12,7 +12,8 @@ const areaRouter = require('./routers/areaRouter');
 const cityRouter = require('./routers/cityRouter');
 const communityRouter = require('./routers/communityRouter');
 const CMTRouter = require('./routers/CMTRouter');
-
+const catagoryRouter = require("./routers/catagoryRouter")
+const subcatagoryRouter = require("./routers/subcatagoryRouter")
 
 
 // configure funtionality
@@ -39,11 +40,18 @@ app.use(express.static(path.join(__dirname, "public")))
 
 // Root routes
 
+// community items
 app.use('/api/state', stateRouter);
 app.use('/api/area', areaRouter);
 app.use('/api/city', cityRouter);
 app.use('/api/community', communityRouter);
 app.use('/api/models', CMTRouter);
+
+
+// blog items
+app.use('/api/catagory', catagoryRouter);
+app.use('/api/subcatagory', subcatagoryRouter);
+
 
 
 
