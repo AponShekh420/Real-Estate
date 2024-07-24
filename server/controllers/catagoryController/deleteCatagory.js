@@ -20,7 +20,7 @@ const deleteCatagory = async (req, res) => {
 
       // update the community collection to delete this state id
       const blogUpdateStatus = await BlogModel.updateMany({catagory: catagoryId}, {
-        catagory: "uncatagoryCollectionId",
+        catagory: "66a0b384885b42cf193f9d63",
       });
 
       // try to check those cities, areas, and communities has update or not

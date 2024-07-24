@@ -44,9 +44,8 @@ const addBlog = async (req, res) => {
       })
 
       // push the blog in subcatagory blogs list
-      let subcatagoryUpdate;
       if(subcatagoryId) {
-        subcatagoryUpdate = await SubcatagoryModel.findByIdAndUpdate(subcatagoryId, {
+        await SubcatagoryModel.findByIdAndUpdate(subcatagoryId, {
           $push: {
             blogs: blog[0]._id
           }
@@ -54,7 +53,7 @@ const addBlog = async (req, res) => {
       }
 
       // check: those catagoryModel and subcatagoryModel has updated or not
-      if(catagoryUpdate && subcatagoryUpdate ) {
+      if(catagoryUpdate) {
         res.status(200).json({
           msg: "The blog has uploaded Successfully",
           data: blog[0]

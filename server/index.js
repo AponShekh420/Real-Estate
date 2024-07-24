@@ -12,8 +12,9 @@ const areaRouter = require('./routers/areaRouter');
 const cityRouter = require('./routers/cityRouter');
 const communityRouter = require('./routers/communityRouter');
 const CMTRouter = require('./routers/CMTRouter');
-const catagoryRouter = require("./routers/catagoryRouter")
-const subcatagoryRouter = require("./routers/subcatagoryRouter")
+const catagoryRouter = require("./routers/catagoryRouter");
+const subcatagoryRouter = require("./routers/subcatagoryRouter");
+const blogRouter = require("./routers/blogRouter");
 
 
 // configure funtionality
@@ -51,6 +52,7 @@ app.use('/api/models', CMTRouter);
 // blog items
 app.use('/api/catagory', catagoryRouter);
 app.use('/api/subcatagory', subcatagoryRouter);
+app.use('/api/blog', blogRouter);
 
 
 

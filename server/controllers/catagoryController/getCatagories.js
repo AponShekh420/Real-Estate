@@ -9,7 +9,7 @@ const getCatagories = async (req, res)=> {
     if(catagories) {
       res.status(200).json({
         message: "Got the all Catagories",
-        data: state
+        data: catagories
       })
     } else {
       res.status(500).json({

@@ -25,7 +25,7 @@ const updateSubcatagory = async (req, res) => {
       name,
       slug,
       catagory: catagoryId
-    })
+    });
 
     // updating the catagory collection to add subcatagory in subcatagory field on catagory
     if(subcatagory) {
