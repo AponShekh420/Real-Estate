@@ -26,7 +26,6 @@ const BlogSchema = mongoose.Schema({
   },
   subcatagory: {
     type: mongoose.Types.ObjectId,
-    required: true,
     ref: "Subcatagory"
   },
   img: {
@@ -35,7 +34,7 @@ const BlogSchema = mongoose.Schema({
   },
   active: {
     type: Boolean,
-    default: true
+    default: false,
   },
   auther: {
     type: mongoose.Types.ObjectId,
