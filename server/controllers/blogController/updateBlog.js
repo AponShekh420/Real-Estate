@@ -36,7 +36,6 @@ const updateCommuity = async (req, res) => {
       subcatagory: subcatagoryId || null,
       img,
       active,
-      auther,
       metaTitle,
       metaDesc,
     }).populate("catagory").populate("subcatagory");
