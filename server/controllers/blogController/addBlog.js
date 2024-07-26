@@ -25,7 +25,7 @@ const addBlog = async (req, res) => {
       title,
       slug,
       desc,
-      catagory: catagoryId || "66a0b384885b42cf193f9d63",
+      catagory: catagoryId || process.env.uncatagoryId,
       subcatagory: subcatagoryId || null,
       img,
       active,
