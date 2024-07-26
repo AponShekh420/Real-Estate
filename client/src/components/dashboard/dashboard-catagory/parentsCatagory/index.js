@@ -18,6 +18,7 @@ const Catagory = () => {
                 dispatch(addCatagoryFields({catagoryName: e.target.value}))
               }}
               value={catagoryName}
+              placeholder="Type a catagory name"
             />
             <p className="text-danger">{errors?.name?.msg}</p>
           </div>

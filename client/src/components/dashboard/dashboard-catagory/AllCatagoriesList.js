@@ -9,7 +9,7 @@ import SubCatagoryItem from "./subCatagory/SubCatagoryItem";
 const AllCatagoriesList = () => {
   const path = usePathname();
   const [catagoryData, setCatagoryData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // fetch all state, city and area to show these on summery page sidebar as list
   const getExistingDataToUpdate = async () => {

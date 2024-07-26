@@ -2,7 +2,7 @@ import React from "react";
 
 const statisticsData = [
   {
-    text: "All Properties",
+    text: "All Communities",
     title: "583",
     icon: "flaticon-home",
   },

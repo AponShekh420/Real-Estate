@@ -12,7 +12,7 @@ import AreaItem from "./areaList/AreaItem";
 const AllLocationList = () => {
   const path = usePathname();
   const [locationData, setLocationData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // fetch all state, city and area to show these on summery page sidebar as list
   const getExistingDataToUpdate = async () => {
