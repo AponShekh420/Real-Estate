@@ -2,32 +2,32 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 const initialState = {
-  subCatagoryName: "",
+  subcatagoryName: "",
   catagoryId: "",
   edit: false,
   errors: {},
-  subCatagoryId: "",
+  subcatagoryId: "",
 }
 
 
 const subCatagorySlice = createSlice({
-  name: "subCatagory",
+  name: "subcatagory",
   initialState,
   reducers: {
-    addSubCatagoryFields: (state, action) => {
+    addSubcatagoryFields: (state, action) => {
       return {
         ...state,
         ...action.payload
       }
     },
-    removeAllSubCatagoryFields: (state) => {
+    removeAllSubcatagoryFields: (state) => {
       return initialState
     }
   }
 });
 
 
-export const {addSubCatagoryFields, removeAllSubCatagoryFields} = subCatagorySlice.actions;
+export const {addSubcatagoryFields, removeAllSubcatagoryFields} = subCatagorySlice.actions;
 
 
 export default subCatagorySlice.reducer;

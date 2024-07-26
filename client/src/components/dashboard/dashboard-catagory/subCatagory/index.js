@@ -3,10 +3,10 @@ import SelectMulitField from "./SelectMulitField";
 // quill text editor imports
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCityFields } from "@/redux/citySlice";
+import { addSubcatagoryFields } from "@/redux/subCatagorySlice";
 
 const SubCatagory = () => {
-  const {errors, cityName, abbreviation} = useSelector((state)=> state.city);
+  const {errors, subcatagoryName} = useSelector((state)=> state.subcatagory);
   const dispatch = useDispatch();
 
   return (
@@ -19,10 +19,10 @@ const SubCatagory = () => {
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">Subcatagory Name</label>
             <input type="text" className="form-control" 
-              onChange={(e)=> dispatch(addCityFields({
-                cityName: e.target.value
+              onChange={(e)=> dispatch(addSubcatagoryFields({
+                subcatagoryName: e.target.value
               }))}
-              value={cityName}
+              value={subcatagoryName}
               placeholder="Type a subcatagory name"
             />
             <p className="text-danger">{errors?.name?.msg}</p>

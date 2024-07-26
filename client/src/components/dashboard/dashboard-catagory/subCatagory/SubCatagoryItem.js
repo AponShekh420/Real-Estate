@@ -1,4 +1,4 @@
-import { addCityFields } from "@/redux/citySlice";
+import { addSubcatagoryFields } from "@/redux/subCatagorySlice";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MoonLoader } from "react-spinners";
@@ -12,99 +12,25 @@ const override = {
 };
 
 
-const SubCatagoryItem = ({eachCity, state}) => {
-  const [loading, setLoading] = useState(false);
+const SubCatagoryItem = ({eachSubcatagory, catagory}) => {
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   // redux 
-  const {active, cityName, description, abbreviation, edit} = useSelector(state => state.city);
+  const {subcatagoryName, edit} = useSelector(state => state.subcatagory);
   const dispatch = useDispatch();
 
-
-  // the state would be "Deactive" though this function
-  const deactiveHanlder = async (e) => {
-    try {
-      setLoading(true)
-      const res = await fetch("http://localhost:5000/api/city/deactive", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          cityId: eachCity._id
-        })
-      })
-      const dataRes = await res.json();
-      setLoading(false)
-      if(dataRes.msg) {
-        toast.success(dataRes.msg, {
-          position: "top-right",
-          autoClose: 1500,
-        });
-      } else if (dataRes?.errors?.locationUpdate) {
-        toast.error(`First, Take care the parent of "${eachCity.name}"`, {
-          position: "top-right",
-          autoClose: 1500,
-        });
-      } else {
-        toast.error(`Please try again "${eachCity.name}" city`, {
-          position: "top-right",
-          autoClose: 1500,
-        });
-      }
-    } catch(err) {
-      console.log(err.message)
-    }
-  }
-
-
-  // the state would be "Active" though this function
-  const activeHandler = async () => {
-    try {
-      setLoading(true)
-      const res = await fetch("http://localhost:5000/api/city/active", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          cityId: eachCity._id
-        })
-      })
-      const dataRes = await res.json();
-      setLoading(false)
-      if(dataRes.msg) {
-        toast.success(dataRes.msg, {
-          position: "top-right",
-          autoClose: 1500,
-        });
-      } else if (dataRes?.errors?.locationUpdate) {
-        toast.error(`First, Take care the parent of "${eachCity.name}"`, {
-          position: "top-right",
-          autoClose: 1500,
-        });
-      } else {
-        toast.error(`Please try again "${eachCity.name}" city`, {
-          position: "top-right",
-          autoClose: 1500,
-        });
-      }
-    } catch(err) {
-      console.log(err.message)
-    }
-  }
 
 
   const deleteHanlder = async () => {
     try {
       setDeleteLoading(true)
-      const res = await fetch("http://localhost:5000/api/city/delete", {
+      const res = await fetch("http://localhost:5000/api/subcatagory/delete", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          cityId: eachCity._id
+          subcatagoryId: eachSubcatagory._id
         })
       })
       const dataRes = await res.json();
@@ -115,7 +41,7 @@ const SubCatagoryItem = ({eachCity, state}) => {
           autoClose: 1500,
         });
       } else {
-        toast.error(`Please try again to delete "${state.name}" city`, {
+        toast.error(`Please try again to delete "${catagory.name}" subcatagory`, {
           position: "top-right",
           autoClose: 1500,
         });
@@ -127,14 +53,11 @@ const SubCatagoryItem = ({eachCity, state}) => {
 
 
   const editHandler = () => {
-    dispatch(addCityFields({
-      stateId: state,
-      cityName: eachCity.name,
-      description: eachCity.desc,
-      abbreviation: eachCity.abbreviation,
-      active: eachCity.active,
+    dispatch(addSubcatagoryFields({
+      catagoryId: catagory,
+      subcatagoryName: eachSubcatagory.name,
       edit: true,
-      cityId: eachCity._id,
+      subcatagoryId: eachSubcatagory._id,
     }))
   }
 
@@ -143,32 +66,13 @@ const SubCatagoryItem = ({eachCity, state}) => {
   return (
     <>
       <div className="d-flex justify-content-between align-items-center bdrb1 py-2">
-        <p className={`text-capitalize m-0`}>-{eachCity.name} ({eachCity.community.length})</p>
+        <p className={`text-capitalize m-0`}>-{eachSubcatagory.name} ({eachSubcatagory.blogs.length})</p>
         <div className="d-flex align-items-center gap-3">
-
-            <span
-              className="text-capitalize"
-              style={{cursor: "pointer", border: "none", color: `${eachCity.active ? "green" : "red"}`, padding: `${loading ? eachCity.active ? "2px 16px" : "2px 22px" : "1px 8px"}`, lineHeight: "1.5", borderRadius: "15px", border: `1px solid ${eachCity.active ? "green" : "red"}`, fontSize: "12px"}}
-              data-tooltip-id={`status-${eachCity?.slug}`}
-              onClick={eachCity.active ? deactiveHanlder : activeHandler}
-            >
-              {loading ? (
-                <MoonLoader
-                color={eachCity.active == true ? "green" : "red"}
-                loading={loading}
-                cssOverride={override}
-                size={12}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-              />
-              ): eachCity.active ? "active" : "Deactive"}
-              
-            </span>
 
             <button
               className="icon btn"
               style={{ border: "none", color: "green", padding: "0px", fontSize: "15px"}}
-              data-tooltip-id={`edit-${eachCity?.slug}`}
+              data-tooltip-id={`edit-${eachSubcatagory?.slug}`}
               onClick={editHandler}
             > 
               <span className="fas fa-pen fa" />
@@ -176,7 +80,7 @@ const SubCatagoryItem = ({eachCity, state}) => {
 
             <a 
             style={{ border: "none", color: "red", padding: "0px", fontSize: "16px", cursor: "pointer"}}
-            data-tooltip-id={`delete-${eachCity?.slug}`}
+            data-tooltip-id={`delete-${eachSubcatagory?.slug}`}
             onClick={deleteHanlder}
           >
             {deleteLoading ? (
@@ -192,23 +96,18 @@ const SubCatagoryItem = ({eachCity, state}) => {
           </a>
             
             <ReactTooltip
-              id={`edit-${eachCity?.slug}`}
+              id={`edit-${eachSubcatagory?.slug}`}
               place="top"
               content="Edit"
             />
             <ReactTooltip
-              id={`delete-${eachCity?.slug}`}
+              id={`delete-${eachSubcatagory?.slug}`}
               place="top"
               content="Delete"
             />
-            <ReactTooltip
-              id={`status-${eachCity?.slug}`}
-              place="top"
-              content={`${eachCity.active ? "Click Me To Deactive": "Click Me To Active"}`}
-            />
+            
           </div>
       </div>
-      <ToastContainer/>
     </>
   );
 }

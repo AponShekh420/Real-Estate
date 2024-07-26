@@ -8,18 +8,18 @@ import SubCatagoryItem from "./subCatagory/SubCatagoryItem";
 
 const AllCatagoriesList = () => {
   const path = usePathname();
-  const [locationData, setLocationData] = useState([]);
+  const [catagoryData, setCatagoryData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   // fetch all state, city and area to show these on summery page sidebar as list
   const getExistingDataToUpdate = async () => {
     try {
       setLoading(true)
-      const res = await fetch('http://localhost:5000/api/state/getall/anytype');
-      const currentLocationData = await res.json();
+      const res = await fetch('http://localhost:5000/api/catagory/getall');
+      const currentCatagoryData = await res.json();
       setLoading(false)
-      if(currentLocationData?.message) {
-        setLocationData(currentLocationData?.data)
+      if(currentCatagoryData?.message) {
+        setCatagoryData(currentCatagoryData?.data)
       } else {
         // do something
       }
@@ -48,14 +48,14 @@ const AllCatagoriesList = () => {
         </ContentLoader>
       ) : (
         <ul className="w-100 list-unstyled">
-          {locationData.map((state, stateIndex)=> (
-            <li className={`${path.split('/')[2] === state.slug ? "text-danger": ""}`} key={stateIndex}>
-              <CatagoryItem state={state}/>
+          {catagoryData.map((catagory, stateIndex)=> (
+            <li className={`${path.split('/')[2] === catagory.slug ? "text-danger": ""}`} key={stateIndex}>
+              <CatagoryItem catagory={catagory}/>
               {/* fist chiled */}
               <ul className="w-90 list-unstyled ml10" style={{marginTop: "2px", }}> {/**height: 0, overflow: "hidden" */}
-                {state.city.map((eachCity, cityIndex)=> (
-                  <li className={`${path.split('/')[3] === eachCity.slug ? "text-danger": ""}`} key={cityIndex}>
-                    <SubCatagoryItem eachCity={eachCity} state={state}/>
+                {catagory.subcatagory.map((eachSubcatagory, subcatagoryIndex)=> (
+                  <li className={`${path.split('/')[3] === eachSubcatagory.slug ? "text-danger": ""}`} key={subcatagoryIndex}>
+                    <SubCatagoryItem eachSubcatagory={eachSubcatagory} catagory={catagory}/>
                   </li>
                 ))}
               </ul>

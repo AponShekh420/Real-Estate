@@ -1,5 +1,6 @@
 "use client";
 import { addCityFields } from "@/redux/citySlice";
+import { addSubcatagoryFields } from "@/redux/subCatagorySlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
@@ -23,34 +24,30 @@ const customStyles = {
 
 const SelectMultiField = () => {
   // options
-  const [stateOptions, setStateOptions] = useState([]);
+  const [catagoryOptions, setCatagoryOptions] = useState([]);
 
-  const {errors, stateId, active} = useSelector((state)=> state.city);
+  const {errors, catagoryId} = useSelector((state)=> state.subcatagory);
   const dispatch = useDispatch();
 
-  const statusOption = [
-    { value: "Active", label: "Active" },
-    { value: "Deactive", label: "Deactive" },
-  ];
 
-
-  const fetchStateData = async () => {
+  const fetchCatagorData = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/state/getall/anytype');
-      const stateData = await res.json();
-      setStateOptions(stateData.data);
+      const res = await fetch('http://localhost:5000/api/catagory/getall');
+      const catagorData = await res.json();
+      catagorData.data.shift();
+      setCatagoryOptions(catagorData.data);
     } catch(err){
       console.log(err.message)
     }
   }
 
   useEffect(()=> {
-    fetchStateData();
+    fetchCatagorData();
   }, [])
 
   // useEffect(()=> {
-  //   console.log(stateId._id, active, cityName, abbreviation, description)
-  // }, [stateId])
+  //   console.log(catagoryId._id, cityName, abbreviation, description)
+  // }, [catagoryId])
 
 
   return (
@@ -67,18 +64,18 @@ const SelectMultiField = () => {
               classNamePrefix="select"
               required
               // isMulti
-              options={stateOptions?.map((item) => ({
+              options={catagoryOptions?.map((item) => ({
                 value: item,
-                label: `${item.name} (${item.active ? "Active": "Deactive"})`,
+                label: `${item.name}`,
               }))}
               onChange={(e)=> {
-                dispatch(addCityFields({stateId: e.value}))
+                dispatch(addSubcatagoryFields({catagoryId: e.value}))
               }}
-              value={{value: stateId?.name, label: stateId?.name}}
+              value={{value: catagoryId?.name, label: catagoryId?.name}}
             />
-            {/* <p className="text-danger">{errors?.stateId?.msg}</p> */}
+            {/* <p className="text-danger">{errors?.catagoryId?.msg}</p> */}
           </div>
-          <p className="text-danger">{errors?.stateId?.msg}</p>
+          <p className="text-danger">{errors?.catagoryId?.msg}</p>
         </div>
       </div>
     </>

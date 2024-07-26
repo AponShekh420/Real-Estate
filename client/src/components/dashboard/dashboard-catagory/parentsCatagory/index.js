@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addStateFields } from "@/redux/stateSlice";
+import { addCatagoryFields } from "@/redux/catagorySlice";
 
 
 const Catagory = () => {
-  const { errors, stateName } = useSelector((state)=> state.state)
+  const { errors, catagoryName } = useSelector((state)=> state.catagory)
   const dispatch = useDispatch();
 
   return (
@@ -15,9 +15,9 @@ const Catagory = () => {
             <label className="heading-color ff-heading fw600 mb10">Catagory Name</label>
             <input type="text" className="form-control" 
               onChange={(e)=> {
-                dispatch(addStateFields({stateName: e.target.value}))
+                dispatch(addCatagoryFields({catagoryName: e.target.value}))
               }}
-              value={stateName}
+              value={catagoryName}
             />
             <p className="text-danger">{errors?.name?.msg}</p>
           </div>

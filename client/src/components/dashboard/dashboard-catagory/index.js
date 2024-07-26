@@ -11,6 +11,8 @@ import { addAreaFields, removeAllAreaFields } from "@/redux/areaSlice";
 import '@/components/dashboard/dashboard-location/style.css';
 import Catagory from "./parentsCatagory";
 import SubCatagory from "./subCatagory";
+import { addSubcatagoryFields, removeAllSubcatagoryFields } from "@/redux/subCatagorySlice";
+import { addCatagoryFields, removeCatagoryAllFields } from "@/redux/catagorySlice";
 
 
 const override = {
@@ -21,45 +23,43 @@ const override = {
 
 
 const AddCatagoryContent = () => {
-  const [stateLoading, setStateLoading] = useState(false);
-  const [cityLoading, setCityLoading] = useState(false);
-  const [areaLoading, setAreaLoading] = useState(false);
+  const [catagoryLoading, setCatagoryLoading] = useState(false);
+  const [subcatagoryLoading, setSubcatagoryLoading] = useState(false);
 
   // redux state
-  const {stateId, active, description, abbreviation, cityName, edit: cityEdit, cityId: cityUpdateId} = useSelector((state)=> state.city);
-  const {active: stateActive, description: stateDescription, abbreviation: stateAbbreviation, stateName, edit: stateEdit, stateId: stateUpdateId} = useSelector((state)=> state.state);
-  const {active: areaActive, description: areaDescription, abbreviation: areaAbbreviation, areaName, stateId: stateIdForArea, cityId: cityIdForArea, edit: areaEdit, areaId: areaUpdateId} = useSelector((state)=> state.area);
+  const {catagoryId, subcatagoryName, edit: subcatagoryEdit, subcatagoryId: subcatagoryUpdateId} = useSelector((state)=> state.subcatagory);
+
+  const {catagoryName, edit: catagoryEdit, catagoryId: catagoryUpdateId} = useSelector((state)=> state.catagory);
+  
+  
   const dispatch = useDispatch();
 
 // upload new 'State', 'City' and 'Area' through these functions
-  const uploadNewCity = async (e) => {
+  const uploadNewSubcatagory = async (e) => {
     e.preventDefault();
     try {
-      setCityLoading(true);
-      const res = await fetch("http://localhost:5000/api/city/add", {
+      setSubcatagoryLoading(true);
+      const res = await fetch("http://localhost:5000/api/subcatagory/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          stateId: stateId._id,
-          active,
-          abbreviation,
-          name: cityName,
-          desc: description
+          catagoryId: catagoryId._id,
+          name: subcatagoryName,
         })
       });
-      const currentCity = await res.json();
-      setCityLoading(false);
-      if(currentCity.msg) {
-        toast.success(currentCity.msg, {
+      const currentSubcatagory = await res.json();
+      setSubcatagoryLoading(false);
+      if(currentSubcatagory.msg) {
+        toast.success(currentSubcatagory.msg, {
           position: "top-right",
           autoClose: 1500,
         });
-        dispatch(removeAllCityFields())
+        dispatch(removeAllSubcatagoryFields())
       } else {
-        dispatch(addCityFields({
-          errors: currentCity.errors,
+        dispatch(addSubcatagoryFields({
+          errors: currentSubcatagory.errors,
         }))
       }
     } catch(err) {
@@ -68,124 +68,76 @@ const AddCatagoryContent = () => {
   }
 
 
-  const uploadNewState = async (e) => {
+  const uploadNewCatagory = async (e) => {
     e.preventDefault();
     try {
-      setStateLoading(true);
-      const res = await fetch("http://localhost:5000/api/state/add", {
+      setCatagoryLoading(true);
+      const res = await fetch("http://localhost:5000/api/catagory/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          active: stateActive,
-          abbreviation: stateAbbreviation,
-          name: stateName,
-          desc: stateDescription
+          name: catagoryName,
         })
       });
-      const currentState = await res.json();
-      setStateLoading(false);
-      if(currentState.msg) {
-        toast.success(currentState.msg, {
+      const currentCatagory = await res.json();
+      setCatagoryLoading(false);
+      if(currentCatagory.msg) {
+        toast.success(currentCatagory.msg, {
           position: "top-right",
           autoClose: 1500,
         });
-        dispatch(removeStateAllFields())
+        dispatch(removeCatagoryAllFields())
       } else {
-        dispatch(addStateFields({
-          errors: currentState.errors,
+        dispatch(addCatagoryFields({
+          errors: currentCatagory.errors,
         }))
       }
     } catch(err) {
       console.log(err.message)
     }
   }
+  // uploading new 'catagory' and 'subcatagory' has ended
 
 
+  const cancelCatagoryUpdate = () => {
+    dispatch(removeCatagoryAllFields())
+  }
 
-  const uploadNewArea = async (e) => {
+  const cancelSubcatagoryUpdate = ()=> {
+    dispatch(removeAllSubcatagoryFields())
+  }
+
+
+  // start here to update catagory and subcatagory
+
+  // catagory udpate
+  const updateExistingCatagory = async (e) => {
     e.preventDefault();
     try {
-      setAreaLoading(true);
-      const res = await fetch("http://localhost:5000/api/area/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          active: areaActive,
-          abbreviation: areaAbbreviation,
-          name: areaName,
-          desc: areaDescription,
-          stateId: stateIdForArea._id,
-          cityId: cityIdForArea._id,
-        })
-      });
-      const currentArea = await res.json();
-      setAreaLoading(false);
-      if(currentArea.msg) {
-        toast.success(currentArea.msg, {
-          position: "top-right",
-          autoClose: 1500,
-        });
-        dispatch(removeAllAreaFields())
-      } else {
-        dispatch(addAreaFields({
-          errors: currentArea.errors,
-        }))
-      }
-    } catch(err) {
-      console.log(err.message)
-    }
-  }
-  // uploading new 'State', 'City' and 'Area' has ended
-
-
-  const cancelStateUpdate = () => {
-    dispatch(removeStateAllFields())
-  }
-
-  const cancelAreaUpdate = () => {
-    dispatch(removeAllAreaFields())
-  }
-
-  const cancelCityUpdate = ()=> {
-    dispatch(removeAllCityFields())
-  }
-
-
-  // start here to update location
-
-  // state udpate
-  const updateExistingState = async (e) => {
-    e.preventDefault();
-    try {
-      setStateLoading(true);
-      const res = await fetch("http://localhost:5000/api/state/update", {
+      setCatagoryLoading(true);
+      const res = await fetch("http://localhost:5000/api/catagory/update", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          active: stateActive,
-          abbreviation: stateAbbreviation,
-          name: stateName,
-          desc: stateDescription,
-          stateId: stateUpdateId
+          name: catagoryName,
+          catagoryId: catagoryUpdateId
         })
       });
-      const currentState = await res.json();
-      setStateLoading(false);
-      if(currentState.msg) {
-        toast.success(currentState.msg, {
+      const currentCatagory = await res.json();
+      setCatagoryLoading(false);
+      if(currentCatagory.msg) {
+        toast.success(currentCatagory.msg, {
           position: "top-right",
           autoClose: 1500,
         });
-        dispatch(removeStateAllFields())
+        dispatch(removeCatagoryAllFields())
       } else {
-        dispatch(addStateFields({
-          errors: currentState.errors,
+        dispatch(addCatagoryFields({
+          errors: currentCatagory.errors,
         }))
       }
     } catch(err) {
@@ -194,83 +146,40 @@ const AddCatagoryContent = () => {
   }
   
 
-  // city update
-  const updateExistingCity = async (e) => {
+  // subcatagory update
+  const updateExistingSubcatagory = async (e) => {
     e.preventDefault();
     try {
-      setCityLoading(true);
-      const res = await fetch("http://localhost:5000/api/city/update", {
+      setSubcatagoryLoading(true);
+      const res = await fetch("http://localhost:5000/api/subcatagory/update", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          stateId: stateId._id,
-          active,
-          abbreviation,
-          name: cityName,
-          desc: description,
-          cityId: cityUpdateId,
+          catagoryId: catagoryId._id,
+          name: subcatagoryName,
+          subcatagoryId: subcatagoryUpdateId,
         })
       });
-      const currentCity = await res.json();
-      setCityLoading(false);
-      if(currentCity.msg) {
-        toast.success(currentCity.msg, {
+      const currentSubcatagory = await res.json();
+      setSubcatagoryLoading(false);
+      if(currentSubcatagory.msg) {
+        toast.success(currentSubcatagory.msg, {
           position: "top-right",
           autoClose: 1500,
         });
-        dispatch(removeAllCityFields())
+        dispatch(removeAllSubcatagoryFields())
       } else {
-        dispatch(addCityFields({
-          errors: currentCity.errors,
+        dispatch(addSubcatagoryFields({
+          errors: currentSubcatagory.errors,
         }))
       }
     } catch(err) {
       console.log(err.message)
     }
   }
-
-
-  // area update
-  const updateExistingArea = async (e) => {
-    e.preventDefault();
-    try {
-      setAreaLoading(true);
-      const res = await fetch("http://localhost:5000/api/area/update", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          active: areaActive,
-          abbreviation: areaAbbreviation,
-          name: areaName,
-          desc: areaDescription,
-          stateId: stateIdForArea._id,
-          cityId: cityIdForArea._id,
-          areaId: areaUpdateId,
-        })
-      });
-      const currentArea = await res.json();
-      setAreaLoading(false);
-      if(currentArea.msg) {
-        toast.success(currentArea.msg, {
-          position: "top-right",
-          autoClose: 1500,
-        });
-        dispatch(removeAllAreaFields())
-      } else {
-        dispatch(addAreaFields({
-          errors: currentArea.errors,
-        }))
-      }
-    } catch(err) {
-      console.log(err.message)
-    }
-  }
-
-  // here has ended to update location
+  // here has ended to update catagory and subcatagory
 
 
 
@@ -317,10 +226,10 @@ const AddCatagoryContent = () => {
             <div className="d-flex justify-content-between align-items-center">
               <h4 className="title fz17 mb30">Creating Parent Catagory</h4>
               <div className="d-flex align-items-center gap-2 flex-row-reverse">
-                <button className={`bdrs0 btn-primary rounded-2 py-1 px-2 d-flex gap-2 justify-content-center align-items-center ${stateLoading ? "opacity-50" : "opacity-100"}`} disabled={stateLoading} onClick={stateEdit ? updateExistingState : uploadNewState}>{stateEdit ? "Update Catagory": "Add New Catagory"}
-                  {!stateLoading ? <ImUpload /> : <HashLoader
+                <button className={`bdrs0 btn-primary rounded-2 py-1 px-2 d-flex gap-2 justify-content-center align-items-center ${catagoryLoading ? "opacity-50" : "opacity-100"}`} disabled={catagoryLoading} onClick={catagoryEdit ? updateExistingCatagory : uploadNewCatagory}>{catagoryEdit ? "Update Catagory": "Add New Catagory"}
+                  {!catagoryLoading ? <ImUpload /> : <HashLoader
                     color="#ffffff"
-                    loading={stateLoading}
+                    loading={catagoryLoading}
                     cssOverride={override}
                     size={17}
                     aria-label="Loading Spinner"
@@ -328,8 +237,8 @@ const AddCatagoryContent = () => {
                   />
                   }
                 </button>
-                {stateEdit ? (
-                  <button className={`cancelBtn btn btn-outline-danger rounded-2 d-flex gap-2 text-danger justify-content-center align-items-center`} onClick={cancelStateUpdate}>
+                {catagoryEdit ? (
+                  <button className={`cancelBtn btn btn-outline-danger rounded-2 d-flex gap-2 text-danger justify-content-center align-items-center`} onClick={cancelCatagoryUpdate}>
                     Cancel
                   </button>
                 ): (
@@ -351,10 +260,10 @@ const AddCatagoryContent = () => {
             <div className="d-flex justify-content-between align-items-center">
               <h4 className="title fz17 mb30">Creating Subcatagory</h4>
               <div className="d-flex align-items-center gap-2 flex-row-reverse">
-                <button className={`bdrs0 btn-primary rounded-2 py-1 px-2 d-flex gap-2 justify-content-center align-items-center ${cityLoading ? "opacity-50" : "opacity-100"}`} disabled={cityLoading} onClick={cityEdit ? updateExistingCity : uploadNewCity}>{cityEdit ? "Update Subcatagory" : "Add New Subcatagory"}
-                  {!cityLoading ? <ImUpload /> : <HashLoader
+                <button className={`bdrs0 btn-primary rounded-2 py-1 px-2 d-flex gap-2 justify-content-center align-items-center ${subcatagoryLoading ? "opacity-50" : "opacity-100"}`} disabled={subcatagoryLoading} onClick={subcatagoryEdit ? updateExistingSubcatagory : uploadNewSubcatagory}>{subcatagoryEdit ? "Update Subcatagory" : "Add New Subcatagory"}
+                  {!subcatagoryLoading ? <ImUpload /> : <HashLoader
                     color="#ffffff"
-                    loading={cityLoading}
+                    loading={subcatagoryLoading}
                     cssOverride={override}
                     size={17}
                     aria-label="Loading Spinner"
@@ -362,8 +271,8 @@ const AddCatagoryContent = () => {
                   />
                   }
                 </button>
-                {cityEdit ? (
-                  <button className={`cancelBtn btn btn-outline-danger rounded-2 d-flex gap-2 text-danger justify-content-center align-items-center`} onClick={cancelCityUpdate}>
+                {subcatagoryEdit ? (
+                  <button className={`cancelBtn btn btn-outline-danger rounded-2 d-flex gap-2 text-danger justify-content-center align-items-center`} onClick={cancelSubcatagoryUpdate}>
                     Cancel
                   </button>
                   ): (
