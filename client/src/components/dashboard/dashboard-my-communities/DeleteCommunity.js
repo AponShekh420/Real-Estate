@@ -48,7 +48,6 @@ const DeleteCommunity = ({community, setDeleteData}) => {
           className="icon btn btn-primary"
           style={{ border: "none" }}
           data-tooltip-id={`delete-${community?._id}`}
-          data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
           disabled={loading}
           onClick={deleteCommunity}
         >

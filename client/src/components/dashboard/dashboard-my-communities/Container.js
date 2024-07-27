@@ -18,7 +18,7 @@ const Container = () => {
 
   const [search, setSearch] = useState("");
   const [active, setActive] = useState(true);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [communitiesData, setCommunitiesData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // Current active page
   const [deletedData, setDeleteData] = useState({}); // deleted data notification

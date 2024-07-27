@@ -3,11 +3,9 @@
 import React, { useState } from "react";
 import { HashLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
-import { addCityFields, removeAllCityFields } from "@/redux/citySlice";
 import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { ImUpload } from "react-icons/im";
-import { addStateFields, removeStateAllFields } from "@/redux/stateSlice";
-import { addAreaFields, removeAllAreaFields } from "@/redux/areaSlice";
 import '@/components/dashboard/dashboard-location/style.css';
 import Catagory from "./parentsCatagory";
 import SubCatagory from "./subCatagory";

@@ -3,8 +3,10 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MoonLoader } from "react-spinners";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
+import DeleteModal from "../../../common/DeleteModal";
 
 
 const override = {
@@ -24,7 +26,7 @@ const CatagoryItem = ({catagory}) => {
 
 
   
-  const deleteHanlder = async () => {
+  const deleteHanlder = async (catagoryId) => {
     try {
       setDeleteLoading(true)
       const res = await fetch("http://localhost:5000/api/catagory/delete", {
@@ -33,7 +35,7 @@ const CatagoryItem = ({catagory}) => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          catagoryId: catagory._id
+          catagoryId: catagoryId,
         })
       })
       const dataRes = await res.json();
@@ -85,7 +87,8 @@ const CatagoryItem = ({catagory}) => {
             <a 
               style={{ border: "none", color: "red", padding: "0px", fontSize: "16px", cursor: "pointer"}}
               data-tooltip-id={`delete-${catagory?.slug}`}
-              onClick={deleteHanlder}
+              data-bs-target={`#exampleModalToggle-${catagory?._id}`}
+              data-bs-toggle="modal"
             >
               {deleteLoading ? (
                 <MoonLoader
@@ -110,6 +113,7 @@ const CatagoryItem = ({catagory}) => {
             place="top"
             content="Delete"
           />
+          <DeleteModal deleteHanlder={deleteHanlder} item={catagory} subject={"catagory"}/>
         </div>
       </div>
     </>
