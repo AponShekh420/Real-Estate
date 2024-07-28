@@ -1,10 +1,11 @@
+import DeleteModal from "@/components/common/DeleteModal";
 import { addAreaFields } from "@/redux/areaSlice";
 import { addCityFields } from "@/redux/citySlice";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MoonLoader } from "react-spinners";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
 const override = {
@@ -97,7 +98,7 @@ const AreaItem = ({eachArea, city, state}) => {
   }
 
 
-  const deleteHanlder = async () => {
+  const deleteHanlder = async (areaId) => {
     try {
       setDeleteLoading(true)
       const res = await fetch("http://localhost:5000/api/area/delete", {
@@ -106,7 +107,7 @@ const AreaItem = ({eachArea, city, state}) => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          areaId: eachArea._id
+          areaId: areaId,
         })
       })
       const dataRes = await res.json();
@@ -178,7 +179,8 @@ const AreaItem = ({eachArea, city, state}) => {
           <a 
           style={{ border: "none", color: "red", padding: "0px", fontSize: "16px", cursor: "pointer"}}
           data-tooltip-id={`delete-${eachArea?.slug}`}
-          onClick={deleteHanlder}
+          data-bs-target={`#exampleModalToggle-${eachArea?._id}`}
+          data-bs-toggle="modal"
         >
           {deleteLoading ? (
             <MoonLoader
@@ -207,9 +209,9 @@ const AreaItem = ({eachArea, city, state}) => {
             place="top"
             content={`${eachArea.active ? "Click Me To Deactive": "Click Me To Active"}`}
           />
+          <DeleteModal deleteHanlder={deleteHanlder} item={eachArea} subject={"Area"}/>
         </div>
       </div>
-      <ToastContainer/>
     </>
   );
 }

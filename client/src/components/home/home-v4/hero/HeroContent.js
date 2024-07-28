@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 const HeroContent = () => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("buy");
+  const [suggestion, setSuggestion] = useState(false);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -42,14 +43,53 @@ const HeroContent = () => {
                 <div className="col-md-8 col-lg-9">
                   <div className="advance-search-field position-relative text-start">
                     <form className="form-search position-relative">
-                      <div className="box-search">
+                      <div className="box-search dropdown">
                         <span className="icon flaticon-home-1" />
                         <input
-                          className="form-control bgc-f7 bdrs12"
+                          className="form-control bgc-f7 bdrs12 dropdown-toggle"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
                           type="text"
+                          autoComplete="off"
                           name="search"
                           placeholder={`Search Products for ${tab.label}`}
+                          onFocus={() => setSuggestion(true)}
+                          onBlur={() => setSuggestion(false)}
                         />
+                        <ul className={`dropdown-menu w-100 ${suggestion && "show"}`}>
+                          <li className="bdrt1">
+                            <button className="dropdown-item" type="button">
+                              <div className="d-flex justify-content-between align-items-center">
+                                <p className="mb-0">Item title</p>
+                                <p className="mb-0">Community</p>
+                              </div>
+                            </button>
+                          </li>
+                          <li className="bdrt1">
+                            <button className="dropdown-item" type="button">
+                              <div className="d-flex justify-content-between align-items-center">
+                                <p className="mb-0">Item title</p>
+                                <p className="mb-0">Area</p>
+                              </div>
+                            </button>
+                          </li>
+                          <li className="bdrt1">
+                            <button className="dropdown-item" type="button">
+                              <div className="d-flex justify-content-between align-items-center">
+                                <p className="mb-0">Item title</p>
+                                <p className="mb-0">state</p>
+                              </div>
+                            </button>
+                          </li>
+                          <li className="bdrt1">
+                            <button className="dropdown-item" type="button">
+                              <div className="d-flex justify-content-between align-items-center">
+                                <p className="mb-0">Item title</p>
+                                <p className="mb-0">City</p>
+                              </div>
+                            </button>
+                          </li>
+                        </ul>
                       </div>
                     </form>
                   </div>

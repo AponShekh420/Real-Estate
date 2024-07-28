@@ -8,6 +8,7 @@ import CityList from "./cityList";
 import AreaList from "./areaList";
 import { addCityFields, removeAllCityFields } from "@/redux/citySlice";
 import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { ImUpload } from "react-icons/im";
 import { addStateFields, removeStateAllFields } from "@/redux/stateSlice";
 import { addAreaFields, removeAllAreaFields } from "@/redux/areaSlice";
