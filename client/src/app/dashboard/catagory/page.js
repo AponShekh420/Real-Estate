@@ -4,6 +4,8 @@ import DboardMobileNavigation from "@/components/dashboard/DboardMobileNavigatio
 import Footer from "@/components/dashboard/Footer";
 import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
 import TabAndHeader from "@/components/dashboard/dashboard-catagory/TabAndHeader";
+import AuthCheck from "@/utilis/AuthCheck";
+import { redirect } from "next/navigation";
 
 
 export const metadata = {
@@ -11,6 +13,15 @@ export const metadata = {
 };
 
 const DashboardAddProperty = () => {
+
+  const user = AuthCheck();
+
+  if(user.role == "admin" || user.role == "contributor") {
+    // nothing
+  } else {
+    redirect("/")
+  }
+
   return (
     <>
       {/* Main Header Nav */}

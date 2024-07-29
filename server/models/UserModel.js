@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 
 const UserSchema = mongoose.Schema({
-  name: {
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
     type: String,
     required: true
   },
@@ -15,10 +19,28 @@ const UserSchema = mongoose.Schema({
       ref: 'Wishlist'
     }
   ],
-  blogs: {
-    type: mongoose.Types.ObjectId,
-    ref: "Blog"
+  blogs: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Blog"
+    }
+  ],
+  provider: {
+    type: String,
+    required: true
   },
+  password: {
+    type: String,
+    required: true
+  },
+  role: {
+    type: String,
+    required: true,
+    default: "viewer"
+  },
+  accountId: {
+    type: String,
+  }
 }, {timestamps: true});
 
 

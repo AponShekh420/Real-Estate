@@ -16,6 +16,8 @@ const catagoryRouter = require("./routers/catagoryRouter");
 const subcatagoryRouter = require("./routers/subcatagoryRouter");
 const blogRouter = require("./routers/blogRouter");
 
+// user
+const userRouter = require("./routers/userRouter")
 
 // configure funtionality
 const app = express();
@@ -55,7 +57,8 @@ app.use('/api/subcatagory', subcatagoryRouter);
 app.use('/api/blog', blogRouter);
 
 
-
+// login and logout item
+app.use('/api/user', userRouter)
 
 // Server listening
 const PORT = process.env.PORT || 3000;

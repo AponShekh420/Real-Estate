@@ -1,7 +1,14 @@
+import { useRef } from "react";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginSignupModal = () => {
+
+  const signInBtn = useRef(null);
+  const modalCloseBtn = useRef(null);
+
   return (
     <div className="modal-content">
       <div className="modal-header">
@@ -13,6 +20,7 @@ const LoginSignupModal = () => {
           className="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
+          ref={modalCloseBtn}
         />
       </div>
       {/* End header */}
@@ -31,6 +39,7 @@ const LoginSignupModal = () => {
                   role="tab"
                   aria-controls="nav-home"
                   aria-selected="true"
+                  ref={signInBtn}
                 >
                   Sign In
                 </button>
@@ -57,7 +66,7 @@ const LoginSignupModal = () => {
                 role="tabpanel"
                 aria-labelledby="nav-home-tab"
               >
-                <SignIn />
+                <SignIn  modalCloseBtn={modalCloseBtn}/>
               </div>
               {/* End signin content */}
 
@@ -67,9 +76,10 @@ const LoginSignupModal = () => {
                 role="tabpanel"
                 aria-labelledby="nav-profile-tab"
               >
-                <SignUp />
+                <SignUp signInTabBtn={signInBtn}/>
               </div>
               {/* End signup content */}
+              <ToastContainer/>
             </div>
           </div>
         </div>

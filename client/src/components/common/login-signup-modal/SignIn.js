@@ -1,28 +1,77 @@
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import { BeatLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
-const SignIn = () => {
+const SignIn = ({modalCloseBtn}) => {
+
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
+
+  const router = useRouter();
+
+  const userLogin = async (e) => {
+    e.preventDefault()
+    try {
+      setErrors({})
+      setLoading(true)
+      const res = await fetch("http://localhost:5000/api/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email,
+          password
+        })
+      })
+      const dataRes = await res.json();
+      setLoading(false)
+      if(dataRes.msg) {
+        console.log(dataRes.msg)
+        setEmail("");
+        setPassword("");
+        // toast.success(dataRes.msg, {
+        //   position: "top-right",
+        //   autoClose: 1500,
+        // });
+        modalCloseBtn.current.click();
+      } else {
+        setErrors(dataRes?.errors)
+      }
+    } catch(err) {
+      console.log(err.message)
+    }
+  }
+
   return (
-    <form className="form-style1">
+    <form className="form-style1" onSubmit={userLogin} method="POST" action={"http://localhost:5000/api/user/login"}>
       <div className="mb25">
         <label className="form-label fw600 dark-color">Email</label>
         <input
           type="email"
           className="form-control"
           placeholder="Enter Email"
-          required
+          onChange={(e)=> setEmail(e.target.value)}
+          value={email}
         />
+        <p className="text-danger text-capitalize" style={{fontSize: 13, lineHeight: 1.4}}>{errors?.email?.msg}</p>
       </div>
       {/* End email */}
 
       <div className="mb15">
         <label className="form-label fw600 dark-color">Password</label>
         <input
-          type="text"
+          type="password"
           className="form-control"
           placeholder="Enter Password"
-          required
+          onChange={(e)=> setPassword(e.target.value)}
+          value={password}
         />
+        <p className="text-danger text-capitalize" style={{fontSize: 13, lineHeight: 1.4}}>{errors?.password?.msg}</p>
       </div>
       {/* End Password */}
 
@@ -39,9 +88,11 @@ const SignIn = () => {
       {/* End  Lost your password? */}
 
       <div className="d-grid mb20">
-        <button className="ud-btn btn-thm" type="submit">
-          Sign in <i className="fal fa-arrow-right-long" />
+        <button className={`ud-btn btn-thm d-flex align-items-center justify-content-center ${loading ? "opacity-50": "opacity-100"}`} type="submit" disabled={loading}>
+          {!loading && "Sign in"}
+          {loading ? (<BeatLoader color="white" loading={loading} />) : (<i className="fal fa-arrow-right-long" />)}
         </button>
+        <p className="text-danger text-capitalize text-center mt10" style={{fontSize: 15, lineHeight: 1.4}}>{errors?.login?.msg}</p>
       </div>
       {/* End submit */}
 

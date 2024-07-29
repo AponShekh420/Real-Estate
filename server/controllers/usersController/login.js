@@ -1,34 +1,28 @@
 const UserModel = require("../../models/UserModel");
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken');
+const tokenGenerator = require("../../helpers/tokenGenerator");
 // const cookie = require('cookie-parser')
-const login = async (req, res, next) => {
+const login = async (req, res) => {
     const {email, password} = req.body;
     
     try {
         const data = await UserModel.findOne({email});
-
+        console.log(data)
         if(data) {
             const compare = await bcrypt.compare(password, data.password);
+            console.log(compare)
             if(compare) {
-                const token = jwt.sign({id: data._id, email: data.email, name: data.name, avatar: data.avatar}, process.env.TOKEN_SECRET, {
-                    expiresIn: '365d',
-                });
-                res.cookie('token', token, {
-                    signed: true,
-                    httpOnly: true,
-                    secure: false,
-                    maxAge: 365 * 24 * 60 * 60 * 1000 // one year
-                }) 
+                const token = tokenGenerator(res, data) 
                 res.json({
                     data: {
                         email: data.email,
-                        name: data.name,
+                        firstName: data.firstName,
+                        lastName: data.lastName,
                         id: data._id,
                         avatar: data.avatar
                     },
                     token: token,
-                    message: "login sucessfully"
+                    msg: "login sucessfully"
                 })
             } else {
                 res.json({

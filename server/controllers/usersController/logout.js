@@ -1,7 +1,7 @@
 
 const logout = async (req, res) => {
     try {
-        const logout = res.clearCookie("accessToken");
+        const logout = res.clearCookie("token");
         if(logout) {
             res.json({
                 message: "logout successful"

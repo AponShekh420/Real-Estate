@@ -5,12 +5,21 @@ import DboardMobileNavigation from "@/components/dashboard/DboardMobileNavigatio
 import Footer from "@/components/dashboard/Footer";
 import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
 import ListingsFavourites from "@/components/dashboard/dashboard-my-favourites/ListingsFavourites";
+import AuthCheck from "@/utilis/AuthCheck";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Dashboard My Favourites || Homez - Real Estate NextJS Template",
 };
 
 const DashboardMyFavourites = () => {
+  
+  const user = AuthCheck();
+
+  if(!user) {
+    redirect("/")
+  }
+
   return (
     <>
       {/* Main Header Nav */}

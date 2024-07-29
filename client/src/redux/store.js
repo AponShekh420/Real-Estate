@@ -6,6 +6,7 @@ import areaSlice from './areaSlice'
 import modelSlice from './modelSlice'
 import catagorySlice from './catagorySlice'
 import subCatagorySlice from './subCatagorySlice'
+import userSlice from './userSlice'
 
 
 const store = configureStore({
@@ -17,6 +18,7 @@ const store = configureStore({
     model: modelSlice,
     catagory: catagorySlice,
     subcatagory: subCatagorySlice,
+    user: userSlice,
   }
 })
 

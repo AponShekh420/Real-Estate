@@ -7,12 +7,21 @@ import ChangePasswordForm from "@/components/dashboard/dashboard-profile/ChangeP
 import PersonalInfo from "@/components/dashboard/dashboard-profile/PersonalInfo";
 import ProfileBox from "@/components/dashboard/dashboard-profile/ProfileBox";
 import SocialField from "@/components/dashboard/dashboard-profile/SocialField";
+import AuthCheck from "@/utilis/AuthCheck";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Dashboard My Profile || Homez - Real Estate NextJS Template",
 };
 
 const DashboardMyProfile = () => {
+  const user = AuthCheck();
+
+  if(!user) {
+    redirect("/")
+  }
+
+
   return (
     <>
       {/* Main Header Nav */}

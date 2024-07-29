@@ -6,12 +6,25 @@ import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
 import RecentActivities from "@/components/dashboard/dashboard-home/RecentActivities";
 import TopStateBlock from "@/components/dashboard/dashboard-home/TopStateBlock";
 import PropertyViews from "@/components/dashboard/dashboard-home/property-view";
+import AuthCheck from "@/utilis/AuthCheck";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Dashboard Home || Homez - Real Estate NextJS Template",
 };
 
 const DashboardHome = () => {
+  const user = AuthCheck();
+
+  if(!user) {
+    redirect("/");
+  } else if (user.role == "contributor") {
+    redirect("/dashboard/blogs");
+  } else if(user.role == "local") {
+    redirect('/dashboard/my-favourites');
+  }
+
+
   return (
     <>
       {/* Main Header Nav */}
