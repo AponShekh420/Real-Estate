@@ -1,9 +1,11 @@
+"use client"
+
 import React from "react";
-import MultiSelectField from "./MultiSelectField";
-import StructureType from "./StructureType";
 import { useDispatch, useSelector } from "react-redux";
-import Select from "react-select";
 import { addCommunityFieldValue } from "@/redux/communitySlice";
+import dynamic from "next/dynamic";
+
+const AsyncSelect = dynamic(() => import("react-select/async"), { ssr: false });
 
 
 const ageRes = [
@@ -49,7 +51,7 @@ const DetailsFiled = () => {
               Age Restrictions
             </label>
             <div className="location-area">
-              <Select
+              <AsyncSelect
                 id="sudfuwioeur"
                 defaultValue={[ageRes[0]]}
                 name="colors"
@@ -76,7 +78,7 @@ const DetailsFiled = () => {
               Gated
             </label>
             <div className="location-area">
-              <Select
+              <AsyncSelect
                 id="sjdfoiuwoei"
                 defaultValue={[gatedOption[0]]}
                 name="colors"

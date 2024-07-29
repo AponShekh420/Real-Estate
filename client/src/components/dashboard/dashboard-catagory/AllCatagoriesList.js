@@ -1,10 +1,15 @@
+"use client"
+
 import { usePathname } from "next/navigation";
 import React from 'react'
 
 import { useEffect, useState } from "react";
-import ContentLoader from "react-content-loader";
 import CatagoryItem from "./parentsCatagory/CatagoryItem";
 import SubCatagoryItem from "./subCatagory/SubCatagoryItem";
+import dynamic from "next/dynamic";
+
+const ContentLoader = dynamic(() => import('react-content-loader'), { ssr: false });
+
 
 const AllCatagoriesList = () => {
   const path = usePathname();

@@ -1,6 +1,9 @@
 "use client";
+import dynamic from "next/dynamic";
 import React from "react";
-import Select from "react-select";
+
+const AsyncSelect = dynamic(() => import("react-select/async"), { ssr: false });
+
 
 const structureTypeOptions = [
   { value: "Apartments", label: "Apartments" },
@@ -30,7 +33,7 @@ const StructureType = () => {
           Structure type
         </label>
         <div className="location-area">
-          <Select
+          <AsyncSelect
             id="sifuewoifnwjk"
             styles={customStyles}
             className="select-custom pl-0"

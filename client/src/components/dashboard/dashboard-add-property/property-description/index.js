@@ -1,8 +1,8 @@
 "use client";
 import { addCommunityFieldValue } from "@/redux/communitySlice";
-import { useEffect } from "react";
+import dynamic from "next/dynamic";
 import { useDispatch, useSelector } from "react-redux";
-import Select from "react-select";
+const AsyncSelect = dynamic(() => import("react-select/async"), { ssr: false });
 
 const PropertyDescription = () => {
   const {errors, title, homeTypes, active, status, maxPrice, minPrice} = useSelector((state)=> state.community)
@@ -72,7 +72,7 @@ const PropertyDescription = () => {
               Home Type
             </label>
             <div className="location-area">
-              <Select
+              <AsyncSelect
                 id="sdjfsdjfksj"
                 name="colors"
                 options={homeTypeOptions}
@@ -100,7 +100,7 @@ const PropertyDescription = () => {
               Listed in
             </label>
             <div className="location-area">
-              <Select
+              <AsyncSelect
                 id="sdfjssdfiowre"
                 defaultValue={[listedIn[0]]}
                 name="colors"
@@ -127,7 +127,7 @@ const PropertyDescription = () => {
               Community Status
             </label>
             <div className="location-area">
-              <Select
+              <AsyncSelect
                 id="fwieriwer"
                 name="colors"
                 options={communityStatus}

@@ -1,13 +1,14 @@
+"use client"
+
 import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { IoIosArrowDown } from "react-icons/io";
 import React from 'react'
 
 import { useEffect, useState } from "react";
-import ContentLoader from "react-content-loader";
 import StateItem from "./stateList/StateItem";
 import CityItem from "./cityList/CityItem";
 import AreaItem from "./areaList/AreaItem";
+import dynamic from "next/dynamic";
+const ContentLoader = dynamic(() => import('react-content-loader'), { ssr: false });
 
 const AllLocationList = () => {
   const path = usePathname();

@@ -1,8 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Select from "react-select";
 import {useSelector, useDispatch} from "react-redux"
 import { addCommunityFieldValue } from "@/redux/communitySlice";
+import dynamic from "next/dynamic";
+
+
+const AsyncSelect = dynamic(() => import("react-select/async"), { ssr: false });
 
 
 const customStyles = {
@@ -77,7 +80,7 @@ const SelectMultiField = () => {
             State
           </label>
           <div className="location-area">
-            <Select
+            <AsyncSelect
               id="dskjfkasduiofusdiou"
               styles={customStyles}
               className="select-custom pl-0"
@@ -104,7 +107,7 @@ const SelectMultiField = () => {
             City
           </label>
           <div className="location-area">
-            <Select
+            <AsyncSelect
               id="dsfjasdiouwei"
               styles={customStyles}
               className="select-custom pl-0"
@@ -132,7 +135,7 @@ const SelectMultiField = () => {
             Neighborhood
           </label>
           <div className="location-area">
-            <Select
+            <AsyncSelect
               id="sdfiosaufiudiof"
               styles={customStyles}
               className="select-custom pl-0"

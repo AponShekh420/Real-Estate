@@ -1,6 +1,9 @@
 "use client";
+import dynamic from "next/dynamic";
 import React from "react";
-import Select from "react-select";
+
+const AsyncSelect = dynamic(() => import("react-select/async"), { ssr: false });
+
 
 const options = {
   floorNo: ["1st", "2nd", "3rd", "4th"],
@@ -34,7 +37,7 @@ const MultiSelectField = () => {
               {fieldTitles[index]}
             </label>
             <div className="location-area">
-              <Select
+              <AsyncSelect
                 id="dfjaoisd"
                 styles={customStyles}
                 className="select-custom pl-0"
