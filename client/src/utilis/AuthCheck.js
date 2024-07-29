@@ -3,7 +3,8 @@ const AuthCheck = () => {
     name: "apon shekh",
     email: "aponshekh420@gmail.com",
     img: "placeholder.jpg",
-    role: "admin"
+    role: "viewer", // can be admin and contributor
+    provider: "local" // can be google, facebook and apple
   }
 
   return user

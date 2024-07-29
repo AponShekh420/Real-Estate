@@ -6,7 +6,7 @@ import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
 import RecentActivities from "@/components/dashboard/dashboard-home/RecentActivities";
 import TopStateBlock from "@/components/dashboard/dashboard-home/TopStateBlock";
 import PropertyViews from "@/components/dashboard/dashboard-home/property-view";
-import AuthCheck from "@/utilis/AuthCheck";
+import store from "@/redux/store";
 import { redirect } from "next/navigation";
 
 export const metadata = {
@@ -14,13 +14,12 @@ export const metadata = {
 };
 
 const DashboardHome = () => {
-  const user = AuthCheck();
-
+  const {user} = store.getState();
   if(!user) {
     redirect("/");
   } else if (user.role == "contributor") {
     redirect("/dashboard/blogs");
-  } else if(user.role == "local") {
+  } else if(user.role == "viewer") {
     redirect('/dashboard/my-favourites');
   }
 

@@ -70,6 +70,7 @@ const SelectMultiField = () => {
           </label>
           <div className="location-area">
             <Select
+              id="sdfiouiaweu"
               styles={customStyles}
               className="select-custom pl-0"
               classNamePrefix="select"
@@ -96,6 +97,7 @@ const SelectMultiField = () => {
           </label>
           <div className="location-area">
             <Select
+              id="sduiwuernsdfjsd"
               styles={customStyles}
               className="select-custom pl-0"
               classNamePrefix="select"
@@ -123,6 +125,7 @@ const SelectMultiField = () => {
           </label>
           <div className="location-area">
             <Select
+              id="iosufwen"
               defaultValue={[statusOption[0]]}
               name="colors"
               options={statusOption}

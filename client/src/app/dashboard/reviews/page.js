@@ -5,15 +5,15 @@ import DboardMobileNavigation from "@/components/dashboard/DboardMobileNavigatio
 import Footer from "@/components/dashboard/Footer";
 import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
 import AllReviews from "@/components/dashboard/dashboard-reviews";
-import AuthCheck from "@/utilis/AuthCheck";
 import { redirect } from "next/navigation";
+import store from "@/redux/store";
 
 export const metadata = {
   title: "Dashboard Reviews || Homez - Real Estate NextJS Template",
 };
 
 const DashboardReviews = () => {
-  const user = AuthCheck();
+  const {user} = store.getState();
 
   if(user.role !== "admin") {
     redirect("/")

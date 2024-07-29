@@ -73,6 +73,7 @@ const PropertyDescription = () => {
             </label>
             <div className="location-area">
               <Select
+                id="sdjfsdjfksj"
                 name="colors"
                 options={homeTypeOptions}
                 styles={customStyles}
@@ -100,6 +101,7 @@ const PropertyDescription = () => {
             </label>
             <div className="location-area">
               <Select
+                id="sdfjssdfiowre"
                 defaultValue={[listedIn[0]]}
                 name="colors"
                 options={listedIn}
@@ -126,6 +128,7 @@ const PropertyDescription = () => {
             </label>
             <div className="location-area">
               <Select
+                id="fwieriwer"
                 name="colors"
                 options={communityStatus}
                 styles={customStyles}

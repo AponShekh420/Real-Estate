@@ -31,6 +31,7 @@ const StructureType = () => {
         </label>
         <div className="location-area">
           <Select
+            id="sifuewoifnwjk"
             styles={customStyles}
             className="select-custom pl-0"
             classNamePrefix="select"

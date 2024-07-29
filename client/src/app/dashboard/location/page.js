@@ -4,7 +4,7 @@ import DboardMobileNavigation from "@/components/dashboard/DboardMobileNavigatio
 import Footer from "@/components/dashboard/Footer";
 import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
 import TabAndHeader from "@/components/dashboard/dashboard-location/TabAndHeader";
-import AuthCheck from "@/utilis/AuthCheck";
+import store from "@/redux/store";
 import { redirect } from "next/navigation";
 
 
@@ -12,10 +12,8 @@ export const metadata = {
   title: "Dashboard Add Property || Homez - Real Estate NextJS Template",
 };
 
-const DashboardAddProperty = () => {
-
-  
-  const user = AuthCheck();
+const DashboardAddLocation = () => {
+  const {user} = store.getState();
 
   if(user.role !== "admin") {
     redirect("/")
@@ -61,4 +59,4 @@ const DashboardAddProperty = () => {
   );
 };
 
-export default DashboardAddProperty;
+export default DashboardAddLocation;

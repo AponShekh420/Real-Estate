@@ -2,12 +2,16 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 const initialState = {
-  user: {},
+  name: "apon shekh",
+  email: "aponshekh420@gmail.com",
+  avatar: "placeholder.jpg",
+  role: "admin", // can be admin, viewer and contributor
+  provider: "local" // can be google, facebook and apple
 }
 
 
 const userSlice = createSlice({
-  name: "state",
+  name: "user",
   initialState,
   reducers: {
     addUserField: (state, action) => {

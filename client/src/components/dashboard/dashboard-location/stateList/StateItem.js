@@ -21,7 +21,6 @@ const StateItem = ({state}) => {
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   // redux 
-  const {active, stateName, description, abbreviation, edit} = useSelector(state => state.state);
   const dispatch = useDispatch();
 
 

@@ -6,6 +6,9 @@ import LoginSignupModal from "@/components/common/login-signup-modal";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const DefaultHeader = () => {
   const [navbar, setNavbar] = useState(false);
@@ -140,6 +143,7 @@ const DefaultHeader = () => {
         <SidebarPanel />
       </div>
       {/* Sidebar Panel End */}
+      <ToastContainer/>
     </>
   );
 };

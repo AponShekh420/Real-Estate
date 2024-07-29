@@ -34,10 +34,10 @@ const SignIn = ({modalCloseBtn}) => {
         console.log(dataRes.msg)
         setEmail("");
         setPassword("");
-        // toast.success(dataRes.msg, {
-        //   position: "top-right",
-        //   autoClose: 1500,
-        // });
+        toast.success(dataRes.msg, {
+          position: "top-right",
+          autoClose: 1500,
+        });
         modalCloseBtn.current.click();
       } else {
         setErrors(dataRes?.errors)

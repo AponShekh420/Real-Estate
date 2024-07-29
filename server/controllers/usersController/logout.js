@@ -4,7 +4,7 @@ const logout = async (req, res) => {
         const logout = res.clearCookie("token");
         if(logout) {
             res.json({
-                message: "logout successful"
+                message: "logged out successfully"
             });
         } else {
             res.status(500).json({

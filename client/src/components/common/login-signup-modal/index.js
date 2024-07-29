@@ -1,8 +1,6 @@
 import { useRef } from "react";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const LoginSignupModal = () => {
 
@@ -79,7 +77,6 @@ const LoginSignupModal = () => {
                 <SignUp signInTabBtn={signInBtn}/>
               </div>
               {/* End signup content */}
-              <ToastContainer/>
             </div>
           </div>
         </div>

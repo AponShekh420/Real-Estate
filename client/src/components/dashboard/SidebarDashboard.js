@@ -6,14 +6,12 @@ import { CiLocationOn } from "react-icons/ci";
 import { HiOutlineNewspaper } from "react-icons/hi2";
 import { GiCheckboxTree } from "react-icons/gi";
 import { PiNotePencilThin } from "react-icons/pi";
-import AuthCheck from "@/utilis/AuthCheck";
-
-
-
+import store from "@/redux/store";
 
 const SidebarDashboard = () => {
   const pathname = usePathname();
-  const user = AuthCheck()
+  const {user} = store.getState();
+
 
   const sidebarItems = [
     {
@@ -159,6 +157,10 @@ const SidebarDashboard = () => {
                 }
 
                 if((user.role == "admin" || user.role == "contributor") && item.text == "Add New Blog") {
+                  enable = true
+                }
+
+                if((user.role == "admin" || user.role == "contributor") && item.text == "Catagory") {
                   enable = true
                 }
 

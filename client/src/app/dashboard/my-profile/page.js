@@ -7,7 +7,7 @@ import ChangePasswordForm from "@/components/dashboard/dashboard-profile/ChangeP
 import PersonalInfo from "@/components/dashboard/dashboard-profile/PersonalInfo";
 import ProfileBox from "@/components/dashboard/dashboard-profile/ProfileBox";
 import SocialField from "@/components/dashboard/dashboard-profile/SocialField";
-import AuthCheck from "@/utilis/AuthCheck";
+import store from "@/redux/store";
 import { redirect } from "next/navigation";
 
 export const metadata = {
@@ -15,7 +15,8 @@ export const metadata = {
 };
 
 const DashboardMyProfile = () => {
-  const user = AuthCheck();
+  const {user} = store.getState();
+
 
   if(!user) {
     redirect("/")

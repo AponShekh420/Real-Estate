@@ -35,6 +35,7 @@ const MultiSelectField = () => {
             </label>
             <div className="location-area">
               <Select
+                id="dfjaoisd"
                 styles={customStyles}
                 className="select-custom pl-0"
                 classNamePrefix="select"

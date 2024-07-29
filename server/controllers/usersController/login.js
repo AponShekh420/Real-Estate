@@ -19,6 +19,8 @@ const login = async (req, res) => {
                         firstName: data.firstName,
                         lastName: data.lastName,
                         id: data._id,
+                        role: data.role,
+                        provider: data.provider,
                         avatar: data.avatar
                     },
                     token: token,

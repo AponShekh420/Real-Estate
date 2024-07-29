@@ -59,6 +59,7 @@ const SelectMultiField = () => {
           </label>
           <div className="location-area">
             <Select
+              id="jasjfioaweiur"
               styles={customStyles}
               className="select-custom pl-0"
               classNamePrefix="select"

@@ -7,16 +7,17 @@ import FilterHeader from "@/components/dashboard/dashboard-my-communities/Filter
 import PropertyDataTable from "@/components/dashboard/dashboard-my-communities/CommunitiesDataTable";
 import DboardMobileNavigation from "@/components/dashboard/DboardMobileNavigation";
 import Container from "@/components/dashboard/dashboard-my-communities/Container";
-import AuthCheck from "@/utilis/AuthCheck";
 import { redirect } from "next/navigation";
+import store from "@/redux/store";
 
 export const metadata = {
   title: "Dashboard Properties || Homez - Real Estate NextJS Template",
 };
 
-const DashboardMyProperties = () => {
+const DashboardMyCommunities = () => {
   
-  const user = AuthCheck();
+  const {user} = store.getState();
+
 
   if(user.role !== "admin") {
     redirect("/")
@@ -63,4 +64,4 @@ const DashboardMyProperties = () => {
   );
 };
 
-export default DashboardMyProperties;
+export default DashboardMyCommunities;

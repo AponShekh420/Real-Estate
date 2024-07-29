@@ -50,6 +50,7 @@ const DetailsFiled = () => {
             </label>
             <div className="location-area">
               <Select
+                id="sudfuwioeur"
                 defaultValue={[ageRes[0]]}
                 name="colors"
                 options={ageRes}
@@ -76,6 +77,7 @@ const DetailsFiled = () => {
             </label>
             <div className="location-area">
               <Select
+                id="sjdfoiuwoei"
                 defaultValue={[gatedOption[0]]}
                 name="colors"
                 options={gatedOption}

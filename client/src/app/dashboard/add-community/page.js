@@ -4,7 +4,7 @@ import DboardMobileNavigation from "@/components/dashboard/DboardMobileNavigatio
 import Footer from "@/components/dashboard/Footer";
 import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
 import TabAndHeader from "@/components/dashboard/dashboard-add-property/TabAndHeader";
-import AuthCheck from "@/utilis/AuthCheck";
+import store from "@/redux/store";
 import { redirect } from "next/navigation";
 
 
@@ -13,7 +13,7 @@ export const metadata = {
 };
 
 const DashboardAddProperty = () => {
-  const user = AuthCheck();
+  const {user} = store.getState();
 
   if(user.role !== "admin") {
     redirect("/")
