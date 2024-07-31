@@ -28,6 +28,7 @@ const SignIn = ({modalCloseBtn}) => {
         headers: {
           "Content-Type": "application/json"
         },
+        credentials: "include",
         body: JSON.stringify({
           email,
           password
@@ -36,8 +37,7 @@ const SignIn = ({modalCloseBtn}) => {
       const dataRes = await res.json();
       setLoading(false)
       if(dataRes.msg) {
-        console.log(dataRes.data)
-        dispatch(addUserField(dataRes.data))
+        localStorage.setItem('token', dataRes.token)
         setEmail("");
         setPassword("");
         toast.success(dataRes.msg, {
