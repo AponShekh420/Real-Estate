@@ -7,10 +7,11 @@ import { HiOutlineNewspaper } from "react-icons/hi2";
 import { GiCheckboxTree } from "react-icons/gi";
 import { PiNotePencilThin } from "react-icons/pi";
 import store from "@/redux/store";
+import { useSelector } from "react-redux";
 
 const SidebarDashboard = () => {
   const pathname = usePathname();
-  const {user} = store.getState();
+  const user = useSelector(state => state.user)
 
 
   const sidebarItems = [
