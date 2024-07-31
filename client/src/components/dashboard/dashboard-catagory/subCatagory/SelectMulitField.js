@@ -1,12 +1,10 @@
 "use client";
 import { addCityFields } from "@/redux/citySlice";
 import { addSubcatagoryFields } from "@/redux/subCatagorySlice";
-import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const AsyncSelect = dynamic(() => import("react-select/async"), { ssr: false });
-
+import Select from "react-select";
 
 const customStyles = {
   option: (styles, { isFocused, isSelected, isHovered }) => {
@@ -60,8 +58,9 @@ const SelectMultiField = () => {
             Parent Catagory
           </label>
           <div className="location-area">
-            <AsyncSelect
+            <Select
               id="jasjfioaweiur"
+              instanceId={"jasjfioaweiur"}
               styles={customStyles}
               className="select-custom pl-0"
               classNamePrefix="select"

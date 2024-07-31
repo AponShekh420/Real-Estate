@@ -2,9 +2,7 @@
 import React, { useEffect, useState } from "react";
 import {useSelector, useDispatch} from "react-redux"
 import { addStateFields } from "@/redux/stateSlice";
-import dynamic from "next/dynamic";
-const AsyncSelect = dynamic(() => import("react-select/async"), { ssr: false });
-
+import Select from 'react-select'
 
 const customStyles = {
   option: (styles, { isFocused, isSelected, isHovered }) => {
@@ -42,8 +40,9 @@ const SelectMultiField = () => {
             Status
           </label>
           <div className="location-area">
-            <AsyncSelect
+            <Select
               id="sdfwelasdvfsd"
+              instanceId="sdfwelasdvfsd"
               defaultValue={[statusOption[0]]}
               name="colors"
               options={statusOption}
