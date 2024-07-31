@@ -15,7 +15,7 @@ export const metadata = {
 
 const DashboardHome = () => {
   const {user} = store.getState();
-  if(!user) {
+  if(!user.role || !user.email) {
     redirect("/");
   } else if (user.role == "contributor") {
     redirect("/dashboard/blogs");

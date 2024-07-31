@@ -1,6 +1,8 @@
+import { addUserField } from "@/redux/userSlice";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
@@ -12,6 +14,9 @@ const SignIn = ({modalCloseBtn}) => {
   const [errors, setErrors] = useState({});
 
   const router = useRouter();
+
+  // redux
+  const dispatch = useDispatch();
 
   const userLogin = async (e) => {
     e.preventDefault()
@@ -31,7 +36,8 @@ const SignIn = ({modalCloseBtn}) => {
       const dataRes = await res.json();
       setLoading(false)
       if(dataRes.msg) {
-        console.log(dataRes.msg)
+        console.log(dataRes.data)
+        dispatch(addUserField(dataRes.data))
         setEmail("");
         setPassword("");
         toast.success(dataRes.msg, {
