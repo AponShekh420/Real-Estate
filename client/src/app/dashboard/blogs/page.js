@@ -4,7 +4,6 @@ import Footer from "@/components/dashboard/Footer";
 import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
 import DboardMobileNavigation from "@/components/dashboard/DboardMobileNavigation";
 import Container from "@/components/dashboard/dashboard-blogs/Container";
-import AuthCheck from "@/utilis/AuthCheck";
 import { redirect } from "next/navigation";
 import store from "@/redux/store";
 
@@ -12,8 +11,8 @@ export const metadata = {
   title: "Dashboard Properties || Homez - Real Estate NextJS Template",
 };
 
-const DashboardMyBlogs = () => {
-  const {user} = store.getState();
+const DashboardMyBlogs = async () => {
+  const {user} = await store.getState();
 
   if(user.role == "admin" || user.role == "contributor") {
     // nothing

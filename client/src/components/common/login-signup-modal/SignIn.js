@@ -1,3 +1,4 @@
+"use client"
 import { addUserField } from "@/redux/userSlice";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -12,8 +13,6 @@ const SignIn = ({modalCloseBtn}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-
-  const router = useRouter();
 
   // redux
   const dispatch = useDispatch();
@@ -37,7 +36,8 @@ const SignIn = ({modalCloseBtn}) => {
       const dataRes = await res.json();
       setLoading(false)
       if(dataRes.msg) {
-        localStorage.setItem('token', dataRes.token)
+        localStorage.setItem('userInfo', JSON.stringify(dataRes.token));
+        dispatch(addUserField(dataRes.data));
         setEmail("");
         setPassword("");
         toast.success(dataRes.msg, {

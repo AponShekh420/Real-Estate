@@ -13,8 +13,9 @@ export const metadata = {
   title: "Dashboard Home || Homez - Real Estate NextJS Template",
 };
 
-const DashboardHome = () => {
-  const {user} = store.getState();
+const DashboardHome = async () => {
+  const {user} = await store.getState();
+  console.log("dashboard", user)
   if(!user.role || !user.email) {
     redirect("/");
   } else if (user.role == "contributor") {

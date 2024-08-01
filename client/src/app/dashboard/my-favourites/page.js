@@ -12,9 +12,9 @@ export const metadata = {
   title: "Dashboard My Favourites || Homez - Real Estate NextJS Template",
 };
 
-const DashboardMyFavourites = () => {
+const DashboardMyFavourites = async () => {
   
-  const {user} = store.getState();
+  const {user} = await store.getState();
 
 
   if(!user) {

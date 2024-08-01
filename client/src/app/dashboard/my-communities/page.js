@@ -14,10 +14,9 @@ export const metadata = {
   title: "Dashboard Properties || Homez - Real Estate NextJS Template",
 };
 
-const DashboardMyCommunities = () => {
+const DashboardMyCommunities = async () => {
   
-  const {user} = store.getState();
-
+  const {user} = await store.getState();
 
   if(user.role !== "admin") {
     redirect("/")

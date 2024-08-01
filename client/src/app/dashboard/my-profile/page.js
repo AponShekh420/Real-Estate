@@ -14,8 +14,8 @@ export const metadata = {
   title: "Dashboard My Profile || Homez - Real Estate NextJS Template",
 };
 
-const DashboardMyProfile = () => {
-  const {user} = store.getState();
+const DashboardMyProfile = async () => {
+  const {user} = await store.getState();
 
 
   if(!user) {

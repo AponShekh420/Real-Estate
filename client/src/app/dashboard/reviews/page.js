@@ -12,8 +12,8 @@ export const metadata = {
   title: "Dashboard Reviews || Homez - Real Estate NextJS Template",
 };
 
-const DashboardReviews = () => {
-  const {user} = store.getState();
+const DashboardReviews = async () => {
+  const {user} = await store.getState();
 
   if(user.role !== "admin") {
     redirect("/")
