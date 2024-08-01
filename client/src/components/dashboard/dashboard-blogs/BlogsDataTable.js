@@ -31,8 +31,8 @@ const BlogsDataTable = ({blogsData, setDeleteData}) => {
         <tr>
           <th scope="col">Title</th>
           <th scope="col">Date Published</th>
-          <th scope="col">Status</th>
           <th scope="col">Email</th>
+          <th scope="col">Status</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
@@ -54,7 +54,7 @@ const BlogsDataTable = ({blogsData, setDeleteData}) => {
                   <div className="h6 list-title">
                     <Link href={`/blog/${blog?.slug}`}>{blog?.title}</Link>
                   </div>
-                  <p className="list-text mb-0">{blog.desc}</p>
+                  <p className="list-text mb-0">{blog?.auther?.firstName} {blog?.auther?.lastName}</p>
                   <div className="list-price">
                     <a href="#">{blog?.catagory?.name}{blog.subcatagory ? `, ${blog.subcatagory.name}` : ``}</a>
                   </div>
@@ -67,12 +67,12 @@ const BlogsDataTable = ({blogsData, setDeleteData}) => {
               </Moment>
             </td>
             <td className="vam">
+              {blog.auther.email}
+            </td>
+            <td className="vam">
               <span className={getStatusStyle(blog.active)}>
                 {blog?.active ? "Active": "panding"}
               </span>
-            </td>
-            <td className="vam">
-              {blog.img}
             </td>
             <td className="vam">
               <div className="d-flex">

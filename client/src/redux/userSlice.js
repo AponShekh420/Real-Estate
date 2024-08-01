@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 const initialState = {
-  id: "",
-  firstName: "",
-  lastName: "",
-  accountId: "",
-  email: "",
-  avatar: "",
-  role: "", // can be admin, viewer and contributor
-  provider: "" // can be google, facebook and apple
+  id: "4534534534",
+  firstName: "Apon",
+  lastName: "Shekh",
+  accountId: "238904239084",
+  email: "aponshekh420@gmail.com",
+  avatar: "placeholder.jpg",
+  role: "admin", // can be admin, viewer and contributor
+  provider: "local" // can be google, facebook and apple
 }
 
 
