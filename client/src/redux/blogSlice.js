@@ -8,9 +8,9 @@ const initialState = {
   catagoryId: "",
   subcatagoryId: "",
   img: [],
-  active: true,
+  active: false,
   deleteImgUrls: [],
-  loading: false, // manually true kore dite hobe
+  loading: true, // manually true kore dite hobe
   errors: {},
   auther: "",
   edit: false,

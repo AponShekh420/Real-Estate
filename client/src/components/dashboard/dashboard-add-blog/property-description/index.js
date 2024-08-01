@@ -3,27 +3,28 @@ import { useDispatch, useSelector } from "react-redux";
 import Select from 'react-select'
 import SelectMultiField from "./SelectMulitField";
 import { addBlogFieldValue } from "@/redux/blogSlice";
+
+// text editor items
+import ReactQuill from "react-quill";
+import EditorToolbar, { modules, formats } from "@/components/common/EditorToolbar";
+import "react-quill/dist/quill.snow.css";
+import "@/components/common/styles/quillEditor.css"
+
+
 const PropertyDescription = () => {
   const {errors, title, desc, active} = useSelector((state)=> state.blog)
   const dispatch = useDispatch();
 
-  const homeTypeOptions= [
-    { value: "Single", label: "Single" },
-    { value: "Family", label: "Family" },
-    { value: "Condos", label: "Condos" },
-    { value: "Manufactured", label: "Manufactured" },
-    { value: "Attached", label: "Attached" },
-  ];
   const listedIn = [
     { value: "Approved", label: "Approved" },
     { value: "Pending", label: "Pending" },
   ];
-  const communityStatus = [
-    { value: "Rent", label: "Rent" },
-    { value: "Sold", label: "Sold" },
-    { value: "Buy", label: "Buy" },
-  ];
 
+  const handleChange = (e) => {
+    dispatch(addBlogFieldValue({
+      desc: e
+    }))
+  }
  
 
   const customStyles = {
@@ -98,7 +99,17 @@ const PropertyDescription = () => {
 
 
 
-        {/* here would be react quill */}
+        <div className="text-editor">
+          <EditorToolbar />
+          <ReactQuill
+            theme="snow"
+            value={desc}
+            onChange={handleChange}
+            placeholder={"Write something awesome..."}
+            modules={modules}
+            formats={formats}
+          />
+        </div>
         {/* End .col-6 */}
 
 
