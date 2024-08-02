@@ -7,7 +7,7 @@ const initialState = {
   desc: "",
   catagoryId: "",
   subcatagoryId: "",
-  img: [],
+  img: "",
   active: false,
   deleteImgUrls: [],
   loading: true, // manually true kore dite hobe

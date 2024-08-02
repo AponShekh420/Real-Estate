@@ -1,21 +1,22 @@
 "use client";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { addCommunityFieldValue } from "@/redux/communitySlice";
 import { usePathname } from "next/navigation";
+import { addBlogFieldValue } from "@/redux/blogSlice";
 
 const UploadPhotoGallery = () => {
   const fileInputRef = useRef(null);
   const pathname = usePathname();
+  const [notify, setNotify] = useState("");
 
   // redux
-  const {errors, imgs, deleteImgUrls} = useSelector((state)=> state.community);
+  const {errors, img, deleteImgUrls} = useSelector((state)=> state.blog);
   const dispatch = useDispatch();
 
 
-  const editPageValidation = pathname.split("/")[2] === "edit-community" ? true : false;
+  const editPageValidation = pathname.split("/")[2] === "edit-blog" ? true : false;
 
 
   const handleUpload = async (files) => {
@@ -26,16 +27,17 @@ const UploadPhotoGallery = () => {
     });
 
     try {
-      const res = await fetch("http://localhost:5000/api/community/upload", {
+      const res = await fetch("http://localhost:5000/api/blog/upload", {
         method: "POST",
         body: formData
       })
       const {message: imgsData} = await res.json();
       console.log(imgsData)
-      const newImages = [...imgs, ...imgsData];
-      dispatch(addCommunityFieldValue({
-        imgs: newImages
-      }))
+      const newImages = imgsData;
+      dispatch(addBlogFieldValue({
+        img: newImages
+      }));
+      setNotify(newImages)
     } catch(err) {
       console.log(err.message)
     }
@@ -47,13 +49,14 @@ const UploadPhotoGallery = () => {
     fileInputRef.current.click();
   };
 
-  const handleDelete = async (index) => {
-    const newImages = [...imgs];
-    const deletedImage = newImages.splice(index, 1);
-    const DeletedImageUrl = deletedImage[0];
+  const handleDelete = async (img) => {
+    const newImages = img;
+    const deletedImage = newImages;
+    const DeletedImageUrl = deletedImage;
+    console.log(DeletedImageUrl)
     try {
       if(!editPageValidation) {
-        const res = await fetch("http://localhost:5000/api/community/imgdelete", {
+        const res = await fetch("http://localhost:5000/api/blog/imgdelete", {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json"
@@ -62,24 +65,27 @@ const UploadPhotoGallery = () => {
             imgUrl: DeletedImageUrl
           })
         })
-        await res.json();
-        dispatch(addCommunityFieldValue({
-          imgUrl: newImages,
+        const deleteStatus = await res.json();
+        console.log(deleteStatus)
+        dispatch(addBlogFieldValue({
+          img: "",
         }));
+        setNotify(null)
       } else {
-        dispatch(addCommunityFieldValue({
-          imgs: newImages,
+        dispatch(addBlogFieldValue({
+          img: "",
           deleteImgUrls: [...deleteImgUrls, DeletedImageUrl]
         }));
         console.log("deleteImgs:", deleteImgUrls)
       }
-      dispatch(addCommunityFieldValue({
-        imgs: newImages
+      dispatch(addBlogFieldValue({
+        img: ""
       }));
     } catch(err){
       console.log(err.message)
     }
   };
+
 
   return (
     <>
@@ -99,7 +105,6 @@ const UploadPhotoGallery = () => {
             ref={fileInputRef}
             id="fileInput"
             type="file"
-            multiple
             className="ud-btn btn-white"
             onChange={(e) => handleUpload(e.target.files)}
             style={{ display: "none" }}
@@ -109,35 +114,35 @@ const UploadPhotoGallery = () => {
 
       {/* Display uploaded images */}
       <div className="row profile-box position-relative d-md-flex align-items-end mb50">
-        {imgs.map((imageData, index) => (
-          <div className="col-2" key={index}>
-            <div className="profile-img mb20 position-relative">
-              <Image
-                width={212}
-                height={194}
-                className="w-100 bdrs12 cover"
-                src={`http://localhost:5000/assets/communityImgs/${imageData}`}
-                alt={`Uploaded Image ${index + 1}`}
-              />
-              <button
-                style={{ border: "none" }}
-                className="tag-del"
-                title="Delete Image"
-                onClick={() => handleDelete(index)}
-                type="button"
-                data-tooltip-id={`delete-${index}`}
-              >
-                <span className="fas fa-trash-can" />
-              </button>
+          {notify ? (
+            <div className="col-2">
+              <div className="profile-img mb20 position-relative">
+                <Image
+                  width={212}
+                  height={194}
+                  className="w-100 bdrs12 cover"
+                  src={`http://localhost:5000/assets/blogs/${img}`}
+                  alt={`Uploaded Image ${img}`}
+                />
+                <button
+                  style={{ border: "none" }}
+                  className="tag-del"
+                  title="Delete Image"
+                  onClick={() => handleDelete(img)}
+                  type="button"
+                  data-tooltip-id={`delete-${img}`}
+                >
+                  <span className="fas fa-trash-can" />
+                </button>
 
-              <ReactTooltip
-                id={`delete-${index}`}
-                place="right"
-                content="Delete Image"
-              />
+                <ReactTooltip
+                  id={`delete-${img}`}
+                  place="right"
+                  content="Delete Image"
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ):  (<div></div>)}
       </div>
       <p className="text-danger fs-4">{errors?.imgs?.msg}</p>
     </>

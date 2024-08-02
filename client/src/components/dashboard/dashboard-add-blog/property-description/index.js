@@ -109,6 +109,7 @@ const PropertyDescription = () => {
             modules={modules}
             formats={formats}
           />
+          <p className="text-danger">{errors?.desc?.msg}</p>
         </div>
         {/* End .col-6 */}
 
