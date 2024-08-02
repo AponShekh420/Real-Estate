@@ -153,8 +153,8 @@ const UploadPhotoGallery = () => {
         </div>
 
         {/* Display uploaded images */}
-        {notify ? (
-          <div className="profile-box w-100 h-100 position-absolute top-0" style={{zIndex: !notify ? "-10" : ""}}>
+        {img ? (
+          <div className="profile-box w-100 h-100 position-absolute top-0" style={{zIndex: !img ? "-10" : ""}}>
             <div className="w-100 h-100">
               <div className="profile-img w-100 h-100">
                 <Image

@@ -70,6 +70,7 @@ const BlogPublish = () => {
       console.log("title:", blog.title)
       const res = await fetch("http://localhost:5000/api/blog/update", {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -111,7 +112,7 @@ const BlogPublish = () => {
       if(existingBlogData?.errors?.notFound) {
         router.push('/dashboard/blogs');
       } else {
-        const {title, active, img, subcatagory, catagory, _id } = existingBlogData.data
+        const {title, active, img, subcatagory, catagory, _id, desc} = existingBlogData.data
         dispatch(addBlogFieldValue({
           blogId: _id,
           title,

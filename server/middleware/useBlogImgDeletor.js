@@ -3,15 +3,16 @@ const {unlink} = require("fs");
 
 
 const useBlogImgDeletor = async (req, res, next) => {
-    const {deleteImgUrl} = req.body;
+    const {deleteImgUrls} = req.body;
     try {
-      unlink(path.join(__dirname, `../public/assets/blogs/${deleteImgUrl}`), (err)=> {
-        if(err) {
-            console.log(err)
-        } else {
-          next();
-        }
+      deleteImgUrls.forEach((eachUrl)=> {
+        unlink(path.join(__dirname, `../public/assets/blogs/${eachUrl}`), (err)=> {
+          if(err) {
+              console.log(err)
+          }
+        })
       })
+      next();
     } catch(err) {
         console.log(err);
     }

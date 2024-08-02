@@ -20,7 +20,6 @@ const getStatusStyle = (active) => {
   }
 };
 
-let parser = new DOMParser();
 
 const BlogsDataTable = ({blogsData, setDeleteData}) => {
   const {data} = blogsData;
