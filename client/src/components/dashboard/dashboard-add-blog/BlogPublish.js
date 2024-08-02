@@ -35,6 +35,7 @@ const BlogPublish = () => {
       setLoading(true)
       const res = await fetch("http://localhost:5000/api/blog/add", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -56,10 +57,8 @@ const BlogPublish = () => {
           router.push(`/dashboard/edit-blog/${dataRes.data.slug}`)
         }, 1500)
       } else {
-        console.log(dataRes.errors)
         dispatch(addBlogFieldValue({errors: dataRes?.errors}))
       }
-      console.log(dataRes)
     } catch(err) {
       console.log(err.message)
     }
@@ -90,8 +89,8 @@ const BlogPublish = () => {
         setTimeout(()=> {
           router.push('/dashboard/blogs')
         }, 1500)
-      } else if(dataRes.errors.locationUpdate) {
-        toast.error(dataRes.errors.locationUpdate.msg, {
+      } else if(dataRes.errors.img) {
+        toast.error(dataRes.errors.img.msg, {
           position: "top-right",
           autoClose: 1500,
         });

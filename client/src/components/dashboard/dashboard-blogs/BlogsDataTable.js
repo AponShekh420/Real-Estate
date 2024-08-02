@@ -52,11 +52,11 @@ const BlogsDataTable = ({blogsData, setDeleteData}) => {
                 </div>
                 <div className="list-content py-0 p-0 mt-2 mt-xxl-0 ps-xxl-4">
                   <div className="h6 list-title">
-                    <Link href={`/blog/${blog?.slug}`}>{blog?.title}</Link>
+                    <Link href={`/post/${blog?.slug}`}>{blog?.title}</Link>
                   </div>
-                  <p className="list-text mb-0">{blog?.auther?.firstName} {blog?.auther?.lastName}</p>
+                  <span className="list-text mb-0 text-capitalize" href="#" style={{fontWeight: 500, fontSize: "13px"}}>{blog?.catagory?.name}{blog.subcatagory ? `, ${blog.subcatagory.name}` : ``}</span>
                   <div className="list-price">
-                    <a href="#">{blog?.catagory?.name}{blog.subcatagory ? `, ${blog.subcatagory.name}` : ``}</a>
+                    <p className="list-text mb-0" style={{fontWeight: "500", fontSize: "14px", color: "#8b2323"}} >{blog?.auther?.firstName} {blog?.auther?.lastName}</p>
                   </div>
                 </div>
               </div>

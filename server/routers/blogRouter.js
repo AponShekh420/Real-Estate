@@ -12,7 +12,8 @@ const getSingleBlog = require("../controllers/blogController/getSingleBlog");
 const checkCommunityValidation = require("../middleware/checkCommunityValidation");
 const useValidationResult = require("../middleware/common/useValidationResult");
 const useBlogImgDeletor = require("../middleware/useBlogImgDeletor");
-const checkBlogValidation = require("../middleware/checkBlogValidation copy");
+const checkBlogValidation = require("../middleware/checkBlogValidation");
+const authCheck = require("../middleware/common/users/authCheck");
 
 // callback function of configure
 const router = express.Router();
@@ -23,8 +24,8 @@ router.get('/single-blog/:slug', getSingleBlog);
 
 
 // route controller
-router.post('/add', checkBlogValidation, useValidationResult, addBlog);
-router.put('/update', checkBlogValidation, useValidationResult, useBlogImgDeletor, updateBlog);
+router.post('/add', authCheck, checkBlogValidation, useValidationResult, addBlog);
+router.put('/update', authCheck, checkBlogValidation, useValidationResult, useBlogImgDeletor, updateBlog);
 router.delete('/delete', deleteBlog);
 
 

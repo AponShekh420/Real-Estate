@@ -31,7 +31,7 @@ const login = async (req, res) => {
                 res.json({
                     errors: {
                         login: {
-                            msg: 'login access invalid'
+                            msg: 'Invalid login credentials'
                         }
                     }
                 })
@@ -40,7 +40,7 @@ const login = async (req, res) => {
             res.json({
                 errors: {
                     login: {
-                        msg: 'login access invalid'
+                        msg: 'Invalid login credentials'
                     }
                 }
             })

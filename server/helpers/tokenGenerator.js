@@ -9,7 +9,7 @@ const tokenGenerator = (res, data) => {
   res.cookie('token', token, {
       signed: true,
       httpOnly: true,
-      secure: false,
+      secure: process.env.SECURE_COOKIE || "production",
       maxAge: 365 * 24 * 60 * 60 * 1000 // one year
   })
 

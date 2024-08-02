@@ -5,9 +5,9 @@ const uploadCommunityImages = (req, res) => {
 
    upload.any()(req, res, (err)=> {
         if(err) {
-            res.json({
+            res.status(405).json({
                 errors: {
-                    communityImgs: {
+                    imgs: {
                         msg: err.message,
                     }
                 }

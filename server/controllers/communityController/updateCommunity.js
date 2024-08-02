@@ -9,19 +9,26 @@ const updateCommuity = async (req, res) => {
     // send these data from front-end to add a community in database
     const {lat, long, communityId, title, website, phone, address, stateId, cityId, areaId, zip, minPrice, maxPrice, homeTypes, communitySize, ageRestrictions, gated, builtStart, builtEnd, overview, imgs, bedrooms, bathrooms, garages, active, status, sqft} = req.body
 
-    console.log(stateId);
     // slug making
-    const duplicateCommuntiy = await CommunityModel.find({title: title, _id: {$ne: communityId}});
+    const duplicateCommunityWithTitle = await CommunityModel.find({title: title, _id: {$ne: communityId}});
     const currentCommunity = await CommunityModel.findById(communityId);
 
     let slug;
     if(title === currentCommunity.title) {
       slug = currentCommunity.slug
     } else {
-      if(duplicateCommuntiy.length > 0){
-        slug = title.toLowerCase().trim().split(' ').join("-") + "-" + duplicateCommuntiy.length;
+      if(duplicateCommunityWithTitle.length > 0){
+        slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-") + "-" + duplicateCommunityWithTitle.length;
       } else {
-        slug = title.toLowerCase().trim().split(' ').join("-");
+        const checkSlug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-");
+        const duplicateCommunityWithSlug = await CommunityModel.find({slug: checkSlug});
+  
+        // check again with slug to make sure
+        if(duplicateCommunityWithSlug.length > 0) {
+          slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-") + "-" + CommunityModel.length;
+        } else {
+          slug = checkSlug;
+        }
       }
     }
 

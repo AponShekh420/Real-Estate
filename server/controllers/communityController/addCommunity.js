@@ -11,13 +11,21 @@ const addCommunity = async (req, res) => {
   try {
 
     // slug making
-    const duplicateArea = await CommunityModel.find({title});
+    const duplicateCommunityWithTitle = await CommunityModel.find({title});
 
     let slug;
-    if(duplicateArea.length > 0){
-      slug = title.toLowerCase().trim().split(' ').join("-") + "-" + duplicateArea.length;
+    if(duplicateCommunityWithTitle.length > 0){
+      slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-") + "-" + duplicateCommunityWithTitle.length;
     } else {
-      slug = title.toLowerCase().trim().split(' ').join("-");
+      const checkSlug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-");
+      const duplicateCommunityWithSlug = await CommunityModel.find({slug: checkSlug});
+
+      // check again with slug to make sure
+      if(duplicateCommunityWithSlug.length > 0) {
+        slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-") + "-" + CommunityModel.length;
+      } else {
+        slug = checkSlug;
+      }
     }
 
 

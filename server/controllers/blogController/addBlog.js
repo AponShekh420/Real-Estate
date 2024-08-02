@@ -14,9 +14,17 @@ const addBlog = async (req, res) => {
 
     let slug;
     if(duplicateBlog.length > 0){
-      slug = title.toLowerCase().trim().split(' ').join("-") + "-" + duplicateBlog.length;
+      slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-") + "-" + duplicateBlog.length;
     } else {
-      slug = title.toLowerCase().trim().split(' ').join("-");
+      const checkSlug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-");
+      const duplicateBlogWithSlug = await BlogModel.find({slug: checkSlug});
+
+      // check again with slug to make sure
+      if(duplicateBlogWithSlug.length > 0) {
+        slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-") + "-" + duplicateBlog.length;
+      } else {
+        slug = checkSlug;
+      }
     }
 
 
@@ -29,7 +37,7 @@ const addBlog = async (req, res) => {
       subcatagory: subcatagoryId || null,
       img,
       active,
-      auther,
+      auther: req.user.id,
       metaTitle,
       metaDesc,
     });

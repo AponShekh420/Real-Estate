@@ -5,12 +5,24 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
 import { addBlogFieldValue } from "@/redux/blogSlice";
+import { MoonLoader } from "react-spinners";
+
+
+const override = {
+  display: "flex",
+  margin: "0 auto",
+  borderColor: "red",
+};
+
+
+
+
 
 const UploadPhotoGallery = () => {
   const fileInputRef = useRef(null);
   const pathname = usePathname();
   const [notify, setNotify] = useState("");
-
+  const [loading, setLoading] = useState(false)
   // redux
   const {errors, img, deleteImgUrls} = useSelector((state)=> state.blog);
   const dispatch = useDispatch();
@@ -19,25 +31,40 @@ const UploadPhotoGallery = () => {
   const editPageValidation = pathname.split("/")[2] === "edit-blog" ? true : false;
 
 
-  const handleUpload = async (files) => {
-    
+  const handleUpload = async (file) => {
+    dispatch(addBlogFieldValue({
+      img: "",
+      errors: {}
+    }))
     const formData = new FormData();
-    Array.from(files).forEach((file, index) => {
-      formData.append(`file${index}`, file);
-    });
+    formData.append('file', file);
 
+    console.log("fileData", file);
+    console.log("FormData", formData);
     try {
-      const res = await fetch("http://localhost:5000/api/blog/upload", {
-        method: "POST",
-        body: formData
-      })
-      const {message: imgsData} = await res.json();
-      console.log(imgsData)
-      const newImages = imgsData;
-      dispatch(addBlogFieldValue({
-        img: newImages
-      }));
-      setNotify(newImages)
+      if(file) {
+        setLoading(true);
+        const res = await fetch("http://localhost:5000/api/blog/upload", {
+          method: "POST",
+          body: formData
+        })
+        const resData = await res.json();
+        setLoading(false);
+        if(resData.errors) {
+          dispatch(addBlogFieldValue({
+            errors: resData?.errors
+          }))
+          setNotify(null);
+        } else {
+          const newImages = resData.message;
+          dispatch(addBlogFieldValue({
+            img: newImages
+          }));
+          setNotify(newImages)
+        }
+      } else {
+        return;
+      }
     } catch(err) {
       console.log(err.message)
     }
@@ -50,6 +77,10 @@ const UploadPhotoGallery = () => {
   };
 
   const handleDelete = async (img) => {
+    dispatch(addBlogFieldValue({
+      errors: {}
+    }))
+    
     const newImages = img;
     const deletedImage = newImages;
     const DeletedImageUrl = deletedImage;
@@ -66,7 +97,6 @@ const UploadPhotoGallery = () => {
           })
         })
         const deleteStatus = await res.json();
-        console.log(deleteStatus)
         dispatch(addBlogFieldValue({
           img: "",
         }));
@@ -76,7 +106,6 @@ const UploadPhotoGallery = () => {
           img: "",
           deleteImgUrls: [...deleteImgUrls, DeletedImageUrl]
         }));
-        console.log("deleteImgs:", deleteImgUrls)
       }
       dispatch(addBlogFieldValue({
         img: ""
@@ -90,37 +119,48 @@ const UploadPhotoGallery = () => {
   return (
     <>
       <div
-        className="upload-img position-relative overflow-hidden bdrs12 text-center mb30 px-2"
+        className="upload-img position-relative overflow-hidden bdrs12 text-center mb30"
       >
-        <div className="icon mb30">
+        
+        <div className="icon mb30" style={{visibility: loading ? "hidden" : "visible"}}>
           <span className="flaticon-upload" />
         </div>
-        <h4 className="title fz17 mb10">Upload/Drag photos of your property</h4>
-        <p className="text mb25">
-          Photos must be JPEG or PNG format and at least 2048x768
+        <h4 className="title fz17 mb10" style={{visibility: loading ? "hidden" : "visible"}}>Upload/Drag photos of your property</h4>
+        <p className="text mb25" style={{visibility: loading ? "hidden" : "visible"}}>
+          Photos must be JPEG, JPG or PNG format
         </p>
-        <label className="ud-btn btn-white">
+        <label className="ud-btn btn-white" style={{visibility: loading ? "hidden" : "visible"}}>
           Browse Files
           <input
             ref={fileInputRef}
             id="fileInput"
             type="file"
             className="ud-btn btn-white"
-            onChange={(e) => handleUpload(e.target.files)}
+            onChange={(e) => handleUpload(e.target.files[0])}
             style={{ display: "none" }}
           />
         </label>
-      </div>
 
-      {/* Display uploaded images */}
-      <div className="row profile-box position-relative d-md-flex align-items-end mb50">
-          {notify ? (
-            <div className="col-2">
-              <div className="profile-img mb20 position-relative">
+        <div className="w-100 h-100 top-0 d-flex align-items-center justify-content-center position-absolute" style={{zIndex: loading ? "100" : "-2000", display: loading ? "flex": "none"}}>
+          <MoonLoader
+            color="black"
+            loading={loading}
+            cssOverride={override}
+            size={30}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+
+        {/* Display uploaded images */}
+        {notify ? (
+          <div className="profile-box w-100 h-100 position-absolute top-0" style={{zIndex: !notify ? "-10" : ""}}>
+            <div className="w-100 h-100">
+              <div className="profile-img w-100 h-100">
                 <Image
-                  width={212}
-                  height={194}
-                  className="w-100 bdrs12 cover"
+                  width={100}
+                  height={100}
+                  className="w-100 h-100 bdrs12 cover"
                   src={`http://localhost:5000/assets/blogs/${img}`}
                   alt={`Uploaded Image ${img}`}
                 />
@@ -142,9 +182,9 @@ const UploadPhotoGallery = () => {
                 />
               </div>
             </div>
-          ):  (<div></div>)}
+          </div>):  (<div></div>)}
       </div>
-      <p className="text-danger fs-4">{errors?.imgs?.msg}</p>
+      <p className="text-danger fs-4">{errors?.img?.msg}</p>
     </>
   );
 };

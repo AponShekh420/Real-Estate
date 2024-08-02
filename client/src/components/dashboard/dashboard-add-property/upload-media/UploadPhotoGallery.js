@@ -19,23 +19,35 @@ const UploadPhotoGallery = () => {
 
 
   const handleUpload = async (files) => {
-    
+    dispatch(addCommunityFieldValue({
+      errors: {}
+    }))
     const formData = new FormData();
     Array.from(files).forEach((file, index) => {
       formData.append(`file${index}`, file);
     });
 
     try {
-      const res = await fetch("http://localhost:5000/api/community/upload", {
-        method: "POST",
-        body: formData
-      })
-      const {message: imgsData} = await res.json();
-      console.log(imgsData)
-      const newImages = [...imgs, ...imgsData];
-      dispatch(addCommunityFieldValue({
-        imgs: newImages
-      }))
+      if(files.length >= 1) {
+        const res = await fetch("http://localhost:5000/api/community/upload", {
+          method: "POST",
+          body: formData
+        })
+        const resData = await res.json();
+        console.log(imgsData)
+        if(resData.error) {
+          dispatch(addCommunityFieldValue({
+            errors: resData.errors
+          }))
+        } else {
+          const newImages = [...imgs, ...resData.message];
+          dispatch(addCommunityFieldValue({
+            imgs: newImages
+          }))
+        }
+      } else {
+        return;
+      }
     } catch(err) {
       console.log(err.message)
     }
@@ -48,6 +60,11 @@ const UploadPhotoGallery = () => {
   };
 
   const handleDelete = async (index) => {
+
+    dispatch(addCommunityFieldValue({
+      errors: {}
+    }))
+
     const newImages = [...imgs];
     const deletedImage = newImages.splice(index, 1);
     const DeletedImageUrl = deletedImage[0];
