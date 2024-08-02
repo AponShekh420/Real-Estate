@@ -9,23 +9,18 @@ const addBlog = async (req, res) => {
 
   try {
 
-    // slug making
-    const duplicateBlog = await BlogModel.find({title});
+    // Remove special characters and make the slug
+    const sanitizedTitle = title.toLowerCase().trim().replace(/[^\w\s-]/g, '');
+    let slug = sanitizedTitle.split(' ').join('-');
 
-    let slug;
-    if(duplicateBlog.length > 0){
-      slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-") + "-" + duplicateBlog.length;
-    } else {
-      const checkSlug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-");
-      const duplicateBlogWithSlug = await BlogModel.find({slug: checkSlug});
+    // Check for duplicates
+    const duplicateBlogCount = await BlogModel.countDocuments({ slug: { $regex: `^${slug}(-[0-9]*)?$`, $options: 'i' } });
 
-      // check again with slug to make sure
-      if(duplicateBlogWithSlug.length > 0) {
-        slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-") + "-" + duplicateBlog.length;
-      } else {
-        slug = checkSlug;
-      }
+    if (duplicateBlogCount > 0) {
+      slug = `${slug}-${duplicateBlogCount}`;
     }
+
+    // Continue with the rest of your code...
 
 
     // upload the blog in database

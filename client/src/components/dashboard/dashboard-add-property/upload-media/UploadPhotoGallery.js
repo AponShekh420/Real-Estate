@@ -34,13 +34,13 @@ const UploadPhotoGallery = () => {
           body: formData
         })
         const resData = await res.json();
-        console.log(imgsData)
         if(resData.error) {
           dispatch(addCommunityFieldValue({
             errors: resData.errors
           }))
         } else {
-          const newImages = [...imgs, ...resData.message];
+          const latestImags = resData.message;
+          const newImages = [...imgs, ...latestImags];
           dispatch(addCommunityFieldValue({
             imgs: newImages
           }))

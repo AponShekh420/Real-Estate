@@ -10,23 +10,18 @@ const addCommunity = async (req, res) => {
 
   try {
 
-    // slug making
-    const duplicateCommunityWithTitle = await CommunityModel.find({title});
+    // Remove special characters and make the slug
+    const sanitizedTitle = title.toLowerCase().trim().replace(/[^\w\s-]/g, '');
+    let slug = sanitizedTitle.split(' ').join('-');
 
-    let slug;
-    if(duplicateCommunityWithTitle.length > 0){
-      slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-") + "-" + duplicateCommunityWithTitle.length;
-    } else {
-      const checkSlug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-");
-      const duplicateCommunityWithSlug = await CommunityModel.find({slug: checkSlug});
+    // Check for duplicates
+    const duplicateCommunityCount = await CommunityModel.countDocuments({ slug: { $regex: `^${slug}(-[0-9]*)?$`, $options: 'i' } });
 
-      // check again with slug to make sure
-      if(duplicateCommunityWithSlug.length > 0) {
-        slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-") + "-" + CommunityModel.length;
-      } else {
-        slug = checkSlug;
-      }
+    if (duplicateCommunityCount > 0) {
+      slug = `${slug}-${duplicateCommunityCount}`;
     }
+
+    // Continue with the rest of your code...
 
 
     // upload the community in database

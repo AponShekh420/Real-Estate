@@ -9,26 +9,26 @@ const updateCommuity = async (req, res) => {
     // send these data from front-end to add a community in database
     const {lat, long, communityId, title, website, phone, address, stateId, cityId, areaId, zip, minPrice, maxPrice, homeTypes, communitySize, ageRestrictions, gated, builtStart, builtEnd, overview, imgs, bedrooms, bathrooms, garages, active, status, sqft} = req.body
 
-    // slug making
-    const duplicateCommunityWithTitle = await CommunityModel.find({title: title, _id: {$ne: communityId}});
+    // Find the current community by ID
     const currentCommunity = await CommunityModel.findById(communityId);
+    if (!currentCommunity) {
+      return res.status(404).json({ error: "Community not found" });
+    }
 
     let slug;
-    if(title === currentCommunity.title) {
-      slug = currentCommunity.slug
+    // If the title hasn't changed, keep the current slug
+    if (title === currentCommunity.title) {
+      slug = currentCommunity.slug;
     } else {
-      if(duplicateCommunityWithTitle.length > 0){
-        slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-") + "-" + duplicateCommunityWithTitle.length;
-      } else {
-        const checkSlug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-");
-        const duplicateCommunityWithSlug = await CommunityModel.find({slug: checkSlug});
-  
-        // check again with slug to make sure
-        if(duplicateCommunityWithSlug.length > 0) {
-          slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-") + "-" + CommunityModel.length;
-        } else {
-          slug = checkSlug;
-        }
+      // Remove special characters and generate slug
+      const sanitizedTitle = title.toLowerCase().trim().replace(/[^\w\s-]/g, '');
+      slug = sanitizedTitle.split(' ').join('-');
+
+      // Check for duplicates excluding the current communtiy ID
+      const duplicateCommunityCount = await CommunityModel.countDocuments({ slug: { $regex: `^${slug}(-[0-9]*)?$`, $options: 'i' }, _id: { $ne: communityId } });
+
+      if (duplicateCommunityCount > 0) {
+        slug = `${slug}-${duplicateCommunityCount}`;
       }
     }
 

@@ -8,27 +8,26 @@ const updateBlog = async (req, res) => {
     // send these data from front-end to add a blog in database
     const {title, metaTitle, metaDesc, desc, catagoryId, subcatagoryId, img, active, auther, blogId} = req.body
 
-    console.log(blogId);
-    // slug making
-    const duplicateBlog = await BlogModel.find({title: title, _id: {$ne: blogId}});
+    // Find the current blog by ID
     const currentBlog = await BlogModel.findById(blogId);
+    if (!currentBlog) {
+      return res.status(404).json({ error: "Blog not found" });
+    }
 
     let slug;
-    if(title === currentBlog.title) {
-      slug = currentBlog.slug
+    // If the title hasn't changed, keep the current slug
+    if (title === currentBlog.title) {
+      slug = currentBlog.slug;
     } else {
-      if(duplicateBlog.length > 0){
-        slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-") + "-" + duplicateBlog.length;
-      } else {
-        const checkSlug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-");
-        const duplicateBlogWithSlug = await BlogModel.find({slug: checkSlug});
-  
-        // check again with slug to make sure
-        if(duplicateBlogWithSlug.length > 0) {
-          slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').split(' ').join("-") + "-" + duplicateBlog.length;
-        } else {
-          slug = checkSlug;
-        }
+      // Remove special characters and generate slug
+      const sanitizedTitle = title.toLowerCase().trim().replace(/[^\w\s-]/g, '');
+      slug = sanitizedTitle.split(' ').join('-');
+
+      // Check for duplicates excluding the current blog ID
+      const duplicateBlogCount = await BlogModel.countDocuments({ slug: { $regex: `^${slug}(-[0-9]*)?$`, $options: 'i' }, _id: { $ne: blogId } });
+
+      if (duplicateBlogCount > 0) {
+        slug = `${slug}-${duplicateBlogCount}`;
       }
     }
 
