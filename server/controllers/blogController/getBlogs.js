@@ -13,7 +13,10 @@ const getBlogs = async (req, res) => {
         blog.title.match(new RegExp(searchParams, 'i')) ||
         blog.catagory?.name.match(new RegExp(searchParams, 'i')) ||
         blog.subcatagory?.name.match(new RegExp(searchParams, 'i')) ||
-        blog.auther?.name.match(new RegExp(searchParams, 'i'))
+        blog.auther?.email.match(new RegExp(searchParams, 'i')) ||
+        blog.auther?.role.match(new RegExp(searchParams, 'i')) ||
+        blog.auther?.firstName.match(new RegExp(searchParams, 'i')) ||
+        blog.auther?.lastName.match(new RegExp(searchParams, 'i'))
       );
     });
 
