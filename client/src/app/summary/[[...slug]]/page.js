@@ -4,12 +4,20 @@ import MobileMenu from "@/components/common/mobile-menu";
 
 import React from "react";
 import PropertyFiltering from "@/components/listing/grid-view/grid-default/PropertyFiltering";
+import { notFound } from "next/navigation";
 
 export const metadata = {
   title: "Gird Default || Homez - Real Estate NextJS Template",
 };
 
-const SummaryPage = () => {
+const SummaryPage = ({params}) => {
+  const {slug} = params;
+
+  if(slug?.length > 3 && slug !== undefined) {
+    notFound();
+  }
+
+  console.log(slug)
   return (
     <>
       {/* Main Header Nav */}
