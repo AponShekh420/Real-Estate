@@ -1,53 +1,76 @@
 "use client";
-import Link from "next/link";
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
+import MenuItem from "./MenuItem";
+import { useSelector } from "react-redux";
 
 const DboardMobileNavigation = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const pathname = usePathname();
+  const user = useSelector(state => state.user);
+
+
 
   const sidebarItems = [
     {
       title: "MAIN",
       items: [
         {
-          href: "/dashboard-home",
+          href: "/dashboard",
           icon: "flaticon-discovery",
           text: "Dashboard",
         },
-        {
-          href: "/dashboard-message",
-          icon: "flaticon-chat-1",
-          text: "Message",
-        },
+        // {
+        //   href: "/dashboard/message",
+        //   icon: "flaticon-chat-1",
+        //   text: "Message",
+        // },
       ],
     },
     {
       title: "MANAGE LISTINGS",
       items: [
         {
-          href: "/dashboard-add-property",
+          href: "/dashboard/catagory",
+          icon: "FaLocationDot",
+          text: "Catagory",
+        },
+        {
+          href: "/dashboard/add-blog",
+          icon: "FaLocationDot",
+          text: "Add New Blog",
+        },
+        {
+          href: "/dashboard/blogs",
+          icon: "FaLocationDot",
+          text: "Blogs",
+        },
+        {
+          href: "/dashboard/location",
+          icon: "FaLocationDot",
+          text: "Location",
+        },
+        {
+          href: "/dashboard/add-community",
           icon: "flaticon-new-tab",
-          text: "Add New Property",
+          text: "Add New Commmunity",
         },
         {
-          href: "/dashboard-my-properties",
+          href: "/dashboard/my-communities",
           icon: "flaticon-home",
-          text: "My Properties",
+          text: "My Communities",
         },
         {
-          href: "/dashboard-my-favourites",
+          href: "/dashboard/my-favourites",
           icon: "flaticon-like",
           text: "My Favorites",
         },
+        // {
+        //   href: "/dashboard/saved-search",
+        //   icon: "flaticon-search-2",
+        //   text: "Saved Search",
+        // },
         {
-          href: "/dashboard-saved-search",
-          icon: "flaticon-search-2",
-          text: "Saved Search",
-        },
-        {
-          href: "/dashboard-reviews",
+          href: "/dashboard/reviews",
           icon: "flaticon-review",
           text: "Reviews",
         },
@@ -56,13 +79,13 @@ const DboardMobileNavigation = () => {
     {
       title: "MANAGE ACCOUNT",
       items: [
+        // {
+        //   href: "/dashboard/my-package",
+        //   icon: "flaticon-protection",
+        //   text: "My Package",
+        // },
         {
-          href: "/dashboard-my-package",
-          icon: "flaticon-protection",
-          text: "My Package",
-        },
-        {
-          href: "/dashboard-my-profile",
+          href: "/dashboard/my-profile",
           icon: "flaticon-user",
           text: "My Profile",
         },
@@ -85,30 +108,66 @@ const DboardMobileNavigation = () => {
           <i className="fa fa-bars pr10" /> Dashboard Navigation
         </button>
         <ul className={`dropdown-content ${isDropdownOpen ? "show" : ""}`}>
-          {sidebarItems.map((section, sectionIndex) => (
-            <div key={sectionIndex}>
-              <p
-                className={`fz15 fw400 ff-heading mt30 pl30 ${
-                  sectionIndex === 0 ? "mt-0" : "mt30"
-                }`}
-              >
-                {section.title}
-              </p>
-              {section.items.map((item, itemIndex) => (
-                <div key={itemIndex} className="sidebar_list_item">
-                  <Link
-                    href={item.href}
-                    className={`items-center   ${
-                      pathname == item.href ? "-is-active" : ""
-                    } `}
-                  >
-                    <i className={`${item.icon} mr15`} />
-                    {item.text}
-                  </Link>
-                </div>
-              ))}
-            </div>
-          ))}
+          {sidebarItems.map((section, sectionIndex) => {
+            let enable = true;
+            if(user.role !== "admin" && section.title == "MAIN") {
+              enable = false
+            }
+            return enable ? (
+              <div key={sectionIndex}>
+                {section.items.map((item, itemIndex) => {
+                  let enable = false;
+                  if(user.role == 'admin' && item.text == "Dashboard") {
+                    enable = true
+                  }
+
+                  if(user && item.text == "Logout") {
+                    enable = true
+                  }
+
+                  if(user && item.text == "My Profile") {
+                    enable = true
+                  }
+
+                  if(user.role == "admin" && item.text == "Reviews") {
+                    enable = true
+                  }
+
+                  if(user && item.text == "My Favorites") {
+                    enable = true
+                  }
+
+                  if(user.role == "admin" && item.text == "My Communities") {
+                    enable = true
+                  }
+
+                  if(user.role == "admin" && item.text == "Add New Commmunity") {
+                    enable = true
+                  }
+
+                  if(user.role == "admin" && item.text == "Location") {
+                    enable = true
+                  }
+
+                  if((user.role == "admin" || user.role == "contributor") && item.text == "Blogs") {
+                    enable = true
+                  }
+
+                  if((user.role == "admin" || user.role == "contributor") && item.text == "Add New Blog") {
+                    enable = true
+                  }
+
+                  if((user.role == "admin" || user.role == "contributor") && item.text == "Catagory") {
+                    enable = true
+                  }
+
+                  return enable ? (
+                    <MenuItem itemIndex={itemIndex} item={item}/>
+                  ) : "";
+                })}
+              </div>
+            ) : "";
+          })}
         </ul>
       </div>
     </div>

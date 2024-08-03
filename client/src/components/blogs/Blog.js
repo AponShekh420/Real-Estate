@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 
-const BlogFilter = () => {
+const Blogs = () => {
   
 
   const [filteredBlogs, setFilteredBlogs] = useState(blogsThree);
@@ -32,22 +32,6 @@ const BlogFilter = () => {
 
   return (
     <>
-      <ul className="nav nav-pills mb20">
-        {categories.map((category, index) => (
-          <li className="nav-item" role="presentation" key={index}>
-            <button
-              className={`nav-link mb-2 mb-lg-0 fw500 dark-color ${
-                category === activeCategory ? "active" : ""
-              }`}
-              onClick={() => handleFilter(category)}
-            >
-              {category}
-            </button>
-          </li>
-        ))}
-      </ul>
-      {/* End nav */}
-
       <div className="row">
         {filteredBlogs.map((blog) => (
           <div className="col-sm-6 col-lg-4" key={blog.id}>
@@ -81,4 +65,4 @@ const BlogFilter = () => {
   );
 };
 
-export default BlogFilter;
+export default Blogs;

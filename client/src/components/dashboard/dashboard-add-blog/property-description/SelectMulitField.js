@@ -41,6 +41,7 @@ const SelectMultiField = () => {
     try {
       const res = await fetch('http://localhost:5000/api/catagory/getall');
       const catagoryData = await res.json();
+      catagoryData.data.shift();
       setCatagoryOptions(catagoryData.data);
     } catch(err){
       console.log(err.message)

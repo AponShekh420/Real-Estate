@@ -1,25 +1,25 @@
 import MobileMenu from "@/components/common/mobile-menu";
-import CallToActions from "@/components/home/home-v4/CallToActions";
+import CallToActions from "@/components/home/CallToActions";
 import DefaultHeader from "@/components/common/DefaultHeader";
 import Partner from "@/components/common/Partner";
-import PropertiesByCities from "@/components/home/home-v4/PropertiesByCities";
-import Hero from "@/components/home/home-v4/hero";
+import PropertiesByCities from "@/components/home/PropertiesByCities";
+import Hero from "@/components/home/hero";
 import Blog from "@/components/common/Blog";
-import Features from "@/components/home/home-v4/Features";
+import Features from "@/components/home/Features";
 import Link from "next/link";
-import Funfact from "@/components/home/home-v4/Funfact";
-import ApartmentTypes from "@/components/home/home-v4/ApartmentTypes";
-import About from "@/components/home/home-v4/about";
-import Testimonial from "@/components/home/home-v4/Testimonial";
-import FilterProperties from "@/components/home/home-v4/FilterProperties";
+import Funfact from "@/components/home/Funfact";
+import ApartmentTypes from "@/components/home/ApartmentTypes";
+import About from "@/components/home/about";
+import Testimonial from "@/components/home/Testimonial";
+import FilterProperties from "@/components/home/FilterProperties";
 import Footer from "@/components/common/default-footer";
 
 
 export const metadata = {
-  title: "Home v4 || Homez - Real Estate NextJS Template",
+  title: "Home || Real Estate NextJS Template",
 };
 
-const Home_V4 = () => {
+const Home = () => {
   return (
     <>
       {/* Main Header Nav */}
@@ -319,4 +319,4 @@ const Home_V4 = () => {
   );
 };
 
-export default Home_V4;
+export default Home;

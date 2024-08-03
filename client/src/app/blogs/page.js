@@ -1,15 +1,16 @@
-import Pagination from "@/components/blog/Pagination";
-import Blog from "@/components/blog/blog-list-v1/Blog";
-import BlogSidebar from "@/components/blog/sidebar";
+import Pagination from "@/components/blogs/Pagination";
+import Blog from "@/components/blogs/Blog";
+import BlogSidebar from "@/components/blogs/sidebar";
 import DefaultHeader from "@/components/common/DefaultHeader";
 import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
+import TopLayoutBlogs from "@/components/blogs/TopLayoutBlogs";
 
 export const metadata = {
-  title: "Blog List v1  || Homez - Real Estate NextJS Template",
+  title: "Blog List v2  || Homez - Real Estate NextJS Template",
 };
 
-const BlogV1 = () => {
+const Blogs = () => {
   return (
     <div className="bgc-f7">
       {/* Main Header Nav */}
@@ -41,7 +42,8 @@ const BlogV1 = () => {
       {/* Blog Section Area */}
       <section className="our-blog pt-0">
         <div className="container">
-          <div className="row" data-aos="fade-up" data-aos-delay="300">
+          <TopLayoutBlogs/>
+          <div className="row mt20" data-aos="fade-up" data-aos-delay="300">
             <div className="col-lg-8">
               <Blog />
               <div className="row">
@@ -76,4 +78,4 @@ const BlogV1 = () => {
   );
 };
 
-export default BlogV1;
+export default Blogs;

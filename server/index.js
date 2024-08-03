@@ -37,8 +37,8 @@ mongoose.connect(process.env.MONGOOSE_URL, {
 .catch((err)=> console.log(err))
 
 app.use(cookieParser(process.env.COOKIE_SECRET))
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+app.use(express.json({limit: "50000mb"}))
+app.use(express.urlencoded({extended: true, limit: "50000mb"}))
 app.use(express.static(path.join(__dirname, "public")))
 
 

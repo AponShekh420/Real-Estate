@@ -30,19 +30,19 @@ const SelectMultiField = () => {
   const dispatch = useDispatch();
 
 
-  const fetchCatagorData = async () => {
+  const fetchCatagoryData = async () => {
     try {
       const res = await fetch('http://localhost:5000/api/catagory/getall');
-      const catagorData = await res.json();
-      catagorData.data.shift();
-      setCatagoryOptions(catagorData.data);
+      const catagoryData = await res.json();
+      catagoryData.data.shift();
+      setCatagoryOptions(catagoryData.data);
     } catch(err){
       console.log(err.message)
     }
   }
 
   useEffect(()=> {
-    fetchCatagorData();
+    fetchCatagoryData();
   }, [])
 
   // useEffect(()=> {
