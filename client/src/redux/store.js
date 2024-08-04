@@ -8,6 +8,7 @@ import catagorySlice from './catagorySlice'
 import subCatagorySlice from './subCatagorySlice'
 import userSlice from './userSlice'
 import blogSlice from './blogSlice'
+import communityFilterSlice from './communityFilterSlice'
 
 
 const store = configureStore({
@@ -20,7 +21,8 @@ const store = configureStore({
     catagory: catagorySlice,
     subcatagory: subCatagorySlice,
     user: userSlice,
-    blog: blogSlice
+    blog: blogSlice,
+    communityFilter: communityFilterSlice
   }
 })
 

@@ -1,3 +1,9 @@
 .ql-container.ql-snow {
   height: 400px;
 }
+
+.ql-toolbar {
+  border: 1px solid #ccc; /* For debugging */
+  padding: 10px; /* For visibility */
+  background: #f5f5f5; /* For visibility */
+}

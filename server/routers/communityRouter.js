@@ -14,6 +14,7 @@ const useCommunityImgsDeletor = require("../middleware/useCommunityImgsDeletor")
 const getCommunities = require("../controllers/communityController/getCommunities");
 const checkCommunityValidation = require("../middleware/checkCommunityValidation");
 const useValidationResult = require("../middleware/common/useValidationResult");
+const getCommunitiesByFilter = require("../controllers/communityController/getCommunitiesByFilter");
 
 // callback function of configure
 const router = express.Router();
@@ -42,6 +43,11 @@ router.delete('/imgdelete', communityImageDelete);
 
 // get the communities by area/city/state/title
 router.post('/get-communities', getCommunities)
+
+
+
+// get data for display on frontend page 
+router.post('/get-by-filter', getCommunitiesByFilter)
 
 
 module.exports = router;

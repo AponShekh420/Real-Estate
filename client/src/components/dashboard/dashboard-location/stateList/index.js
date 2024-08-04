@@ -1,12 +1,13 @@
+"use client"
+
 import React from "react";
 import SelectMulitField from "./SelectMulitField";
 import { useDispatch, useSelector } from "react-redux";
 import ReactQuill from "react-quill";
-import EditorToolbar, { modules, formats } from "@/components/common/EditorToolbar";
 import "react-quill/dist/quill.snow.css";
 import "@/components/common/styles/quillEditor.css"
 import { addStateFields } from "@/redux/stateSlice";
-
+import {modules, formats} from '@/components/common/quillEditorConfig'
 
 const StateList = () => {
   const { errors, stateName, abbreviation, description } = useSelector((state)=> state.state)
@@ -57,7 +58,7 @@ const StateList = () => {
         <SelectMulitField />
 
         <div className="text-editor">
-          <EditorToolbar />
+          {/* <EditorToolbar /> */}
           <ReactQuill
             theme="snow"
             value={description}

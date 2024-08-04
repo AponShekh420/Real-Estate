@@ -10,6 +10,7 @@ const activeState = require("../controllers/stateController/activeState");
 const getState = require("../controllers/stateController/getState");
 const checkStateValidation = require("../middleware/checkStateValidation");
 const useValidationResult = require("../middleware/common/useValidationResult");
+const getStateBySlug = require("../controllers/stateController/getStateBySlug");
 
 // callback function of configure
 const router = express.Router();
@@ -25,6 +26,10 @@ router.delete('/delete', deleteState);
 // state deactive and active
 router.put('/deactive', deactiveState);
 router.put('/active', activeState);
+
+
+// get state data to display in frontend page 
+router.post("/get-by-slug", getStateBySlug)
 
 
 module.exports = router;

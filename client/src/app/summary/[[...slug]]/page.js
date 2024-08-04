@@ -5,19 +5,33 @@ import MobileMenu from "@/components/common/mobile-menu";
 import React from "react";
 import PropertyFiltering from "@/components/listing/grid-view/grid-default/PropertyFiltering";
 import { notFound } from "next/navigation";
+import getLocationData from "@/lib/getLocationData";
+import ReadMore from "@/components/common/ReadMore";
+import store from "@/redux/store";
+import { addCommunityFilterValue, removeCommunityFilterValues } from "@/redux/communityFilterSlice";
 
 export const metadata = {
   title: "Gird Default || Homez - Real Estate NextJS Template",
 };
 
-const SummaryPage = ({params}) => {
+const SummaryPage = async ({params}) => {
   const {slug} = params;
 
   if(slug?.length > 3 && slug !== undefined) {
     notFound();
   }
+  const res = await getLocationData(params)
+  let desc = res?.data?.desc;
 
-  console.log(slug)
+  if(res?.data) {
+    store.dispatch(addCommunityFilterValue({
+      state: res.data
+    }))
+  } else if(slug !==undefined && !res?.data) {
+    store.dispatch(addCommunityFilterValue(removeCommunityFilterValues()))
+    notFound();
+  }
+
   return (
     <>
       {/* Main Header Nav */}
@@ -34,10 +48,11 @@ const SummaryPage = ({params}) => {
           <div className="row">
             <div className="col-lg-12">
               <div className="breadcumb-style1">
-                <h2 className="title">New York Homes for Sale</h2>
+                <h2 className="title">{res?.data?.name} Homes for Sale</h2>
                 <div className="breadcumb-list">
                   <a href="#">Home</a>
                   <a href="#">For Rent</a>
+                  {desc ? <ReadMore desc={desc}/> : <div></div>}
                 </div>
                 <a
                   className="filter-btn-left mobile-filter-btn d-block d-lg-none"
