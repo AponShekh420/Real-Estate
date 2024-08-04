@@ -17,17 +17,23 @@ export const metadata = {
 const SummaryPage = async ({params}) => {
   const {slug} = params;
 
+  // that would be redirect on notFound page if the slug params are more then 3, like state/city/area/notfound??
   if(slug?.length > 3 && slug !== undefined) {
     notFound();
   }
+
+  // get location data like description, name etc from api
   const res = await getLocationData(params)
   let desc = res?.data?.desc;
 
+
+  // has add the data on redux after fetching from backend
   if(res?.data) {
     store.dispatch(addCommunityFilterValue({
       state: res.data
     }))
   } else if(slug !==undefined && !res?.data) {
+    // if the data has not founded, that's mean the route are wrong, so redirect on not found page
     store.dispatch(addCommunityFilterValue(removeCommunityFilterValues()))
     notFound();
   }
