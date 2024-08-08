@@ -45,6 +45,9 @@ const CatagoryItem = ({catagory}) => {
           position: "top-right",
           autoClose: 1500,
         });
+        dispatch(addCatagoryFields({
+          notify: Math.random(),
+        }))
       } else {
         toast.error(`Please try again to delete "${catagory.name}" catagory`, {
           position: "top-right",

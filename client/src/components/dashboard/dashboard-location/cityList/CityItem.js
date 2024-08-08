@@ -1,5 +1,6 @@
 import DeleteModal from "@/components/common/DeleteModal";
 import { addCityFields } from "@/redux/citySlice";
+import { addStateFields } from "@/redux/stateSlice";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MoonLoader } from "react-spinners";
@@ -42,6 +43,9 @@ const CityItem = ({eachCity, state}) => {
           position: "top-right",
           autoClose: 1500,
         });
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
       } else if (dataRes?.errors?.locationUpdate) {
         toast.error(`First, Take care the parent of "${eachCity.name}"`, {
           position: "top-right",
@@ -79,6 +83,9 @@ const CityItem = ({eachCity, state}) => {
           position: "top-right",
           autoClose: 1500,
         });
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
       } else if (dataRes?.errors?.locationUpdate) {
         toast.error(`First, Take care the parent of "${eachCity.name}"`, {
           position: "top-right",
@@ -115,6 +122,9 @@ const CityItem = ({eachCity, state}) => {
           position: "top-right",
           autoClose: 1500,
         });
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
       } else {
         toast.error(`Please try again to delete "${state.name}" city`, {
           position: "top-right",

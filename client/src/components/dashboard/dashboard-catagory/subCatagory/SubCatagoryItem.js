@@ -5,6 +5,7 @@ import { MoonLoader } from "react-spinners";
 import { toast, ToastContainer } from "react-toastify";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import DeleteModal from "../../../common/DeleteModal";
+import { addCatagoryFields } from "@/redux/catagorySlice";
 
 const override = {
   display: "block",
@@ -41,6 +42,9 @@ const SubCatagoryItem = ({eachSubcatagory, catagory}) => {
           position: "top-right",
           autoClose: 1500,
         });
+        dispatch(addCatagoryFields({
+          notify: Math.random(),
+        }))
       } else {
         toast.error(`Please try again to delete "${catagory.name}" subcatagory`, {
           position: "top-right",

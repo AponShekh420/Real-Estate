@@ -1,6 +1,7 @@
 import DeleteModal from "@/components/common/DeleteModal";
 import { addAreaFields } from "@/redux/areaSlice";
 import { addCityFields } from "@/redux/citySlice";
+import { addStateFields } from "@/redux/stateSlice";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,6 +45,9 @@ const AreaItem = ({eachArea, city, state}) => {
           position: "top-right",
           autoClose: 1500,
         });
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
       } else if (dataRes?.errors?.locationUpdate) {
         toast.error(`First, Take care the parent of "${eachArea.name}"`, {
           position: "top-right",
@@ -81,6 +85,9 @@ const AreaItem = ({eachArea, city, state}) => {
           position: "top-right",
           autoClose: 1500,
         });
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
       } else if (dataRes?.errors?.locationUpdate) {
         toast.error(`First, Take care the parent of "${eachArea.name}"`, {
           position: "top-right",
@@ -117,6 +124,9 @@ const AreaItem = ({eachArea, city, state}) => {
           position: "top-right",
           autoClose: 1500,
         });
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
       } else {
         toast.error(`Please try again to delete "${state.name}" area`, {
           position: "top-right",

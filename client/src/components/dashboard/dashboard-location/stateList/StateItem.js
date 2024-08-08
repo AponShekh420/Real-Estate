@@ -44,6 +44,9 @@ const StateItem = ({state}) => {
           position: "top-right",
           autoClose: 1500,
         });
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
       } else {
         toast.error(`Please try again ${state.name} state`, {
           position: "top-right",
@@ -76,6 +79,9 @@ const StateItem = ({state}) => {
           position: "top-right",
           autoClose: 1500,
         });
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
       } else {
         toast.error(`Please try again ${state.name} state`, {
           position: "top-right",
@@ -106,6 +112,9 @@ const StateItem = ({state}) => {
           position: "top-right",
           autoClose: 1500,
         });
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
       } else {
         toast.error(`Please try again to delete "${state.name}" state`, {
           position: "top-right",
