@@ -11,7 +11,7 @@ import TopFilterBar2 from "./TopFilterBar2";
 import FeaturedListings from "./FeatuerdListings";
 
 import AdvanceFilterModal from "@/components/common/advance-filter-two";
-import PaginationTwo from "../../PaginationTwo";
+import PaginationTwo from "../../../summary/PaginationTwo";
 import ListingMap1 from "../ListingMap1";
 export default function PropertyFilteringTwo() {
     const [filteredData, setFilteredData] = useState([]);

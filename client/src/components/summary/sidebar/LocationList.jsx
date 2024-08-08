@@ -13,7 +13,7 @@ import ContentLoaderWrapper from "./ContentLoaderWrapper";
 const LocationList = () => {
   const path = usePathname();
   const [locationData, setLocationData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // fetch all state, city and area to show these on summery page sidebar as list
   const getExistingDataToUpdate = async () => {
@@ -54,28 +54,40 @@ const LocationList = () => {
               </Link>
               {/* fist chiled */}
               <ul className="w-90 list-unstyled ml10" style={{marginTop: "2px", height: path.split('/')[2] === state.slug ? "100%": "0", overflow: path.split('/')[2] === state.slug ? "visible": "hidden" }}> {/**height: 0, overflow: "hidden" */}
-                {state.city.map((eachCity, cityIndex)=> (
-                  <li className={`${path.split('/')[3] === eachCity.slug ? "text-danger": ""}`} key={cityIndex}>
-                    <Link href={`/summary/${state.slug}/${eachCity.slug}`}>
-                      <div className="d-flex justify-content-between align-items-center">
-                        <p className={`text-capitalize m-0 ${path.split('/')[3] === eachCity.slug ? "text-danger": ""}`}>{eachCity.name} ({eachCity.community.length})</p>
-                        <IoIosArrowDown className="p-0"/>
-                      </div>
-                    </Link>
-                    {/* second child */}
-                    <ul className="w-90 list-unstyled ml10" style={{marginTop: "2px", height: path.split('/')[3] === eachCity.slug ? "100%": "0", overflow: path.split('/')[3] === eachCity.slug ? "visible": "hidden" }}> {/**height: 0, overflow: "hidden" */}
-                      {eachCity.area.map((eachArea, areaIndex)=> (
-                        <li className={`${path.split('/')[4] === eachArea.slug ? "text-danger": ""}`} key={areaIndex}>
-                          <Link href={`/summary/${state.slug}/${eachCity.slug}/${eachArea.slug}`}>
-                            <div className="d-flex justify-content-between align-items-center">
-                              <p className={`text-capitalize m-0 ${path.split('/')[4] === eachArea.slug ? "text-danger": ""}`}>{eachArea.name} ({eachArea.community.length})</p>
-                            </div>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                ))}
+                {state.city.map((eachCity, cityIndex)=> {
+                  if(eachCity?.active) {
+                    return (
+                      <li className={`${path.split('/')[3] === eachCity.slug ? "text-danger": ""}`} key={cityIndex}>
+                        <Link href={`/summary/${state.slug}/${eachCity.slug}`}>
+                          <div className="d-flex justify-content-between align-items-center">
+                            <p className={`text-capitalize m-0 ${path.split('/')[3] === eachCity.slug ? "text-danger": ""}`}>{eachCity.name} ({eachCity.community.length})</p>
+                            <IoIosArrowDown className="p-0"/>
+                          </div>
+                        </Link>
+                        {/* second child */}
+                        <ul className="w-90 list-unstyled ml10" style={{marginTop: "2px", height: path.split('/')[3] === eachCity.slug ? "100%": "0", overflow: path.split('/')[3] === eachCity.slug ? "visible": "hidden" }}> {/**height: 0, overflow: "hidden" */}
+                          {eachCity.area.map((eachArea, areaIndex)=> {
+                            if(eachArea.active) {
+                              return (
+                                <li className={`${path.split('/')[4] === eachArea.slug ? "text-danger": ""}`} key={areaIndex}>
+                                  <Link href={`/summary/${state.slug}/${eachCity.slug}/${eachArea.slug}`}>
+                                    <div className="d-flex justify-content-between align-items-center">
+                                      <p className={`text-capitalize m-0 ${path.split('/')[4] === eachArea.slug ? "text-danger": ""}`}>{eachArea.name} ({eachArea.community.length})</p>
+                                    </div>
+                                  </Link>
+                                </li>
+                              )
+                            } else {
+                              return;
+                            }
+                          })}
+                        </ul>
+                      </li>
+                    )
+                  } else {
+                    return;
+                  }
+                })}
               </ul>
             </li>
           ))}

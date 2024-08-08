@@ -3,13 +3,13 @@
 
 import listings from "@/data/listings";
 import React, { useState,useEffect } from 'react'
-import Pagination from '../../Pagination'
+import Pagination from '../../../summary/Pagination'
 import FeaturedListings from './FeatuerdListings'
 import TopFilterBar from './TopFilterBar'
 import RecentProperty from '../../sidebar-2/RecentProperty'
 import MortgageCalculator from './MortgageCalculator'
 import Hero from './hero'
-import PaginationTwo from "../../PaginationTwo";
+import PaginationTwo from "../../../summary/PaginationTwo";
 
 export default function PropertyFilteringBanner() {
     const [filteredData, setFilteredData] = useState([]);

@@ -8,7 +8,7 @@ import TopFilter from './TopFilter'
 
 
 
-import PaginationTwo from '../listing/PaginationTwo';
+import PaginationTwo from '../summary/PaginationTwo';
 import { agentsData } from '@/data/agency';
 import AllAgents from './agency/AllAgency';
 

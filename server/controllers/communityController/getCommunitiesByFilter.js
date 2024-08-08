@@ -10,13 +10,13 @@ const getCommunitiesByFilter = async (req, res) => {
   const {stateId, cityId, areaId, status, homeTypes, titleSearch} = req.body
 
   const dataQueryObj = {}
-  
+  const statusArray = [status];
   stateId ? dataQueryObj.state = stateId : null
   cityId ? dataQueryObj.city = cityId : null
   areaId ? dataQueryObj.area = areaId : null
-  status.length > 0 ? dataQueryObj.status = {$in: status} : null
+  statusArray?.length ? dataQueryObj.status = {$in: statusArray} : null
   titleSearch ? dataQueryObj.title = {$regex: titleSearch || "", $options: "i"} : null
-  homeTypes.length > 0 ? dataQueryObj.homeTypes = {$in: homeTypes} : null
+  homeTypes?.length > 0 ? dataQueryObj.homeTypes = {$in: homeTypes} : null
 
   
 

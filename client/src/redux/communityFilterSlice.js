@@ -8,10 +8,11 @@ const initialState = {
   area: "",
   homeTypes: [],
   active: true,
-  status: [],
+  status: "",
   loading: true,
   errors: {},
-  zip: ""
+  zip: "",
+  data: [],
 }
 
 

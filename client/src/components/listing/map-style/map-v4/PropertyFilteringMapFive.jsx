@@ -8,7 +8,7 @@ import AdvanceFilterModal from "@/components/common/advance-filter-two";
 import TopFilterBar from "./TopFilterBar";
 import FeaturedListings from "./FeatuerdListings";
 
-import PaginationTwo from "../../PaginationTwo";
+import PaginationTwo from "../../../summary/PaginationTwo";
 import ListingMap1 from "../ListingMap1";
 
 export default function PropertyFilteringMapFive() {

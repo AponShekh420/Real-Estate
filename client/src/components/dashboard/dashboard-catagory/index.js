@@ -55,6 +55,9 @@ const AddCatagoryContent = () => {
           autoClose: 1500,
         });
         dispatch(removeAllSubcatagoryFields())
+        dispatch(addCatagoryFields({
+          notify: Math.random(),
+        }))
       } else {
         dispatch(addSubcatagoryFields({
           errors: currentSubcatagory.errors,
@@ -86,7 +89,10 @@ const AddCatagoryContent = () => {
           position: "top-right",
           autoClose: 1500,
         });
-        dispatch(removeCatagoryAllFields())
+        dispatch(removeCatagoryAllFields());
+        dispatch(addCatagoryFields({
+          notify: Math.random(),
+        }))
       } else {
         dispatch(addCatagoryFields({
           errors: currentCatagory.errors,
@@ -132,7 +138,10 @@ const AddCatagoryContent = () => {
           position: "top-right",
           autoClose: 1500,
         });
-        dispatch(removeCatagoryAllFields())
+        dispatch(removeCatagoryAllFields());
+        dispatch(addCatagoryFields({
+          notify: Math.random(),
+        }))
       } else {
         dispatch(addCatagoryFields({
           errors: currentCatagory.errors,
@@ -167,7 +176,10 @@ const AddCatagoryContent = () => {
           position: "top-right",
           autoClose: 1500,
         });
-        dispatch(removeAllSubcatagoryFields())
+        dispatch(removeAllSubcatagoryFields());
+        dispatch(addCatagoryFields({
+          notify: Math.random(),
+        }))
       } else {
         dispatch(addSubcatagoryFields({
           errors: currentSubcatagory.errors,

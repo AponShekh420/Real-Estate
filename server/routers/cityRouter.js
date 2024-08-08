@@ -9,6 +9,8 @@ const deactiveCity = require("../controllers/cityController/deactiveCity");
 const activeCity = require("../controllers/cityController/activeCity");
 const checkCityValidation = require("../middleware/checkCityValidation");
 const useValidationResult = require("../middleware/common/useValidationResult");
+const getCityBySlug = require("../controllers/cityController/getCityBySlug");
+
 
 // callback function of configure
 const router = express.Router();
@@ -22,6 +24,10 @@ router.delete('/delete', deleteCity);
 // city deactive and active 
 router.put('/deactive', deactiveCity);
 router.put('/active', activeCity);
+
+// get state data to display in frontend page 
+router.post("/get-by-slug", getCityBySlug);
+
 
 
 module.exports = router;

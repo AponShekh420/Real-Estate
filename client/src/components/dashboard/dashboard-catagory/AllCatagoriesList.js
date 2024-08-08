@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import CatagoryItem from "./parentsCatagory/CatagoryItem";
 import SubCatagoryItem from "./subCatagory/SubCatagoryItem";
 import dynamic from "next/dynamic";
+import store from "@/redux/store";
+import { useSelector } from "react-redux";
 
 const ContentLoader = dynamic(() => import('react-content-loader'), { ssr: false });
 
@@ -15,6 +17,11 @@ const AllCatagoriesList = () => {
   const path = usePathname();
   const [catagoryData, setCatagoryData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+
+  // redux
+  const {notify} = useSelector(state =>  state.catagory);
+
 
   // fetch all state, city and area to show these on summery page sidebar as list
   const getExistingDataToUpdate = async () => {
@@ -36,7 +43,7 @@ const AllCatagoriesList = () => {
   useEffect(()=> {
     getExistingDataToUpdate();
     console.log(path.split('/')[4])
-  }, [])
+  }, [notify])
 
 
   return (

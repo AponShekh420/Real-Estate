@@ -7,7 +7,7 @@ import React, { useState,useEffect } from 'react'
 import FeaturedListings from './FeatuerdListings'
 import TopFilterBar from './TopFilterBar'
 import Hero from './hero'
-import PaginationTwo from "../../PaginationTwo";
+import PaginationTwo from "../../../summary/PaginationTwo";
 
 export default function PropertyFilteringBannerTwo() {
     const [filteredData, setFilteredData] = useState([]);

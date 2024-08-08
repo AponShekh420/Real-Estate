@@ -3,11 +3,11 @@
 
 
 import React from "react";
-import PropertyType from "../../sidebar/PropertyType";
-import PriceRange from "../../sidebar/PriceRange";
-import Bedroom from "../../sidebar/Bedroom";
-import Bathroom from "../../sidebar/Bathroom";
-import ListingStatus from "../../sidebar/ListingStatus";
+import PropertyType from "../../../summary/sidebar/PropertyType";
+import PriceRange from "../../../summary/sidebar/PriceRange";
+import Bedroom from "../../../summary/sidebar/Bedroom";
+import Bathroom from "../../../summary/sidebar/Bathroom";
+import ListingStatus from "../../../summary/sidebar/ListingStatus";
 
 const TopFilterBar2 = ({filterFunctions}) => {
   return (

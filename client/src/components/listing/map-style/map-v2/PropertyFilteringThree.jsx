@@ -4,12 +4,12 @@
 
 import listings from "@/data/listings";
 import React, { useState,useEffect } from 'react'
-import Pagination from '../../Pagination'
+import Pagination from '../../../summary/Pagination'
 import FeaturedListings from './FeatuerdListings'
 import TopFilterBar from './TopFilterBar'
 import TopFilterBar2 from './TopFilterBar2'
 import AdvanceFilterModal from '@/components/common/advance-filter-two'
-import PaginationTwo from "../../PaginationTwo";
+import PaginationTwo from "../../../summary/PaginationTwo";
 import ListingMap1 from "../ListingMap1";
 
 export default function PropertyFilteringThree() {

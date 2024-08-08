@@ -99,43 +99,16 @@ const MainMenu = () => {
 
       {/* End property Items */}
 
+      {/* contact us */}
       <li className="visible_list dropitem">
-        <a className="list-item" href="#">
-          <span className={topMenu == "blog" ? "title menuActive" : "title"}>
-            Blog
-          </span>
-          <span className="arrow"></span>
-        </a>
-        <ul className="sub-menu">
-          {blogItems.map((item, index) => (
-            <li key={index}>
-              <Link className={`${handleActive(item.href)}`} href={item.href}>
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <Link
+          className={`${handleActive("/blogs")} list-item`}
+          href='/blogs'
+        >
+           blogs
+        </Link>
       </li>
-      {/* End blog Items */}
-
-      <li className="visible_list dropitem">
-        <a className="list-item" href="#">
-          <span className={topMenu == "pages" ? "title menuActive" : "title"}>
-            Pages
-          </span>
-          <span className="arrow"></span>
-        </a>
-        <ul className="sub-menu">
-          {pageItems.map((item, index) => (
-            <li key={index}>
-              <Link className={`${handleActive(item.href)}`} href={item.href}>
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </li>
-      {/* End pages Items */}
+      {/* End blog */}
     </ul>
   );
 };

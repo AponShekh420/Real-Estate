@@ -2,12 +2,12 @@
 
 import listings from "@/data/listings";
 import React, { useState, useEffect } from "react";
-import ListingSidebar from "../../sidebar";
+import ListingSidebar from "../../../summary/sidebar";
 import AdvanceFilterModal from "@/components/common/advance-filter-two";
 import TopFilterBar from "./TopFilterBar";
 import FeaturedListings from "./FeatuerdListings";
-import Pagination from "../../Pagination";
-import PaginationTwo from "../../PaginationTwo";
+import Pagination from "../../../summary/Pagination";
+import PaginationTwo from "../../../summary/PaginationTwo";
 
 export default function PropertyFiltering() {
   const [filteredData, setFilteredData] = useState([]);

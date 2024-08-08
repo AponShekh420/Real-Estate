@@ -10,7 +10,7 @@ import TopFilter from './TopFilter'
 
 import AllAgents from './agents/AllAgents';
 import agents from '@/data/agents';
-import PaginationTwo from '../listing/PaginationTwo';
+import PaginationTwo from '../summary/PaginationTwo';
 export default function FilteringAgent() {
     const [filteredData, setFilteredData] = useState([]);
     const [currentSortingOption, setCurrentSortingOption] = useState('Newest')

@@ -59,7 +59,10 @@ const AddLocationContent = () => {
           position: "top-right",
           autoClose: 1500,
         });
-        dispatch(removeAllCityFields())
+        dispatch(removeAllCityFields());
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
       } else {
         dispatch(addCityFields({
           errors: currentCity.errors,
@@ -94,7 +97,10 @@ const AddLocationContent = () => {
           position: "top-right",
           autoClose: 1500,
         });
-        dispatch(removeStateAllFields())
+        dispatch(removeStateAllFields());
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
       } else {
         dispatch(addStateFields({
           errors: currentState.errors,
@@ -132,7 +138,10 @@ const AddLocationContent = () => {
           position: "top-right",
           autoClose: 1500,
         });
-        dispatch(removeAllAreaFields())
+        dispatch(removeAllAreaFields());
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
       } else {
         dispatch(addAreaFields({
           errors: currentArea.errors,
@@ -185,7 +194,10 @@ const AddLocationContent = () => {
           position: "top-right",
           autoClose: 1500,
         });
-        dispatch(removeStateAllFields())
+        dispatch(removeStateAllFields());
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
       } else {
         dispatch(addStateFields({
           errors: currentState.errors,
@@ -223,7 +235,10 @@ const AddLocationContent = () => {
           position: "top-right",
           autoClose: 1500,
         });
-        dispatch(removeAllCityFields())
+        dispatch(removeAllCityFields());
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
       } else {
         dispatch(addCityFields({
           errors: currentCity.errors,
@@ -262,7 +277,10 @@ const AddLocationContent = () => {
           position: "top-right",
           autoClose: 1500,
         });
-        dispatch(removeAllAreaFields())
+        dispatch(removeAllAreaFields());
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
       } else {
         dispatch(addAreaFields({
           errors: currentArea.errors,

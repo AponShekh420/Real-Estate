@@ -7,7 +7,7 @@ import FeaturedListings from "./FeatuerdListings";
 import ListingSidebar2 from "../../sidebar-2";
 import TopFilterBar2 from "./TopFilterBar2";
 import AdvanceFilterModal from "@/components/common/advance-filter-two";
-import PaginationTwo from "../../PaginationTwo";
+import PaginationTwo from "../../../summary/PaginationTwo";
 
 export default function PropertyFilteringCol() {
   const [filteredData, setFilteredData] = useState([]);

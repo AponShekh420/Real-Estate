@@ -9,6 +9,7 @@ const initialState = {
   errors: {},
   edit: false,
   stateId: "",
+  notify: "",
 }
 
 

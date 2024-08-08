@@ -3,7 +3,7 @@ import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
 
 import React from "react";
-import PropertyFiltering from "@/components/listing/grid-view/grid-default/PropertyFiltering";
+import PropertyFiltering from "@/components/summary/PropertyFiltering";
 import { notFound } from "next/navigation";
 import getLocationData from "@/lib/getLocationData";
 import ReadMore from "@/components/common/ReadMore";
@@ -37,6 +37,11 @@ const SummaryPage = async ({params}) => {
     store.dispatch(addCommunityFilterValue(removeCommunityFilterValues()))
     notFound();
   }
+
+
+  // console.log("dataToFetchCommunity:", store.getState().communityFilter.state)
+
+
 
   return (
     <>

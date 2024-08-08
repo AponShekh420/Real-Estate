@@ -8,6 +8,7 @@ import StateItem from "./stateList/StateItem";
 import CityItem from "./cityList/CityItem";
 import AreaItem from "./areaList/AreaItem";
 import dynamic from "next/dynamic";
+import { useSelector } from "react-redux";
 const ContentLoader = dynamic(() => import('react-content-loader'), { ssr: false });
 
 const AllLocationList = () => {
@@ -15,6 +16,10 @@ const AllLocationList = () => {
   const [locationData, setLocationData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+
+  // redux
+  const {notify} = useSelector(state => state.state)
+  
   // fetch all state, city and area to show these on summery page sidebar as list
   const getExistingDataToUpdate = async () => {
     try {
@@ -35,7 +40,7 @@ const AllLocationList = () => {
   useEffect(()=> {
     getExistingDataToUpdate();
     console.log(path.split('/')[4])
-  }, [])
+  }, [notify])
 
 
   return (
