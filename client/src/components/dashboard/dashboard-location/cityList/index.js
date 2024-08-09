@@ -1,14 +1,21 @@
+"use client"
+
 import { useEffect, useState } from "react";
 import SelectMulitField from "./SelectMulitField";
 
 // quill text editor imports
 import React from "react";
-import ReactQuill from "react-quill";
-import EditorToolbar, { modules, formats } from "@/components/common/EditorToolbar";
+import {modules, formats} from '@/components/common/quillEditorConfig'
 import "react-quill/dist/quill.snow.css";
 import "@/components/common/styles/quillEditor.css"
 import { useDispatch, useSelector } from "react-redux";
 import { addCityFields } from "@/redux/citySlice";
+import dynamic from "next/dynamic";
+
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+
+
 
 const CityList = () => {
   const {errors, cityName, description, abbreviation} = useSelector((state)=> state.city);
@@ -55,7 +62,6 @@ const CityList = () => {
         </div>
 
         <div className="text-editor">
-          <EditorToolbar />
           <ReactQuill
             theme="snow"
             value={description}

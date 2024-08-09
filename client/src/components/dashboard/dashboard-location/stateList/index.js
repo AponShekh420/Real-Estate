@@ -3,11 +3,17 @@
 import React from "react";
 import SelectMulitField from "./SelectMulitField";
 import { useDispatch, useSelector } from "react-redux";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "@/components/common/styles/quillEditor.css"
 import { addStateFields } from "@/redux/stateSlice";
 import {modules, formats} from '@/components/common/quillEditorConfig'
+import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+
+
+
+
 
 const StateList = () => {
   const { errors, stateName, abbreviation, description } = useSelector((state)=> state.state)

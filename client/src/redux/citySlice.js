@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
   active: true,
   cityName: "",
-  description: "",
+  desc: "",
   abbreviation: "",
   stateId: "",
   edit: false,

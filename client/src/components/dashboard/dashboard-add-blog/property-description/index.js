@@ -5,10 +5,15 @@ import SelectMultiField from "./SelectMulitField";
 import { addBlogFieldValue } from "@/redux/blogSlice";
 
 // text editor items
-import ReactQuill from "react-quill";
-import EditorToolbar, { modules, formats } from "@/components/common/EditorToolbar";
+import {modules, formats} from '@/components/common/quillEditorConfig'
 import "react-quill/dist/quill.snow.css";
 import "@/components/common/styles/quillEditor.css"
+import dynamic from "next/dynamic";
+
+
+// Dynamically import React Quill with SSR disabled
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+
 
 
 const PropertyDescription = () => {
@@ -100,7 +105,6 @@ const PropertyDescription = () => {
 
 
         <div className="text-editor">
-          <EditorToolbar />
           <ReactQuill
             theme="snow"
             value={desc}

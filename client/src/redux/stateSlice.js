@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
   active: true,
   stateName: "",
-  description: "",
+  desc: "",
   abbreviation: "",
   errors: {},
   edit: false,

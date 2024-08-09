@@ -1,12 +1,15 @@
+"use client"
+
 import React from "react";
 import SelectMulitField from "./SelectMulitField";
 import { useDispatch, useSelector } from "react-redux";
 import { addAreaFields } from "@/redux/areaSlice";
-import ReactQuill from "react-quill";
-import EditorToolbar, { modules, formats } from "@/components/common/EditorToolbar";
+import {modules, formats} from '@/components/common/quillEditorConfig'
 import "react-quill/dist/quill.snow.css";
 import "@/components/common/styles/quillEditor.css"
+import dynamic from "next/dynamic";
 
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 
 const AreaList = () => {
@@ -57,7 +60,6 @@ const AreaList = () => {
         {/* End .col-sm-6 */}
 
         <div className="text-editor">
-          <EditorToolbar />
           <ReactQuill
             theme="snow"
             value={description}
