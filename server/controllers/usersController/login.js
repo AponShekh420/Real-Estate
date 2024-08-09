@@ -1,5 +1,5 @@
 const UserModel = require("../../models/UserModel");
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const tokenGenerator = require("../../helpers/tokenGenerator");
 // const cookie = require('cookie-parser')
 const login = async (req, res) => {

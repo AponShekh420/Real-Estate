@@ -1,11 +1,11 @@
 const UserModel = require("../../models/UserModel");
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs');
 
 const register = async (req, res) => {
   const {email, password, firstName, lastName } = req.body;
 
   try {
-    const hashPassword = await bcrypt.hash(password, 10);
+    const hashPassword = bcrypt.hashSync(password, 10);
     if(hashPassword) {
       const NewUser = new UserModel({
         firstName,
