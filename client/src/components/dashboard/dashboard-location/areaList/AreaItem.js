@@ -29,7 +29,7 @@ const AreaItem = ({eachArea, city, state}) => {
   const deactiveHanlder = async (e) => {
     try {
       setLoading(true)
-      const res = await fetch("http://localhost:5000/api/area/deactive", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/area/deactive`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -69,7 +69,7 @@ const AreaItem = ({eachArea, city, state}) => {
   const activeHandler = async () => {
     try {
       setLoading(true)
-      const res = await fetch("http://localhost:5000/api/area/active", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/area/active`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -108,7 +108,7 @@ const AreaItem = ({eachArea, city, state}) => {
   const deleteHanlder = async (areaId) => {
     try {
       setDeleteLoading(true)
-      const res = await fetch("http://localhost:5000/api/area/delete", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/area/delete`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"

@@ -44,6 +44,14 @@ app.use(express.static(path.join(__dirname, "public")))
 
 // Root routes
 
+
+app.use('/', (req, res) => {
+  res.status(200).json({
+    msg: "hello world"
+  })
+})
+
+
 // community items
 app.use('/api/state', stateRouter);
 app.use('/api/area', areaRouter);

@@ -37,7 +37,7 @@ const AddCatagoryContent = () => {
     e.preventDefault();
     try {
       setSubcatagoryLoading(true);
-      const res = await fetch("http://localhost:5000/api/subcatagory/add", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/subcatagory/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -73,7 +73,7 @@ const AddCatagoryContent = () => {
     e.preventDefault();
     try {
       setCatagoryLoading(true);
-      const res = await fetch("http://localhost:5000/api/catagory/add", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/catagory/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -121,7 +121,7 @@ const AddCatagoryContent = () => {
     e.preventDefault();
     try {
       setCatagoryLoading(true);
-      const res = await fetch("http://localhost:5000/api/catagory/update", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/catagory/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -158,7 +158,7 @@ const AddCatagoryContent = () => {
     e.preventDefault();
     try {
       setSubcatagoryLoading(true);
-      const res = await fetch("http://localhost:5000/api/subcatagory/update", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/subcatagory/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"

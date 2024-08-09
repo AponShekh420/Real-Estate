@@ -29,7 +29,7 @@ const UploadPhotoGallery = () => {
 
     try {
       if(files.length >= 1) {
-        const res = await fetch("http://localhost:5000/api/community/upload", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/upload`, {
           method: "POST",
           body: formData
         })
@@ -70,7 +70,7 @@ const UploadPhotoGallery = () => {
     const DeletedImageUrl = deletedImage[0];
     try {
       if(!editPageValidation) {
-        const res = await fetch("http://localhost:5000/api/community/imgdelete", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/imgdelete`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json"
@@ -133,7 +133,7 @@ const UploadPhotoGallery = () => {
                 width={212}
                 height={194}
                 className="w-100 bdrs12 cover"
-                src={`http://localhost:5000/assets/communityImgs/${imageData}`}
+                src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${imageData}`}
                 alt={`Uploaded Image ${index + 1}`}
               />
               <button

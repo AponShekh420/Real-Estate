@@ -22,7 +22,7 @@ const SignIn = ({modalCloseBtn}) => {
     try {
       setErrors({})
       setLoading(true)
-      const res = await fetch("http://localhost:5000/api/user/login", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -54,7 +54,7 @@ const SignIn = ({modalCloseBtn}) => {
   }
 
   return (
-    <form className="form-style1" onSubmit={userLogin} method="POST" action={"http://localhost:5000/api/user/login"}>
+    <form className="form-style1" onSubmit={userLogin} method="POST" action={`${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/login`}>
       <div className="mb25">
         <label className="form-label fw600 dark-color">Email</label>
         <input

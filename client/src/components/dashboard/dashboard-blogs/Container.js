@@ -27,7 +27,7 @@ const Container = () => {
   const getBlogsData = async () => {
     try {
       setLoading(true)
-      const res = await fetch("http://localhost:5000/api/blog/get-blogs", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/blog/get-blogs`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

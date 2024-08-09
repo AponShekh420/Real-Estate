@@ -17,7 +17,7 @@ const DeleteBlog = ({blog, setDeleteData}) => {
     e.preventDefault();
     try {
       setLoading(true)
-      const res = await fetch("http://localhost:5000/api/blog/delete", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/blog/delete`, {
         headers: {
           "Content-Type": "application/json"
         },

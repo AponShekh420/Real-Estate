@@ -20,7 +20,7 @@ const SignUp = ({signInTabBtn}) => {
     try {
       setErrors({})
       setLoading(true)
-      const res = await fetch("http://localhost:5000/api/user/register", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -55,7 +55,7 @@ const SignUp = ({signInTabBtn}) => {
 
 
   return (
-    <form className="form-style1" onSubmit={userRegister} method="POST" action={"http://localhost:5000/api/user/register"}>
+    <form className="form-style1" onSubmit={userRegister} method="POST" action={`${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/register`}>
       <div className={`${errors ? "md17" : "mb25"}`}>
         <label className="form-label fw600 dark-color">First Name</label>
         <input

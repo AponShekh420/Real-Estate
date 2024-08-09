@@ -28,7 +28,7 @@ const StateItem = ({state}) => {
   const deactiveHanlder = async (e) => {
     try {
       setLoading(true)
-      const res = await fetch("http://localhost:5000/api/state/deactive", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/deactive`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -63,7 +63,7 @@ const StateItem = ({state}) => {
   const activeHandler = async () => {
     try {
       setLoading(true)
-      const res = await fetch("http://localhost:5000/api/state/active", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/active`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -96,7 +96,7 @@ const StateItem = ({state}) => {
   const deleteHanlder = async (stateId) => {
     try {
       setDeleteLoading(true)
-      const res = await fetch("http://localhost:5000/api/state/delete", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/delete`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"

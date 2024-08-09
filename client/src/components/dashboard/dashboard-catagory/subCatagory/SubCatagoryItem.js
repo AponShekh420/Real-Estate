@@ -26,7 +26,7 @@ const SubCatagoryItem = ({eachSubcatagory, catagory}) => {
   const deleteHanlder = async (subcatagoryId) => {
     try {
       setDeleteLoading(true)
-      const res = await fetch("http://localhost:5000/api/subcatagory/delete", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/subcatagory/delete`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"

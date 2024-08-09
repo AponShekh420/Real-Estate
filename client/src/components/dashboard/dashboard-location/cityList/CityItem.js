@@ -27,7 +27,7 @@ const CityItem = ({eachCity, state}) => {
   const deactiveHanlder = async (e) => {
     try {
       setLoading(true)
-      const res = await fetch("http://localhost:5000/api/city/deactive", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/deactive`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -67,7 +67,7 @@ const CityItem = ({eachCity, state}) => {
   const activeHandler = async () => {
     try {
       setLoading(true)
-      const res = await fetch("http://localhost:5000/api/city/active", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/active`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -106,7 +106,7 @@ const CityItem = ({eachCity, state}) => {
   const deleteHanlder = async (cityId) => {
     try {
       setDeleteLoading(true)
-      const res = await fetch("http://localhost:5000/api/city/delete", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/delete`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"

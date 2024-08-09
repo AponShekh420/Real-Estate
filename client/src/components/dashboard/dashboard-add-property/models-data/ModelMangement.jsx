@@ -42,7 +42,7 @@ const ModelMangement = () => {
     try {
       setLoading(true);
       // console.log("img:", img)
-      const res = await fetch("http://localhost:5000/api/models/add", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/add`, {
         method: "POST",
         body: formData
       });
@@ -98,7 +98,7 @@ const ModelMangement = () => {
     try {
       setLoading(true);
       // console.log("img:", img)
-      const res = await fetch("http://localhost:5000/api/models/update", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/update`, {
         method: "PUT",
         body: formData
       });
@@ -137,7 +137,7 @@ const ModelMangement = () => {
           <h4 className="title fz17 mb30">Upload photos of your community model</h4>
           <form className="form-style1" 
             onSubmit={edit ? updateModel : addModel} 
-            action={edit ? "http://localhost:5000/api/models/update" : "http://localhost:5000/api/models/add"} 
+            action={edit ? `${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/update` : `${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/add`} 
             method={edit ? "put": "post"} 
             encType="multipart/form-data"
           >

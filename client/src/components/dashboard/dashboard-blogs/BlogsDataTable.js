@@ -45,7 +45,7 @@ const BlogsDataTable = ({blogsData, setDeleteData}) => {
                     width={110}
                     height={94}
                     className="w-100"
-                    src={`http://localhost:5000/assets/blogs/${blog?.img}`}
+                    src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/blogs/${blog?.img}`}
                     alt={blog.img}
                   />
                 </div>

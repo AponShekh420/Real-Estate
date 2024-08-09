@@ -17,7 +17,7 @@ const DeleteCommunity = ({community, setDeleteData}) => {
     e.preventDefault();
     try {
       setLoading(true)
-      const res = await fetch("http://localhost:5000/api/community/delete", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/delete`, {
         headers: {
           "Content-Type": "application/json"
         },

@@ -33,7 +33,7 @@ const BlogPublish = () => {
   const addBlog = async () => {
     try {
       setLoading(true)
-      const res = await fetch("http://localhost:5000/api/blog/add", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/blog/add`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -68,7 +68,7 @@ const BlogPublish = () => {
     try {
       setLoading(true);
       console.log("title:", blog.title)
-      const res = await fetch("http://localhost:5000/api/blog/update", {
+      const res = await fetch("${process.env.NEXT_PUBLIC_BACKEND_API}/api/blog/update", {
         method: "PUT",
         credentials: "include",
         headers: {
@@ -106,7 +106,7 @@ const BlogPublish = () => {
 
   const getExistingDataToUpdate = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/blog/single-blog/${slug}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/blog/single-blog/${slug}`);
       const existingBlogData = await res.json();
       console.log(existingBlogData)
       if(existingBlogData?.errors?.notFound) {

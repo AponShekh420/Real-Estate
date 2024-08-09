@@ -24,7 +24,7 @@ const SingleModel = () => {
       if(communityId == "0") {
         return;
       }
-      const res = await fetch(`http://localhost:5000/api/models/get/${communityId}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/get/${communityId}`);
       const currentData = await res.json();
       setModelsData(currentData.data)
     } catch(err) {
@@ -35,7 +35,7 @@ const SingleModel = () => {
 
   const deleteModel = async (modelId) => {
     try {
-      const res = await fetch("http://localhost:5000/api/models/delete", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/delete`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -100,7 +100,7 @@ const SingleModel = () => {
                   width={70}
                   height={70}
                   className="w70"
-                  src={`http://localhost:5000/assets/communityModels/${element.img}`}
+                  src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityModels/${element.img}`}
                   alt="agent"
                 />
               </div>

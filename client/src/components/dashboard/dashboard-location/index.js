@@ -39,7 +39,7 @@ const AddLocationContent = () => {
     e.preventDefault();
     try {
       setCityLoading(true);
-      const res = await fetch("http://localhost:5000/api/city/add", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -78,7 +78,7 @@ const AddLocationContent = () => {
     e.preventDefault();
     try {
       setStateLoading(true);
-      const res = await fetch("http://localhost:5000/api/state/add", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -117,7 +117,7 @@ const AddLocationContent = () => {
     e.preventDefault();
     try {
       setAreaLoading(true);
-      const res = await fetch("http://localhost:5000/api/area/add", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/area/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -174,7 +174,7 @@ const AddLocationContent = () => {
     e.preventDefault();
     try {
       setStateLoading(true);
-      const res = await fetch("http://localhost:5000/api/state/update", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -214,7 +214,7 @@ const AddLocationContent = () => {
     e.preventDefault();
     try {
       setCityLoading(true);
-      const res = await fetch("http://localhost:5000/api/city/update", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -255,7 +255,7 @@ const AddLocationContent = () => {
     e.preventDefault();
     try {
       setAreaLoading(true);
-      const res = await fetch("http://localhost:5000/api/area/update", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/area/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"

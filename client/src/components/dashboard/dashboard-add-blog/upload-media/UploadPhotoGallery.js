@@ -44,7 +44,7 @@ const UploadPhotoGallery = () => {
     try {
       if(file) {
         setLoading(true);
-        const res = await fetch("http://localhost:5000/api/blog/upload", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/blog/upload`, {
           method: "POST",
           body: formData
         })
@@ -87,7 +87,7 @@ const UploadPhotoGallery = () => {
     console.log(DeletedImageUrl)
     try {
       if(!editPageValidation) {
-        const res = await fetch("http://localhost:5000/api/blog/imgdelete", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/blog/imgdelete`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json"
@@ -161,7 +161,7 @@ const UploadPhotoGallery = () => {
                   width={100}
                   height={100}
                   className="w-100 h-100 bdrs12 cover"
-                  src={`http://localhost:5000/assets/blogs/${img}`}
+                  src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/blogs/${img}`}
                   alt={`Uploaded Image ${img}`}
                 />
                 <button

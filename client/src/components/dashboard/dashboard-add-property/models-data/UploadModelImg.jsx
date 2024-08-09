@@ -32,7 +32,7 @@ const UploadModelImg = () => {
             width={240}
             height={220}
             className="w-100 cover h-100"
-            src={(!uploadedImageChanged && oldImgUrl ) ? `http://localhost:5000/assets/communityModels/${oldImgUrl}` : uploadedImage || "/images/listings/profile-1.jpg"}
+            src={(!uploadedImageChanged && oldImgUrl ) ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityModels/${oldImgUrl}` : uploadedImage || "/images/listings/profile-1.jpg"}
             alt="profile avatar"
           />
 
