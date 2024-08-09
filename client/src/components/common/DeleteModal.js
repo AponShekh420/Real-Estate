@@ -10,6 +10,7 @@ const DeleteModal = ({deleteHanlder, item, subject}) => {
             </div>
             <div className="modal-body">
               Are you sure you want to delete the <b>"{item.name || item.title}"</b> {subject}?
+              {/* eslint-disable-line react/no-unescaped-entities */}
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>

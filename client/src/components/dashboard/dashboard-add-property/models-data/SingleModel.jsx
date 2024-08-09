@@ -84,8 +84,8 @@ const SingleModel = () => {
 
   return (
     <div className="row mb30 p10 gap-3">
-      {modelsData.map((element)=> (
-        <div className={`ps-widget ${classes.boxBg} ${classes.modelGridBox} bdrs12 default-box-shadow2 p10`}>
+      {modelsData.map((element, index)=> (
+        <div className={`ps-widget ${classes.boxBg} ${classes.modelGridBox} bdrs12 default-box-shadow2 p10`} key={index}>
           <div className="title fz17 mb10 d-flex justify-content-end gap-3 align-items-center">
             <BsFillPencilFill color="green" size={16} cursor="pointer" onClick={(e) => editHandler(element)}/>
             <MdDeleteForever color="red" size={20} cursor="pointer" onClick={(e)=> {
