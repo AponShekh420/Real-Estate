@@ -42,16 +42,6 @@ app.use(express.urlencoded({extended: true, limit: "50000mb"}))
 app.use(express.static(path.join(__dirname, "public")))
 
 
-// Root routes
-
-
-app.use('/', (req, res) => {
-  res.status(200).json({
-    msg: "hello world"
-  })
-})
-
-
 // community items
 app.use('/api/state', stateRouter);
 app.use('/api/area', areaRouter);
@@ -69,8 +59,18 @@ app.use('/api/blog', blogRouter);
 // login and logout item
 app.use('/api/user', userRouter)
 
+
+
+// Root routes
+app.get('/', (req, res) => {
+  res.status(200).json({
+    msg: "welcome to the home page"
+  })
+})
+
+
 // Server listening
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 const server = app.listen(PORT, ()=> {
   console.log(`The server has started at ${PORT}`)
