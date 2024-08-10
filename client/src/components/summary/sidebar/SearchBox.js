@@ -1,16 +1,40 @@
-
 'use client'
 
+import getCommunities from "@/lib/getCommunities";
+import { addCommunityFilterValue } from "@/redux/communityFilterSlice";
+import store from "@/redux/store";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-const SearchBox = ({filterFunctions}) => {
+
+let searchIntervel;
+const SearchBox = () => {
+  // redux action
+  const dispatch = useDispatch();
+  const {titleSearch}= useSelector(state => state.communityFilter)
+
+
+  const searchHandler = (e) => {
+    clearInterval(searchIntervel)
+    dispatch(addCommunityFilterValue({
+      titleSearch: e.target.value,
+    }))
+
+    searchIntervel = setTimeout(()=> {
+      getCommunities()
+    }, 1000)
+  }
+
+
+
   return (
     <div className="search_area">
       <input
         type="text"
         className="form-control"
         placeholder="What are you looking for?"
-        onChange={(e)=>filterFunctions?.setSearchQuery(e.target.value)}
+        onChange={(e)=> searchHandler(e)}
+        value={titleSearch}
       />
       <label>
         <span className="flaticon-search" />

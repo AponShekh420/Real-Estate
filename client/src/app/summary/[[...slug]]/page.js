@@ -11,7 +11,7 @@ import store from "@/redux/store";
 import { addCommunityFilterValue, removeCommunityFilterValues } from "@/redux/communityFilterSlice";
 
 export const metadata = {
-  title: "Gird Default || Homez - Real Estate NextJS Template",
+  title: "55 home || summary",
 };
 
 const SummaryPage = async ({params}) => {
@@ -28,18 +28,11 @@ const SummaryPage = async ({params}) => {
 
 
   // has add the data on redux after fetching from backend
-  if(res?.data) {
-    store.dispatch(addCommunityFilterValue({
-      state: res.data
-    }))
-  } else if(slug !==undefined && !res?.data) {
+  if(slug !==undefined && !res?.data) {
     // if the data has not founded, that's mean the route are wrong, so redirect on not found page
     store.dispatch(addCommunityFilterValue(removeCommunityFilterValues()))
     notFound();
   }
-
-
-  // console.log("dataToFetchCommunity:", store.getState().communityFilter.state)
 
 
 
@@ -82,7 +75,7 @@ const SummaryPage = async ({params}) => {
       {/* End Breadcumb Sections */}
 
       {/* Property Filtering */}
-      <PropertyFiltering/>
+      <PropertyFiltering communityFilter={store.getState().communityFilter}/>
       {/* Property Filtering */}
 
       {/* Start Our Footer */}

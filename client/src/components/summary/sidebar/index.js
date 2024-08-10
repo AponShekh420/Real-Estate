@@ -5,13 +5,23 @@ import SearchBox from "./SearchBox";
 import ListingStatus from "./ListingStatus";
 import PropertyType from "./PropertyType";
 import LocationList from "./LocationList";
+import { useSelector } from "react-redux";
+import store from "@/redux/store";
 
 const ListingSidebar = ({filterFunctions}) => {
+  const communityFilter = useSelector(state => state.communityFilter)
+  const searchHanlder = (e) => {
+    e.preventDefault();
+    console.log("communityFilterValue:", store.getState().communityFilter)
+  }
+
+
+
   return (
     <div className="list-sidebar-style1">
       <div className="widget-wrapper">
         <h6 className="list-title">Find your home</h6>
-        <SearchBox filterFunctions={filterFunctions} />
+        <SearchBox />
       </div>
       {/* End .widget-wrapper */}
 
@@ -27,7 +37,7 @@ const ListingSidebar = ({filterFunctions}) => {
       <div className="widget-wrapper">
         <h6 className="list-title">Listing Status</h6>
         <div className="radio-element">
-          <ListingStatus filterFunctions={filterFunctions} />
+          <ListingStatus />
         </div>
       </div>
       {/* End .widget-wrapper */}
@@ -42,7 +52,7 @@ const ListingSidebar = ({filterFunctions}) => {
 
       <div className="widget-wrapper mb20">
         <div className="btn-area d-grid align-items-center">
-          <button className="ud-btn btn-thm">
+          <button className="ud-btn btn-thm" onClick={searchHanlder}>
             <span className="flaticon-search align-text-top pr10" />
             Search
           </button>

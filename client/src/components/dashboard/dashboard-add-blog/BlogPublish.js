@@ -68,7 +68,7 @@ const BlogPublish = () => {
     try {
       setLoading(true);
       console.log("title:", blog.title)
-      const res = await fetch("${process.env.NEXT_PUBLIC_BACKEND_API}/api/blog/update", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/blog/update`, {
         method: "PUT",
         credentials: "include",
         headers: {

@@ -2,7 +2,7 @@
 
 import React from "react";
 
-const TopFilterBar = ({setCurrentSortingOption,setColstyle,colstyle,pageContentTrac}) => {
+const TopFilterBar = () => {
   return (
     <>
       <div className="col-sm-6">
