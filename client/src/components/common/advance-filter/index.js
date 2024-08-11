@@ -86,7 +86,7 @@ const AdvanceFilterModal = () => {
         <div className="modal-footer justify-content-between">
           <button className="reset-button" onClick={()=> dispatch(removeCommunityFilterValues())}>
             <span className="flaticon-turn-back" />
-            <u>Reset all filter</u>
+            <u>Reset all filters</u>
           </button>
           <div className="btn-area">
             <button data-bs-dismiss="modal" type="submit" className="ud-btn btn-thm" onClick={() => router.push(`/summary${state ? `/${state?.slug}` : ""}${city ? `/${city?.slug}` : ""}`)} >
