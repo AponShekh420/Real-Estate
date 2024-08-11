@@ -1,12 +1,18 @@
 "use client";
+import { addCommunityFilterValue } from "@/redux/communityFilterSlice";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-const Pagination = ({totalPages, setCurrentPage, currentPage, communitiesData}) => {
+const Pagination = () => {
+
+  const {data: communitiesData, totalPages, currentPage} = useSelector(state => state.communityFilter);
+  const dispatch = useDispatch();
+
 
   const handlePageClick = (page) => {
-    setCurrentPage(page);
-    // Here you can add additional logic to handle what happens when the user clicks on a page number.
-    // For example, you can fetch data corresponding to the selected page from the server or update the URL.
+    dispatch(addCommunityFilterValue({
+      currentPage: page,
+    }))
   };
 
   const generatePageNumbers = () => {
@@ -62,7 +68,7 @@ const Pagination = ({totalPages, setCurrentPage, currentPage, communitiesData}) 
         </li>
       </ul>
       <p className="mt10 pagination_page_count text-center">
-        {currentPage}-{totalPages} of {communitiesData?.lotalNumberOfData}+ communities available
+        {currentPage}-{totalPages} of {communitiesData?.length}+ communities available
       </p>
     </div>
   );

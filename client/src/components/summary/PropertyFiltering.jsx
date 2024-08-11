@@ -1,9 +1,8 @@
-// import listings from "@/data/listings";
 import ListingSidebar from "./sidebar";
-// import TopFilterBar from "./TopFilterBar";
+import TopFilterBar from "./TopFilterBar";
 import FeaturedListings from "./FeatuerdListings";
+import Pagination from "./Pagination";
 
-// import PaginationTwo from "./PaginationTwo";
 
 export default function PropertyFiltering({communityFilter}) {
   const {state, city, area} = communityFilter;
@@ -43,12 +42,7 @@ export default function PropertyFiltering({communityFilter}) {
 
           <div className="col-lg-8">
             <div className="row align-items-center mb20">
-              {/* <TopFilterBar
-                pageContentTrac={pageContentTrac}
-                colstyle={colstyle}
-                setColstyle={setColstyle}
-                setCurrentSortingOption={setCurrentSortingOption}
-              /> */}
+              <TopFilterBar />
             </div>
             {/* End TopFilterBar */}
 
@@ -58,12 +52,7 @@ export default function PropertyFiltering({communityFilter}) {
             {/* End .row */}
 
             <div className="row">
-              {/* <PaginationTwo
-                pageCapacity={8}
-                data={sortedFilteredData}
-                pageNumber={pageNumber}
-                setPageNumber={setPageNumber}
-              /> */}
+              <Pagination />
             </div>
             {/* End .row */}
           </div>

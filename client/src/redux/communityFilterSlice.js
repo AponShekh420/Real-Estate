@@ -13,6 +13,8 @@ const initialState = {
   errors: {},
   zip: "",
   data: [],
+  totalPages: 1,
+  currentPage: 1,
 }
 
 

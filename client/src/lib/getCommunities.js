@@ -4,7 +4,7 @@ const { default: store } = require("@/redux/store");
 
 const getCommunities = async () => {
 
-  const { titleSearch, state, area, city, homeTypes, status, active } = store.getState().communityFilter;
+  const { titleSearch, state, area, city, homeTypes, status, active, currentPage } = store.getState().communityFilter;
   const {dispatch} = store;
 
 
@@ -26,6 +26,8 @@ const getCommunities = async () => {
         homeTypes,
         status,
         active,
+        limitStart: (currentPage - 1 ) * 10,
+        limitEnd: currentPage * 10,
       })
     })
     const dataRes = await res.json();
@@ -33,6 +35,7 @@ const getCommunities = async () => {
       dispatch(addCommunityFilterValue({
         data: dataRes?.data,
         loading: false,
+        totalPages: dataRes?.data?.length / 10 <= 1 ? 1 : Math.ceil(dataRes?.data?.length / 10),
       }))
       return dataRes?.data
     } else {
