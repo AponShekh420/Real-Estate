@@ -44,7 +44,7 @@ const AdvanceFilterModal = ({ filterFunctions }) => {
       <div className="modal-content">
         <div className="modal-header pl30 pr30">
           <h5 className="modal-title" id="exampleModalLabel">
-            More Filter
+            More Filter 3
           </h5>
           <button
             type="button"

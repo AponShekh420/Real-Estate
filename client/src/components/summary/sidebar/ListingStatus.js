@@ -22,10 +22,10 @@ const ListingStatus = () => {
   };
 
   const options = [
-    { id: "flexRadioDefault3", label: "" , defaultChecked: true },
+    { id: "flexRadioDefault4", label: "" , defaultChecked: true },
     { id: "flexRadioDefault1", label: "Buy" },
     { id: "flexRadioDefault2", label: "Rent", },
-
+    { id: "flexRadioDefault3", label: "Sold", },
   ];
 
 

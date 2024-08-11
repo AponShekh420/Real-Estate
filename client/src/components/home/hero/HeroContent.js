@@ -109,7 +109,7 @@ const HeroContent = () => {
                     <button
                       className="advance-search-icon ud-btn btn-dark ms-4"
                       type="button"
-                      onClick={() => router.push("/grid-full-3-col")}
+                      onClick={() => router.push("/summary")}
                     >
                       <span className="flaticon-search" />
                     </button>
