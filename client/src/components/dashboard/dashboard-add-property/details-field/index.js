@@ -163,50 +163,10 @@ const DetailsFiled = () => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Bedrooms
-            </label>
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Type the room number"
-              onChange={(e)=> {
-                dispatch(addCommunityFieldValue({
-                  bedrooms: e.target.value
-                }))
-              }}
-              value={bedrooms}
-            />
-          </div>
-        </div>
-        {/* End .col-4 */}
-
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
-              Bathrooms
-            </label>
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Type the number"
-              onChange={(e)=> {
-                dispatch(addCommunityFieldValue({
-                  bathrooms: e.target.value
-                }))
-              }}
-              value={bathrooms}
-            />
-          </div>
-        </div>
-        {/* End .col-4 */}
-
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
               Built Start
             </label>
             <input
-              type="text"
+              type="date"
               className="form-control"
               placeholder="Type the date"
               onChange={(e)=> {
@@ -227,7 +187,7 @@ const DetailsFiled = () => {
               Built End
             </label>
             <input
-              type="text"
+              type="date"
               className="form-control"
               placeholder="Type the date"
               onChange={(e)=> {
@@ -241,47 +201,6 @@ const DetailsFiled = () => {
           </div>
         </div>
         {/* End .col-4 */}
-
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
-              Garages
-            </label>
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Type the number"
-              onChange={(e)=> {
-                dispatch(addCommunityFieldValue({
-                  garages: e.target.value
-                }))
-              }}
-              value={garages}
-            />
-          </div>
-        </div>
-        {/* End .col-4 */}
-
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
-              Sqft
-            </label>
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Type the Sqft Number"
-              onChange={(e)=> {
-                dispatch(addCommunityFieldValue({
-                  sqft: e.target.value
-                }))
-              }}
-              value={sqft}
-            />
-          </div>
-        </div>
-        {/* End .col-4 */}
-
       </div>
     </form>
   );

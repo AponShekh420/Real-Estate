@@ -3,7 +3,7 @@ import { addCommunityFieldValue } from "@/redux/communitySlice";
 import { useDispatch, useSelector } from "react-redux";
 import Select from 'react-select'
 const PropertyDescription = () => {
-  const {errors, title, homeTypes, active, status, maxPrice, minPrice} = useSelector((state)=> state.community)
+  const {errors, title, homeTypes, active, status, maxPrice, minPrice, description} = useSelector((state)=> state.community)
   const dispatch = useDispatch();
 
   const homeTypeOptions= [
@@ -192,7 +192,25 @@ const PropertyDescription = () => {
         </div>
         {/* End .col-6 */}
 
-
+        <div className="col-sm-6 col-xl-12">
+          <div className="mb30">
+            <label className="heading-color ff-heading fw600 mb10">
+              Description
+            </label>
+            <textarea
+              onChange={(e)=> dispatch(addCommunityFieldValue({
+                description: e.target.value
+              }))}
+              type="text"
+              className={`form-control`}
+              placeholder="Write Description"
+              value={description}
+              style={{height: "300px"}}
+            >
+            </textarea>
+          </div>
+        </div>
+        {/* End .row */}
       </div>
     </form>
   );

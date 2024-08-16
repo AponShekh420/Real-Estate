@@ -41,10 +41,10 @@ const checkCommunityValidation = [
     .isLength({min: 3})
     .withMessage("The built start date is required")
     .trim(),
-  check("builtEnd")
-    .isLength({min: 3})
-    .withMessage("The built end date is required")
-    .trim(),
+  // check("builtEnd")
+  //   .isLength({min: 3})
+  //   .withMessage("The built end date is required")
+  //   .trim(),
   check("imgs")
     .custom((item)=> item.length > 0)
     .withMessage("Must be upload a Image")

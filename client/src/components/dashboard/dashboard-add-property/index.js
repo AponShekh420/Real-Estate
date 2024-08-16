@@ -5,7 +5,7 @@ import PropertyDescription from "./property-description";
 import UploadMedia from "./upload-media";
 import LocationField from "./LocationField";
 import DetailsFiled from "./details-field";
-import Amenities from "./Amenities";
+import Amenities from "./amenities/Amenities";
 import ModelMangement from "./models-data/ModelMangement"
 import { usePathname } from "next/navigation";
 import { MoonLoader } from "react-spinners";

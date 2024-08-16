@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
   communityId: "0",
   title: "",
+  description: "",
   website: "",
   phone: "",
   address: "",

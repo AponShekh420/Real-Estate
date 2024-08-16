@@ -114,10 +114,11 @@ const CommunityPublish = () => {
       if(existingCommunityData?.errors?.notFound) {
         router.push('/dashboard/my-communities');
       } else {
-        const {title, website, phone, address, lat, long, sqft, active, status, garages, bathrooms, bedrooms, imgs, builtEnd, builtStart, gated, ageRestrictions, communitySize, homeTypes, maxPrice, minPrice, zip, area, city, state, _id } = existingCommunityData.data
+        const {title, website, phone, address, lat, long, sqft, active, status, garages, bathrooms, bedrooms, imgs, builtEnd, builtStart, gated, ageRestrictions, communitySize, homeTypes, maxPrice, minPrice, zip, area, city, state, _id, description } = existingCommunityData.data
         dispatch(addCommunityFieldValue({
           communityId: _id,
           title,
+          description,
           website, 
           phone, 
           address, 
