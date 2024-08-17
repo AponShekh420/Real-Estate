@@ -1,58 +1,87 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import AmenitiesHanlder from "./AmenitiesHanlder";
 
-const amenitiesData = {
-  column1: [
-    { label: "Attic", defaultChecked: false },
-    { label: "Basketball court", defaultChecked: true },
-    { label: "Air Conditioning", defaultChecked: true },
-    { label: "Lawn", defaultChecked: true },
-    { label: "Swimming Pool", defaultChecked: false },
-    { label: "Barbeque", defaultChecked: false },
-    { label: "Microwave", defaultChecked: false },
-  ],
-  column2: [
-    { label: "TV Cable", defaultChecked: false },
-    { label: "Dryer", defaultChecked: true },
-    { label: "Outdoor Shower", defaultChecked: true },
-    { label: "Washer", defaultChecked: true },
-    { label: "Gym", defaultChecked: false },
-    { label: "Ocean view", defaultChecked: false },
-    { label: "Private space", defaultChecked: false },
-  ],
-  column3: [
-    { label: "Lake view", defaultChecked: false },
-    { label: "Wine cellar", defaultChecked: true },
-    { label: "Front yard", defaultChecked: true },
-    { label: "Refrigerator", defaultChecked: true },
-    { label: "WiFi", defaultChecked: false },
-    { label: "Laundry", defaultChecked: false },
-    { label: "Sauna Sauna Sauna a 4", defaultChecked: false },
-  ],
-};
 
 const Amenities = () => {
+  const [amenitiesData, setAmenitiesData] = useState({});
+
+
+  const [popular, setPopular] = useState(false);
+  const [amenityName, setAmenityName] = useState("");
+  const [emoji, setEmoji] = useState("");
+  const [edit, setEdit] = useState(false);
+  const [notify, setNotify] = useState("");
+
+
+
+  const chunkArray = (array, chunkSize) => {
+    const chunks = [];
+    for (let i = 0; i < array.length; i += chunkSize) {
+      chunks.push(array.slice(i, i + chunkSize));
+    }
+    return chunks;
+  };
+
+  const transformData = (array) => {
+    const chunks = chunkArray(array, 7);
+    const result = {};
+    chunks.forEach((chunk, index) => {
+      result[`column${index + 1}`] = chunk;
+    });
+    return result;
+  };
+
+  const fetchAmenities = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/amenity/getall`);
+      const amenities = await res.json();
+      console.log("amenity:", amenities?.data)
+      if(amenities?.data) {
+        const {data} = amenities;
+        const transformedData = transformData(data);
+        setAmenitiesData(transformedData);
+      }
+      console.log("amentiyesData", amenitiesData);
+    } catch(err) {
+      console.log(err.message)
+    }
+  }
+
+
+  const editHanlder = (amenity) => {
+    const {name, icon, _id, popular} = amenity;
+    setPopular(popular);
+    setAmenityName(name);
+    setEdit(_id);
+    setEmoji(icon);
+  }
+
+  useEffect(()=> {
+    fetchAmenities()
+  }, [notify])
+
   return (
     <div className="row">
       {Object.keys(amenitiesData).map((columnKey, index) => (
         <div key={index} className="col-sm-6 col-lg-3 col-xxl-2">
           <div className="checkbox-style1">
             {amenitiesData[columnKey].map((amenity, amenityIndex) => (
-              <div className="d-flex justify-content-between">
-                <label key={amenityIndex} className="custom_checkbox">
-                  {amenity.label}
+              <div className="d-flex justify-content-between" key={amenityIndex}>
+                <label className="custom_checkbox">
+                  {amenity.icon}{amenity.name}
                   <input
                   className="p-0 m-0"
                     type="checkbox"
-                    defaultChecked={amenity.defaultChecked}
+                    defaultChecked={amenity.name}
                   />
                   <span className="checkmark" />
                 </label>
                 <div className="d-flex align-items-center gap-2">
                   <FaPencilAlt 
+                    onClick={() => editHanlder(amenity)}
                     size={12} 
                     color="green" 
                     cursor="pointer" 
@@ -80,7 +109,7 @@ const Amenities = () => {
           </div>
         </div>
       ))}
-      <AmenitiesHanlder/>
+      <AmenitiesHanlder setPopular={setPopular} setAmenityName={setAmenityName} setEmoji={setEmoji} setEdit={setEdit} popular={popular} amenityName={amenityName} emoji={emoji} edit={edit} setNotify={setNotify}/>
     </div>
   );
 };

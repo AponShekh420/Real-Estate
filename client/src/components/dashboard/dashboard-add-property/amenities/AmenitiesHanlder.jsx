@@ -6,6 +6,7 @@ import { BsEmojiSmile } from "react-icons/bs";
 import { HashLoader } from 'react-spinners';
 import { ImUpload } from 'react-icons/im';
 import '@/components/dashboard/dashboard-location/style.css';
+import { toast, ToastContainer } from "react-toastify";
 
 const override = {
   display: "block",
@@ -14,22 +15,84 @@ const override = {
 };
 
 
-const AmenitiesHanlder = () => {
+const AmenitiesHanlder = ({setPopular, setAmenityName, setEmoji, setEdit, popular, amenityName, emoji, edit, setNotify}) => {
 
-  const [popular, setPopular] = useState(false);
-  const [amenityName, setAmenityName] = useState("");
-  const [Emoji, setEmoji] = useState("");
   const [prickerDisplay, setPrickerDisplay] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [edit, setEdit] = useState(true);
+  const [errors, setErrors] = useState({});
   
 
-  const updateExistingAmenity = () => {
-
+  const updateExistingAmenity = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      setErrors({});
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/amenity/update`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          id: edit,
+          name: amenityName,
+          popular: popular,
+          icon: emoji,
+        })
+      });
+      const currentAmenity = await res.json();
+      setLoading(false);
+      if(currentAmenity.msg) {
+        toast.success(currentAmenity.msg, {
+          position: "top-right",
+          autoClose: 1500,
+        });
+        setEmoji("");
+        setPopular(false);
+        setPrickerDisplay(false);
+        setAmenityName("");
+        setNotify(Math.random());
+      } else {
+        setErrors(currentAmenity.errors)
+      }
+    } catch(err) {
+      console.log(err.message)
+    }
   }
 
-  const uploadNewAmenity = () => {
-    
+  const uploadNewAmenity = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      setErrors({});
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/amenity/add`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: amenityName,
+          popular: popular,
+          icon: emoji,
+        })
+      });
+      const currentAmenity = await res.json();
+      setLoading(false);
+      if(currentAmenity.msg) {
+        toast.success(currentAmenity.msg, {
+          position: "top-right",
+          autoClose: 1500,
+        });
+        setEmoji("");
+        setPopular(false);
+        setPrickerDisplay(false);
+        setAmenityName("");
+        setNotify(Math.random())
+      } else {
+        setErrors(currentAmenity.errors)
+      }
+    } catch(err) {
+      console.log(err.message)
+    }
   }
 
   const cancelAmenityUpdate = () => {
@@ -38,7 +101,8 @@ const AmenitiesHanlder = () => {
     setPrickerDisplay(false);
     setEdit(false);
     setPopular(false);
-    setLoading(false)
+    setLoading(false);
+    setErrors({});
   }
 
   return (
@@ -79,26 +143,28 @@ const AmenitiesHanlder = () => {
             onChange={(e)=> setAmenityName(e.target.value)}
             value={amenityName}
           />
-          {/* <p className="text-danger">{errors?.amenityName?.msg}</p> */}
+          <p className="text-danger">{errors?.name?.msg}</p>
         </div>
       </div>
       {/* col 2 end */}
 
       {/* col 2 */}
-      <div className="col-sm-6 col-xl-4 d-flex align-items-end">
-        <div className="mb20 d-flex align-items-center" style={{height: "55px", width: '55px'}}>
+      <div className="col-sm-6 col-xl-4 d-flex mt0-xs mt35" style={{height: "54px"}}>
+        <div className="mb20 d-flex align-items-center" style={{height: "54px", width: '54px'}}>
           <div className='d-flex align-items-center justify-content-center h-100 w-100 overflow-hidden position-relative pointer'>
-            {!Emoji ? (
+            {!emoji ? (
               <BsEmojiSmile size={55} onClick={() => setPrickerDisplay((old)=> !old)}/>
             ) : (
-              <p style={{padding: 0, lineHeight: 0, margin: 0, fontSize: "50px", display: 'flex', alignItems: "center"}} onClick={() => setPrickerDisplay((old)=> !old)}>{Emoji}</p>
+              <p style={{padding: 0, lineHeight: 0, margin: 0, fontSize: "50px", display: 'flex', alignItems: "center"}} onClick={() => setPrickerDisplay((old)=> !old)}>{emoji}</p>
             )}
           </div>
           {prickerDisplay ? (
-            <Picker data={data} onEmojiSelect={(e) => {
-              setPrickerDisplay(false)
-              setEmoji(e.native)
-            }} className="position-absolute bottom-0 m-5"/>
+            <div className="position-absolute bottom-0">
+              <Picker data={data} onEmojiSelect={(e) => {
+                setPrickerDisplay(false)
+                setEmoji(e.native)
+              }} />
+            </div>
           ): null}
         </div>
       </div>
@@ -112,18 +178,19 @@ const AmenitiesHanlder = () => {
             Popular
           </label>
           <div className="popular-options">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onClick={()=>  setPopular(true)} checked={popular}/>
-              <label class="form-check-label" for="inlineRadio1">Yes</label>
+            <div className="form-check form-check-inline">
+              <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" onClick={()=>  setPopular(true)} checked={popular}/>
+              <label className="form-check-label" for="inlineRadio1">Yes</label>
             </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onClick={()=> setPopular(false)} checked={popular ? false : true}/>
-              <label class="form-check-label" for="inlineRadio2">No</label>
+            <div className="form-check form-check-inline">
+              <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onClick={()=> setPopular(false)} checked={popular ? false : true}/>
+              <label className="form-check-label" for="inlineRadio2">No</label>
             </div>
           </div>
         </div>
       </div>
       {/* col 1 end */}
+      <ToastContainer/>
     </div>
   );
 }
