@@ -46,6 +46,7 @@ const AmenitiesHanlder = ({setPopular, setAmenityName, setEmoji, setEdit, popula
           position: "top-right",
           autoClose: 1500,
         });
+        setEdit(false);
         setEmoji("");
         setPopular(false);
         setPrickerDisplay(false);
