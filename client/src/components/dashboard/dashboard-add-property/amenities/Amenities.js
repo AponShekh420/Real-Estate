@@ -72,16 +72,13 @@ const Amenities = () => {
   
 
   // check handler
-  const checkedArray = [...amenities];
-
-  const checkHanlder = (e, amenity) => {
+  const checkHanlder = async (e, amenity) => {
     if(e.target.checked) {
-      checkedArray.push(amenity)
       dispatch(addCommunityFieldValue({
-        amenities: checkedArray
+        amenities: [...amenities, amenity]
       }));
     } else {
-      const newCheckedArray = checkedArray.filter(element => {
+      const newCheckedArray = amenities.filter(element => {
         if(element?._id !== amenity?._id) {
           return element
         }
@@ -93,9 +90,10 @@ const Amenities = () => {
   }
 
 
-
-
   useEffect(()=> {
+    if(notify?.msg == "Delete") {
+      checkHanlder({target: {checked: false}}, notify?.amenity)
+    }
     fetchAmenities();
   }, [notify])
 
@@ -107,7 +105,7 @@ const Amenities = () => {
             {amenitiesData[columnKey].map((amenity, amenityIndex) => (
               <div className="d-flex justify-content-between align-items-center mb10" key={amenityIndex} >
                 <label className="custom_checkbox d-flex align-items-center" style={{lineHeight: "20px"}}>
-                  {amenity.icon}{amenity.name}
+                  {amenity?.icon}{amenity?.name}
                   <input
                   className="p-0 m-0"
                     type="checkbox"
@@ -128,7 +126,7 @@ const Amenities = () => {
                     cursor="pointer" 
                   />
                   </a>
-                  <DeleteAmenity amenity={amenity} columnKey={columnKey} setNotify={setNotify} checkHanlder={checkHanlder}/>
+                  <DeleteAmenity amenity={amenity} columnKey={columnKey} setNotify={setNotify}/>
                   <ReactTooltip
                     id={`delete-${columnKey}`}
                     place="top"

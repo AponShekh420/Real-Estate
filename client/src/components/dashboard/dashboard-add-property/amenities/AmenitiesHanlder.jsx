@@ -41,8 +41,8 @@ const AmenitiesHanlder = ({setPopular, setAmenityName, setEmoji, setEdit, popula
       });
       const currentAmenity = await res.json();
       setLoading(false);
-      if(currentAmenity.msg) {
-        toast.success(currentAmenity.msg, {
+      if(currentAmenity?.msg) {
+        toast.success(currentAmenity?.msg, {
           position: "top-right",
           autoClose: 1500,
         });
@@ -53,7 +53,7 @@ const AmenitiesHanlder = ({setPopular, setAmenityName, setEmoji, setEdit, popula
         setAmenityName("");
         setNotify(Math.random());
       } else {
-        setErrors(currentAmenity.errors)
+        setErrors(currentAmenity?.errors)
       }
     } catch(err) {
       console.log(err.message)
@@ -78,8 +78,8 @@ const AmenitiesHanlder = ({setPopular, setAmenityName, setEmoji, setEdit, popula
       });
       const currentAmenity = await res.json();
       setLoading(false);
-      if(currentAmenity.msg) {
-        toast.success(currentAmenity.msg, {
+      if(currentAmenity?.msg) {
+        toast.success(currentAmenity?.msg, {
           position: "top-right",
           autoClose: 1500,
         });
@@ -89,7 +89,7 @@ const AmenitiesHanlder = ({setPopular, setAmenityName, setEmoji, setEdit, popula
         setAmenityName("");
         setNotify(Math.random())
       } else {
-        setErrors(currentAmenity.errors)
+        setErrors(currentAmenity?.errors)
       }
     } catch(err) {
       console.log(err.message)

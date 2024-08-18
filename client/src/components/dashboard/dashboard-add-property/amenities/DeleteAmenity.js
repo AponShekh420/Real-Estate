@@ -31,12 +31,10 @@ const DeleteAmenity = ({amenity, columnKey, setNotify}) => {
       const dataRes = await res.json();
       setDeleteLoading(false)
       if(dataRes.msg) {
-        toast.success(dataRes.msg, {
-          position: "top-right",
-          autoClose: 1500,
+        setNotify({
+          msg: "Delete",
+          amenity: amenity,
         });
-        // checkHanlder({target: {checked: false}}, amenity)
-        setNotify(Math.random());
       } else {
         toast.error(`Please try again to delete amenity`, {
           position: "top-right",
