@@ -12,7 +12,7 @@ const override = {
   borderColor: "red",
 };
 
-const DeleteAmenity = ({amenity, columnKey, setNotify, checkHanlder}) => {
+const DeleteAmenity = ({amenity, columnKey, setNotify}) => {
   const [deleteLoading, setDeleteLoading] = useState(false);
 
    // delete amenity
@@ -35,7 +35,7 @@ const DeleteAmenity = ({amenity, columnKey, setNotify, checkHanlder}) => {
           position: "top-right",
           autoClose: 1500,
         });
-        checkHanlder({target: {checked: false}}, amenity)
+        // checkHanlder({target: {checked: false}}, amenity)
         setNotify(Math.random());
       } else {
         toast.error(`Please try again to delete amenity`, {
@@ -53,10 +53,6 @@ const DeleteAmenity = ({amenity, columnKey, setNotify, checkHanlder}) => {
     <>
       <a 
         style={{ border: "none", color: "red", padding: "0px", fontSize: "16px", cursor: "pointer"}}
-        data-tooltip-id={`delete-${columnKey}`}
-        data-bs-target={`#exampleModalToggle-${amenity?._id}`}
-        data-bs-toggle={`${deleteLoading ? null : "modal"}`}
-        
       >
         {deleteLoading ? (
           <MoonLoader

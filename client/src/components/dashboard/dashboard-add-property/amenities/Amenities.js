@@ -7,6 +7,7 @@ import AmenitiesHanlder from "./AmenitiesHanlder";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommunityFieldValue } from "@/redux/communitySlice";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import DeleteAmenity from "./DeleteAmenity";
 
 
