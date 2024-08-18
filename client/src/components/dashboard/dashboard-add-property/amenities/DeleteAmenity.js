@@ -12,7 +12,7 @@ const override = {
   borderColor: "red",
 };
 
-const DeleteAmenity = ({amenity, columnKey}) => {
+const DeleteAmenity = ({amenity, columnKey, setNotify, checkHanlder}) => {
   const [deleteLoading, setDeleteLoading] = useState(false);
 
    // delete amenity
@@ -35,7 +35,8 @@ const DeleteAmenity = ({amenity, columnKey}) => {
           position: "top-right",
           autoClose: 1500,
         });
-        setNotify(Math.random())
+        checkHanlder({target: {checked: false}}, amenity)
+        setNotify(Math.random());
       } else {
         toast.error(`Please try again to delete amenity`, {
           position: "top-right",

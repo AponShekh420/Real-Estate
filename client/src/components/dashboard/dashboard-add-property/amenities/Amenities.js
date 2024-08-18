@@ -101,11 +101,11 @@ const Amenities = () => {
   return (
     <div className="row">
       {Object.keys(amenitiesData).map((columnKey, index) => (
-        <div key={index} className="col-sm-6 col-lg-3 col-xxl-2">
+        <div key={index} className="col-sm-5 col-lg-3 col-xxl-2">
           <div className="checkbox-style1">
             {amenitiesData[columnKey].map((amenity, amenityIndex) => (
-              <div className="d-flex justify-content-between" key={amenityIndex}>
-                <label className="custom_checkbox">
+              <div className="d-flex justify-content-between align-items-center mb10" key={amenityIndex} >
+                <label className="custom_checkbox d-flex align-items-center" style={{lineHeight: "20px"}}>
                   {amenity.icon}{amenity.name}
                   <input
                   className="p-0 m-0"
@@ -113,7 +113,7 @@ const Amenities = () => {
                     defaultChecked={amenities?.map(element => element?._id).indexOf(amenity?._id) !== -1}
                     onChange={(e)=> checkHanlder(e, amenity)}
                   />
-                  <span className="checkmark" />
+                  <span className="checkmark" style={{top: 3}}/>
                 </label>
                 <div className="d-flex align-items-center gap-2">
                   <a 
@@ -127,7 +127,7 @@ const Amenities = () => {
                     cursor="pointer" 
                   />
                   </a>
-                  <DeleteAmenity amenity={amenity} columnKey={columnKey}/>
+                  <DeleteAmenity amenity={amenity} columnKey={columnKey} setNotify={setNotify} checkHanlder={checkHanlder}/>
                   <ReactTooltip
                     id={`delete-${columnKey}`}
                     place="top"

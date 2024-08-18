@@ -1,4 +1,5 @@
 const AmenityModel = require("../../models/AmenityModel");
+const CommunityModel = require("../../models/CommunityModel");
 
 
 const deleteAmenity = async (req, res) => {
@@ -6,6 +7,18 @@ const deleteAmenity = async (req, res) => {
   try {
     const status = await AmenityModel.findByIdAndDelete(id)
     if(status) {
+      // update the community collection to delete this amenity id
+      await CommunityModel.updateMany({
+        amenities: {
+          $in: id
+        }
+      },
+      {
+        $pull: {
+          amenities: id
+        }
+      });
+
       res.status(200).json({
         msg: "The amenity has deleted successfully"
       })
