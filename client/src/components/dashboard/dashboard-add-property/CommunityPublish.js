@@ -114,7 +114,7 @@ const CommunityPublish = () => {
       if(existingCommunityData?.errors?.notFound) {
         router.push('/dashboard/my-communities');
       } else {
-        const {title, website, phone, address, lat, long, sqft, active, status, garages, bathrooms, bedrooms, imgs, builtEnd, builtStart, gated, ageRestrictions, communitySize, homeTypes, maxPrice, minPrice, zip, area, city, state, _id, description } = existingCommunityData.data
+        const {title, website, phone, address, lat, long, sqft, active, status, garages, bathrooms, bedrooms, imgs, builtEnd, builtStart, gated, ageRestrictions, communitySize, homeTypes, maxPrice, minPrice, zip, area, city, state, _id, description, amenities } = existingCommunityData.data
         dispatch(addCommunityFieldValue({
           communityId: _id,
           title,
@@ -143,7 +143,8 @@ const CommunityPublish = () => {
           areaId: area, 
           cityId: city,
           stateId: state,
-          loading: false
+          loading: false,
+          amenities
         }));
       }
     } catch(err) {

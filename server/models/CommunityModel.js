@@ -28,6 +28,13 @@ const CommunitySchema = mongoose.Schema({
     required: true,
     ref: "City"
   },
+  amenities: [
+    {
+      type: mongoose.Types.ObjectId,
+      default: [],
+      ref: "Amenity",
+    }
+  ],
   area: {
     type: mongoose.Types.ObjectId,
     required: true,

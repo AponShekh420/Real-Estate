@@ -31,7 +31,8 @@ const initialState = {
   deleteImgUrls: [],
   loading: true,
   errors: {},
-  zip: ""
+  zip: "",
+  amenities: [],
 }
 
 

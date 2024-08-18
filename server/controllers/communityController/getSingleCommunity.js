@@ -3,7 +3,7 @@ const CommunityModel = require("../../models/CommunityModel");
 const getSingleCommunity = async (req, res) => {
   const {slug} = req.params
   try {
-    const singleCommunity = await CommunityModel.findOne({slug}).populate({path: "state"}).populate({path: "city"}).populate({path: "area"})
+    const singleCommunity = await CommunityModel.findOne({slug}).populate({path: "state"}).populate({path: "city"}).populate({path: "area"}).populate({path: "amenities"})
     if(singleCommunity) {
       res.status(200).json({
         message: "Community has fetched successfully",

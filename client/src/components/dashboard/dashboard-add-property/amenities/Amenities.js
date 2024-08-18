@@ -1,8 +1,14 @@
+"use client"
+
 import React, { useEffect, useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import AmenitiesHanlder from "./AmenitiesHanlder";
+import { useDispatch, useSelector } from "react-redux";
+import { addCommunityFieldValue } from "@/redux/communitySlice";
+
+
 
 
 const Amenities = () => {
@@ -16,6 +22,10 @@ const Amenities = () => {
   const [notify, setNotify] = useState("");
 
 
+
+  // redux
+  const dispatch = useDispatch();
+  const {amenities} = useSelector(state =>  state.community)
 
   const chunkArray = (array, chunkSize) => {
     const chunks = [];
@@ -59,8 +69,33 @@ const Amenities = () => {
     setEmoji(icon);
   }
 
+  
+
+  // check handler
+  const checkedArray = [...amenities];
+
+  const checkHanlder = (e, amenity) => {
+    if(e.target.checked) {
+      checkedArray.push(amenity)
+      dispatch(addCommunityFieldValue({
+        amenities: checkedArray
+      }));
+    } else {
+      const newCheckedArray = checkedArray.filter(element => {
+        if(element?._id !== amenity?._id) {
+          return element
+        }
+      })
+      dispatch(addCommunityFieldValue({
+        amenities: newCheckedArray
+      }));
+    }
+  }
+
+
+
   useEffect(()=> {
-    fetchAmenities()
+    fetchAmenities();
   }, [notify])
 
   return (
@@ -75,7 +110,8 @@ const Amenities = () => {
                   <input
                   className="p-0 m-0"
                     type="checkbox"
-                    defaultChecked={amenity.name}
+                    defaultChecked={amenities?.map(element => element?._id).indexOf(amenity?._id) !== -1}
+                    onChange={(e)=> checkHanlder(e, amenity)}
                   />
                   <span className="checkmark" />
                 </label>

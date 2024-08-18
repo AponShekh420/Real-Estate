@@ -5,7 +5,7 @@ const getCommunities = async (req, res) => {
   const {searchParams, active, limitEnd, limitStart} = req.body;
 
   try {
-    const getCommunitiesData = await CommunityModel.find({active}).populate('state').populate("city").populate('area');
+    const getCommunitiesData = await CommunityModel.find({active}).populate('state').populate('city').populate('area').populate('amenities');
 
      // Filter the results based on the populated fields
      const filteredCommunities = getCommunitiesData.filter(community => {
