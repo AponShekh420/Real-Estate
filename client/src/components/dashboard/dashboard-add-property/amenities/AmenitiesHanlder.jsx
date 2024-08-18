@@ -6,7 +6,7 @@ import { BsEmojiSmile } from "react-icons/bs";
 import { HashLoader } from 'react-spinners';
 import { ImUpload } from 'react-icons/im';
 import '@/components/dashboard/dashboard-location/style.css';
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const override = {
   display: "block",
@@ -191,7 +191,6 @@ const AmenitiesHanlder = ({setPopular, setAmenityName, setEmoji, setEdit, popula
         </div>
       </div>
       {/* col 1 end */}
-      <ToastContainer/>
     </div>
   );
 }

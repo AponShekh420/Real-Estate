@@ -2,13 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
-import { MdDeleteForever } from "react-icons/md";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import AmenitiesHanlder from "./AmenitiesHanlder";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommunityFieldValue } from "@/redux/communitySlice";
-
-
+import { ToastContainer } from "react-toastify";
+import DeleteAmenity from "./deleteAmenity";
 
 
 const Amenities = () => {
@@ -94,6 +93,7 @@ const Amenities = () => {
 
 
 
+
   useEffect(()=> {
     fetchAmenities();
   }, [notify])
@@ -116,19 +116,18 @@ const Amenities = () => {
                   <span className="checkmark" />
                 </label>
                 <div className="d-flex align-items-center gap-2">
+                  <a 
+                    style={{ border: "none", color: "red", padding: "0px", fontSize: "20px", cursor: "pointer"}}
+                    data-tooltip-id={`edit-${columnKey}`}
+                  >
                   <FaPencilAlt 
                     onClick={() => editHanlder(amenity)}
                     size={12} 
                     color="green" 
                     cursor="pointer" 
-                    data-tooltip-id={`edit-${columnKey}`}
                   />
-                  <MdDeleteForever 
-                    size={16} 
-                    color="red" 
-                    cursor="pointer"
-                    data-tooltip-id={`delete-${columnKey}`}
-                  />
+                  </a>
+                  <DeleteAmenity amenity={amenity} columnKey={columnKey}/>
                   <ReactTooltip
                     id={`delete-${columnKey}`}
                     place="top"
@@ -146,6 +145,7 @@ const Amenities = () => {
         </div>
       ))}
       <AmenitiesHanlder setPopular={setPopular} setAmenityName={setAmenityName} setEmoji={setEmoji} setEdit={setEdit} popular={popular} amenityName={amenityName} emoji={emoji} edit={edit} setNotify={setNotify}/>
+      <ToastContainer/>
     </div>
   );
 };
