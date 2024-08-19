@@ -6,7 +6,7 @@ const getSingleCommunity = async (req, res) => {
     const singleCommunity = await CommunityModel.findOne({slug}).populate({path: "state"}).populate({path: "city"}).populate({path: "area"}).populate({path: "amenities"})
     if(singleCommunity) {
       res.status(200).json({
-        message: "Community has fetched successfully",
+        msg: "Community has fetched successfully",
         data: singleCommunity
       })
     } else {

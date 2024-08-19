@@ -14,6 +14,7 @@ const CommunitySchema = mongoose.Schema({
     type: String,
     required: true
   },
+  description: String,
   address: {
     type: String,
     required: true
@@ -81,18 +82,6 @@ const CommunitySchema = mongoose.Schema({
       required: true
     }
   ],
-  bedrooms: {
-    type: Number,
-    default: 0
-  },
-  bathrooms: {
-    type: Number,
-    default: 0
-  },
-  garages: {
-    type: Number,
-    default: 0
-  },
   active: {
     type: Boolean,
     default: true

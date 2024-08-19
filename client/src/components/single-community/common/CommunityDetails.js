@@ -1,49 +1,41 @@
 import React from "react";
 
-const PropertyDetails = () => {
+const PropertyDetails = ({data}) => {
   const columns = [
     [
       {
-        label: "Property ID",
-        value: "RT48",
+        label: "Price Range",
+        value: `$${data.minPrice} - $${data.maxPrice}`,
       },
       {
-        label: "Price",
-        value: "$252,000",
+        label: "Size",
+        value: `${data.communitySize}`,
       },
       {
-        label: "Property Size",
-        value: "1500 Sq Ft",
+        label: "Status",
+        value: `For ${data?.status?.join("/")}`,
       },
       {
-        label: "Bathrooms",
-        value: "3",
-      },
-      {
-        label: "Bedrooms",
-        value: "2",
+        label: "Age Restrictions",
+        value: data.ageRestrictions ? "55+" : "N/A",
       },
     ],
     [
       {
-        label: "Garage",
-        value: "2",
+        label: "Gated",
+        value: data.gated ? "Yes" : "No",
       },
       {
-        label: "Garage Size",
-        value: "200 SqFt",
+        label: "Built Start",
+        value: data.builtStart,
       },
       {
-        label: "Year Built",
-        value: "2022",
+        label: "Built End",
+        value: data.builtEnd,
       },
       {
-        label: "Property Type",
-        value: "Apartment",
-      },
-      {
-        label: "Property Status",
-        value: "For Sale",
+        label: "Home Types",
+        value: data?.homeTypes?.join(", "),
       },
     ],
   ];
@@ -65,7 +57,7 @@ const PropertyDetails = () => {
                 </p>
               </div>
               <div className="pd-list">
-                <p className="text mb10">{detail.value}</p>
+                <p className="text mb10 text-end" style={{maxWidth: "150px"}}>{detail.value}</p>
               </div>
             </div>
           ))}

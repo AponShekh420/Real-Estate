@@ -6,21 +6,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import Image from "next/image";
 import "photoswipe/dist/photoswipe.css";
-import listings from "@/data/listings";
 
-const images = [
-  "/images/listings/listing-single-6-1.jpg",
-  "/images/listings/listing-single-6-2.jpg",
-  "/images/listings/listing-single-6-3.jpg",
-  "/images/listings/listing-single-6-4.jpg",
-];
 
-const PropertyGallery = ({ id }) => {
+const PropertyGallery = ({ id, data }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const data = listings.filter((elm) => elm.id == id)[0] || listings[0];
+
+  const {imgs: images} = data;
+
+  console.log(images)
+
   return (
     <>
-      <div className="ps-v6-slider nav_none mt30">
+      <div className="ps-v6-slider nav_none mt30 mb30">
         <Gallery>
           <Swiper
             loop={true}
@@ -39,8 +36,8 @@ const PropertyGallery = ({ id }) => {
             {images.map((item, i) => (
               <SwiperSlide key={i}>
                 <Item
-                  original={item}
-                  thumbnail={item}
+                  original={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${item}`}
+                  thumbnail={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${item}`}
                   width={1206}
                   height={671}
                 >
@@ -50,28 +47,30 @@ const PropertyGallery = ({ id }) => {
                       height={671}
                       ref={ref}
                       onClick={open}
-                      src={item}
+                      src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${item}`}
                       alt="gallery"
                       className="w-100 h-auto bdrs12 pointer"
                     />
                   )}
                 </Item>
 
-                <button className="all-tag popup-img border-0 pe-none">
-                  See All 74 Photos
-                </button>
+                {images.length > 1 ? (
+                  <button className="all-tag popup-img border-0 pe-none">
+                    See All {images.length} Photos
+                  </button>
+                ): null}
               </SwiperSlide>
             ))}
           </Swiper>
         </Gallery>
 
         <div className="row">
-          <div className="col-lg-5 col-md-7">
+          <div className={`${images.length < 4 ? "col-lg-4 col-md-5" : "col-lg-7 col-md-8"}`}>
             <Swiper
               onSwiper={setThumbsSwiper}
               loop={true}
               spaceBetween={10}
-              slidesPerView={4}
+              slidesPerView={images.length < 4 ? images.length : 4}
               freeMode={true}
               watchSlidesProgress={true}
               modules={[FreeMode, Navigation, Thumbs]}
@@ -82,7 +81,7 @@ const PropertyGallery = ({ id }) => {
                   <Image
                     height={90}
                     width={83}
-                    src={item}
+                    src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${item}`}
                     alt="image"
                     className="w-100 bdrs12 cover pointer"
                   />
