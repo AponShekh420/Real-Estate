@@ -1,6 +1,6 @@
 import React from "react";
 
-const PropertyDetails = ({data}) => {
+const CommunityDetails = ({data}) => {
   const columns = [
     [
       {
@@ -57,7 +57,7 @@ const PropertyDetails = ({data}) => {
                 </p>
               </div>
               <div className="pd-list">
-                <p className="text mb10 text-end" style={{maxWidth: "150px"}}>{detail.value}</p>
+                <p className="text mb10 text-end" style={{maxWidth: "130px"}}>{detail.value}</p>
               </div>
             </div>
           ))}
@@ -67,4 +67,4 @@ const PropertyDetails = ({data}) => {
   );
 };
 
-export default PropertyDetails;
+export default CommunityDetails;

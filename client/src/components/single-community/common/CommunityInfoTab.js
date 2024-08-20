@@ -1,7 +1,11 @@
 import Amenities from "./Amenities";
+import CommunityDescriptions from "./CommunityDescriptions";
+import CommunityDetails from "./CommunityDetails";
+import Models from "./Models";
+import getModels from "@/lib/getModels";
 
-const CommunityInfoTab = ({data}) => {
-  
+const CommunityInfoTab = async ({data}) => {
+  const modelsData = await getModels(data)
 
   return (
     <div className="col-md-12">
@@ -34,18 +38,20 @@ const CommunityInfoTab = ({data}) => {
                   Amenities
                 </button>
                 ): null}
-              <button
-                className={`nav-link fw600`}
-                id={`nav-item3-tab`}
-                data-bs-toggle="tab"
-                data-bs-target={`#nav-item3`}
-                type="button"
-                role="tab"
-                aria-controls={`nav-item3`}
-                aria-selected={"false"}
-              >
-                Models
-              </button>
+              {modelsData.length > 0 ? (
+                <button
+                  className={`nav-link fw600`}
+                  id={`nav-item3-tab`}
+                  data-bs-toggle="tab"
+                  data-bs-target={`#nav-item3`}
+                  type="button"
+                  role="tab"
+                  aria-controls={`nav-item3`}
+                  aria-selected={"false"}
+                >
+                  Models
+                </button>
+              ): null}
           </div>
         </nav>
         {/* End nav tabs */}
@@ -57,7 +63,16 @@ const CommunityInfoTab = ({data}) => {
               role="tabpanel"
               aria-labelledby={`nav-item1-tab`}
             >
-              <h1>hello</h1>
+              
+              {data?.description && (
+                <>
+                  <h4 className="title fz17 mb10">Description</h4>
+                  <CommunityDescriptions data={data}/>
+                </>
+                )}
+
+              <h4 className="title fz17 mt30 mb10">Details</h4>
+              <CommunityDetails data={data}/>
             </div>
 
             {/* amenities */}
@@ -75,14 +90,16 @@ const CommunityInfoTab = ({data}) => {
             ): null}
 
             {/* models */}
-            <div
-              className={`tab-pane fade fz15`}
-              id={`nav-item3`}
-              role="tabpanel"
-              aria-labelledby={`nav-item3-tab`}
-            >
-              <h1>Models</h1>
-            </div>
+            {modelsData.length > 0 ? (
+              <div
+                className={`tab-pane fade fz15`}
+                id={`nav-item3`}
+                role="tabpanel"
+                aria-labelledby={`nav-item3-tab`}
+              >
+                <Models modelsData={modelsData}/>
+              </div>
+            ): null}
         </div>
       </div>
     </div>

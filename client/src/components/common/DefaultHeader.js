@@ -43,17 +43,17 @@ const DefaultHeader = () => {
                   <div className="logos mr40">
                     <Link className="header-logo logo1" href="/">
                       <Image
-                        width={138}
+                        width={100}
                         height={44}
-                        src="/images/header-logo2.svg"
+                        src="/images/55&up-logo.png"
                         alt="Header Logo"
                       />
                     </Link>
                     <Link className="header-logo logo2" href="/">
                       <Image
-                        width={138}
+                        width={100}
                         height={44}
-                        src="/images/header-logo2.svg"
+                        src="/images/55&up-logo.png"
                         alt="Header Logo"
                       />
                     </Link>

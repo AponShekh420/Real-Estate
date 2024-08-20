@@ -14,7 +14,7 @@ import PropertyHeader from "@/components/single-community/common/CommunityHeader
 import CommunityInfoTab from "@/components/single-community/common/CommunityInfoTab";
 import PropertyVideo from "@/components/single-community/common/PropertyVideo";
 import PropertyViews from "@/components/single-community/common/property-view";
-import ProperytyDescriptions from "@/components/single-community/common/CommunityDescriptions";
+import CommunityDescriptions from "@/components/single-community/common/CommunityDescriptions";
 import ReviewBoxForm from "@/components/single-community/common/ReviewBoxForm";
 import VirtualTour360 from "@/components/single-community/common/VirtualTour360";
 import AllReviews from "@/components/single-community/common/reviews";
@@ -72,13 +72,8 @@ const SingleCommunity = async ({ params }) => {
               {/* End .ps-widget */}
 
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Community Description</h4>
-                <ProperytyDescriptions data={res}/>
-                {/* End property description */}
-
-                <h4 className="title fz17 mb30 mt50">Community Details</h4>
                 <div className="row">
-                  <PropertyDetails data={res}/>
+                  <CommunityInfoTab data={res}/>
                 </div>
               </div>
               {/* End .ps-widget */}
@@ -129,12 +124,6 @@ const SingleCommunity = async ({ params }) => {
               </div> */}
               {/* End .ps-widget */}
 
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <div className="row">
-                  <CommunityInfoTab data={res}/>
-                </div>
-              </div>
-              {/* End .ps-widget */}
 
               {/* <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                 <h4 className="title fz17 mb30">Walkscore</h4>

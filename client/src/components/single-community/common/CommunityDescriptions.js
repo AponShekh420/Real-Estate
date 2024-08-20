@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProperytyDescriptions = ({data}) => {
+const CommunityDescriptions = ({data}) => {
   return (
     <>
       <p className="text mb10">
@@ -22,18 +22,20 @@ const ProperytyDescriptions = ({data}) => {
                 </p>
               </div>
             </div>
-            <h2 className="accordion-header" id="flush-headingOne">
-              <button
-                className="accordion-button p-0 collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseOne"
-                aria-expanded="false"
-                aria-controls="flush-collapseOne"
-              >
-                Show more
-              </button>
-            </h2>
+            {data?.description?.length > 300 ? (
+              <h2 className="accordion-header" id="flush-headingOne">
+                <button
+                  className="accordion-button p-0 collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseOne"
+                  aria-expanded="false"
+                  aria-controls="flush-collapseOne"
+                >
+                  Show more
+                </button>
+              </h2>
+            ) : null}
           </div>
         </div>
       </div>
@@ -41,4 +43,4 @@ const ProperytyDescriptions = ({data}) => {
   );
 };
 
-export default ProperytyDescriptions;
+export default CommunityDescriptions;
