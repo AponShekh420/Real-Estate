@@ -10,9 +10,8 @@ import NearbySimilarProperty from "@/components/single-community/common/NearbySi
 import OverView from "@/components/single-community/common/OverView";
 import PropertyAddress from "@/components/single-community/common/CommunityAddress";
 import PropertyDetails from "@/components/single-community/common/CommunityDetails";
-import PropertyFeaturesAminites from "@/components/single-community/common/PropertyFeaturesAminites";
 import PropertyHeader from "@/components/single-community/common/CommunityHeader";
-import PropertyNearby from "@/components/single-community/common/PropertyNearby";
+import CommunityInfoTab from "@/components/single-community/common/CommunityInfoTab";
 import PropertyVideo from "@/components/single-community/common/PropertyVideo";
 import PropertyViews from "@/components/single-community/common/property-view";
 import ProperytyDescriptions from "@/components/single-community/common/CommunityDescriptions";
@@ -42,7 +41,7 @@ const SingleCommunity = async ({ params }) => {
     if(slug !==undefined && !res) {
       notFound();
     }
-
+    
   return (
     <>
       {/* Main Header Nav */}
@@ -92,13 +91,7 @@ const SingleCommunity = async ({ params }) => {
               </div>
               {/* End .ps-widget */}
 
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Features &amp; Amenities</h4>
-                <div className="row">
-                  <PropertyFeaturesAminites data={res}/>
-                </div>
-              </div>
-              {/* End .ps-widget */}
+              
 
               {/* <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                 <h4 className="title fz17 mb30">Energy Class</h4>
@@ -137,9 +130,8 @@ const SingleCommunity = async ({ params }) => {
               {/* End .ps-widget */}
 
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">What&apos;s Nearby?</h4>
                 <div className="row">
-                  <PropertyNearby data={res}/>
+                  <CommunityInfoTab data={res}/>
                 </div>
               </div>
               {/* End .ps-widget */}
