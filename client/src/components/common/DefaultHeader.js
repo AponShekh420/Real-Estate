@@ -68,6 +68,11 @@ const DefaultHeader = () => {
 
               <div className="col-auto">
                 <div className="d-flex align-items-center">
+                  <a href="tel:+012305094502" className="info-phone dark-color d-flex align-items-center mx-2 mx-xl-4 gap-1" style={{fontSize: "14px", fontWeight: 700}}>
+                    <i class="fa-light fa-phone"></i>
+                    +(0) 123 050 945 02
+                  </a>
+
                   <a
                     href="#"
                     className="login-info d-flex align-items-cente"
@@ -78,14 +83,15 @@ const DefaultHeader = () => {
                     <i className="far fa-user-circle fz16 me-2" />{" "}
                     <span className="d-none d-xl-block">Login / Register</span>
                   </a>
-                  <Link
+                  {/* <Link
                     className="ud-btn btn-white add-property bdrs60 mx-2 mx-xl-4"
                     href="/dashboard-add-property"
                   >
                     Add Property
                     <i className="fal fa-arrow-right-long" />
-                  </Link>
-                  <a
+                  </Link> */}
+                  
+                  {/* <a
                     className="sidemenu-btn filter-btn-right"
                     href="#"
                     data-bs-toggle="offcanvas"
@@ -106,7 +112,7 @@ const DefaultHeader = () => {
                       src="/images/dark-nav-icon.svg"
                       alt="humberger menu"
                     />
-                  </a>
+                  </a> */}
                 </div>
               </div>
               {/* End .col-auto */}
