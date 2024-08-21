@@ -1,18 +1,14 @@
-import { allblogs } from '@/data/blogs';
 import Image from 'next/image';
-import React from 'react'
+import TimeManager from '../single-community/common/TimeManager';
 
-export default function Details({id}) {
-    const data = allblogs.filter((elm) => elm.id == id)[0] || allblogs[0];
+export default function Details({id, data}) {
   return (
     <>
      <div className="container">
           <div className="row" data-aos="fade-up" data-aos-delay="100">
             <div className="col-lg-12">
               <h2 className="blog-title">
-                {data.title ||  data.content || `7 Simple Ways to Keep Your Kid&apos;s Toys From Taking Over Your
-                Home`}
-                
+                {data.title}
               </h2>
               <div className="blog-single-meta">
                 <div className="post-author d-sm-flex align-items-center">
@@ -24,13 +20,14 @@ export default function Details({id}) {
                     alt="blog"
                   />
                   <a className="pr15 bdrr1" href="#">
-                    Leslie Alexander
+                    {data?.auther?.firstName} {data?.auther?.lastName}
                   </a>
                   <a className="ml15 pr15 bdrr1" href="#">
-                    Home Improvement
+                    {data?.catagory?.name}
                   </a>
                   <a className="ml15" href="#">
-                    {data.date.month} {data.date.day}, {data.date.year || 2022}
+                    {/* {data.date.month} {data.date.day}, {data.date.year || 2022} */}
+                    <TimeManager data={data}/>
                   </a>
                 </div>
               </div>
@@ -46,15 +43,15 @@ export default function Details({id}) {
         >
           <div className="row">
             <div className="col-lg-12">
-              <div className="large-thumb">
+              <div className="large-thumb h580">
                 <Image
                   width={1200}
-                  height={600}
+                  height={100}
                   priority
                   className="w-100 h-100 cover"
                   // style={{maxHeight:'600px',objectFit:'cover'}}
-                  src='/images/blog/blog-single-1.jpg'
-                  alt="blog"
+                  src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/blogs/${data.img}`}
+                  alt={data?.title}
                 />
               </div>
             </div>

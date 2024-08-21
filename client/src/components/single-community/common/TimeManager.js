@@ -1,7 +1,7 @@
 "use client"
 import Moment from "react-moment";
 
-const TimeManager = (data) => {
+const TimeManager = ({data}) => {
   return (
     <Moment format="D MMM YYYY">
       {data?.createdAt}
