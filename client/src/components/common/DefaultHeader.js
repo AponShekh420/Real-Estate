@@ -8,7 +8,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import './styles/header.css'
 
 const DefaultHeader = () => {
   const [navbar, setNavbar] = useState(false);
@@ -68,7 +68,7 @@ const DefaultHeader = () => {
 
               <div className="col-auto">
                 <div className="d-flex align-items-center">
-                  <a href="tel:+012305094502" className="info-phone dark-color d-flex align-items-center mx-2 mx-xl-4 gap-1" style={{fontSize: "14px", fontWeight: 700}}>
+                  <a href="tel:+012305094502" className="ph-info info-phone d-flex align-items-center mx-2 mx-xl-4 gap-1">
                     <i class="fa-light fa-phone"></i>
                     +(0) 123 050 945 02
                   </a>

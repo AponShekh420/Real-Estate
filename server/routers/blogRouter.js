@@ -14,6 +14,7 @@ const useValidationResult = require("../middleware/common/useValidationResult");
 const useBlogImgDeletor = require("../middleware/useBlogImgDeletor");
 const checkBlogValidation = require("../middleware/checkBlogValidation");
 const authCheck = require("../middleware/common/users/authCheck");
+const getBlogsByFilter = require("../controllers/blogController/getBlogsByFilter");
 
 // callback function of configure
 const router = express.Router();
@@ -37,7 +38,11 @@ router.delete('/imgdelete', blogImgDelete);
 
 
 // get the blogs by auther/catagory/subcatagory/title
-router.post('/get-blogs', getBlogs)
+router.post('/get-blogs', getBlogs);
+
+
+// get all blog by filter 
+router.post('/get-by-filter', getBlogsByFilter)
 
 
 module.exports = router;

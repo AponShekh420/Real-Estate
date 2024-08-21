@@ -4,13 +4,37 @@ import BlogSidebar from "@/components/blogs/sidebar";
 import DefaultHeader from "@/components/common/DefaultHeader";
 import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
-import TopLayoutBlogs from "@/components/blogs/TopLayoutBlogs";
+import getCatagoryData from "@/lib/getCatagoryData";
+import store from "@/redux/store";
+import { removeBlogFilterValues } from "@/redux/blogFilterSlice";
+import { notFound } from "next/navigation";
 
 export const metadata = {
   title: "Blog List v2  || Homez - Real Estate NextJS Template",
 };
 
-const Blogs = () => {
+const Blogs = async ({params}) => {
+  const {slug} = params;
+
+  // that would be redirect on notFound page if the slug params are more then 3, like state/city/area/notfound??
+  if(slug?.length > 2 && slug !== undefined) {
+    notFound();
+  }
+
+  // get location data like description, name etc from api
+  const res = await getCatagoryData(params)
+  let desc = res?.data?.desc;
+
+
+  // has add the data on redux after fetching from backend
+  if(slug !==undefined && !res?.data) {
+    // if the data has not founded, that's mean the route are wrong, so redirect on not found page
+    store.dispatch(removeBlogFilterValues())
+    notFound();
+  }
+
+
+
   return (
     <div className="bgc-f7">
       {/* Main Header Nav */}
@@ -42,16 +66,12 @@ const Blogs = () => {
       {/* Blog Section Area */}
       <section className="our-blog pt-0">
         <div className="container">
-          <TopLayoutBlogs/>
           <div className="row mt20" data-aos="fade-up" data-aos-delay="300">
             <div className="col-lg-8">
-              <Blog />
+              <Blog blogFilter={store.getState().blogFilter}/>
               <div className="row">
                 <div className="mbp_pagination text-center">
                   <Pagination />
-                  <p className="mt10 pagination_page_count text-center">
-                    1 – 20 of 300+ property available
-                  </p>
                 </div>
               </div>
               {/* End .row */}

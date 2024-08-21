@@ -2,7 +2,6 @@
 
 import getCommunities from "@/lib/getCommunities";
 import { addCommunityFilterValue } from "@/redux/communityFilterSlice";
-import store from "@/redux/store";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 

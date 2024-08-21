@@ -8,7 +8,7 @@ import { notFound } from "next/navigation";
 import getLocationData from "@/lib/getLocationData";
 import ReadMore from "@/components/common/ReadMore";
 import store from "@/redux/store";
-import { addCommunityFilterValue, removeCommunityFilterValues } from "@/redux/communityFilterSlice";
+import { removeCommunityFilterValues } from "@/redux/communityFilterSlice";
 
 export const metadata = {
   title: "55 home || summary",
@@ -30,7 +30,7 @@ const SummaryPage = async ({params}) => {
   // has add the data on redux after fetching from backend
   if(slug !==undefined && !res?.data) {
     // if the data has not founded, that's mean the route are wrong, so redirect on not found page
-    store.dispatch(addCommunityFilterValue(removeCommunityFilterValues()))
+    store.dispatch(removeCommunityFilterValues())
     notFound();
   }
 

@@ -1,14 +1,14 @@
 import React from "react";
 import SearchBox from "./SearchBox";
-import Categrory from "./Categrory";
 import LatestPost from "./LatestPost";
 import PopularTags from "./PopularTags";
+import CatagoriesList from "./CatagoriesList";
 
 const BlogSidebar = () => {
   return (
     <div className="blog-sidebar">
       <SearchBox />
-      <Categrory />
+      <CatagoriesList />
       <LatestPost />
       <PopularTags />
     </div>

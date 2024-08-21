@@ -1,0 +1,9 @@
+.ph-info {
+ color: #181A20 !important;
+ font-size: 14px;
+ font-weight: 600;
+}
+
+.ph-info:hover {
+  color: #eb6753 !important;
+}

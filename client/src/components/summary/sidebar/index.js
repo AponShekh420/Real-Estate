@@ -7,18 +7,30 @@ import PropertyType from "./PropertyType";
 import LocationList from "./LocationList";
 import { useSelector } from "react-redux";
 import store from "@/redux/store";
+import { removeCommunityFilterValues } from "@/redux/communityFilterSlice";
 
 const ListingSidebar = ({filterFunctions}) => {
-  const communityFilter = useSelector(state => state.communityFilter)
-  const searchHanlder = (e) => {
-    e.preventDefault();
-    console.log("communityFilterValue:", store.getState().communityFilter)
-  }
+
+  // const resetHanlder = (e) => {
+  //   e.preventDefault();
+  //   store.dispatch(removeCommunityFilterValues())
+  // }
 
 
 
   return (
     <div className="list-sidebar-style1">
+
+      {/* <div className="widget-wrapper mb20">
+        <div className="btn-area d-grid align-items-center">
+          <button className="ud-btn btn-thm" onClick={resetHanlder}>
+            <span className="flaticon-turn-back align-text-top pr10" />
+            <u>Reset all filters</u>
+          </button>
+        </div>
+      </div> */}
+
+
       <div className="widget-wrapper">
         <h6 className="list-title">Find your home</h6>
         <SearchBox />
@@ -49,27 +61,6 @@ const ListingSidebar = ({filterFunctions}) => {
         </div>
       </div>
       
-
-      <div className="widget-wrapper mb20">
-        <div className="btn-area d-grid align-items-center">
-          <button className="ud-btn btn-thm" onClick={searchHanlder}>
-            <span className="flaticon-search align-text-top pr10" />
-            Search
-          </button>
-        </div>
-      </div>
-      {/* End .widget-wrapper */}
-
-      <div className="reset-area d-flex align-items-center justify-content-between">
-        <div onClick={()=>filterFunctions.resetFilter()} className="reset-button cursor" href="#">
-          <span className="flaticon-turn-back" />
-          <u>Reset all filters</u>
-        </div>
-        {/* <a className="reset-button" href="#">
-          <span className="flaticon-favourite" />
-          <u>Save Search</u>
-        </a> */}
-      </div>
     </div>
   );
 };

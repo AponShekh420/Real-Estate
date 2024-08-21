@@ -1,0 +1,44 @@
+// import the model of community for query the all community by filter
+const BlogModel = require("../../models/BlogModel")
+
+
+
+
+// This controller will give us communities data by filter
+const getBlogsByFilter = async (req, res) => {
+
+  const {catagoryId, subcatagoryId, titleSearch, active, limitStart, limitEnd} = req.body
+
+  const dataQueryObj = {}
+  catagoryId ? dataQueryObj.catagory = catagoryId : null
+  subcatagoryId ? dataQueryObj.subcatagory = subcatagoryId : null
+  titleSearch ? dataQueryObj.title = {$regex: titleSearch || "", $options: "i"} : null
+
+  
+
+  try {
+    const data = await BlogModel.find({
+      ...dataQueryObj,
+      active,
+    }).skip(limitStart).limit(limitEnd);
+
+    if(data) {
+      res.status(200).json({
+        msg: "The data has been received successfully",
+        data: data
+      })
+    } else {
+      res.status(404).json({
+        errors: {
+          notFound: {
+            msg: "No data found"
+          }
+        }
+      })
+    }
+  } catch(err) {
+    console.log(err.message)
+  }
+}
+
+module.exports = getBlogsByFilter;

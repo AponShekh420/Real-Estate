@@ -1,65 +1,75 @@
 "use client";
-import { blogsThree } from "@/data/blogs";
+import getBlogs from "@/lib/getBlogs";
+import { addBlogFilterValue } from "@/redux/blogFilterSlice";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import BlogsListLoader from "./BlogsListLoader"
+import Moment from "react-moment";
 
-const Blogs = () => {
+const Blogs = ({blogFilter}) => {  
+  // redux
+  const dispatch = useDispatch();
+  const { catagory, subcatagory, data, loading, currentPage } = useSelector(state => state.blogFilter);
   
+  const {catagory: catagoryProps, subcatagory: subcatagoryProps} = blogFilter;
 
-  const [filteredBlogs, setFilteredBlogs] = useState(blogsThree);
-  const [activeCategory, setActiveCategory] = useState("All");
-
-  const handleFilter = (category) => {
-    if (category === "All") {
-      setFilteredBlogs(blogsThree);
-    } else {
-      const filtered = blogsThree.filter((blog) => blog.category === category);
-      setFilteredBlogs(filtered);
-    }
-    setActiveCategory(category);
-  };
-
-  const categories = [
-    "All",
-    "Home Improvement",
-    "Life & Style",
-    "Finance",
-    "Selling a Home",
-    "Renting a Home",
-    "Buying a Home",
-  ];
+  useEffect(()=> {
+    dispatch(addBlogFilterValue({
+      catagory: catagoryProps,
+      subcatagory: subcatagoryProps,
+    }))
+    getBlogs()
+    // console.log("titleSearch:", titleSearch)
+  }, [catagory, subcatagory, currentPage])
 
   return (
     <>
       <div className="row">
-        {filteredBlogs.map((blog) => (
-          <div className="col-sm-6 col-lg-4" key={blog.id}>
-            <div className="blog-style1">
-              <div className="blog-img">
-                <Image
-                  width={386}
-                  height={271}
-                  className="w-100 h-100 cover"
-                  src={blog.image}
-                  alt="blog"
-                />
-              </div>
-              <div className="blog-content">
-                <div className="date">
-                  <span className="month">July</span>
-                  <span className="day">{blog.date.day}</span>
+        {loading ? (
+          <BlogsListLoader/>
+        ) : (data.length > 0) ? (
+          data?.map((blog) => (
+            <div className="col-sm-6 col-lg-4" key={blog.id}>
+              <div className="blog-style1">
+                <div className="blog-img">
+                  <Image
+                    width={386}
+                    height={271}
+                    className="w-100 h-100 cover"
+                    src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/blogs/${blog.img}`}
+                    alt="blog"
+                  />
                 </div>
-                <a className="tag" href="#">
-                  {blog.tag}
-                </a>
-                <h6 className="title mt-1">
-                  <Link href={`/blog/${blog.id}`}>{blog.title}</Link>
-                </h6>
+                <div className="blog-content">
+                  <div className="date">
+                    <span className="month" style={{fontSize: "13px", fontWeight: 400}}>
+                      <Moment format="MMM">
+                        {blog?.createdAt}
+                      </Moment>
+                    </span>
+                    <span className="day" style={{fontSize: "13px", fontWeight: 400}}>
+                      <Moment format="D">
+                        {blog?.createdAt}
+                      </Moment>
+                    </span>
+                  </div>
+                  <a className="tag" href="#">
+                    {blog?.tag}
+                  </a>
+                  <h6 className="title mt-1">
+                    <Link href={`/blog/${blog?.slug}`}>{blog?.title}</Link>
+                  </h6>
+                </div>
               </div>
             </div>
+          ))
+        ) : (
+          <div className="h-100 w-100 d-flex justify-content-center align-items-center">
+            <h1 style={{height: "600px"}} className="d-flex align-items-center justify-content-center">No Data Found</h1>
           </div>
-        ))}
+        )}
       </div>
     </>
   );
