@@ -1,32 +1,165 @@
 "use client"
 
-import React from "react";
+import React, { useState } from "react";
 import SelectMulitField from "./SelectMulitField";
 import { useDispatch, useSelector } from "react-redux";
 import "react-quill/dist/quill.snow.css";
 import "@/components/common/styles/quillEditor.css"
-import { addStateFields } from "@/redux/stateSlice";
+import { addStateFields, removeStateAllFields } from "@/redux/stateSlice";
 import {modules, formats} from '@/components/common/quillEditorConfig'
 import dynamic from "next/dynamic";
+import UploadLocationImg from "./UploadLocationImg";
+import { ImUpload } from "react-icons/im";
+import { HashLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 
 
-
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
 
 const StateList = () => {
-  const { errors, stateName, abbreviation, description } = useSelector((state)=> state.state)
+  const [stateLoading, setStateLoading] = useState(false);
+
+  // state location
+  const {abbreviation, desc, errors, active: stateActive, abbreviation: stateAbbreviation, stateName, edit: stateEdit, stateId: stateUpdateId, uploadedImageChanged: stateUploadedImageChanged, oldImgUrl: stateOldImgUrl, uploadedImage: stateUploadedImage} = useSelector((state)=> state.state);
+
+
+
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
     dispatch(addStateFields({
-      description: e
+      desc: e
     }))
   }
 
+  const cancelStateUpdate = () => {
+    dispatch(removeStateAllFields())
+  }
+
+  const uploadNewState = async (e) => {
+    e.preventDefault();
+
+    // console.log("stateName:", stateName);
+    const formData = new FormData(e.target);
+    formData.append("active", stateActive);
+    formData.append("abbreviation", stateAbbreviation);
+    formData.append("name", stateName);
+    formData.append("desc", desc);
+    try {
+      setStateLoading(true);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/add`, {
+        method: "POST",
+        body: formData
+      });
+      const currentState = await res.json();
+      setStateLoading(false);
+      if(currentState.msg) {
+        toast.success(currentState.msg, {
+          position: "top-right",
+          autoClose: 1500,
+        });
+        dispatch(removeStateAllFields());
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
+      } else {
+        dispatch(addStateFields({
+          errors: currentState.errors,
+        }))
+      }
+    } catch(err) {
+      console.log(err.message)
+    }
+  }
+
+
+
+  // state udpate
+  const updateExistingState = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    formData.append("active", stateActive);
+    formData.append("abbreviation", stateAbbreviation);
+    formData.append("name", stateName);
+    formData.append("desc", desc);
+    formData.append("stateId", stateUpdateId);
+    formData.append("uploadedImageChanged", stateUploadedImageChanged);
+    formData.append("oldImgUrl", stateOldImgUrl);
+    formData.append("uploadedImage", stateUploadedImage);
+    try {
+      setStateLoading(true);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/update`, {
+        method: "PUT",
+        body: formData
+      });
+      const currentState = await res.json();
+      setStateLoading(false);
+      if(currentState.msg) {
+        toast.success(currentState.msg, {
+          position: "top-right",
+          autoClose: 1500,
+        });
+        dispatch(removeStateAllFields());
+        dispatch(addStateFields({
+          notify: Math.random(),
+        }))
+      } else {
+        dispatch(addStateFields({
+          errors: currentState.errors,
+        }))
+      }
+    } catch(err) {
+      console.log(err.message)
+    }
+  }
+
   return (
-    <form className="form-style1">
+    <form className="form-style1"
+      onSubmit={stateEdit ? updateExistingState : uploadNewState} 
+      action={stateEdit ? `${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/update` : `${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/add`} 
+      method={stateEdit ? "put": "post"} 
+      encType="multipart/form-data"
+    >
+      <div className="d-flex justify-content-between align-items-center">
+        <h4 className="title fz17 mb30">Creating State</h4>
+        <div className="d-flex align-items-center gap-2 flex-row-reverse">
+          <button className={`bdrs0 btn-primary rounded-2 py-1 px-2 d-flex gap-2 justify-content-center align-items-center ${stateLoading ? "opacity-50" : "opacity-100"}`} disabled={stateLoading} type="submit">{stateEdit ? "Update State": "Add New State"}
+            {!stateLoading ? <ImUpload /> : <HashLoader
+              color="#ffffff"
+              loading={stateLoading}
+              cssOverride={override}
+              size={17}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+            }
+          </button>
+          {stateEdit ? (
+            <button className={`cancelBtn btn btn-outline-danger rounded-2 d-flex gap-2 text-danger justify-content-center align-items-center`} onClick={cancelStateUpdate}>
+              Cancel
+            </button>
+          ): (
+            ""
+          )}
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-sm-12 col-xl-12">
+          <div className="mb20">
+            <UploadLocationImg/>
+          </div>
+        </div>
+      </div>
+      {/* End .row */}
+
+
       <div className="row">
         <div className="col-sm-12 col-xl-12">
           <div className="mb20">
@@ -67,7 +200,7 @@ const StateList = () => {
           {/* <EditorToolbar /> */}
           <ReactQuill
             theme="snow"
-            value={description}
+            value={desc}
             onChange={handleChange}
             placeholder={"Write something awesome..."}
             modules={modules}

@@ -2,11 +2,14 @@ const AreaModel = require("../../models/AreaModel");
 const CityModel = require("../../models/CityModel");
 const CommunityModel = require("../../models/CommunityModel");
 const StateModel = require("../../models/StateModel");
+const path = require("path");
+const {unlink} = require('fs');
+
 
 const updateArea = async (req, res) => {
   
   try {
-    const {name, desc, stateId, areaId, cityId, active, abbreviation} = req.body;
+    const {name, desc, stateId, areaId, cityId, active, abbreviation, oldImgUrl, uploadedImageChanged} = req.body;
 
     // slug making
     const duplicateArea = await AreaModel.find({name, _id: {$ne: areaId}});
@@ -31,9 +34,19 @@ const updateArea = async (req, res) => {
       desc,
       state: stateId,
       city: cityId,
+      img: uploadedImageChanged ? req?.files[0]?.filename : oldImgUrl,
       abbreviation
     });
 
+    if(uploadedImageChanged) {
+      if(oldImgUrl) {
+        unlink(path.join(__dirname, `../../public/assets/location/${oldImgUrl}`), (err)=> {
+          if(err) {
+              console.log(err)
+          }
+        });
+      }
+    }
     // updating the state collection to add area in area field on state
     if(Area) {
 

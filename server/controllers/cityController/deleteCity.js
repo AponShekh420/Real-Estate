@@ -3,7 +3,8 @@ const AreaModel = require('../../models/AreaModel');
 const CityModel = require('../../models/CityModel');
 const StateModel = require('../../models/StateModel')
 const CommunityModel = require('../../models/CommunityModel')
-
+const {unlink} = require('fs');
+const path = require("path");
 
 const deleteCity = async (req, res) => {
   const {cityId} = req.body
@@ -41,9 +42,21 @@ const deleteCity = async (req, res) => {
 
       // try to check those cities, areas, and communities has update or not
       if(stateUpdateStatus && communtiyUpdateStatus && areaUpdateStatus) {
-        res.status(200).json({
-          msg: "The city has deleted successfully"
-        })
+        if(cityDeleteStatus?.img) {
+          unlink(path.join(__dirname, `../../public/assets/location/${cityDeleteStatus.img}`), (err)=> {
+            if(err) {
+                console.log(err)
+            } else {
+              res.status(200).json({
+                msg: "The city has deleted successfully"
+              })
+            }
+          })
+        } else {
+          res.status(200).json({
+            msg: "The city has deleted successfully"
+          })
+        }
       } else {
         res.status(500).json({
           errors: {

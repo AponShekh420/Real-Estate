@@ -130,11 +130,14 @@ const StateItem = ({state}) => {
   const editHandler = () => {
     dispatch(addStateFields({
       stateName: state.name,
-      description: state.desc,
+      desc: state.desc,
       abbreviation: state.abbreviation,
       active: state.active,
       edit: true,
       stateId: state._id,
+      oldImgUrl: state.img,
+      uploadedImageChanged: false,
+      uploadedImage: state.img,
     }))
   }
   

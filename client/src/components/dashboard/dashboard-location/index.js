@@ -23,15 +23,22 @@ const override = {
 
 
 const AddLocationContent = () => {
-  const [stateLoading, setStateLoading] = useState(false);
   const [cityLoading, setCityLoading] = useState(false);
   const [areaLoading, setAreaLoading] = useState(false);
   const [currentTab, setCurrentTab] = useState("state");
 
   // redux state
+
+  // city location
   const {stateId, active, description, abbreviation, cityName, edit: cityEdit, cityId: cityUpdateId} = useSelector((state)=> state.city);
-  const {active: stateActive, description: stateDescription, abbreviation: stateAbbreviation, stateName, edit: stateEdit, stateId: stateUpdateId} = useSelector((state)=> state.state);
+
+
+
+  // area location
   const {active: areaActive, description: areaDescription, abbreviation: areaAbbreviation, areaName, stateId: stateIdForArea, cityId: cityIdForArea, edit: areaEdit, areaId: areaUpdateId} = useSelector((state)=> state.area);
+
+
+  // dispatch
   const dispatch = useDispatch();
 
 // upload new 'State', 'City' and 'Area' through these functions
@@ -73,43 +80,6 @@ const AddLocationContent = () => {
     }
   }
 
-
-  const uploadNewState = async (e) => {
-    e.preventDefault();
-    try {
-      setStateLoading(true);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/add`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          active: stateActive,
-          abbreviation: stateAbbreviation,
-          name: stateName,
-          desc: stateDescription
-        })
-      });
-      const currentState = await res.json();
-      setStateLoading(false);
-      if(currentState.msg) {
-        toast.success(currentState.msg, {
-          position: "top-right",
-          autoClose: 1500,
-        });
-        dispatch(removeStateAllFields());
-        dispatch(addStateFields({
-          notify: Math.random(),
-        }))
-      } else {
-        dispatch(addStateFields({
-          errors: currentState.errors,
-        }))
-      }
-    } catch(err) {
-      console.log(err.message)
-    }
-  }
 
 
 
@@ -154,10 +124,6 @@ const AddLocationContent = () => {
   // uploading new 'State', 'City' and 'Area' has ended
 
 
-  const cancelStateUpdate = () => {
-    dispatch(removeStateAllFields())
-  }
-
   const cancelAreaUpdate = () => {
     dispatch(removeAllAreaFields())
   }
@@ -169,44 +135,6 @@ const AddLocationContent = () => {
 
   // start here to update location
 
-  // state udpate
-  const updateExistingState = async (e) => {
-    e.preventDefault();
-    try {
-      setStateLoading(true);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/update`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          active: stateActive,
-          abbreviation: stateAbbreviation,
-          name: stateName,
-          desc: stateDescription,
-          stateId: stateUpdateId
-        })
-      });
-      const currentState = await res.json();
-      setStateLoading(false);
-      if(currentState.msg) {
-        toast.success(currentState.msg, {
-          position: "top-right",
-          autoClose: 1500,
-        });
-        dispatch(removeStateAllFields());
-        dispatch(addStateFields({
-          notify: Math.random(),
-        }))
-      } else {
-        dispatch(addStateFields({
-          errors: currentState.errors,
-        }))
-      }
-    } catch(err) {
-      console.log(err.message)
-    }
-  }
   
 
   // city update
@@ -350,30 +278,7 @@ const AddLocationContent = () => {
           aria-labelledby="nav-item1-tab"
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <div className="d-flex justify-content-between align-items-center">
-              <h4 className="title fz17 mb30">Creating State</h4>
-              <div className="d-flex align-items-center gap-2 flex-row-reverse">
-                <button className={`bdrs0 btn-primary rounded-2 py-1 px-2 d-flex gap-2 justify-content-center align-items-center ${stateLoading ? "opacity-50" : "opacity-100"}`} disabled={stateLoading} onClick={stateEdit ? updateExistingState : uploadNewState}>{stateEdit ? "Update State": "Add New State"}
-                  {!stateLoading ? <ImUpload /> : <HashLoader
-                    color="#ffffff"
-                    loading={stateLoading}
-                    cssOverride={override}
-                    size={17}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
-                  />
-                  }
-                </button>
-                {stateEdit ? (
-                  <button className={`cancelBtn btn btn-outline-danger rounded-2 d-flex gap-2 text-danger justify-content-center align-items-center`} onClick={cancelStateUpdate}>
-                    Cancel
-                  </button>
-                ): (
-                  ""
-                )}
-              </div>
-            </div>
-            {currentTab === "state" ? <StateList /> : <div></div> }
+            {currentTab === "state" ? <StateList/> : <div></div> }
           </div>
         </div>
 

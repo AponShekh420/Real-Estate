@@ -14,6 +14,7 @@ import Image from "next/image";
 import getSingleBlog from "@/lib/getSingleBlog";
 import ReadMore from "@/components/common/ReadMore";
 import StringToDomComponent from "@/components/common/StringToDomComponent";
+import "@/components/common/quillEditorTextStyle.css";
 
 export const metadata = {
   title: "Blog Single  || Homez - Real Estate NextJS Template",
@@ -52,7 +53,9 @@ const BlogSingle = async ({params}) => {
         <div className="container">
           <div className="roww" data-aos="fade-up" data-aos-delay="500">
             <div className="col-xl-8 offset-xl-2">
-              <StringToDomComponent htmlString={res?.desc} />
+              <div className="quillEditorTextHandler">
+                <StringToDomComponent htmlString={res?.desc} />
+              </div>
 
               <div className="bdrt1 bdrb1 d-block d-sm-flex justify-content-between pt50 pt30-sm pb50 pb30-sm">
                 <div className="blog_post_share d-flex align-items-center mb10-sm">

@@ -10,6 +10,8 @@ const activeCity = require("../controllers/cityController/activeCity");
 const checkCityValidation = require("../middleware/checkCityValidation");
 const useValidationResult = require("../middleware/common/useValidationResult");
 const getCityBySlug = require("../controllers/cityController/getCityBySlug");
+const uploadLocationImg = require("../middleware/uploadLocationImg");
+const useLocationValidationResult = require("../middleware/useLocationValidationResult");
 
 
 // callback function of configure
@@ -17,8 +19,8 @@ const router = express.Router();
 
 
 // route controller
-router.post('/add', checkCityValidation, useValidationResult, addCity);
-router.put('/update', checkCityValidation, useValidationResult, updateCity);
+router.post('/add', uploadLocationImg, checkCityValidation, useLocationValidationResult, addCity);
+router.put('/update', uploadLocationImg, checkCityValidation, useLocationValidationResult, updateCity);
 router.delete('/delete', deleteCity);
 
 // city deactive and active 

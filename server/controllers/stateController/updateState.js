@@ -1,9 +1,11 @@
 const StateModel = require("../../models/StateModel");
+const path = require("path");
+const {unlink} = require('fs');
 
 // upload the state on database
 const updateState = async (req, res)=> {
   try {
-    const {stateId, name, desc, active, abbreviation} = req.body;
+    const {stateId, name, desc, active, abbreviation, oldImgUrl, uploadedImageChanged} = req.body;
 
 
     // slug making
@@ -26,8 +28,19 @@ const updateState = async (req, res)=> {
       desc,
       slug,
       active,
-      abbreviation
+      abbreviation,
+      img: uploadedImageChanged ? req?.files[0]?.filename : oldImgUrl,
     })
+
+    if(uploadedImageChanged) {
+      if(oldImgUrl) {
+        unlink(path.join(__dirname, `../../public/assets/location/${oldImgUrl}`), (err)=> {
+          if(err) {
+              console.log(err)
+          }
+        });
+      }
+    }
 
     if(status) {
       res.status(200).json({

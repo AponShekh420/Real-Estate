@@ -21,7 +21,6 @@ const getCatagoryData = async (params) => {
         })
       });
       const catagory = await res.json();
-      console.log(catagory)
       if(catagory) {
         store.dispatch(addBlogFilterValue({
           catagory: catagory?.data,

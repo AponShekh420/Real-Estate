@@ -10,6 +10,8 @@ const activeArea = require("../controllers/areaController/activeArea");
 const checkAreaValidation = require("../middleware/checkAreaValidation");
 const useValidationResult = require("../middleware/common/useValidationResult");
 const getAreaBySlug = require("../controllers/areaController/getAreaBySlug");
+const uploadLocationImg = require("../middleware/uploadLocationImg");
+const useLocationValidationResult = require("../middleware/useLocationValidationResult");
 
 
 // callback function of configure
@@ -17,8 +19,8 @@ const router = express.Router();
 
 
 // route controller
-router.post('/add', checkAreaValidation, useValidationResult, addArea);
-router.put('/update', checkAreaValidation, useValidationResult, updateArea);
+router.post('/add', uploadLocationImg, checkAreaValidation, useLocationValidationResult, addArea);
+router.put('/update', uploadLocationImg, checkAreaValidation, useLocationValidationResult, updateArea);
 router.delete('/delete', deleteArea);
 
 

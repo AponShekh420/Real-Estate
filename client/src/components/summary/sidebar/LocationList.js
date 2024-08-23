@@ -2,7 +2,7 @@ import mobileMenuItems from "@/data/mobileMenuItems";
 import { isParentActive } from "@/utilis/isMenuActive";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import React from 'react'
 
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
@@ -49,7 +49,7 @@ const LocationList = () => {
               <Link href={`/summary/${state.slug}`}>
                 <div className="d-flex justify-content-between align-items-center">
                   <p className={`text-capitalize m-0 ${path.split('/')[2] === state.slug ? "text-danger": ""}`}><b>{state.name} ({state.community.length})</b></p>
-                  <IoIosArrowDown className="p-0"/>
+                  {path.split('/')[2] !== state.slug ? <IoIosArrowDown className="p-0"/> : <IoIosArrowUp className="p-0 text-danger"/> }
                 </div>
               </Link>
               {/* fist chiled */}
@@ -61,7 +61,7 @@ const LocationList = () => {
                         <Link href={`/summary/${state.slug}/${eachCity.slug}`}>
                           <div className="d-flex justify-content-between align-items-center">
                             <p className={`text-capitalize m-0 ${path.split('/')[3] === eachCity.slug ? "text-danger": ""}`}>{eachCity.name} ({eachCity.community.length})</p>
-                            <IoIosArrowDown className="p-0"/>
+                            {path.split('/')[3] !== eachCity.slug ? <IoIosArrowDown className="p-0"/> : <IoIosArrowUp className="p-0 text-danger"/> }
                           </div>
                         </Link>
                         {/* second child */}

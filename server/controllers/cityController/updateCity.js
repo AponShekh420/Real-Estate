@@ -1,10 +1,13 @@
 const CityModel = require("../../models/CityModel");
 const StateModel = require("../../models/StateModel");
 const CommunityModel = require("../../models/CommunityModel");
+const path = require("path");
+const {unlink} = require('fs');
+
 
 const updateCity = async (req, res) => {
   try {
-    const {name, desc, stateId, cityId, abbreviation, active } = req.body;
+    const {name, desc, stateId, cityId, abbreviation, active, oldImgUrl, uploadedImageChanged } = req.body;
     
     // slug making
     const duplicateCity = await CityModel.find({name, _id: {$ne: cityId}});
@@ -27,8 +30,20 @@ const updateCity = async (req, res) => {
       active,
       abbreviation,
       desc,
+      img: uploadedImageChanged ? req?.files[0]?.filename : oldImgUrl,
       state: stateId
     })
+
+    if(uploadedImageChanged) {
+      if(oldImgUrl) {
+        unlink(path.join(__dirname, `../../public/assets/location/${oldImgUrl}`), (err)=> {
+          if(err) {
+              console.log(err)
+          }
+        });
+      }
+    }
+
 
     // updating the state collection to add city in city field on state
     if(City) {

@@ -10,6 +10,9 @@ const initialState = {
   edit: false,
   stateId: "",
   notify: "",
+  oldImgUrl: "",
+  uploadedImage: "",
+  uploadedImageChanged: false,
 }
 
 

@@ -9,8 +9,9 @@ const deactiveState = require("../controllers/stateController/deactiveState");
 const activeState = require("../controllers/stateController/activeState");
 const getState = require("../controllers/stateController/getState");
 const checkStateValidation = require("../middleware/checkStateValidation");
-const useValidationResult = require("../middleware/common/useValidationResult");
 const getStateBySlug = require("../controllers/stateController/getStateBySlug");
+const uploadLocationImg = require("../middleware/uploadLocationImg");
+const useLocationValidationResult = require("../middleware/useLocationValidationResult");
 
 // callback function of configure
 const router = express.Router();
@@ -18,8 +19,8 @@ const router = express.Router();
 
 // route controller
 router.get('/getall/:status', getState) // fetch data with active param to get only active data, fetch data with deactive param to get deactive data, and fetch data with anytype param to get both type of data
-router.post('/add', checkStateValidation, useValidationResult, addState);
-router.put('/update', checkStateValidation, useValidationResult, updateState);
+router.post('/add', uploadLocationImg, checkStateValidation, useLocationValidationResult, addState);
+router.put('/update', uploadLocationImg, checkStateValidation, useLocationValidationResult, updateState);
 router.delete('/delete', deleteState);
 
 

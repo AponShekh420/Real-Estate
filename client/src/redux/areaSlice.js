@@ -10,6 +10,9 @@ const initialState = {
   cityId: "",
   errors: {},
   areaId: "",
+  oldImgUrl: "",
+  uploadedImage: "",
+  uploadedImageChanged: false,
 }
 
 

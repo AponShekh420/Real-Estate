@@ -24,6 +24,7 @@ const addArea = async (req, res) => {
       state: stateId,
       city: cityId,
       abbreviation,
+      img: req?.files[0]?.filename || "",
       slug,
     });
 

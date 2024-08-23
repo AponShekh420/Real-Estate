@@ -36,7 +36,10 @@ const citySchema = mongoose.Schema({
   active: {
     type: Boolean,
     default: true
-  }
+  },
+  img: {
+    type: String,
+  },
 }, {timestamps: true})
 
 

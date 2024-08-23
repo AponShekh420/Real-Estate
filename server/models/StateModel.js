@@ -31,7 +31,10 @@ const StateSchema = mongoose.Schema({
   active: {
     type: Boolean,
     default: true
-  }
+  },
+  img: {
+    type: String,
+  },
 }, {timestamps: true})
 
 // module of state
