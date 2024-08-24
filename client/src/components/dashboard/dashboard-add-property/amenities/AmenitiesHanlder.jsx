@@ -107,8 +107,7 @@ const AmenitiesHanlder = ({setPopular, setAmenityName, setEmoji, setEdit, popula
   }
 
   return (
-    <div className="row">
-      <hr />
+    <div className="row p-4 rounded-2 mt25" style={{background: "#d1d1d1"}}>
       {/* header */}
       <h4 className='title fz17 mb30'>Manage Amenities</h4>
       <div className="d-flex align-items-center gap-2 mb25">

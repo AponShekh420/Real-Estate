@@ -46,7 +46,7 @@ const CommunitiesDataTable = ({communitiesData, setDeleteData}) => {
                     width={110}
                     height={94}
                     className="w-100"
-                    src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${community?.imgs[community.imgs.length -1]}`}
+                    src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${community?.imgs[community?.imgs?.length -1]}`}
                     alt="community"
                   />
                 </div>
@@ -54,9 +54,9 @@ const CommunitiesDataTable = ({communitiesData, setDeleteData}) => {
                   <div className="h6 list-title">
                     <Link href={`/community/${community?.slug}`}>{community?.title}</Link>
                   </div>
-                  <p className="list-text mb-0">{community?.city?.name} city, {community.state.abbreviation}, USA</p>
+                  <p className="list-text mb-0">{community?.city?.name} city, {community?.state?.abbreviation}, USA</p>
                   <div className="list-price">
-                    <a href="#">Price: ${community.minPrice}-${community?.maxPrice}</a>
+                    <a href="#">Price: ${community?.minPrice}-${community?.maxPrice}</a>
                   </div>
                 </div>
               </div>
@@ -67,14 +67,14 @@ const CommunitiesDataTable = ({communitiesData, setDeleteData}) => {
               </Moment>
             </td>
             <td className="vam">
-              <span className={getStatusStyle(community.active)}>
+              <span className={getStatusStyle(community?.active)}>
                 {community?.active ? "Active": "panding"}
               </span>
             </td>
-            <td className="vam">{community?.status.map((item, index) => (community.status.length > (index + 1)) ? `${item}/`: item)}</td>
+            <td className="vam">{community?.status.map((item, index) => (community?.status?.length > (index + 1)) ? `${item}/`: item)}</td>
             <td className="vam">
               <div className="d-flex">
-                <Link href={`/dashboard/edit-community/${community.slug}`}> 
+                <Link href={`/dashboard/edit-community/${community?.slug}`}> 
                   <button
                     className="icon"
                     style={{ border: "none" }}
