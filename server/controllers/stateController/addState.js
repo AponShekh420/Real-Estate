@@ -3,7 +3,7 @@ const StateModel = require("../../models/StateModel");
 // upload the state on database
 const addState = async (req, res)=> {
   try {
-    const {name, desc, active, abbreviation} = req.body;
+    const {name, desc, active, abbreviation, uploadedImageChanged} = req.body;
 
     // slug making
     const duplicateState = await StateModel.find({name});
@@ -22,7 +22,7 @@ const addState = async (req, res)=> {
       desc,
       active,
       abbreviation,
-      img: req?.files[0]?.filename || "",
+      img: uploadedImageChanged ? req?.files[0]?.filename : "",
     })
 
     const status = await State.save();

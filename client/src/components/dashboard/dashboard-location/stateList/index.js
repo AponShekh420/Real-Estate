@@ -52,12 +52,31 @@ const StateList = () => {
     formData.append("abbreviation", stateAbbreviation);
     formData.append("name", stateName);
     formData.append("desc", desc);
+
+    const manualData = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        active: stateActive,
+        abbreviation: stateAbbreviation,
+        name: stateName,
+        desc: desc,
+        uploadedImageChanged: false,
+      })
+    }
+    
+    const multipartDataWithFile = {
+      method: "POST",
+      body: formData
+    }
+
+    const bodyData = stateUploadedImageChanged ? multipartDataWithFile : manualData;
+    console.log("bodyData:", bodyData)
     try {
       setStateLoading(true);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/add`, {
-        method: "POST",
-        body: formData
-      });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/add`, bodyData);
       const currentState = await res.json();
       setStateLoading(false);
       if(currentState.msg) {
@@ -93,12 +112,32 @@ const StateList = () => {
     formData.append("uploadedImageChanged", stateUploadedImageChanged);
     formData.append("oldImgUrl", stateOldImgUrl);
     formData.append("uploadedImage", stateUploadedImage);
+
+    const manualData = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        active: stateActive,
+        abbreviation: stateAbbreviation,
+        name: stateName,
+        desc: desc,
+        stateId: stateUpdateId,
+        uploadedImageChanged: false
+      })
+    }
+
+    const multipartDataWithFile = {
+      method: "PUT",
+      body: formData
+    }
+
+    const bodyData = stateUploadedImageChanged ? multipartDataWithFile : manualData;
+
     try {
       setStateLoading(true);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/update`, {
-        method: "PUT",
-        body: formData
-      });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/update`, bodyData);
       const currentState = await res.json();
       setStateLoading(false);
       if(currentState.msg) {
