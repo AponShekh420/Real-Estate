@@ -3,7 +3,7 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { addStateFields } from "@/redux/stateSlice";
+import { addAreaFields } from "@/redux/areaSlice";
 
 const UploadLocationImg = () => {
   // redux
@@ -15,7 +15,7 @@ const UploadLocationImg = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        dispatch(addStateFields({
+        dispatch(addAreaFields({
           uploadedImage: e.target.result,
           uploadedImageChanged: true
         }));

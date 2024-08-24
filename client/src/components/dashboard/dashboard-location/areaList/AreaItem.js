@@ -149,6 +149,9 @@ const AreaItem = ({eachArea, city, state}) => {
       active: eachArea.active,
       edit: true,
       areaId: eachArea._id,
+      oldImgUrl: eachArea.img,
+      uploadedImageChanged: false,
+      uploadedImage: eachArea.img,
     }))
   }
 

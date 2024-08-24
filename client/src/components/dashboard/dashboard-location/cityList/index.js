@@ -56,12 +56,30 @@ const CityList = () => {
     formData.append("desc", desc);
     formData.append("stateId", stateId._id);
 
+    const manualData = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        active: active,
+        abbreviation: abbreviation,
+        name: cityName,
+        desc: desc,
+        stateId: stateId._id,
+        uploadedImageChanged: false,
+      })
+    }
+    
+    const multipartDataWithFile = {
+      method: "POST",
+      body: formData
+    }
+
+    const bodyData = cityUploadedImageChanged ? multipartDataWithFile : manualData;
     try {
       setCityLoading(true);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/add`, {
-        method: "POST",
-        body: formData
-      });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/add`, bodyData);
       const currentCity = await res.json();
       setCityLoading(false);
       if(currentCity.msg) {
@@ -101,12 +119,33 @@ const CityList = () => {
     formData.append("oldImgUrl", cityOldImgUrl);
     formData.append("uploadedImage", cityUploadedImage);
 
+
+     const manualData = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        active: active,
+        abbreviation: abbreviation,
+        name: cityName,
+        desc: desc,
+        stateId: stateId._id,
+        cityId: cityUpdateId,
+        uploadedImageChanged: false
+      })
+    }
+
+    const multipartDataWithFile = {
+      method: "PUT",
+      body: formData
+    }
+
+    const bodyData = cityUploadedImageChanged ? multipartDataWithFile : manualData;
+
     try {
       setCityLoading(true);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/update`, {
-        method: "PUT",
-        body: formData
-      });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/update`, bodyData);
       const currentCity = await res.json();
       setCityLoading(false);
       if(currentCity.msg) {

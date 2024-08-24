@@ -1,147 +1,16 @@
 "use client"
 
 import React, { useState } from "react";
-import { HashLoader, MoonLoader } from "react-spinners";
-import { useDispatch, useSelector } from "react-redux";
 import StateList from "./stateList";
 import CityList from "./cityList";
 import AreaList from "./areaList";
-import { addCityFields, removeAllCityFields } from "@/redux/citySlice";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ImUpload } from "react-icons/im";
-import { addStateFields, removeStateAllFields } from "@/redux/stateSlice";
-import { addAreaFields, removeAllAreaFields } from "@/redux/areaSlice";
 import '@/components/dashboard/dashboard-location/style.css';
 
 
-const override = {
-  display: "block",
-  margin: "0 auto",
-  borderColor: "red",
-};
-
-
 const AddLocationContent = () => {
-  const [areaLoading, setAreaLoading] = useState(false);
   const [currentTab, setCurrentTab] = useState("state");
-
-  // redux state
-
-
-
-
-  // area location
-  const {active: areaActive, description: areaDescription, abbreviation: areaAbbreviation, areaName, stateId: stateIdForArea, cityId: cityIdForArea, edit: areaEdit, areaId: areaUpdateId} = useSelector((state)=> state.area);
-
-
-  // dispatch
-  const dispatch = useDispatch();
-
-// upload new 'State', 'City' and 'Area' through these functions
-  
-
-
-
-
-  const uploadNewArea = async (e) => {
-    e.preventDefault();
-    try {
-      setAreaLoading(true);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/area/add`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          active: areaActive,
-          abbreviation: areaAbbreviation,
-          name: areaName,
-          desc: areaDescription,
-          stateId: stateIdForArea._id,
-          cityId: cityIdForArea._id,
-        })
-      });
-      const currentArea = await res.json();
-      setAreaLoading(false);
-      if(currentArea.msg) {
-        toast.success(currentArea.msg, {
-          position: "top-right",
-          autoClose: 1500,
-        });
-        dispatch(removeAllAreaFields());
-        dispatch(addStateFields({
-          notify: Math.random(),
-        }))
-      } else {
-        dispatch(addAreaFields({
-          errors: currentArea.errors,
-        }))
-      }
-    } catch(err) {
-      console.log(err.message)
-    }
-  }
-  // uploading new 'State', 'City' and 'Area' has ended
-
-
-  const cancelAreaUpdate = () => {
-    dispatch(removeAllAreaFields())
-  }
-
-
-
-
-  // start here to update location
-
-  
-
-  
-
-
-  // area update
-  const updateExistingArea = async (e) => {
-    e.preventDefault();
-    try {
-      setAreaLoading(true);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/area/update`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          active: areaActive,
-          abbreviation: areaAbbreviation,
-          name: areaName,
-          desc: areaDescription,
-          stateId: stateIdForArea._id,
-          cityId: cityIdForArea._id,
-          areaId: areaUpdateId,
-        })
-      });
-      const currentArea = await res.json();
-      setAreaLoading(false);
-      if(currentArea.msg) {
-        toast.success(currentArea.msg, {
-          position: "top-right",
-          autoClose: 1500,
-        });
-        dispatch(removeAllAreaFields());
-        dispatch(addStateFields({
-          notify: Math.random(),
-        }))
-      } else {
-        dispatch(addAreaFields({
-          errors: currentArea.errors,
-        }))
-      }
-    } catch(err) {
-      console.log(err.message)
-    }
-  }
-
-  // here has ended to update location
-
 
 
   return (
@@ -221,46 +90,11 @@ const AddLocationContent = () => {
           aria-labelledby="nav-item3-tab"
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <div className="d-flex justify-content-between align-items-center">
-              <h4 className="title fz17 mb30">Creating Area</h4>
-              <div className="d-flex align-items-center gap-2 flex-row-reverse">
-                <button className={`bdrs0 btn-primary rounded-2 py-1 px-2 d-flex gap-2 justify-content-center align-items-center ${areaLoading ? "opacity-50" : "opacity-100"}`} disabled={areaLoading} onClick={areaEdit ? updateExistingArea : uploadNewArea}>{areaEdit ? "Update Area": "Add New Area"}
-                  {!areaLoading ? <ImUpload /> : <HashLoader
-                    color="#ffffff"
-                    loading={areaLoading}
-                    cssOverride={override}
-                    size={17}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
-                  />
-                  }
-                </button>
-                {areaEdit ? (
-                  <button className={`cancelBtn btn btn-outline-danger rounded-2 d-flex gap-2 text-danger justify-content-center align-items-center`} onClick={cancelAreaUpdate}>
-                    Cancel
-                  </button>
-                ): (
-                  ""
-                )}
-              </div>
-            </div>
             {currentTab === "area" ? <AreaList /> : <div></div> }
           </div>
         </div>
       </div>
-      {/* tab loading div */}
-      {/* {loading ? (
-        <div className="w-100 position-absolute h-100 z-10 top-0 d-flex justify-content-center align-items-center text-white" style={{backgroundColor:"rgba(255, 255, 255, 0.5)"}}>
-          <MoonLoader
-            color="black"
-            loading={loading}
-            cssOverride={override}
-            size={30}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
-        </div>
-      ): ""} */}
+      
       <ToastContainer/>
     </>
   );

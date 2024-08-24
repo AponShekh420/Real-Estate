@@ -73,7 +73,6 @@ const StateList = () => {
     }
 
     const bodyData = stateUploadedImageChanged ? multipartDataWithFile : manualData;
-    console.log("bodyData:", bodyData)
     try {
       setStateLoading(true);
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/add`, bodyData);
