@@ -146,6 +146,9 @@ const CityItem = ({eachCity, state}) => {
       active: eachCity.active,
       edit: true,
       cityId: eachCity._id,
+      oldImgUrl: eachCity.img,
+      uploadedImageChanged: false,
+      uploadedImage: eachCity.img,
     }))
   }
 

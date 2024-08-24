@@ -23,14 +23,11 @@ const override = {
 
 
 const AddLocationContent = () => {
-  const [cityLoading, setCityLoading] = useState(false);
   const [areaLoading, setAreaLoading] = useState(false);
   const [currentTab, setCurrentTab] = useState("state");
 
   // redux state
 
-  // city location
-  const {stateId, active, description, abbreviation, cityName, edit: cityEdit, cityId: cityUpdateId} = useSelector((state)=> state.city);
 
 
 
@@ -42,43 +39,7 @@ const AddLocationContent = () => {
   const dispatch = useDispatch();
 
 // upload new 'State', 'City' and 'Area' through these functions
-  const uploadNewCity = async (e) => {
-    e.preventDefault();
-    try {
-      setCityLoading(true);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/add`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          stateId: stateId._id,
-          active,
-          abbreviation,
-          name: cityName,
-          desc: description
-        })
-      });
-      const currentCity = await res.json();
-      setCityLoading(false);
-      if(currentCity.msg) {
-        toast.success(currentCity.msg, {
-          position: "top-right",
-          autoClose: 1500,
-        });
-        dispatch(removeAllCityFields());
-        dispatch(addStateFields({
-          notify: Math.random(),
-        }))
-      } else {
-        dispatch(addCityFields({
-          errors: currentCity.errors,
-        }))
-      }
-    } catch(err) {
-      console.log(err.message)
-    }
-  }
+  
 
 
 
@@ -128,54 +89,14 @@ const AddLocationContent = () => {
     dispatch(removeAllAreaFields())
   }
 
-  const cancelCityUpdate = ()=> {
-    dispatch(removeAllCityFields())
-  }
+
 
 
   // start here to update location
 
   
 
-  // city update
-  const updateExistingCity = async (e) => {
-    e.preventDefault();
-    try {
-      setCityLoading(true);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/update`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          stateId: stateId._id,
-          active,
-          abbreviation,
-          name: cityName,
-          desc: description,
-          cityId: cityUpdateId,
-        })
-      });
-      const currentCity = await res.json();
-      setCityLoading(false);
-      if(currentCity.msg) {
-        toast.success(currentCity.msg, {
-          position: "top-right",
-          autoClose: 1500,
-        });
-        dispatch(removeAllCityFields());
-        dispatch(addStateFields({
-          notify: Math.random(),
-        }))
-      } else {
-        dispatch(addCityFields({
-          errors: currentCity.errors,
-        }))
-      }
-    } catch(err) {
-      console.log(err.message)
-    }
-  }
+  
 
 
   // area update
@@ -289,29 +210,6 @@ const AddLocationContent = () => {
           aria-labelledby="nav-item2-tab"
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <div className="d-flex justify-content-between align-items-center">
-              <h4 className="title fz17 mb30">Creating City</h4>
-              <div className="d-flex align-items-center gap-2 flex-row-reverse">
-                <button className={`bdrs0 btn-primary rounded-2 py-1 px-2 d-flex gap-2 justify-content-center align-items-center ${cityLoading ? "opacity-50" : "opacity-100"}`} disabled={cityLoading} onClick={cityEdit ? updateExistingCity : uploadNewCity}>{cityEdit ? "Update City" : "Add New City"}
-                  {!cityLoading ? <ImUpload /> : <HashLoader
-                    color="#ffffff"
-                    loading={cityLoading}
-                    cssOverride={override}
-                    size={17}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
-                  />
-                  }
-                </button>
-                {cityEdit ? (
-                  <button className={`cancelBtn btn btn-outline-danger rounded-2 d-flex gap-2 text-danger justify-content-center align-items-center`} onClick={cancelCityUpdate}>
-                    Cancel
-                  </button>
-                  ): (
-                    ""
-                )}
-              </div>
-            </div>
             {currentTab === "city" ? <CityList /> : <div></div> }
           </div>
         </div>
