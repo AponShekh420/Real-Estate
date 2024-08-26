@@ -25,7 +25,7 @@ const Blog = ({data}) => {
               </a>
               </div>
               <h6 className="title mt-1">
-                <Link href={`/blogs/${blog?.slug}`}>{blog?.title}</Link>
+                <Link href={`/blog/${blog?.slug}`}>{blog?.title}</Link>
               </h6>
             </div>
           </div>

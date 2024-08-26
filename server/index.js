@@ -16,6 +16,7 @@ const catagoryRouter = require("./routers/catagoryRouter");
 const subcatagoryRouter = require("./routers/subcatagoryRouter");
 const blogRouter = require("./routers/blogRouter");
 const amenityRouter = require("./routers/amenityRouter");
+const reviewRouter = require("./routers/reviewRouter");
 
 // user
 const userRouter = require("./routers/userRouter")
@@ -60,6 +61,13 @@ app.use('/api/blog', blogRouter);
 
 // login and logout item
 app.use('/api/user', userRouter)
+
+
+
+
+
+// review
+app.use('/api/review', reviewRouter);
 
 
 

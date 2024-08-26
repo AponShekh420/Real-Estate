@@ -26,7 +26,7 @@ export default function Details({id, data}) {
                     {data?.catagory?.name}
                   </a>
                   <a className="ml15" href="#">
-                    {/* {data.date.month} {data.date.day}, {data.date.year || 2022} */}
+                    <i className="far fa-clock pe-2" />
                     <TimeManager data={data}/>
                   </a>
                 </div>

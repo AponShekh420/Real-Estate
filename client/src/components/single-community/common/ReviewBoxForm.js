@@ -31,35 +31,9 @@ const ReviewBoxForm = () => {
   };
 
   return (
-    <form className="comments_form mt30" onSubmit={handleSubmit}>
+    <form className="comments_form mt15" onSubmit={handleSubmit}>
       <div className="row">
         <div className="col-md-12">
-          <div className="mb-4">
-            <label className="fw600 ff-heading mb-2">Email</label>
-            <input
-              type="email"
-              className="form-control"
-              placeholder="ibthemes21@gmail.com"
-              required
-            />
-          </div>
-        </div>
-        {/* End .col-12 */}
-
-        <div className="col-md-6">
-          <div className="mb-4">
-            <label className="fw600 ff-heading mb-2">Title</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter Title"
-              required
-            />
-          </div>
-        </div>
-        {/* End .col-6 */}
-
-        <div className="col-md-6">
           <div className="widget-wrapper sideborder-dropdown mb-4">
             <label className="fw600 ff-heading mb-2">Rating</label>
             <div className="form-style2 input-group">

@@ -79,7 +79,7 @@ const BlogSingle = async ({params}) => {
               {/* End  AllReviews */}
 
               <div className="bsp_reveiw_wrt">
-                <h6 className="fz17">Leave A Review</h6>
+                <h6 className="fz17">Leave A Comment</h6>
                 <ReviewBoxForm />
               </div>
               {/* End ReviewBoxForm */}

@@ -205,7 +205,7 @@ const SingleCommunity = async ({ params }) => {
           </div>
           {/* End .row */}
 
-          <div className="row mt30 align-items-center justify-content-between">
+          {/* <div className="row mt30 align-items-center justify-content-between">
             <div className="col-auto">
               <div className="main-title">
                 <h2 className="title">Discover Our Featured Listings</h2>
@@ -213,43 +213,43 @@ const SingleCommunity = async ({ params }) => {
                   Aliquam lacinia diam quis lacus euismod
                 </p>
               </div>
-            </div>
+            </div> */}
             {/* End header */}
 
-            <div className="col-auto mb30">
+            {/* <div className="col-auto mb30">
               <div className="row align-items-center justify-content-center">
                 <div className="col-auto">
                   <button className="featured-prev__active swiper_button">
                     <i className="far fa-arrow-left-long" />
                   </button>
-                </div>
+                </div> */}
                 {/* End prev */}
 
-                <div className="col-auto">
+                {/* <div className="col-auto">
                   <div className="pagination swiper--pagination featured-pagination__active" />
-                </div>
+                </div> */}
                 {/* End pagination */}
 
-                <div className="col-auto">
+                {/* <div className="col-auto">
                   <button className="featured-next__active swiper_button">
                     <i className="far fa-arrow-right-long" />
                   </button>
-                </div>
+                </div> */}
                 {/* End Next */}
-              </div>
+              {/* </div> */}
               {/* End .col for navigation and pagination */}
-            </div>
+            {/* </div> */}
             {/* End .col for navigation and pagination */}
-          </div>
+          {/* </div> */}
           {/* End .row */}
 
-          <div className="row">
+          {/* <div className="row">
             <div className="col-lg-12">
               <div className="property-city-slider">
                 <NearbySimilarProperty data={res}/>
               </div>
             </div>
-          </div>
+          </div> */}
           {/* End .row */}
         </div>
         {/* End .container */}
