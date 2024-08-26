@@ -7,7 +7,7 @@ const addModelsTab = async (req, res) => {
       name: CMTName,
       community: communityId,
       desc,
-      img: req.files[0].filename,
+      img: req?.files[0]?.filename,
     });
     
     const CMTUploadStatus = await CMTUpload.save();

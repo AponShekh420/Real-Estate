@@ -5,7 +5,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
   CMTName: "",
   desc: "",
-  uploadedImage: "",
+  uploadedImage: null,
   newDataNotify: null,
   errors: {},
   CMTId: "",

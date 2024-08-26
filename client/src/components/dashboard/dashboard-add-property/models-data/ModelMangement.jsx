@@ -28,24 +28,49 @@ const ModelMangement = () => {
 
   const addModel = async (e) => {
     e.preventDefault();
+    dispatch(addModelFields({
+      errors: {}
+    }));
     if(uploadedImage == null) {
-      toast.error("Please select the image!", {
-        position: "top-right",
-        autoClose: 1500,
-      });
+      console.log("image null")
+      dispatch(addModelFields({
+        errors: {
+          img: {
+            msg: "Please select the image!"
+          }
+        }
+      }))
       return;
     }
     const formData = new FormData(e.target);
     formData.set("CMTName", CMTName);
     formData.set("desc", desc);
     formData.set("communityId", communityId);
+
+    const manualData = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        CMTName: CMTName,
+        communityId: communityId,
+        desc: desc,
+        uploadedImageChanged: false,
+      })
+    }
+    
+    const multipartDataWithFile = {
+      method: "POST",
+      body: formData
+    }
+
+    const bodyData = uploadedImageChanged ? multipartDataWithFile : manualData;
+    console.log(bodyData)
     try {
       setLoading(true);
       // console.log("img:", img)
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/add`, {
-        method: "POST",
-        body: formData
-      });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/add`, bodyData);
       const currentData = await res.json();
       setLoading(false)
       if(currentData.msg) {
@@ -81,11 +106,18 @@ const ModelMangement = () => {
   // update the model
   const updateModel = async (e) => {
     e.preventDefault();
+    dispatch(addModelFields({
+      errors: {}
+    }));
     if(uploadedImage == null) {
-      toast.error("Please select the image!", {
-        position: "top-right",
-        autoClose: 1500,
-      });
+      console.log("image null")
+      dispatch(addModelFields({
+        errors: {
+          img: {
+            msg: "Please select the image!"
+          }
+        }
+      }))
       return;
     }
     const formData = new FormData(e.target);
@@ -95,13 +127,31 @@ const ModelMangement = () => {
     formData.set("oldImgUrl", oldImgUrl);
     formData.set("uploadedImage", uploadedImage);
     formData.set("CMTId", CMTId);
+
+    const manualData = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        CMTName: CMTName,
+        desc: desc,
+        CMTId: CMTId,
+        uploadedImageChanged: false
+      })
+    }
+
+    const multipartDataWithFile = {
+      method: "PUT",
+      body: formData
+    }
+
+    const bodyData = uploadedImageChanged ? multipartDataWithFile : manualData;
+
     try {
       setLoading(true);
       // console.log("img:", img)
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/update`, {
-        method: "PUT",
-        body: formData
-      });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/update`, bodyData);
       const currentData = await res.json();
       setLoading(false)
       if(currentData.msg) {

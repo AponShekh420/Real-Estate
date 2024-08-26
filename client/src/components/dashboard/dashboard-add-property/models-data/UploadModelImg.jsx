@@ -7,7 +7,7 @@ import { addModelFields } from "@/redux/modelSlice";
 
 const UploadModelImg = () => {
   // redux
-  const {uploadedImage, uploadedImageChanged, oldImgUrl} = useSelector((state)=> state.model);
+  const {errors, uploadedImage, uploadedImageChanged, oldImgUrl} = useSelector((state)=> state.model);
   const dispatch = useDispatch();
 
   const handleUpload = (event) => {
@@ -66,8 +66,8 @@ const UploadModelImg = () => {
               <i className="fal fa-arrow-right-long" />
             </div>
           </label>
-          <p className="text">
-            Photos must be JPEG or PNG format and at least 2048x768
+          <p className={`text ${errors?.img?.msg ? "text-danger": null}`}>
+            {errors?.img?.msg || "Photos must be JPEG, JPG or PNG format"}
           </p>
         </div>
       </div>
