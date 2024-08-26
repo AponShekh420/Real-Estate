@@ -19,12 +19,12 @@ const LatestPost = async () => {
               width={90} 
               height={80} 
               alt="blog" 
-              src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/blogs/${post.img}`}
+              src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/blogs/${post?.img}`}
             />
           </div>
           <div className="news-content flex-shrink-1 ms-3">
             <p className="new-text mb0 fz14">
-              <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+              <Link href={`/blog/${post?.slug}`}>{post?.title}</Link>
             </p>
             <a className="body-light-color" href="#">
               <TimeManager data={post}/>

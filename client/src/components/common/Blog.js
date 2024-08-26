@@ -1,33 +1,31 @@
 
-import { blogs } from "@/data/blogs";
 import Image from "next/image";
 import Link from "next/link";
+import TimeManager from "../single-community/common/TimeManager";
 
-const Blog = () => {
+const Blog = ({data}) => {
   return (
     <>
-      {blogs.map((blog) => (
-        <div className="col-sm-6 col-lg-4" key={blog.id}>
+      {data?.map((blog) => (
+        <div className="col-sm-6 col-lg-4" key={blog?._id}>
           <div className="blog-style1">
             <div className="blog-img">
               <Image
                 width={386}
                 height={271}
                 className="w-100 h-100 cover"
-                src={blog.image}
+                src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/blogs/${blog?.img}`}
                 alt="blog"
               />
             </div>
             <div className="blog-content">
               <div className="date">
-                <span className="month">{blog.date.month}</span>
-                <span className="day">{blog.date.day}</span>
-              </div>
-              <a className="tag" href="#">
-                {blog.tag}
+              <a className="body-light-color" href="#">
+                <TimeManager data={blog}/>
               </a>
+              </div>
               <h6 className="title mt-1">
-                <Link href={`/blogs/${blog.id}`}>{blog.title}</Link>
+                <Link href={`/blogs/${blog?.slug}`}>{blog?.title}</Link>
               </h6>
             </div>
           </div>

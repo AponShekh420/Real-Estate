@@ -15,6 +15,7 @@ import getSingleBlog from "@/lib/getSingleBlog";
 import ReadMore from "@/components/common/ReadMore";
 import StringToDomComponent from "@/components/common/StringToDomComponent";
 import "@/components/common/quillEditorTextStyle.css";
+import RelatedPosts from "@/components/single-post/RelatedPosts";
 
 export const metadata = {
   title: "Blog Single  || Homez - Real Estate NextJS Template",
@@ -89,29 +90,7 @@ const BlogSingle = async ({params}) => {
       {/* End Blog Details */}
 
       {/* Related Blog Post */}
-      <section className="pb90 pb20-md pt-0">
-        <div className="container">
-          <div className="row">
-            <div
-              className="col-lg-6 m-auto"
-              data-aos="fade-up"
-              data-aos-delay="0"
-            >
-              <div className="main-title text-start text-md-center">
-                <h2 className="title">Related Posts</h2>
-                <p className="paragraph">
-                  Aliquam lacinia diam quis lacus euismod
-                </p>
-              </div>
-            </div>
-          </div>
-          {/* End .row */}
-
-          <div className="row" data-aos="fade-up" data-aos-delay="300">
-            <Blog />
-          </div>
-        </div>
-      </section>
+      <RelatedPosts data={res}/>
       {/* end Related Blog Post */}
 
       {/* Start Our Footer */}
