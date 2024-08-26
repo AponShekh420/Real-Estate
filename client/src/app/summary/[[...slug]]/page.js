@@ -9,6 +9,7 @@ import getLocationData from "@/lib/getLocationData";
 import ReadMore from "@/components/common/ReadMore";
 import store from "@/redux/store";
 import { removeCommunityFilterValues } from "@/redux/communityFilterSlice";
+import Breadcumb from "@/components/summary/Breadcumb";
 
 export const metadata = {
   title: "55 home || summary",
@@ -53,11 +54,7 @@ const SummaryPage = async ({params}) => {
             <div className="col-lg-12">
               <div className="breadcumb-style1">
                 <h2 className="title">{res?.data?.name} Homes for Sale</h2>
-                <div className="breadcumb-list">
-                  <a href="#">Home</a>
-                  <a href="#">For Rent</a>
-                  {desc ? <ReadMore desc={desc}/> : <div></div>}
-                </div>
+                <Breadcumb/>
                 <a
                   className="filter-btn-left mobile-filter-btn d-block d-lg-none"
                   data-bs-toggle="offcanvas"

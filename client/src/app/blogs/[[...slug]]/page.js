@@ -8,6 +8,7 @@ import getCatagoryData from "@/lib/getCatagoryData";
 import store from "@/redux/store";
 import { removeBlogFilterValues } from "@/redux/blogFilterSlice";
 import { notFound } from "next/navigation";
+import Breadcumb from "@/components/blogs/Breadcumb";
 
 export const metadata = {
   title: "Blog List v2  || Homez - Real Estate NextJS Template",
@@ -52,10 +53,7 @@ const Blogs = async ({params}) => {
             <div className="col-lg-12">
               <div className="breadcumb-style1">
                 <h2 className="title">Blog</h2>
-                <div className="breadcumb-list">
-                  <a href="#">Home</a>
-                  <a href="#">Blog</a>
-                </div>
+                <Breadcumb/>
               </div>
             </div>
           </div>
