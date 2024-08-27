@@ -16,7 +16,7 @@ const UserSchema = mongoose.Schema({
   wishlist: [
     {
       type: mongoose.Types.ObjectId,
-      ref: 'Wishlist'
+      ref: 'Community'
     }
   ],
   blogs: [
@@ -40,6 +40,10 @@ const UserSchema = mongoose.Schema({
   },
   accountId: {
     type: String,
+  },
+  avatar: {
+    type: String,
+    default: "user_avatar.png"
   }
 }, {timestamps: true});
 

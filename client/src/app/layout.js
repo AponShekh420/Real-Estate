@@ -9,6 +9,7 @@ import { DM_Sans, Poppins } from "next/font/google";
 import { useEffect } from "react";
 import { Provider } from "react-redux";
 import store from "@/redux/store";
+import Wrapper from "./layout-wrapper/wrapper";
 
 if (typeof window !== "undefined") {
   import("bootstrap");
@@ -43,7 +44,11 @@ export default function RootLayout({ children }) {
         cz-shortcut-listen="false"
       >
         <Provider store={store}>
-          <div className="wrapper ovh">{children}</div>
+          <div className="wrapper ovh">
+            <Wrapper>
+              {children}
+            </Wrapper>
+          </div>
         </Provider>
         <ScrollToTop />
       </body>

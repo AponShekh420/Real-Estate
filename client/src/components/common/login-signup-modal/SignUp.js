@@ -53,6 +53,14 @@ const SignUp = ({signInTabBtn}) => {
     }
   }
 
+  const handleGoogleAuth = () => {
+    try {
+        window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_API}/auth/google/callback`
+    } catch (err) {
+        toast.error(err?.data?.message || err.error)
+    }
+  }
+
 
   return (
     <form className="form-style1" onSubmit={userRegister} method="POST" action={`${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/register`}>
@@ -120,7 +128,7 @@ const SignUp = ({signInTabBtn}) => {
       </div>
 
       <div className="d-grid mb10">
-        <button className="ud-btn btn-white" type="button">
+        <button className="ud-btn btn-white" type="button" onClick={handleGoogleAuth}>
           <i className="fab fa-google" /> Continue Google
         </button>
       </div>

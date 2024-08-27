@@ -12,9 +12,18 @@ const login = async (req, res) => {
             const compare = await bcrypt.compare(password, data.password);
             console.log(compare)
             if(compare) {
-                const token = tokenGenerator(res, data) 
+                const token = tokenGenerator(res, data);
+
+                // logout the social login
+                req.logout(err => {
+                    if (err) {
+                        console.log(err)
+                    }
+                })
+
+                // give response for latest login data
                 res.json({
-                    data: {
+                    userInfo: {
                         email: data.email,
                         firstName: data.firstName,
                         lastName: data.lastName,

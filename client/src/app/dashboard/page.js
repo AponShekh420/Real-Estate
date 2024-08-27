@@ -6,23 +6,13 @@ import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
 import RecentActivities from "@/components/dashboard/dashboard-home/RecentActivities";
 import TopStateBlock from "@/components/dashboard/dashboard-home/TopStateBlock";
 import PropertyViews from "@/components/dashboard/dashboard-home/property-view";
-import store from "@/redux/store";
 import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Dashboard Home || Homez - Real Estate NextJS Template",
 };
 
-const DashboardHome = async () => {
-  const {user} = await store.getState();
-  console.log("dashboard", user)
-  if(!user.role || !user.email) {
-    redirect("/");
-  } else if (user.role == "contributor") {
-    redirect("/dashboard/blogs");
-  } else if(user.role == "viewer") {
-    redirect('/dashboard/my-favourites');
-  }
+const DashboardHome = () => {
 
 
   return (

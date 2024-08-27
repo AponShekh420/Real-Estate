@@ -1,36 +1,42 @@
-import { createSlice } from "@reduxjs/toolkit"
-
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  id: "4534534534",
-  firstName: "Apon",
-  lastName: "Shekh",
-  accountId: "238904239084",
-  email: "aponshekh420@gmail.com",
-  avatar: "placeholder.jpg",
-  role: "admin", // can be admin, viewer and contributor
-  provider: "local" // can be google, facebook and apple
-}
+  userInfo: null,
+};
 
+// Check for `localStorage` only on the client side
+if (typeof window !== "undefined") {
+  const savedUserInfo = localStorage.getItem("userInfo");
+  initialState.userInfo = savedUserInfo ? JSON.parse(savedUserInfo) : null;
+}
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    addUserField: (state, action) => {
-      return {
-        ...state,
-        ...action.payload
+    setCredentials: (state, action) => {
+      state.userInfo = action.payload;
+
+      // Ensure this runs only on the client side
+      if (typeof window !== "undefined") {
+        localStorage.setItem("userInfo", JSON.stringify(action.payload));
+
+        const expirationTime = Date.now() + 30 * 24 * 60 * 60 * 1000; // 30 days
+        localStorage.setItem("expirationTime", expirationTime);
       }
     },
-    removeUserField: (state) => {
-      return initialState
-    }
-  }
+    logout: (state) => {
+      state.userInfo = null;
+
+      // Ensure this runs only on the client side
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("userInfo");
+        localStorage.removeItem("expirationTime");
+      }
+    },
+  },
 });
 
-
-export const {addUserField, removeUserField} = userSlice.actions;
-
+export const { setCredentials, logout } = userSlice.actions;
 
 export default userSlice.reducer;

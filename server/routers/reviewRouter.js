@@ -11,7 +11,6 @@ const getReviews = require("../controllers/reviewController/getReviews");
 const updateReview = require("../controllers/reviewController/updateReview");
 const like = require("../controllers/reviewController/like");
 const dislike = require("../controllers/reviewController/dislike");
-const removeLike = require("../controllers/reviewController/removeLike");
 
 // callback function of configure
 const router = express.Router();

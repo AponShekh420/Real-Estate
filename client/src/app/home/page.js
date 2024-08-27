@@ -13,6 +13,7 @@ import About from "@/components/home/about";
 import Testimonial from "@/components/home/Testimonial";
 import FilterProperties from "@/components/home/FilterProperties";
 import Footer from "@/components/common/default-footer";
+import store from "@/redux/store";
 
 
 export const metadata = {
@@ -20,6 +21,7 @@ export const metadata = {
 };
 
 const Home = () => {
+
   return (
     <>
       {/* Main Header Nav */}

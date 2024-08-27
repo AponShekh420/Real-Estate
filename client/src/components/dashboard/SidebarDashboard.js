@@ -1,9 +1,17 @@
-import store from "@/redux/store";
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import MenuItem  from "@/components/dashboard/MenuItem";
+import { useSelector } from "react-redux";
 
-const SidebarDashboard = async () => {
-  const {user} = await store.getState();
+const SidebarDashboard = () => {
+  const {userInfo: user} = useSelector(state =>  state.user)
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    // Set isMounted to true after the component mounts
+    setIsMounted(true);
+  }, []);
+
 
   const sidebarItems = [
     {
@@ -93,12 +101,18 @@ const SidebarDashboard = async () => {
     },
   ];
 
+  if (!isMounted) {
+    // Show a placeholder during server-side rendering to avoid hydration mismatch
+    return null;
+  }
+
+
   return (
     <div className="dashboard__sidebar d-none d-lg-block">
       <div className="dashboard_sidebar_list">
-        {sidebarItems.map((section, sectionIndex) => {
+        {sidebarItems?.map((section, sectionIndex) => {
           let enable = true;
-          if(user.role !== "admin" && section.title == "MAIN") {
+          if(user?.role !== "admin" && section?.title == "MAIN") {
             enable = false
           }
           return enable ? (
@@ -108,23 +122,23 @@ const SidebarDashboard = async () => {
                   sectionIndex === 0 ? "mt-0" : "mt30"
                 }`}
               >
-                {section.title}
+                {section?.title}
               </p>
-              {section.items.map((item, itemIndex) => {
+              {section?.items?.map((item, itemIndex) => {
                 let enable = false;
-                if(user.role == 'admin' && item.text == "Dashboard") {
+                if(user?.role == 'admin' && item?.text == "Dashboard") {
                   enable = true
                 }
 
-                if(user && item.text == "Logout") {
+                if(user && item?.text == "Logout") {
                   enable = true
                 }
 
-                if(user && item.text == "My Profile") {
+                if(user && item?.text == "My Profile") {
                   enable = true
                 }
 
-                if(user.role == "admin" && item.text == "Reviews") {
+                if(user?.role == "admin" && item?.text == "Reviews") {
                   enable = true
                 }
 
@@ -132,27 +146,27 @@ const SidebarDashboard = async () => {
                   enable = true
                 }
 
-                if(user.role == "admin" && item.text == "My Communities") {
+                if(user?.role == "admin" && item?.text == "My Communities") {
                   enable = true
                 }
 
-                if(user.role == "admin" && item.text == "Add New Commmunity") {
+                if(user?.role == "admin" && item?.text == "Add New Commmunity") {
                   enable = true
                 }
 
-                if(user.role == "admin" && item.text == "Location") {
+                if(user?.role == "admin" && item?.text == "Location") {
                   enable = true
                 }
 
-                if((user.role == "admin" || user.role == "contributor") && item.text == "Blogs") {
+                if((user?.role == "admin" || user?.role == "contributor") && item?.text == "Blogs") {
                   enable = true
                 }
 
-                if((user.role == "admin" || user.role == "contributor") && item.text == "Add New Blog") {
+                if((user?.role == "admin" || user?.role == "contributor") && item?.text == "Add New Blog") {
                   enable = true
                 }
 
-                if((user.role == "admin" || user.role == "contributor") && item.text == "Catagory") {
+                if((user?.role == "admin" || user?.role == "contributor") && item?.text == "Catagory") {
                   enable = true
                 }
 

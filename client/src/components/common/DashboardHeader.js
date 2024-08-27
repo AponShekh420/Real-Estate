@@ -5,10 +5,20 @@ import SidebarPanel from "@/components/common/sidebar-panel";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
 
 const DashboardHeader = () => {
   const pathname = usePathname();
+  const {userInfo} = useSelector(state =>  state.user);
+
+  console.log(userInfo);
+  console.log("pathname", pathname)
+  // if(!userInfo) {
+  //   redirect("/");
+  // } else if (userInfo.role == "contributor") {
+  //   redirect("/dashboard/blogs");
+  // }
 
   const menuItems = [
     {

@@ -19,15 +19,25 @@ const amenityRouter = require("./routers/amenityRouter");
 const reviewRouter = require("./routers/reviewRouter");
 
 // user
-const userRouter = require("./routers/userRouter")
+const userRouter = require("./routers/userRouter");
+const authRouter = require("./routers/authRouter");
+const passport = require('./utils/passport');
 
 // configure funtionality
 const app = express();
 
 dotenv.config();
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000")
+  next()
+})
+
+
 app.use(cors({
-  origin: ["http://localhost:3000", "https://real-estate-ten-phi.vercel.app"],
+  origin: ["http://localhost:3000", "http://127.0.0.1:3000", "https://real-estate-ten-phi.vercel.app"],
   credentials: true,
+  methods: "GET, POST, PATCH, DELETE, PUT"
 }))
 
 
@@ -43,6 +53,9 @@ app.use(express.json({limit: "50000mb"}))
 app.use(express.urlencoded({extended: true, limit: "50000mb"}))
 app.use(express.static(path.join(__dirname, "public")))
 
+
+// password for social login
+passport(app);
 
 // community items
 app.use('/api/state', stateRouter);
@@ -61,7 +74,7 @@ app.use('/api/blog', blogRouter);
 
 // login and logout item
 app.use('/api/user', userRouter)
-
+app.use('/auth', authRouter)
 
 
 
