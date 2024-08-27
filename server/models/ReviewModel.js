@@ -21,7 +21,7 @@ const reviewSchema = mongoose.Schema({
       default: []
     }
   ],
-  unlike: [
+  dislike: [
     {
       type: mongoose.Types.ObjectId,
       ref: "User",
