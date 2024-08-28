@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const express = require("express")
 const passport= require("passport")
 const axios = require("axios")
@@ -24,7 +25,8 @@ router.get("/google", passport.authenticate('google', { scope: ['profile'] }))
 
 //register or login user to DB
 router.get("/login/success", async (req, res) => {
-  // console.log(req)
+  const {session} = req.cookies;
+
   if (req.user) {
     const userExists = await UserModel.findOne({ email: req.user._json.email })
     if (userExists) {
@@ -57,6 +59,25 @@ router.get("/login/success", async (req, res) => {
       },
       msg: "Succesfully logged in",
     })
+  } else if(session) {
+    const verifyedToken = jwt.verify(session, process.env.TOKEN_SECRET)
+    if(verifyedToken) {
+      const checkValidation = await UserModel.findOne({_id: verifyedToken.id, email: verifyedToken.email}, '-password');
+      if(checkValidation) {
+        res.status(200).json({
+          user: verifyedToken,
+          msg: "Succesfully logged in",
+        })
+      } else {
+        res.status(403).json({
+          msg: "Not Authorized",
+        })
+      }
+    } else {
+      res.status(403).json({
+        msg: "Not Authorized",
+      })
+    }
   } else {
     res.status(403).json({
       msg: "Not Authorized",

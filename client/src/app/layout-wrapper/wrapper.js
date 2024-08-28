@@ -1,5 +1,5 @@
 "use client"
-import { setCredentials } from "@/redux/userSlice";
+import { logout, setCredentials } from "@/redux/userSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
@@ -13,6 +13,8 @@ const Wrapper = ({ children }) => {
       const data = await res.json();
       if(data?.user) {
         dispatch(setCredentials(data?.user))
+      } else {
+        dispatch(logout())
       }
     } catch (error) {
         console.log(error.message)
