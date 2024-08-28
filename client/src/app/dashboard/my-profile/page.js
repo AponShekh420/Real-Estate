@@ -7,6 +7,7 @@ import ChangePasswordForm from "@/components/dashboard/dashboard-profile/ChangeP
 import PersonalInfo from "@/components/dashboard/dashboard-profile/PersonalInfo";
 import ProfileBox from "@/components/dashboard/dashboard-profile/ProfileBox";
 import SocialField from "@/components/dashboard/dashboard-profile/SocialField";
+import { getSession } from "@/lib/authLib";
 import store from "@/redux/store";
 import { redirect } from "next/navigation";
 
@@ -15,8 +16,7 @@ export const metadata = {
 };
 
 const DashboardMyProfile = async () => {
-  const {user} = await store.getState();
-
+  const user = await getSession();
 
   if(!user) {
     redirect("/")
@@ -36,7 +36,7 @@ const DashboardMyProfile = async () => {
       {/* dashboard_content_wrapper */}
       <div className="dashboard_content_wrapper">
         <div className="dashboard dashboard_wrapper pr30 pr0-xl">
-          <SidebarDashboard />
+          <SidebarDashboard user={user} />
           {/* End .dashboard__sidebar */}
 
           <div className="dashboard__main pl0-md">

@@ -4,6 +4,7 @@ import DboardMobileNavigation from "@/components/dashboard/DboardMobileNavigatio
 import Footer from "@/components/dashboard/Footer";
 import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
 import TabAndHeader from "@/components/dashboard/dashboard-catagory/TabAndHeader";
+import { getSession } from "@/lib/authLib";
 import store from "@/redux/store";
 import { redirect } from "next/navigation";
 
@@ -13,7 +14,7 @@ export const metadata = {
 };
 
 const DashboardAddProperty = async () => {
-  const {user} = await store.getState();
+  const user = await getSession();
 
   if(user.role == "admin" || user.role == "contributor") {
     // nothing
@@ -34,7 +35,7 @@ const DashboardAddProperty = async () => {
       {/* dashboard_content_wrapper */}
       <div className="dashboard_content_wrapper">
         <div className="dashboard dashboard_wrapper pr30 pr0-md">
-          <SidebarDashboard />
+          <SidebarDashboard user={user}/>
           {/* End .dashboard__sidebar */}
 
           <div className="dashboard__main pl0-md">

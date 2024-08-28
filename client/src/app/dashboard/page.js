@@ -6,14 +6,23 @@ import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
 import RecentActivities from "@/components/dashboard/dashboard-home/RecentActivities";
 import TopStateBlock from "@/components/dashboard/dashboard-home/TopStateBlock";
 import PropertyViews from "@/components/dashboard/dashboard-home/property-view";
+import { getSession } from "@/lib/authLib";
 import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Dashboard Home || Homez - Real Estate NextJS Template",
 };
 
-const DashboardHome = () => {
-
+const DashboardHome = async () => {
+  const user = await getSession();
+  
+  if(user?.role == "contributor") {
+    redirect("/dashboard/blogs")
+  } else if(user.role == "admin" || user.role == "contributor") {
+    // nothing
+  } else {
+    redirect("/login")
+  }
 
   return (
     <>
@@ -28,7 +37,7 @@ const DashboardHome = () => {
       {/* dashboard_content_wrapper */}
       <div className="dashboard_content_wrapper">
         <div className="dashboard dashboard_wrapper pr30 pr0-xl">
-          <SidebarDashboard />
+          <SidebarDashboard user={user}/>
           {/* End .dashboard__sidebar */}
 
           <div className="dashboard__main pl0-md">

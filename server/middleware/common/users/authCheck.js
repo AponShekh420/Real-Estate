@@ -4,11 +4,11 @@ const UserModel = require('../../../models/UserModel');
 
 
 const authCheck = async (req, res, next) => {
-    const {token} = req.signedCookies;
+    const {session} = req.cookies;
     
-    if(token) {
+    if(session) {
         try {
-            const verifyedToken = await jwt.verify(token, process.env.TOKEN_SECRET)
+            const verifyedToken = jwt.verify(session, process.env.TOKEN_SECRET)
 
             if(verifyedToken) {
                 const checkValidation = await UserModel.findOne({_id: verifyedToken.id, email: verifyedToken.email}, '-password');

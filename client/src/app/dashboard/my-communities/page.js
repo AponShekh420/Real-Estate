@@ -9,6 +9,7 @@ import DboardMobileNavigation from "@/components/dashboard/DboardMobileNavigatio
 import Container from "@/components/dashboard/dashboard-my-communities/Container";
 import { redirect } from "next/navigation";
 import store from "@/redux/store";
+import { getSession } from "@/lib/authLib";
 
 export const metadata = {
   title: "Dashboard Properties || Homez - Real Estate NextJS Template",
@@ -16,7 +17,7 @@ export const metadata = {
 
 const DashboardMyCommunities = async () => {
   
-  const {user} = await store.getState();
+  const user = await getSession();
 
   if(user.role !== "admin") {
     redirect("/")
@@ -35,7 +36,7 @@ const DashboardMyCommunities = async () => {
       {/* dashboard_content_wrapper */}
       <div className="dashboard_content_wrapper">
         <div className="dashboard dashboard_wrapper pr30 pr0-xl">
-          <SidebarDashboard />
+          <SidebarDashboard user={user}/>
           {/* End .dashboard__sidebar */}
 
           <div className="dashboard__main pl0-md">
