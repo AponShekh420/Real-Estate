@@ -46,6 +46,8 @@ const CatagoriesList = () => {
       {loading ? (
         <ContentLoaderWrapper/>
       ) : (
+      <div className="sidebar-widget mb30">
+        <h6 className="widget-title">Catagories</h6>
         <ul className="w-100 list-unstyled">
           {catagoriesData.map((catagory, catagoryIndex)=> (
             <li className={`${path.split('/')[2] === catagory.slug ? "text-danger": ""}`} key={catagoryIndex}>
@@ -72,6 +74,7 @@ const CatagoriesList = () => {
             </li>
           ))}
         </ul>
+      </div>
       )}
     </div>
   );

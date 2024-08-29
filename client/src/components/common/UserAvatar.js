@@ -13,19 +13,19 @@ const UserAvatar = ({userInfo}) => {
       href: "/my-favourites",
       icon: "flaticon-like",
       text: "My Favorites",
-      roles: ["user", "admin", "contributor"],
+      roles: ["viewer", "admin", "contributor"],
     },
     {
       href: "/my-profile",
       icon: "flaticon-user",
       text: "My Profile",
-      roles: ["user", "admin", "contributor"],
+      roles: ["viewer", "admin", "contributor"],
     },
     {
       href: "/login",
       icon: "flaticon-logout",
       text: "Logout",
-      roles: ["user", "admin", "contributor"],
+      roles: ["viewer", "admin", "contributor"],
     },
   ];
   return (
@@ -37,7 +37,7 @@ const UserAvatar = ({userInfo}) => {
               width={32}
               height={32}
               className="rounded-circle"
-              src={userInfo?.provider == "local" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar}
+              src={userInfo?.provider == "local" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar || "/images/user_avatar.png"}
               alt="user.png"
             />
           </a>
@@ -52,7 +52,7 @@ const UserAvatar = ({userInfo}) => {
                         width={50}
                         height={50}
                         className="img-fluid mr10"
-                        src={userInfo?.provider == "local" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar}
+                        src={userInfo?.provider == "local" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar || "/images/user_avatar.png"}
                         alt="ms3.png"
                       />
                       <div className="meta d-sm-flex justify-content-sm-between align-items-center">
@@ -69,7 +69,7 @@ const UserAvatar = ({userInfo}) => {
                 const isAuthorized = item?.roles.includes(userInfo?.role);
 
                 return isAuthorized ? (
-                  <MenuItem key={itemIndex} item={item} headerItem={true}/>
+                  <MenuItem key={itemIndex} item={item} headerItem={true} userInfo={userInfo}/>
                 ) : null;
               })}
             </div>

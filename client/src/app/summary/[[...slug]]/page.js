@@ -55,6 +55,7 @@ const SummaryPage = async ({params}) => {
               <div className="breadcumb-style1">
                 <h2 className="title">{res?.data?.name} Homes for Sale</h2>
                 <Breadcumb/>
+                {res?.data?.desc ? <ReadMore desc={res?.data?.desc}/> : null}
                 <a
                   className="filter-btn-left mobile-filter-btn d-block d-lg-none"
                   data-bs-toggle="offcanvas"

@@ -7,9 +7,10 @@ import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
 import MenuItem from "../dashboard/MenuItem";
+import NavAvatarLoading from "./NavAvatarLoading";
 
 const DashboardHeader = () => {
-  const {userInfo} = useSelector(state =>  state.user);
+  const {userInfo, loading} = useSelector(state =>  state.user);
 
   const menuItems = [
     {
@@ -107,42 +108,46 @@ const DashboardHeader = () => {
                             width={44}
                             height={44}
                             className="rounded-circle"
-                            src={userInfo?.provider == "local" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar}
+                            src={userInfo?.provider == "local" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar || "/images/user_avatar.png"}
                             alt="user.png"
                           />
                         </a>
                         <div className="dropdown-menu">
-                          <div className="user_setting_content">
-                            <div className="col-12 mb10">
-                              <div className="message_container mt30-md" style={{boxShadow: "none", borderRadius: "none"}}>
-                                <div className="user_heading px-0 py-2 pt-0">
-                                  <div className="wrap">
-                                    <span className="contact-status online" />
-                                    <Image
-                                      width={50}
-                                      height={50}
-                                      className="img-fluid mr10"
-                                      src={userInfo?.provider == "local" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar}
-                                      alt="ms3.png"
-                                    />
-                                    <div className="meta d-sm-flex justify-content-sm-between align-items-center">
-                                      <div className="authors">
-                                        <h6 className="name mb-0">{userInfo?.firstName} {userInfo?.lastName}</h6>
-                                        <p className="preview" style={{wordBreak: "break-all", overflowWrap: "break-word", width: "100%"}}>{userInfo?.email}</p>
+                          {loading ? (
+                            <NavAvatarLoading/>
+                          ) : (
+                            <div className="user_setting_content">
+                              <div className="col-12 mb10">
+                                <div className="message_container mt30-md" style={{boxShadow: "none", borderRadius: "none"}}>
+                                  <div className="user_heading px-0 py-4 pt-0">
+                                    <div className="wrap">
+                                      <span className="contact-status online" />
+                                      <Image
+                                        width={50}
+                                        height={50}
+                                        className="img-fluid mr10"
+                                        src={userInfo?.provider == "local" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar}
+                                        alt="ms3.png"
+                                      />
+                                      <div className="meta d-sm-flex justify-content-sm-between align-items-center">
+                                        <div className="authors">
+                                          <h6 className="name mb-0">{userInfo?.firstName} {userInfo?.lastName}</h6>
+                                          <p className="preview" style={{wordBreak: "break-all", overflowWrap: "break-word", width: "100%"}}>{userInfo?.email}</p>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                            {menuItems?.map((item, itemIndex) => {
-                              const isAuthorized = item?.roles.includes(userInfo?.role);
+                              {menuItems?.map((item, itemIndex) => {
+                                const isAuthorized = item?.roles.includes(userInfo?.role);
 
-                              return isAuthorized ? (
-                                <MenuItem key={itemIndex} item={item} headerItem={true}/>
-                              ) : null;
-                            })}
-                          </div>
+                                return isAuthorized ? (
+                                  <MenuItem key={itemIndex} item={item} headerItem={true} userInfo={userInfo}/>
+                                ) : null;
+                              })}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </li>

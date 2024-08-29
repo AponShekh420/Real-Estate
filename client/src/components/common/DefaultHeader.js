@@ -14,7 +14,7 @@ import UserAvatar from "./UserAvatar";
 
 const DefaultHeader = () => {
   const [navbar, setNavbar] = useState(false);
-  const {userInfo} = useSelector(state => state.user)
+  const {userInfo, loading} = useSelector(state => state.user)
 
   const changeBackground = () => {
     if (window.scrollY >= 10) {
@@ -81,8 +81,8 @@ const DefaultHeader = () => {
                   ) : (
                     <a
                       href="#"
-                      className="login-info d-flex align-items-cente"
-                      data-bs-toggle="modal"
+                      className={`login-info d-flex align-items-center ${!loading ? null : "opacity-25"}`}
+                      data-bs-toggle={`${loading ? null : "modal"}`}
                       data-bs-target="#loginSignupModal"
                       role="button"
                     >

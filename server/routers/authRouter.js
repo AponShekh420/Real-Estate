@@ -93,6 +93,7 @@ router.get("/login/failed", (req, res) => {
 
 //logout
 router.get("/logout", (req, res) => {
+  res.clearCookie("session");
   req.logout(err => {
     if (err) {
       console.log(err)
