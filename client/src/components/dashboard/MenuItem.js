@@ -8,33 +8,52 @@ import Link from "next/link";
 
 
 
-const MenuItem = ({itemIndex, item}) => {
+const MenuItem = ({itemIndex, item, headerItem}) => {
 
   const pathname = usePathname();
 
 
   return (
-    <div key={itemIndex} className="sidebar_list_item">
-      <Link
-        href={item.href}
-        className={`items-center   ${
-          pathname == item.href ? "-is-active" : ""
-        } `}
-      >
-        {item.text === "Location" ? (
-          <CiLocationOn size={22} className="mr15"/>
-        ) : item.text === "Blogs" ? (
-          <HiOutlineNewspaper size={22} className="mr15"/>
-        ) : item.text === "Catagory" ? (
-          <GiCheckboxTree  size={22} className="mr15"/>
-        ): item.text === "Add New Blog" ? (
-          <PiNotePencilThin size={22} className="mr15"/>
-        ): (
-          <i className={`${item.icon} mr15`} />
-        )}
-        {item.text}
-      </Link>
-    </div>
+    <>
+      {headerItem ? (
+        <Link
+          key={itemIndex}
+          className={`dropdown-item ${
+            pathname == item.href ? "-is-active" : ""
+          } `}
+          href={item.href}
+        >
+          {item.text === "My Blogs" ? (
+            <HiOutlineNewspaper size={22} className="mr15"/>
+          ) : (
+            <i className={`${item.icon} mr15`} />
+          )}
+          {item.text}
+        </Link>
+      ): (
+        <div key={itemIndex} className="sidebar_list_item">
+          <Link
+            href={item.href}
+            className={`items-center   ${
+              pathname == item.href ? "-is-active" : ""
+            } `}
+          >
+            {item.text === "Location" ? (
+              <CiLocationOn size={22} className="mr15"/>
+            ) : item.text === "Blogs" ? (
+              <HiOutlineNewspaper size={22} className="mr15"/>
+            ) : item.text === "Catagory" ? (
+              <GiCheckboxTree  size={22} className="mr15"/>
+            ): item.text === "Add New Blog" ? (
+              <PiNotePencilThin size={22} className="mr15"/>
+            ): (
+              <i className={`${item.icon} mr15`} />
+            )}
+            {item.text}
+          </Link>
+        </div>
+      )}
+    </>
   );
 }
 

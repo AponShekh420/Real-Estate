@@ -9,9 +9,12 @@ import React, { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import './styles/header.css'
+import { useSelector } from "react-redux";
+import UserAvatar from "./UserAvatar";
 
 const DefaultHeader = () => {
   const [navbar, setNavbar] = useState(false);
+  const {userInfo} = useSelector(state => state.user)
 
   const changeBackground = () => {
     if (window.scrollY >= 10) {
@@ -73,16 +76,20 @@ const DefaultHeader = () => {
                     +(0) 123 050 945 02
                   </a>
 
-                  <a
-                    href="#"
-                    className="login-info d-flex align-items-cente"
-                    data-bs-toggle="modal"
-                    data-bs-target="#loginSignupModal"
-                    role="button"
-                  >
-                    <i className="far fa-user-circle fz16 me-2" />{" "}
-                    <span className="d-none d-xl-block">Login / Register</span>
-                  </a>
+                  {userInfo ? (
+                    <UserAvatar userInfo={userInfo}/>
+                  ) : (
+                    <a
+                      href="#"
+                      className="login-info d-flex align-items-cente"
+                      data-bs-toggle="modal"
+                      data-bs-target="#loginSignupModal"
+                      role="button"
+                    >
+                      <i className="far fa-user-circle fz16 me-2" />{" "}
+                      <span className="d-none d-xl-block">Login / Register</span>
+                    </a>
+                  )}
                   {/* <Link
                     className="ud-btn btn-white add-property bdrs60 mx-2 mx-xl-4"
                     href="/dashboard-add-property"

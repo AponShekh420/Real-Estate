@@ -21,7 +21,7 @@ const DashboardHome = async () => {
   } else if(user.role == "admin" || user.role == "contributor") {
     // nothing
   } else {
-    redirect("/login")
+    redirect("/")
   }
 
   return (

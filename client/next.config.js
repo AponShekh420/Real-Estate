@@ -8,6 +8,11 @@ const nextConfig = {
         port: '5000',
         pathname: '/assets/**', // Adjust the path as necessary
       },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com', // Corrected
+        pathname: '/**',
+      },
     ],
   },
 

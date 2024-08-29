@@ -4,79 +4,37 @@ import MainMenu from "@/components/common/MainMenu";
 import SidebarPanel from "@/components/common/sidebar-panel";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { redirect, usePathname } from "next/navigation";
+import React from "react";
 import { useSelector } from "react-redux";
+import MenuItem from "../dashboard/MenuItem";
 
 const DashboardHeader = () => {
-  const pathname = usePathname();
   const {userInfo} = useSelector(state =>  state.user);
-
-  console.log(userInfo);
-  console.log("pathname", pathname)
-  // if(!userInfo) {
-  //   redirect("/");
-  // } else if (userInfo.role == "contributor") {
-  //   redirect("/dashboard/blogs");
-  // }
 
   const menuItems = [
     {
-      title: "MAIN",
-      items: [
-        {
-          icon: "flaticon-discovery",
-          text: "Dashboard",
-          href: "/dashboard-home",
-        },
-        {
-          icon: "flaticon-chat-1",
-          text: "Message",
-          href: "/dashboard-message",
-        },
-      ],
+      href: "/dashboard",
+      icon: "flaticon-discovery",
+      text: "Dashboard",
+      roles: ["admin", "contributor"], // Specify roles that can access this item
     },
     {
-      title: "MANAGE LISTINGS",
-      items: [
-        {
-          icon: "flaticon-new-tab",
-          text: "Add New Property",
-          href: "/dashboard-add-property",
-        },
-        {
-          icon: "flaticon-home",
-          text: "My Properties",
-          href: "/dashboard-my-properties",
-        },
-        {
-          icon: "flaticon-like",
-          text: "My Favorites",
-          href: "/dashboard-my-favourites",
-        },
-        {
-          icon: "flaticon-search-2",
-          text: "Saved Search",
-          href: "/dashboard-saved-search",
-        },
-        { icon: "flaticon-review", text: "Reviews", href: "/dashboard-review" },
-      ],
+      href: "/my-favourites",
+      icon: "flaticon-like",
+      text: "My Favorites",
+      roles: ["user", "admin", "contributor"],
     },
     {
-      title: "MANAGE ACCOUNT",
-      items: [
-        {
-          icon: "flaticon-protection",
-          text: "My Package",
-          href: "/dashboard-my-package",
-        },
-        {
-          icon: "flaticon-user",
-          text: "My Profile",
-          href: "/dashboard-my-profile",
-        },
-        { icon: "flaticon-exit", text: "Logout", href: "/login" },
-      ],
+      href: "/my-profile",
+      icon: "flaticon-user",
+      text: "My Profile",
+      roles: ["user", "admin", "contributor"],
+    },
+    {
+      href: "/login",
+      icon: "flaticon-logout",
+      text: "Logout",
+      roles: ["user", "admin", "contributor"],
     },
   ];
 
@@ -148,35 +106,42 @@ const DashboardHeader = () => {
                           <Image
                             width={44}
                             height={44}
-                            src="/images/resource/user.png"
+                            className="rounded-circle"
+                            src={userInfo?.provider == "local" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar}
                             alt="user.png"
                           />
                         </a>
                         <div className="dropdown-menu">
                           <div className="user_setting_content">
-                            {menuItems.map((section, sectionIndex) => (
-                              <div key={sectionIndex}>
-                                <p
-                                  className={`fz15 fw400 ff-heading ${
-                                    sectionIndex === 0 ? "mb20" : "mt30"
-                                  }`}
-                                >
-                                  {section.title}
-                                </p>
-                                {section.items.map((item, itemIndex) => (
-                                  <Link
-                                    key={itemIndex}
-                                    className={`dropdown-item ${
-                                      pathname == item.href ? "-is-active" : ""
-                                    } `}
-                                    href={item.href}
-                                  >
-                                    <i className={`${item.icon} mr10`} />
-                                    {item.text}
-                                  </Link>
-                                ))}
+                            <div className="col-12 mb10">
+                              <div className="message_container mt30-md" style={{boxShadow: "none", borderRadius: "none"}}>
+                                <div className="user_heading px-0 py-2 pt-0">
+                                  <div className="wrap">
+                                    <span className="contact-status online" />
+                                    <Image
+                                      width={50}
+                                      height={50}
+                                      className="img-fluid mr10"
+                                      src={userInfo?.provider == "local" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar}
+                                      alt="ms3.png"
+                                    />
+                                    <div className="meta d-sm-flex justify-content-sm-between align-items-center">
+                                      <div className="authors">
+                                        <h6 className="name mb-0">{userInfo?.firstName} {userInfo?.lastName}</h6>
+                                        <p className="preview" style={{wordBreak: "break-all", overflowWrap: "break-word", width: "100%"}}>{userInfo?.email}</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
-                            ))}
+                            </div>
+                            {menuItems?.map((item, itemIndex) => {
+                              const isAuthorized = item?.roles.includes(userInfo?.role);
+
+                              return isAuthorized ? (
+                                <MenuItem key={itemIndex} item={item} headerItem={true}/>
+                              ) : null;
+                            })}
                           </div>
                         </div>
                       </div>
