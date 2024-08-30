@@ -47,11 +47,11 @@ router.get("/login/success", async (req, res) => {
     }
     res.status(200).json({
       user: { 
-        firstName: req.user._json.given_name,
-        lastName: req.user._json.family_name,
-        provider: req.user.provider,
+        firstName: userExists?.firstName || req.user._json.given_name,
+        lastName: userExists?.lastName || req.user._json.family_name,
+        provider: userExists?.provider || req.user.provider,
         accountId: req.user.id,
-        avatar: req.user._json.picture,
+        avatar: userExists?.avatar || req.user._json.picture,
         email: req.user._json.email,
         role: userExists?.role || "viewer",
         id: userExists?._id,

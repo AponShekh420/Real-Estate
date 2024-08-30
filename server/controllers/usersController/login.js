@@ -7,7 +7,6 @@ const login = async (req, res) => {
     
     try {
         const data = await UserModel.findOne({email});
-        console.log(data)
         if(data) {
             const compare = await bcrypt.compare(password, data.password);
             console.log(compare)

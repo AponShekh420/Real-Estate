@@ -97,16 +97,16 @@ const SignIn = ({modalCloseBtn}) => {
           <input type="checkbox" defaultChecked="checked" />
           <span className="checkmark" />
         </label>
-        <a className="fz14 ff-heading" href="#">
+        <Link className="fz14 ff-heading" style={{textDecoration: "underline"}} href="/forgot-password">
           Lost your password?
-        </a>
+        </Link>
       </div>
       {/* End  Lost your password? */}
 
       <div className="d-grid mb20">
         <button className={`ud-btn btn-thm d-flex align-items-center justify-content-center ${loading ? "opacity-50": "opacity-100"}`} type="submit" disabled={loading}>
           {!loading && "Sign in"}
-          {loading ? (<BeatLoader color="white" loading={loading} />) : (<i className="fal fa-arrow-right-long" />)}
+          {loading ? (<BeatLoader color="white" size={22} loading={loading} />) : (<i className="fal fa-arrow-right-long" />)}
         </button>
         <p className="text-danger text-capitalize text-center mt10" style={{fontSize: 15, lineHeight: 1.4}}>{errors?.login?.msg}</p>
       </div>

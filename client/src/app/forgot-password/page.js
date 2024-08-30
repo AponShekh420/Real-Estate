@@ -1,15 +1,16 @@
-import SignUp from "@/components/common/login-signup-modal/SignUp";
+import ForgotPassword from "@/components/common/forget-reset/ForgotPassword";
 import { getSession } from "@/lib/authLib";
 import Image from "next/image";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata = {
-  title: "Register  || Homez - Real Estate NextJS Template",
+  title: "Forgot Password || Homez - Real Estate NextJS Template",
 };
 
-const Register = async () => {
+const Reset = async () => {
   const user = await getSession();
   if(user) {
     redirect('/')
@@ -31,29 +32,15 @@ const Register = async () => {
           <div className="row" data-aos="fade-left" data-aos-delay="300">
             <div className="col-lg-6">
               <div className="log-reg-form signup-modal form-style1 bgc-white p50 p30-sm default-box-shadow2 bdrs12">
-                <div className="text-center mb40">
-                  <Link href="/">
-                    <Image
-                      width={138}
-                      height={44}
-                      className="mb25"
-                      src="/images/header-logo2.svg"
-                      alt="logo"
-                    />
-                  </Link>
-                  <h2>Create account</h2>
-                  <p className="text">
-                    Create your account to access all features.
-                  </p>
-                </div>
-                <SignUp />
+                <ForgotPassword />
               </div>
             </div>
           </div>
         </div>
       </section>
+      <ToastContainer/>
     </>
   );
 };
 
-export default Register;
+export default Reset;

@@ -17,7 +17,9 @@ const DashboardMyFavourites = async () => {
   
   const user = await getSession();
 
-  if(!user) {
+  if(user.role == "admin" || user.role == "contributor") {
+    // nothing
+  } else {
     redirect("/")
   }
 

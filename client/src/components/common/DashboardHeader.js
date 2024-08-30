@@ -108,7 +108,7 @@ const DashboardHeader = () => {
                             width={44}
                             height={44}
                             className="rounded-circle"
-                            src={userInfo?.provider == "local" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar || "/images/user_avatar.png"}
+                            src={userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar || "/images/user_avatar.png"}
                             alt="user.png"
                           />
                         </a>
@@ -126,7 +126,7 @@ const DashboardHeader = () => {
                                         width={50}
                                         height={50}
                                         className="img-fluid mr10"
-                                        src={userInfo?.provider == "local" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar}
+                                        src={userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar}
                                         alt="ms3.png"
                                       />
                                       <div className="meta d-sm-flex justify-content-sm-between align-items-center">

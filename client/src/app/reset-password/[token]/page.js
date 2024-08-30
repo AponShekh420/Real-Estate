@@ -1,15 +1,19 @@
-import SignUp from "@/components/common/login-signup-modal/SignUp";
+import ResetPassword from "@/components/common/forget-reset/ResetPassword";
+import SignIn from "@/components/common/login-signup-modal/SignIn";
 import { getSession } from "@/lib/authLib";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata = {
-  title: "Register  || Homez - Real Estate NextJS Template",
+  title: "Account Reset || Homez - Real Estate NextJS Template",
 };
 
-const Register = async () => {
+const Reset = async ({params}) => {
+  const {token} = params;
   const user = await getSession();
   if(user) {
     redirect('/')
@@ -41,19 +45,21 @@ const Register = async () => {
                       alt="logo"
                     />
                   </Link>
-                  <h2>Create account</h2>
+                  <h2>Reset Password</h2>
                   <p className="text">
-                    Create your account to access all features.
+                    Set a new password to secure your account
                   </p>
                 </div>
-                <SignUp />
+                <ResetPassword token={token}/>
+                {/* <h5 style={{padding: "150px 0"}}>Thanks, Please check your email to reset the pasword</h5> */}
               </div>
             </div>
           </div>
         </div>
       </section>
+      <ToastContainer/>
     </>
   );
 };
 
-export default Register;
+export default Reset;

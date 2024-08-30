@@ -119,7 +119,7 @@ const SignUp = ({signInTabBtn}) => {
       <div className="d-grid mb20">
         <button className={`ud-btn btn-thm d-flex align-items-center justify-content-center ${loading ? "opacity-50": "opacity-100"}`} type="submit" disabled={loading}>
           {!loading && "Create account"}
-          {loading ? (<BeatLoader color="white" loading={loading} />) : (<i className="fal fa-arrow-right-long"/>)}
+          {loading ? (<BeatLoader color="white" size={22} loading={loading} />) : (<i className="fal fa-arrow-right-long"/>)}
         </button>
       </div>
       <div className="hr_content mb20">
