@@ -52,10 +52,9 @@ router.get("/login/success", async (req, res) => {
         provider: req.user.provider,
         accountId: req.user.id,
         avatar: req.user._json.picture,
-        role: "viewer",
         email: req.user._json.email,
         role: userExists?.role || "viewer",
-        _id: userExists?._id,
+        id: userExists?._id,
       },
       msg: "Succesfully logged in",
     })

@@ -7,6 +7,8 @@ const checkRegisterValidation = require("../middleware/checkRegisterValidation")
 const checkLoginValidation = require("../middleware/checkLoginValidation");
 const authCheck = require("../middleware/common/users/authCheck");
 const getUser = require("../controllers/usersController/getUser");
+const forgotPassword = require("../controllers/usersController/forgotPassword");
+const resetPassword = require("../controllers/usersController/resetPassword");
 
 
 const router = express.Router();
@@ -16,5 +18,7 @@ router.post("/login", checkLoginValidation, useValidationResult, login);
 router.delete("/logout", authCheck, logout);
 router.post("/register", checkRegisterValidation, useValidationResult, register)
 router.get("/get", authCheck, getUser)
+router.post("/forgot-password", forgotPassword);
+router.patch("/reset-password/:resetToken", resetPassword)
 
 module.exports = router;
