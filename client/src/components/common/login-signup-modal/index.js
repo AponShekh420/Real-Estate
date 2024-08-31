@@ -64,7 +64,7 @@ const LoginSignupModal = () => {
                 role="tabpanel"
                 aria-labelledby="nav-home-tab"
               >
-                <SignIn  modalCloseBtn={modalCloseBtn}/>
+                <SignIn modalCloseBtn={modalCloseBtn}/>
               </div>
               {/* End signin content */}
 
@@ -74,7 +74,7 @@ const LoginSignupModal = () => {
                 role="tabpanel"
                 aria-labelledby="nav-profile-tab"
               >
-                <SignUp signInTabBtn={signInBtn}/>
+                <SignUp signInTabBtn={signInBtn} modalCloseBtn={modalCloseBtn}/>
               </div>
               {/* End signup content */}
             </div>

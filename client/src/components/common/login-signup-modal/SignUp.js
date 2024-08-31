@@ -6,7 +6,7 @@ import { BeatLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
 
-const SignUp = ({signInTabBtn}) => {
+const SignUp = ({signInTabBtn, modalCloseBtn}) => {
 
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -144,7 +144,7 @@ const SignUp = ({signInTabBtn}) => {
       </div>
       <p className="dark-color text-center mb0 mt10">
         Already Have an Account?{" "}
-        <Link className="dark-color fw600" href="/login">
+        <Link className="dark-color fw600" href="/login" onClick={() => modalCloseBtn ? modalCloseBtn.current.click() : null}>
           Login
         </Link>
       </p>

@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import Pagination from "../../property/Pagination";
+import Pagination from "@/components/common/Pagination";
 import FilterHeader from "./FilterHeader";
 import BlogsDataTable from "./BlogsDataTable";
 import { MoonLoader } from "react-spinners";
@@ -133,7 +133,7 @@ const Container = () => {
                       ) : blogsData?.data?.length == 0 ? <h1 style={{height: "400px"}} className="d-flex align-items-center justify-content-center">No Data Found</h1> : <BlogsDataTable blogsData={blogsData} setDeleteData={setDeleteData} key={1}/>}
 
                   <div className="mt30">
-                    {loading ? (<div></div>) : (<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} blogsData={blogsData}/>)}
+                    {loading ? (<div></div>) : (<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} data={blogsData}/>)}
                   </div>
                 </div>
               </div>
@@ -168,7 +168,7 @@ const Container = () => {
                     ) : blogsData?.data?.length == 0 ? <h1 style={{height: "400px"}} className="d-flex align-items-center justify-content-center">No Data Found</h1> : <BlogsDataTable setDeleteData={setDeleteData} blogsData={blogsData} key={2}/>}
 
                   <div className="mt30">
-                   {loading ? (<div></div>) : (<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} blogsData={blogsData}/>)}
+                   {loading ? (<div></div>) : (<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} data={blogsData}/>)}
                   </div>
                 </div>
               </div>

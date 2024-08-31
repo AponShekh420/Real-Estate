@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-const Pagination = ({totalPages, setCurrentPage, currentPage, communitiesData}) => {
+const Pagination = ({totalPages, setCurrentPage, currentPage, data}) => {
 
   const handlePageClick = (page) => {
     setCurrentPage(page);
@@ -62,7 +62,7 @@ const Pagination = ({totalPages, setCurrentPage, currentPage, communitiesData}) 
         </li>
       </ul>
       <p className="mt10 pagination_page_count text-center">
-        {currentPage}-{totalPages} of {communitiesData?.lotalNumberOfData}+ communities available
+        {currentPage}-{totalPages} of {data?.lotalNumberOfData}+ communities available
       </p>
     </div>
   );

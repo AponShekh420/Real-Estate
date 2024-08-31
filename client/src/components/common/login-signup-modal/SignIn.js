@@ -97,7 +97,7 @@ const SignIn = ({modalCloseBtn}) => {
           <input type="checkbox" defaultChecked="checked" />
           <span className="checkmark" />
         </label>
-        <Link className="fz14 ff-heading" style={{textDecoration: "underline"}} href="/forgot-password">
+        <Link href="/forgot-password" className="fz14 ff-heading" style={{textDecoration: "underline"}} onClick={() => modalCloseBtn ? modalCloseBtn.current.click() : null}>
           Lost your password?
         </Link>
       </div>
@@ -138,7 +138,7 @@ const SignIn = ({modalCloseBtn}) => {
       </div>
       <p className="dark-color text-center mb0 mt10">
         Not signed up?{" "}
-        <Link className="dark-color fw600" href="/register">
+        <Link className="dark-color fw600" href="/register" onClick={() => modalCloseBtn ? modalCloseBtn.current.click() : null}>
           Create an account.
         </Link>
       </p>

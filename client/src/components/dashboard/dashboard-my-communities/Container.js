@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import PropertyDataTable from "./CommunitiesDataTable";
-import Pagination from "../../property/Pagination";
+import Pagination from "../../common/Pagination";
 import FilterHeader from "./FilterHeader";
 import CommunitiesDataTable from "./CommunitiesDataTable";
 import { MoonLoader } from "react-spinners";
@@ -134,7 +134,7 @@ const Container = () => {
                       ) : communitiesData?.data?.length == 0 ? <h1 style={{height: "400px"}} className="d-flex align-items-center justify-content-center">No Data Found</h1> : <CommunitiesDataTable communitiesData={communitiesData} setDeleteData={setDeleteData} key={1}/>}
 
                   <div className="mt30">
-                    {loading ? (<div></div>) : (<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} communitiesData={communitiesData}/>)}
+                    {loading ? (<div></div>) : (<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} data={communitiesData}/>)}
                   </div>
                 </div>
               </div>
@@ -169,7 +169,7 @@ const Container = () => {
                     ) : communitiesData?.data?.length == 0 ? <h1 style={{height: "400px"}} className="d-flex align-items-center justify-content-center">No Data Found</h1> : <CommunitiesDataTable setDeleteData={setDeleteData} communitiesData={communitiesData} key={2}/>}
 
                   <div className="mt30">
-                   {loading ? (<div></div>) : (<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} communitiesData={communitiesData}/>)}
+                   {loading ? (<div></div>) : (<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} data={communitiesData}/>)}
                   </div>
                 </div>
               </div>

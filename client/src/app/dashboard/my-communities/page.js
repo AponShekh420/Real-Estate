@@ -1,6 +1,6 @@
 import DashboardHeader from "@/components/common/DashboardHeader";
 import MobileMenu from "@/components/common/mobile-menu";
-import Pagination from "@/components/property/Pagination";
+import Pagination from "@/components/common/Pagination";
 import Footer from "@/components/dashboard/Footer";
 import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
 import FilterHeader from "@/components/dashboard/dashboard-my-communities/FilterHeader";
