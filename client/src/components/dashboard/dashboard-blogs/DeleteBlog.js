@@ -52,7 +52,7 @@ const DeleteBlog = ({blog, setDeleteData}) => {
           disabled={loading}
           onClick={deleteBlogHanlder}
         >
-          <span className="flaticon-bin" />
+          <span className="flaticon-bin" style={{color: "red"}}/>
         </button>
       ) : (
         <div className="d-flex justify-content-center align-items-center" style={{padding: "10px 5px"}}>

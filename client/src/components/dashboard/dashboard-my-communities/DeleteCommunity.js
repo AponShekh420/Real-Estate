@@ -51,7 +51,7 @@ const DeleteCommunity = ({community, setDeleteData}) => {
           disabled={loading}
           onClick={deleteCommunity}
         >
-          <span className="flaticon-bin" />
+          <span className="flaticon-bin" style={{color: "red"}}/>
         </button>
       ) : (
         <div className="d-flex justify-content-center align-items-center" style={{padding: "10px 5px"}}>

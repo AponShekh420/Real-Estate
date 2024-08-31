@@ -77,11 +77,11 @@ const BlogsDataTable = ({blogsData, setDeleteData}) => {
               <div className="d-flex">
                 <Link href={`/dashboard/edit-blog/${blog.slug}`}> 
                   <button
-                    className="icon"
+                    className="icon btn btn-primary p-1"
                     style={{ border: "none" }}
                     data-tooltip-id={`edit-${blog?.slug}`}
                   >
-                    <span className="fas fa-pen fa" />
+                    <span className="fas fa-pen fa" style={{color: "green"}} />
                   </button>
                 </Link>
                 <ReactTooltip
