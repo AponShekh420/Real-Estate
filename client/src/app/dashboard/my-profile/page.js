@@ -10,6 +10,8 @@ import SocialField from "@/components/dashboard/dashboard-profile/SocialField";
 import { getSession } from "@/lib/authLib";
 import store from "@/redux/store";
 import { redirect } from "next/navigation";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata = {
   title: "Dashboard My Profile || Homez - Real Estate NextJS Template",
@@ -82,11 +84,14 @@ const DashboardMyProfile = async () => {
                   </div>
                   {/* End .ps-widget */}
 
-                  <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                    <h4 className="title fz17 mb30">Change password</h4>
-                    <ChangePasswordForm />
-                  </div>
+                  {user?.provider !== "local" ? null : (
+                    <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
+                      <h4 className="title fz17 mb30">Change password</h4>
+                      <ChangePasswordForm />
+                    </div>
+                  )}
                   {/* End .ps-widget */}
+                  <ToastContainer/>
                 </div>
               </div>
               {/* End .row */}

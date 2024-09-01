@@ -1,5 +1,5 @@
 const {check} = require("express-validator");
-const UserModel = require("../models/UserModel");
+const UserModel = require("../../../models/UserModel");
 
 const checkRestPasswordValidation = [
   check('password')

@@ -19,6 +19,12 @@ const SidebarDashboard = ({user}) => {
       title: "MANAGE LISTINGS",
       items: [
         {
+          href: "/dashboard/users",
+          icon: "FaLocationDot",
+          text: "Users",
+          roles: ["admin"],
+        },
+        {
           href: "/dashboard/catagory",
           icon: "FaLocationDot",
           text: "Catagory",

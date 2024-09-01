@@ -16,6 +16,7 @@ import ReadMore from "@/components/common/ReadMore";
 import StringToDomComponent from "@/components/common/StringToDomComponent";
 import "@/components/common/quillEditorTextStyle.css";
 import RelatedPosts from "@/components/single-post/RelatedPosts";
+import { notFound } from "next/navigation";
 
 export const metadata = {
   title: "Blog Single  || Homez - Real Estate NextJS Template",
@@ -25,14 +26,13 @@ const BlogSingle = async ({params}) => {
 
   const {slug} = params;
 
-    // get single community data from api
-    const res = await getSingleBlog(slug)
-    // if the data has not founded, that's mean the route are wrong, so redirect on not found page
-    if(slug !==undefined && !res) {
-      notFound();
-    }
+  // get single community data from api
+  const res = await getSingleBlog(slug)
+  // if the data has not founded, that's mean the route are wrong, so redirect on not found page
+  if(slug !==undefined && !res) {
+    notFound();
+  }
 
-    console.log(res)
 
   return (
     <>

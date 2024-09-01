@@ -4,6 +4,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { HiOutlineNewspaper } from "react-icons/hi2";
 import { GiCheckboxTree } from "react-icons/gi";
 import { PiNotePencilThin } from "react-icons/pi";
+import { PiUsersThreeThin } from "react-icons/pi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
@@ -90,7 +91,9 @@ const MenuItem = ({itemIndex, item, headerItem, userInfo}) => {
                 <GiCheckboxTree  size={22} className="mr15"/>
               ): item.text === "Add New Blog" ? (
                 <PiNotePencilThin size={22} className="mr15"/>
-              ): (
+              ): item.text === "Users" ? (
+                <PiUsersThreeThin size={22} className="mr15"/>
+              ) : (
                 <i className={`${item.icon} mr15`} />
               )}
               {item.text}
