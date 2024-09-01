@@ -66,11 +66,6 @@ const DashboardMyProfile = async () => {
               <div className="row">
                 <div className="col-xl-12">
                   <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                    <div className="col-xl-7">
-                      <ProfileBox />
-                    </div>
-                    {/* End ProfileBox */}
-
                     <div className="col-lg-12">
                       <PersonalInfo />
                     </div>
