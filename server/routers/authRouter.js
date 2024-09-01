@@ -55,16 +55,21 @@ router.get("/login/success", async (req, res) => {
         email: req.user._json.email,
         role: userExists?.role || "viewer",
         id: userExists?._id,
+        address: userExists?.address,
+        taxNumber: userExists?.taxNumber,
+        companyName: userExists?.companyName,
+        about: userExists?.about,
+        phone: userExists?.phone,
       },
       msg: "Succesfully logged in",
     })
   } else if(session) {
     const verifyedToken = jwt.verify(session, process.env.TOKEN_SECRET)
     if(verifyedToken) {
-      const checkValidation = await UserModel.findOne({_id: verifyedToken.id, email: verifyedToken.email}, '-password');
-      if(checkValidation) {
+      const user = await UserModel.findOne({_id: verifyedToken.id, email: verifyedToken.email}, '-password');
+      if(user) {
         res.status(200).json({
-          user: verifyedToken,
+          user: user,
           msg: "Succesfully logged in",
         })
       } else {

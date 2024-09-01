@@ -42,6 +42,21 @@ const UserSchema = mongoose.Schema({
   accountId: {
     type: String,
   },
+  address: {
+    type: String,
+  },
+  taxNumber: {
+    type: String,
+  },
+  about: {
+    type: String,
+  },
+  companyName: {
+    type: String,
+  },
+  phone: {
+    type: String,
+  },
   avatar: {
     type: String,
     default: "user_avatar.png"

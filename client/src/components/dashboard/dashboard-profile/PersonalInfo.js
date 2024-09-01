@@ -32,11 +32,11 @@ const PersonalInfo = () => {
 
   useEffect(()=> {
     setEmail(userInfo?.email)
-    setAbout(userInfo?.about);
-    setCompanyName(userInfo?.companyName);
-    setTaxNumber(userInfo?.taxNumber)
-    setAddress(userInfo?.address);
-    setPhone(userInfo?.phone);
+    setAbout(userInfo?.about || "");
+    setCompanyName(userInfo?.companyName || "");
+    setTaxNumber(userInfo?.taxNumber || "")
+    setAddress(userInfo?.address || "");
+    setPhone(userInfo?.phone || "");
     setLastName(userInfo?.lastName);
     setFirstName(userInfo?.firstName);
     setLoading(false);
@@ -49,15 +49,9 @@ const PersonalInfo = () => {
   // update the model
   const updateProfile = async (e) => {
     e.preventDefault();
+    
     setErrors({})
-    if(uploadedImage == null) {
-      setErrors({
-        img: {
-          msg: "Please select the image!"
-        }
-      })
-      return;
-    }
+    
     const formData = new FormData(e.target);
     formData.set("firstName", firstName);
     formData.set("lastName", lastName);
@@ -75,6 +69,7 @@ const PersonalInfo = () => {
       headers: {
         "Content-Type": "application/json"
       },
+      credentials: "include",
       body: JSON.stringify({
         firstName,
         lastName,
@@ -83,16 +78,19 @@ const PersonalInfo = () => {
         taxNumber,
         phone,
         about,
-        uploadedImageChanged: false
+        uploadedImageChanged,
+        uploadedImage
       })
     }
 
     const multipartDataWithFile = {
       method: "PUT",
-      body: formData
+      body: formData,
+      credentials: "include",
     }
 
-    const bodyData = uploadedImageChanged ? multipartDataWithFile : manualData;
+    const bodyData = (uploadedImageChanged && uploadedImage) ? multipartDataWithFile : manualData;
+
 
     try {
       setLoading(true);
@@ -105,7 +103,8 @@ const PersonalInfo = () => {
           position: "top-right",
           autoClose: 1500,
         });
-        dispatch(setCredentials(currentData.user))
+        dispatch(setCredentials(currentData.user));
+        setUpdate(false)
       } else {
         toast.error("There are somthing is warn, please try again!", {
           position: "top-right",
@@ -129,7 +128,7 @@ const PersonalInfo = () => {
     >
       <div className="row">
       <div className="col-12">
-        <ProfileBox userInfo={userInfo} errors={errors} uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} uploadedImageChanged={uploadedImageChanged} setUploadedImageChanged={setUploadedImageChanged} oldImgUrl={oldImgUrl}/>
+        <ProfileBox userInfo={userInfo} errors={errors} uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} uploadedImageChanged={uploadedImageChanged} setUploadedImageChanged={setUploadedImageChanged} oldImgUrl={oldImgUrl} setOldImgUrl={setOldImgUrl}/>
       </div>
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
@@ -152,7 +151,7 @@ const PersonalInfo = () => {
             <label className="heading-color ff-heading fw600 mb10">Phone</label>
             <input
               disabled={!update}
-              type="number"
+              type="text"
               className="form-control"
               placeholder="Your Name"
               value={phone}
@@ -222,7 +221,7 @@ const PersonalInfo = () => {
             </label>
             <input
               disabled={!update}
-              type="text"
+              type="number"
               className="form-control"
               placeholder="Your Name"
               value={taxNumber}
