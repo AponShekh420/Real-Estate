@@ -3,19 +3,18 @@ import MobileMenu from "@/components/common/mobile-menu";
 import Footer from "@/components/dashboard/Footer";
 import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
 import DboardMobileNavigation from "@/components/dashboard/DboardMobileNavigation";
-import Container from "@/components/dashboard/dashboard-blogs/Container";
+import Container from "@/components/dashboard/dashboard-users/Container";
 import { redirect } from "next/navigation";
-import store from "@/redux/store";
 import { getSession } from "@/lib/authLib";
 
 export const metadata = {
-  title: "Dashboard Properties || Homez - Real Estate NextJS Template",
+  title: "Dashboard Users || Homez - Real Estate NextJS Template",
 };
 
 const DashboardMyBlogs = async () => {
   const user = await getSession();
 
-  if(user.role == "admin" || user.role == "contributor") {
+  if(user.role == "admin") {
     // nothing
   } else {
     redirect("/")
