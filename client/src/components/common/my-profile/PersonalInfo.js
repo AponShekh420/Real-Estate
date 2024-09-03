@@ -128,7 +128,7 @@ const PersonalInfo = () => {
     >
       <div className="row">
       <div className="col-12">
-        <ProfileBox userInfo={userInfo} errors={errors} uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} uploadedImageChanged={uploadedImageChanged} setUploadedImageChanged={setUploadedImageChanged} oldImgUrl={oldImgUrl} setOldImgUrl={setOldImgUrl}/>
+        <ProfileBox userInfo={userInfo} errors={errors} uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} uploadedImageChanged={uploadedImageChanged} setUploadedImageChanged={setUploadedImageChanged} oldImgUrl={oldImgUrl} setOldImgUrl={setOldImgUrl} setUpdate={setUpdate} update={update}/>
       </div>
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">

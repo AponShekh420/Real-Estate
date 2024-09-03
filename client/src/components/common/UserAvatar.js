@@ -36,9 +36,10 @@ const UserAvatar = ({userInfo}) => {
             <Image
               width={32}
               height={32}
+              style={{objectFit: "cover"}}
               className="rounded-circle"
               src={userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar || "/images/user_avatar.png"}
-              alt="user.png"
+              alt={userInfo?.firstName + " " + userInfo?.lastName}
             />
           </a>
           <div className="dropdown-menu">
@@ -51,9 +52,10 @@ const UserAvatar = ({userInfo}) => {
                       <Image
                         width={50}
                         height={50}
-                        className="img-fluid mr10"
+                        className="rounded-circle"
+                        style={{objectFit: "cover"}}
                         src={userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar || "/images/user_avatar.png"}
-                        alt="ms3.png"
+                        alt={userInfo?.firstName + " " + userInfo?.lastName}
                       />
                       <div className="meta d-sm-flex justify-content-sm-between align-items-center">
                         <div className="authors">
