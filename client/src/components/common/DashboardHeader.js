@@ -104,14 +104,14 @@ const DashboardHeader = () => {
                     <li className=" user_setting">
                       <div className="dropdown">
                         <a className="btn" href="#" data-bs-toggle="dropdown">
-                        <Image
-                          width={32}
-                          height={32}
-                          style={{objectFit: "cover"}}
-                          className="rounded-circle"
-                          src={userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar || "/images/user_avatar.png"}
-                          alt={userInfo?.firstName + " " + userInfo?.lastName}
-                        />
+                         <Image
+                            width={44}
+                            height={44}
+                            style={{objectFit: "cover"}}
+                            className="rounded-circle"
+                            src={userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? userInfo?.avatar ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : "/images/user_avatar.png" : userInfo?.avatar}
+                            alt={userInfo?.firstName + " " + userInfo?.lastName}
+                          />
                         </a>
                         <div className="dropdown-menu">
                           {loading ? (
@@ -128,7 +128,7 @@ const DashboardHeader = () => {
                                         height={50}
                                         style={{objectFit: "cover"}}
                                         className="rounded-circle"
-                                        src={userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar || "/images/user_avatar.png"}
+                                        src={userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? userInfo?.avatar ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : "/images/user_avatar.png" : userInfo?.avatar}
                                         alt={userInfo?.firstName + " " + userInfo?.lastName}
                                       />
                                       <div className="meta d-sm-flex justify-content-sm-between align-items-center">
