@@ -13,3 +13,9 @@
   margin-bottom: 5px !important;
   list-style-type: inherit !important; /* Ensure space between items */
 }
+
+
+
+.quillEditorTextHandler img {
+  max-width: 100% !important;
+}

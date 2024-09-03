@@ -32,7 +32,7 @@ const addBlog = async (req, res) => {
       subcatagory: subcatagoryId || null,
       img,
       active,
-      auther: req.user.id,
+      auther: req.user._id,
       metaTitle,
       metaDesc,
     });

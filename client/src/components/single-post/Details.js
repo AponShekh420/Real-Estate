@@ -15,9 +15,10 @@ export default function Details({id, data}) {
                   <Image
                     width={40}
                     height={40}
-                    className="mr10"
-                    src="/images/blog/author-1.png"
-                    alt="blog"
+                    style={{objectFit: "cover"}}
+                    className="rounded-circle mr10"
+                    src={data?.auther?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? data?.auther?.avatar ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${data?.auther?.avatar}` : "/images/user_avatar.png" : data?.auther?.avatar}
+                    alt={data?.auther?.firstName + " " + data?.auther?.lastName}
                   />
                   <a className="pr15 bdrr1" href="#">
                     {data?.auther?.firstName} {data?.auther?.lastName}

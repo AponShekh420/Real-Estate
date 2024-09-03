@@ -5,7 +5,7 @@ const addReview = async (req, res) => {
   try {
     const ReviewObj = new ReviewModel({
       community: communityId,
-      user: req?.user?.id,
+      user: req?.user?._id,
       rating,
       review,
     });

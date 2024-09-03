@@ -51,7 +51,7 @@ const BlogSingle = async ({params}) => {
        
 
 
-        <div className="container">
+        <div className="container mt45">
           <div className="roww" data-aos="fade-up" data-aos-delay="500">
             <div className="col-xl-8 offset-xl-2">
               <div className="quillEditorTextHandler">

@@ -13,7 +13,7 @@ const authCheck = async (req, res, next) => {
             if(verifyedToken) {
                 const checkValidation = await UserModel.findOne({_id: verifyedToken.id, email: verifyedToken.email}, '-password');
                 if(checkValidation) {
-                    req.user = verifyedToken;
+                    req.user = checkValidation;
                     next();
                 } else {
                     res.json({

@@ -38,7 +38,7 @@ router.delete('/imgdelete', blogImgDelete);
 
 
 // get the blogs by auther/catagory/subcatagory/title
-router.post('/get-blogs', getBlogs);
+router.post('/get-blogs', authCheck, getBlogs);
 
 
 // get all blog by filter 

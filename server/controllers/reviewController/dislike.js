@@ -9,12 +9,12 @@ const dislike = async (req, res) => {
         // remove this like in revew dislike array
         const removeLike = await ReviewModel.findOneAndUpdate({
           like: {
-            $in: [req?.user?.id]
+            $in: [req?.user?._id]
           },
           _id: id
         }, {
           $pull: {
-            like: req?.user?.id
+            like: req?.user?._id
           }
         }, {new: true});
 
@@ -22,12 +22,12 @@ const dislike = async (req, res) => {
         // add this like in revew like array
         const data = await ReviewModel.findOneAndUpdate({
           dislike: {
-            $nin: [req?.user?.id]
+            $nin: [req?.user?._id]
           },
           _id: id
         }, {
           $push: {
-            dislike: req?.user?.id
+            dislike: req?.user?._id
           }
         }, {new: true});
 

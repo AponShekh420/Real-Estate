@@ -4,8 +4,12 @@ const getBlogs = async (req, res) => {
 
   const {searchParams, active, limitEnd, limitStart} = req.body;
 
+  const queryObjConfig = {active};
+
+  req?.user?.role !== "admin" ? queryObjConfig.auther = req.user._id : null;
+
   try {
-    const getBlogsData = await BlogModel.find({active}).populate('catagory').populate("subcatagory").populate("auther");
+    const getBlogsData = await BlogModel.find(queryObjConfig).populate('catagory').populate("subcatagory").populate("auther");
 
      // Filter the results based on the populated fields
      const filteredCommunities = getBlogsData.filter(blog => {
