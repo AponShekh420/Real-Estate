@@ -18,10 +18,21 @@ const deleteCatagory = async (req, res) => {
         catagory: null,
       });
 
+      // move all blogs to uncatagory
+      const existingCatagoryBlogs = await BlogModel.find({catagory: catagoryId});
+
+      const uncatagory = await CatagoryModel.findByIdAndUpdate(process.env.uncatagoryId, {
+        $push: {
+          blogs: existingCatagoryBlogs
+        }
+      })
+
+
       // update the community collection to delete this state id
       const blogUpdateStatus = await BlogModel.updateMany({catagory: catagoryId}, {
         catagory: process.env.uncatagoryId,
-      });
+      }, {new: true});
+
 
       // try to check those cities, areas, and communities has update or not
       if(subcatagoryUpdateStatus && blogUpdateStatus) {
