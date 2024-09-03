@@ -3,15 +3,9 @@ import MobileMenu from "@/components/common/mobile-menu";
 import DboardMobileNavigation from "@/components/dashboard/DboardMobileNavigation";
 import Footer from "@/components/dashboard/Footer";
 import SidebarDashboard from "@/components/dashboard/SidebarDashboard";
-import ChangePasswordForm from "@/components/dashboard/dashboard-profile/ChangePasswordForm";
-import PersonalInfo from "@/components/dashboard/dashboard-profile/PersonalInfo";
-import ProfileBox from "@/components/dashboard/dashboard-profile/ProfileBox";
-import SocialField from "@/components/dashboard/dashboard-profile/SocialField";
 import { getSession } from "@/lib/authLib";
-import store from "@/redux/store";
 import { redirect } from "next/navigation";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import MyProfile from "@/components/common/my-profile";
 
 export const metadata = {
   title: "Dashboard My Profile || Homez - Real Estate NextJS Template",
@@ -63,32 +57,7 @@ const DashboardMyProfile = async () => {
               </div>
               {/* End .row */}
 
-              <div className="row">
-                <div className="col-xl-12">
-                  <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                    <div className="col-lg-12">
-                      <PersonalInfo />
-                    </div>
-                    {/* End PersonalInfo */}
-                  </div>
-                  {/* End .ps-widget */}
-
-                  <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                    <h4 className="title fz17 mb30">Social Media</h4>
-                    <SocialField />
-                  </div>
-                  {/* End .ps-widget */}
-
-                  {user?.provider !== "local" ? null : (
-                    <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                      <h4 className="title fz17 mb30">Change password</h4>
-                      <ChangePasswordForm />
-                    </div>
-                  )}
-                  {/* End .ps-widget */}
-                  <ToastContainer/>
-                </div>
-              </div>
+              <MyProfile user={user}/>
               {/* End .row */}
             </div>
             {/* End .dashboard__content */}
