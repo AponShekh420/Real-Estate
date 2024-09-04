@@ -15,6 +15,7 @@ const checkChangePasswordValidation = require("../middleware/common/users/checkC
 const uploadAvatar = require("../middleware/common/users/uploadAvatar");
 const updateProfile = require("../controllers/usersController/updateProfile");
 const getUsers = require("../controllers/usersController/getUsers");
+const deleteUser = require("../controllers/usersController/deleteUser");
 
 
 const router = express.Router();
@@ -23,11 +24,18 @@ const router = express.Router();
 router.post("/login", checkLoginValidation, useValidationResult, login);
 router.delete("/logout", authCheck, logout);
 router.post("/register", checkRegisterValidation, useValidationResult, register)
-router.get("/get", authCheck, getUser)
 router.post("/forgot-password", forgotPassword);
 router.patch("/reset-password/:resetToken", checkRestPasswordValidation, useValidationResult, resetPassword);
 router.patch("/change-password", authCheck, checkChangePasswordValidation, useValidationResult, changePassword);
 router.put("/profile-update", authCheck, uploadAvatar, updateProfile);
+
+
+// admin route
+router.get("/get/:id", authCheck, getUser)
 router.post("/get-users", authCheck, getUsers);
+router.delete("/delete/:id", authCheck, deleteUser);
+
+
+
 
 module.exports = router;

@@ -5,9 +5,11 @@ const UserModel = require("../../models/UserModel");
 // upload the user on database
 const updateProfile = async (req, res)=> {
   try {
-    const {firstName, lastName, address, phone, companyName, about, taxNumber, oldImgUrl, uploadedImageChanged, uploadedImage} = req.body;
+    const {id, role, firstName, lastName, address, phone, companyName, about, taxNumber, oldImgUrl, uploadedImageChanged, uploadedImage} = req.body;
 
-    const user = await UserModel.findOneAndUpdate({email: req?.user?.email}, {
+    const queryObj = {};
+
+    const currentDataObj = {
       firstName,
       lastName,
       address,
@@ -16,7 +18,17 @@ const updateProfile = async (req, res)=> {
       about,
       taxNumber,
       avatar: (uploadedImageChanged && uploadedImage) ? req?.files[0]?.filename : uploadedImageChanged ? "user_avatar.png" : oldImgUrl,
-    }, { new: true, select: '-password' })
+    }
+
+
+    if(req?.user?.role == "admin" && id) {
+      queryObj._id = id;
+      currentDataObj.role = role
+    } else {
+      queryObj.email = req?.user?.email
+    }
+
+    const user = await UserModel.findOneAndUpdate(queryObj, currentDataObj, { new: true, select: '-password' })
 
 
 

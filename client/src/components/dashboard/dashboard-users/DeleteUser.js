@@ -1,7 +1,8 @@
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { useState } from "react";
 import { MoonLoader } from "react-spinners";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const override = {
   display: "block",
@@ -13,11 +14,12 @@ const override = {
 const DeleteUser = ({user, setDeleteData}) => {
   const [loading, setLoading] = useState(false);
 
-  const deleteBlogHanlder = async (e) => {
+  const deleteUserHanlder = async (e) => {
     e.preventDefault();
     try {
       setLoading(true)
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/blog/delete`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/delete/${user?._id}`, {
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -48,14 +50,14 @@ const DeleteUser = ({user, setDeleteData}) => {
           className="icon btn btn-primary"
           style={{ border: "none" }}
           data-tooltip-id={`delete-${user?._id}`}
-          data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
+          // data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
           disabled={loading}
-          onClick={deleteBlogHanlder}
+          onClick={deleteUserHanlder}
         >
           <span className="flaticon-bin" style={{color: "red"}}/>
         </button>
       ) : (
-        <div className="d-flex justify-content-center align-items-center" style={{padding: "10px 5px"}}>
+        <div className="d-flex justify-content-center align-items-center" style={{padding: "15px 5px"}}>
         <MoonLoader
           color="red"
           loading={loading}
@@ -73,7 +75,6 @@ const DeleteUser = ({user, setDeleteData}) => {
         place="top"
         content="Delete"
       />
-      <ToastContainer/>
       {/* delete end */}
     </div>
   );

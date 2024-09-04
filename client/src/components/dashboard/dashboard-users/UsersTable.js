@@ -5,7 +5,6 @@ import React from "react";
 import Moment from "react-moment";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { MoonLoader } from "react-spinners";
-import Deleteuser from "./Deleteuser";
 import DeleteUser from "./DeleteUser";
 
 
@@ -99,7 +98,7 @@ const UsersTable = ({usersData, setDeleteData}) => {
             </td>
             <td className="vam">
               <div className="d-flex">
-                <Link href={`/dashboard/edit-user/${user._id}`}> 
+                <Link href={`/dashboard/user/${user._id}`}> 
                   <button
                     className="icon btn btn-primary p-1"
                     style={{ border: "none" }}
