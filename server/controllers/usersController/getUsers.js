@@ -6,19 +6,19 @@ const getUsers = async (req, res) => {
 
 
   try {
-    const users = await UserModel.find();
+    const users = await UserModel.find({_id: {$ne: req?.user?._id}});
 
      // Filter the results based on the populated fields
      const filteredUser = users.filter(user => {
       return (
-        user.phone.match(new RegExp(searchParams, 'i')) ||
-        user.address?.match(new RegExp(searchParams, 'i')) ||
-        user.provider?.match(new RegExp(searchParams, 'i')) ||
-        user.email.match(new RegExp(searchParams, 'i')) ||
-        user.role.match(new RegExp(searchParams, 'i')) ||
-        user.firstName.match(new RegExp(searchParams, 'i')) ||
-        user.companyName.match(new RegExp(searchParams, 'i')) ||
-        user.lastName.match(new RegExp(searchParams, 'i'))
+        user?.email?.match(new RegExp(searchParams, 'i')) ||
+        user?.firstName?.match(new RegExp(searchParams, 'i')) ||
+        user?.lastName?.match(new RegExp(searchParams, 'i')) ||
+        user?.role?.match(new RegExp(searchParams, 'i')) ||
+        user?.provider?.match(new RegExp(searchParams, 'i')) ||
+        user?.phone?.match(new RegExp(searchParams, 'i')) ||
+        user?.address?.match(new RegExp(searchParams, 'i')) ||
+        user?.companyName?.match(new RegExp(searchParams, 'i'))
       );
     });
 

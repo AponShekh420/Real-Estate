@@ -28,6 +28,6 @@ router.post("/forgot-password", forgotPassword);
 router.patch("/reset-password/:resetToken", checkRestPasswordValidation, useValidationResult, resetPassword);
 router.patch("/change-password", authCheck, checkChangePasswordValidation, useValidationResult, changePassword);
 router.put("/profile-update", authCheck, uploadAvatar, updateProfile);
-router.post("/get-users", getUsers);
+router.post("/get-users", authCheck, getUsers);
 
 module.exports = router;

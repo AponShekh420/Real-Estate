@@ -10,7 +10,7 @@ const override = {
 };
 
 
-const DeleteBlog = ({blog, setDeleteData}) => {
+const DeleteUser = ({user, setDeleteData}) => {
   const [loading, setLoading] = useState(false);
 
   const deleteBlogHanlder = async (e) => {
@@ -23,7 +23,7 @@ const DeleteBlog = ({blog, setDeleteData}) => {
         },
         method: "DELETE",
         body: JSON.stringify({
-          blogId: blog?._id
+          blogId: user?._id
         })
       });
       const currentData = await res.json();
@@ -47,7 +47,7 @@ const DeleteBlog = ({blog, setDeleteData}) => {
         <button
           className="icon btn btn-primary"
           style={{ border: "none" }}
-          data-tooltip-id={`delete-${blog?._id}`}
+          data-tooltip-id={`delete-${user?._id}`}
           data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
           disabled={loading}
           onClick={deleteBlogHanlder}
@@ -69,7 +69,7 @@ const DeleteBlog = ({blog, setDeleteData}) => {
       
         
       <ReactTooltip
-        id={`delete-${blog?._id}`}
+        id={`delete-${user?._id}`}
         place="top"
         content="Delete"
       />
@@ -79,4 +79,4 @@ const DeleteBlog = ({blog, setDeleteData}) => {
   );
 }
 
-export default DeleteBlog;
+export default DeleteUser;

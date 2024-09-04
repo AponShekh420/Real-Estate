@@ -21,7 +21,8 @@ const Container = () => {
   const [blogsData, setBlogsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // Current active page
   const [deletedData, setDeleteData] = useState({}); // deleted data notification
-  let totalPages = 1; // Total number of pages
+  const [totalPages, setTotalPages] = useState(1)
+
 
 
   const getBlogsData = async () => {
@@ -43,7 +44,11 @@ const Container = () => {
       const currentData = await res.json();
       setLoading(false)
       if(currentData.data) {
-        totalPages = currentData.lotalNumberOfData / 10 <= 1 ? 1 : Math.ceil(currentData.lotalNumberOfData / 10);
+        setTotalPages(
+          Math.ceil(currentData.lotalNumberOfData / 10) <= 1 
+            ? 1 
+            : Math.ceil(currentData.lotalNumberOfData / 10)
+        );
         setBlogsData(currentData);
       } else {
         // message for server side error with toastify
@@ -55,7 +60,7 @@ const Container = () => {
 
   useEffect(()=> {
     getBlogsData();
-  }, [active, search, deletedData])
+  }, [active, search, deletedData, currentPage])
 
   return (
     <>

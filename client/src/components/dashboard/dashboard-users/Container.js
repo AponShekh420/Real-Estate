@@ -16,18 +16,17 @@ const override = {
 const Container = () => {
 
   const [search, setSearch] = useState("");
-  const [active, setActive] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [blogsData, setBlogsData] = useState([]);
+  const [usersData, setUsersData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // Current active page
   const [deletedData, setDeleteData] = useState({}); // deleted data notification
-  let totalPages = 1; // Total number of pages
+  const [totalPages, setTotalPages] = useState(1)
 
 
   const getBlogsData = async () => {
     try {
       setLoading(true)
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/blog/get-blogs`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/get-users`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -35,7 +34,6 @@ const Container = () => {
         },
         body: JSON.stringify({
           searchParams: search,
-          active,
           limitStart: (currentPage - 1 ) * 10,
           limitEnd: currentPage * 10,
         })
@@ -43,8 +41,12 @@ const Container = () => {
       const currentData = await res.json();
       setLoading(false)
       if(currentData.data) {
-        totalPages = currentData.lotalNumberOfData / 10 <= 1 ? 1 : Math.ceil(currentData.lotalNumberOfData / 10);
-        setBlogsData(currentData);
+        setTotalPages(
+          Math.ceil(currentData.lotalNumberOfData / 10) <= 1 
+            ? 1 
+            : Math.ceil(currentData.lotalNumberOfData / 10)
+        );
+        setUsersData(currentData);
       } else {
         // message for server side error with toastify
       }
@@ -55,14 +57,14 @@ const Container = () => {
 
   useEffect(()=> {
     getBlogsData();
-  }, [active, search, deletedData])
+  }, [search, deletedData, currentPage])
 
   return (
     <>
       <div className="row align-items-center pb40">
         <div className="col-xxl-3">
           <div className="dashboard_title_area">
-            <h2>All Blogs</h2>
+            <h2>All Users</h2>
             <p className="text">We are glad to see you again!</p>
           </div>
         </div>
@@ -87,10 +89,10 @@ const Container = () => {
                     data-testid="loader"
                   />
                 </div>
-                ) : blogsData?.data?.length == 0 ? <h1 style={{height: "400px"}} className="d-flex align-items-center justify-content-center">No Data Found</h1> : <UsersTable setDeleteData={setDeleteData} blogsData={blogsData} key={2}/>}
+                ) : usersData?.data?.length == 0 ? <h1 style={{height: "400px"}} className="d-flex align-items-center justify-content-center">No Data Found</h1> : <UsersTable setDeleteData={setDeleteData} usersData={usersData} key={2}/>}
 
               <div className="mt30">
-                {loading ? (<div></div>) : (<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} data={blogsData}/>)}
+                {loading ? (<div></div>) : (<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} data={usersData}/>)}
               </div>
             </div>
           </div>
