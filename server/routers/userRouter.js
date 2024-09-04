@@ -14,6 +14,7 @@ const changePassword = require("../controllers/usersController/changePassword");
 const checkChangePasswordValidation = require("../middleware/common/users/checkChangePasswordValidation");
 const uploadAvatar = require("../middleware/common/users/uploadAvatar");
 const updateProfile = require("../controllers/usersController/updateProfile");
+const getUsers = require("../controllers/usersController/getUsers");
 
 
 const router = express.Router();
@@ -27,5 +28,6 @@ router.post("/forgot-password", forgotPassword);
 router.patch("/reset-password/:resetToken", checkRestPasswordValidation, useValidationResult, resetPassword);
 router.patch("/change-password", authCheck, checkChangePasswordValidation, useValidationResult, changePassword);
 router.put("/profile-update", authCheck, uploadAvatar, updateProfile);
+router.post("/get-users", getUsers);
 
 module.exports = router;
