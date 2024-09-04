@@ -16,7 +16,7 @@ const override = {
 const Container = () => {
 
   const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [usersData, setUsersData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // Current active page
   const [deletedData, setDeleteData] = useState({}); // deleted data notification
@@ -69,7 +69,7 @@ const Container = () => {
           </div>
         </div>
         <div className="col-xxl-9">
-          <FilterHeader setSearch={setSearch} search={search} />
+          <FilterHeader setSearch={setSearch} search={search} setCurrentPage={setCurrentPage}/>
         </div>
       </div>
 

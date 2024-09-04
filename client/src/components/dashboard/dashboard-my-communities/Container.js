@@ -71,7 +71,7 @@ const Container = () => {
           </div>
         </div>
         <div className="col-xxl-9">
-          <FilterHeader setSearch={setSearch} search={search} />
+          <FilterHeader setSearch={setSearch} search={search} setCurrentPage={setCurrentPage}/>
         </div>
       </div>
 

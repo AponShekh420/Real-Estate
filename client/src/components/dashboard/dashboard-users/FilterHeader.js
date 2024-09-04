@@ -3,7 +3,7 @@ import React from "react";
 
 let searchTime;
 
-const FilterHeader = ({ setSearch, search}) => {
+const FilterHeader = ({ setSearch, search, setCurrentPage}) => {
   return (
     <div className="dashboard_search_meta d-md-flex align-items-center justify-content-xxl-end">
       <div className="item1 mb15-sm">
@@ -15,7 +15,10 @@ const FilterHeader = ({ setSearch, search}) => {
             required
             onChange={(e)=> {
               clearTimeout(searchTime);
-              searchTime = setTimeout(()=> setSearch(e.target.value), 700)
+              searchTime = setTimeout(()=> {
+                setCurrentPage(1) 
+                setSearch(e.target.value)
+              }, 700)
             }}
             // value={search}
           />
