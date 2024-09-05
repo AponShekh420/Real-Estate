@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MoonLoader } from "react-spinners";
 import CommunitiesListLoader from "./CommunitiesListLoader";
+import Wishlist from "./Wishlist";
 
 
 const override = {
@@ -86,15 +87,10 @@ const FeaturedListings = ({state: stateProps, city: cityProps, area: areaProps})
                 <div className="list-meta2 d-flex justify-content-between align-items-center">
                   <span className="for-what">For {listing?.status.map((item, index) => (listing.status.length > (index + 1)) ? `${item}/`: item)}</span>
                   <div className="icons d-flex align-items-center">
-                    <a href="#">
+                    <Link href={`/community/${listing.slug}`}>
                       <span className="flaticon-fullscreen" />
-                    </a>
-                    <a href="#">
-                      <span className="flaticon-new-tab" />
-                    </a>
-                    <a href="#">
-                      <span className="flaticon-like" />
-                    </a>
+                    </Link>
+                    <Wishlist listing={listing}/>
                   </div>
                 </div>
               </div>
