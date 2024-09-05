@@ -18,6 +18,7 @@ const blogRouter = require("./routers/blogRouter");
 const amenityRouter = require("./routers/amenityRouter");
 const reviewRouter = require("./routers/reviewRouter");
 const commentRouter = require("./routers/commentRouter");
+const wishlistRouter = require("./routers/wishlistRouter");
 
 // user
 const userRouter = require("./routers/userRouter");
@@ -83,6 +84,10 @@ app.use('/auth', authRouter)
 // review
 app.use('/api/review', reviewRouter);
 app.use('/api/comment', commentRouter);
+
+
+// community wishlist
+app.use('/api/wishlist', wishlistRouter);
 
 
 
