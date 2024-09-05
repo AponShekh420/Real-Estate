@@ -119,15 +119,9 @@ const ListingsFavourites = ({data, currentPage, loading, setNotify}) => {
                 <div className="list-meta2 d-flex justify-content-between align-items-center">
                   <span className="for-what">For {listing?.status.map((item, index) => (listing.status.length > (index + 1)) ? `${item}/`: item)}</span>
                   <div className="icons d-flex align-items-center">
-                    <a href="#">
+                    <Link href={`/community/${listing.slug}`}>
                       <span className="flaticon-fullscreen" />
-                    </a>
-                    <a href="#">
-                      <span className="flaticon-new-tab" />
-                    </a>
-                    <a href="#">
-                      <span className="flaticon-like" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
