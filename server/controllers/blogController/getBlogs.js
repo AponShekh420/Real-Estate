@@ -9,7 +9,10 @@ const getBlogs = async (req, res) => {
   req?.user?.role !== "admin" ? queryObjConfig.auther = req.user._id : null;
 
   try {
-    const getBlogsData = await BlogModel.find(queryObjConfig).populate('catagory').populate("subcatagory").populate("auther");
+    const getBlogsData = await BlogModel.find(queryObjConfig).populate('catagory').populate("subcatagory").populate({
+        path: 'auther',
+        select: '-password',  // Exclude the password field
+      });
 
      // Filter the results based on the populated fields
      const filteredCommunities = getBlogsData.filter(blog => {

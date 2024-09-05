@@ -31,8 +31,8 @@ router.post('/dislike', authCheck, dislike);
 
 
 
-// type "all" as params to get all type data, type "active" to get only active data and type 'deactive' for only deactive data
-router.get('/get/:status', getReviews);
+// for community single page
+router.get('/get/:communityId', getReviews);
 
 
 

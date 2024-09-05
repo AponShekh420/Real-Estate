@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import SingleReview from "./SingleReview";
 
 const sortOptions = [
@@ -9,7 +10,8 @@ const sortOptions = [
   "Price High",
 ];
 
-const AllReviews = () => {
+const AllReviews = ({data}) => {
+  const [reviews, setReviews] = useState([]);
   return (
     <div className="product_single_content mb50">
       <div className="mbp_pagination_comments">
@@ -18,7 +20,7 @@ const AllReviews = () => {
             <div className="total_review d-flex align-items-center justify-content-between mb20">
               <h6 className="fz17 mb15">
                 <i className="fas fa-star fz12 pe-2" />
-                5.0 · 3 reviews
+                5.0 · {reviews?.length} reviews
               </h6>
               <div className="page_control_shorting d-flex align-items-center justify-content-center justify-content-sm-end">
                 <div className="pcs_dropdown mb15 d-flex align-items-center">
@@ -34,7 +36,7 @@ const AllReviews = () => {
           </div>
           {/* End review filter */}
 
-          <SingleReview />
+          <SingleReview data={data} reviews={reviews} setReviews={setReviews}/>
           {/* End reviews */}
         </div>
       </div>
