@@ -1,5 +1,6 @@
-import React from "react";
-import SingleReview from "./SingleReview";
+"use client"
+import React, { useState } from "react";
+import SingleComment from "./SingleComment";
 
 const sortOptions = [
   "Newest",
@@ -9,16 +10,16 @@ const sortOptions = [
   "Price High",
 ];
 
-const AllReviews = () => {
+const AllComment = ({data}) => {
+  const [comments, setComments] = useState([]);
   return (
     <div className="product_single_content mb50">
       <div className="mbp_pagination_comments">
         <div className="row">
           <div className="col-lg-12">
-            <div className="total_review d-flex align-items-center justify-content-between mb20 mt60">
+            <div className="total_review d-flex align-items-center justify-content-between mb20">
               <h6 className="fz17 mb15">
-                <i className="fas fa-star fz12 pe-2" />
-                5.0 · 3 reviews
+                {comments?.length} Comments
               </h6>
               <div className="page_control_shorting d-flex align-items-center justify-content-center justify-content-sm-end">
                 <div className="pcs_dropdown mb15 d-flex align-items-center">
@@ -34,7 +35,7 @@ const AllReviews = () => {
           </div>
           {/* End review filter */}
 
-          <SingleReview />
+          <SingleComment data={data} comments={comments} setComments={setComments}/>
           {/* End reviews */}
         </div>
       </div>
@@ -42,4 +43,4 @@ const AllReviews = () => {
   );
 };
 
-export default AllReviews;
+export default AllComment;

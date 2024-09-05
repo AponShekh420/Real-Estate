@@ -1,22 +1,18 @@
 import Details from "@/components/single-post/Details";
-import Features from "@/components/single-post/Features";
 import Pagination from "@/components/single-post/Pagination";
-import ReviewBoxForm from "@/components/single-post/ReviewBoxForm";
 import Social from "@/components/single-post/Social";
 import Tags from "@/components/single-post/Tags";
 import TopComments from "@/components/single-post/TopComments";
-import AllReviews from "@/components/single-post/reviews";
-import Blog from "@/components/common/Blog";
 import DefaultHeader from "@/components/common/DefaultHeader";
 import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
-import Image from "next/image";
 import getSingleBlog from "@/lib/getSingleBlog";
-import ReadMore from "@/components/common/ReadMore";
 import StringToDomComponent from "@/components/common/StringToDomComponent";
 import "@/components/common/quillEditorTextStyle.css";
 import RelatedPosts from "@/components/single-post/RelatedPosts";
 import { notFound } from "next/navigation";
+import AllComment from "@/components/single-post/comment";
+import CommentBoxForm from "@/components/single-post/CommentBoxForm";
 
 export const metadata = {
   title: "Blog Single  || Homez - Real Estate NextJS Template",
@@ -75,12 +71,12 @@ const BlogSingle = async ({params}) => {
               <Pagination />
               {/* End Blog Single pagination */}
 
-              <AllReviews />
+              <AllComment data={res} />
               {/* End  AllReviews */}
 
               <div className="bsp_reveiw_wrt">
                 <h6 className="fz17">Leave A Comment</h6>
-                <ReviewBoxForm />
+                <CommentBoxForm data={res}/>
               </div>
               {/* End ReviewBoxForm */}
             </div>

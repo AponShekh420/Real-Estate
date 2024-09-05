@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   userInfo: null,
-  loading: true
+  loading: true,
+  notify: null,
 };
 
 const userSlice = createSlice({
@@ -17,9 +18,12 @@ const userSlice = createSlice({
       state.userInfo = null;
       state.loading = false
     },
+    setNotify: (state, action) => {
+      state.notify = action.payload;
+    }
   },
 });
 
-export const { setCredentials, logout } = userSlice.actions;
+export const { setCredentials, logout, setNotify } = userSlice.actions;
 
 export default userSlice.reducer;
