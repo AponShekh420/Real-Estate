@@ -11,6 +11,8 @@ const getReviews = require("../controllers/reviewController/getReviews");
 const updateReview = require("../controllers/reviewController/updateReview");
 const like = require("../controllers/reviewController/like");
 const dislike = require("../controllers/reviewController/dislike");
+const getAllReviews = require("../controllers/reviewController/getAllReviews");
+const approveAndPandingReview = require("../controllers/reviewController/approveAndPandingReview");
 
 // callback function of configure
 const router = express.Router();
@@ -33,6 +35,12 @@ router.post('/dislike', authCheck, dislike);
 
 // for community single page
 router.get('/get/:communityId', getReviews);
+
+
+// admin route
+router.get('/getall', getAllReviews);
+router.put('/approve-panding/:id', approveAndPandingReview);
+
 
 
 

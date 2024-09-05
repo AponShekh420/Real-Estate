@@ -8,14 +8,14 @@ const PropertyHeader = ({ data }) => {
           <h2 className="sp-lg-title">{data.title}</h2>
           <div className="pd-meta mb15 d-md-flex align-items-center">
             <p className="text fz15 mb-0 bdrr1 pr10 bdrrn-sm text-capitalize">
-              {data?.city?.name} City, {data.state.abbreviation}, USA
+              {data?.city?.name} City, {data?.state?.abbreviation}, USA
             </p>
             <a
               className="ff-heading text-thm fz15 bdrr1 pr10 ml0-sm ml10 bdrrn-sm"
               href="#"
             >
               <i className="fas fa-circle fz10 pe-2" />
-              For {data?.status.map((item, index) => (data.status.length > (index + 1)) ? `${item}/`: item)}
+              For {data?.status?.map((item, index) => (data?.status?.length > (index + 1)) ? `${item}/`: item)}
             </a>
             <a
               className="ff-heading bdrr1 fz15 pr10 ml10 ml0-sm bdrrn-sm"
@@ -64,7 +64,7 @@ const PropertyHeader = ({ data }) => {
                 <span className="flaticon-printer" />
               </a>
             </div>
-            <h3 className="price mb-0">${data.minPrice}-${data?.maxPrice}</h3>
+            <h3 className="price mb-0">${data?.minPrice}-${data?.maxPrice}</h3>
             <p className="text space fz15"></p>
           </div>
         </div>
