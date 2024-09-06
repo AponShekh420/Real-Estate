@@ -12,6 +12,7 @@ const useValidationResult = require("../middleware/common/useValidationResult");
 const getCityBySlug = require("../controllers/cityController/getCityBySlug");
 const uploadLocationImg = require("../middleware/uploadLocationImg");
 const useLocationValidationResult = require("../middleware/useLocationValidationResult");
+const getCities = require("../controllers/cityController/getCities");
 
 
 // callback function of configure
@@ -29,6 +30,9 @@ router.put('/active', activeCity);
 
 // get state data to display in frontend page 
 router.post("/get-by-slug", getCityBySlug);
+
+
+router.get("/getall", getCities);
 
 
 

@@ -1,13 +1,34 @@
 "use client";
 
-import cities from "@/data/propertyByCities";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 
 const PropertiesByCities = () => {
+  const [data, setData] = useState([]);
+
+  const getAllCities = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/getall`, {
+        credentials: "include",
+      });
+
+      const resData = await res.json();
+      if(resData?.msg) {
+        setData(resData?.data)
+      }
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(()=> {
+    getAllCities()
+  }, [])
+
   return (
     <>
       <Swiper
@@ -34,26 +55,26 @@ const PropertiesByCities = () => {
           },
         }}
       >
-        {cities.slice(14, 23).map((city) => (
-          <SwiperSlide key={city.id}>
+        {data?.map((city) => (
+          <SwiperSlide key={city._id}>
             <div className="item">
               <div className="feature-style3 text-center">
-                <div className="feature-img rounded-circle">
+                <div className="feature-img rounded-circle" style={{width: "176px", height: "176px"}}>
                   <Image
-                    width={176}
-                    height={176}
+                    width={100}
+                    height={100}
                     className="w-100 h-100 cover"
-                    src={city.image}
+                    src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/location/${city?.img}`}
                     alt="cities"
                   />
                 </div>
                 <div className="feature-content pt25">
                   <div className="top-area">
                     <h6 className="title mb-1">
-                      <Link href="/map-v3">{city.name}</Link>
+                      <Link href={`/summary/${city?.state?.slug}/${city?.slug}`}>{city.name}</Link>
                     </h6>
                     <p className="fz15 fw400 dark-color mb-0">
-                      {city.propertyCount} Properties
+                      {city?.community?.length} communities
                     </p>
                   </div>
                 </div>
