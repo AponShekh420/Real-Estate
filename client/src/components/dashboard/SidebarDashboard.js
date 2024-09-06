@@ -61,12 +61,6 @@ const SidebarDashboard = ({user}) => {
           roles: ["admin"],
         },
         {
-          href: "/dashboard/my-favourites",
-          icon: "flaticon-like",
-          text: "My Favorites",
-          roles: ["user", "admin", "contributor"],
-        },
-        {
           href: "/dashboard/reviews",
           icon: "flaticon-review",
           text: "Reviews",

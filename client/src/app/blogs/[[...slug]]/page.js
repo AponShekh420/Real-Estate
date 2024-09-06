@@ -64,7 +64,7 @@ const Blogs = async ({params}) => {
       {/* Blog Section Area */}
       <section className="our-blog pt-0">
         <div className="container">
-          <div className="row mt20" data-aos="fade-up" data-aos-delay="300">
+          <div className="row mt20">
             <div className="col-lg-8">
               <Blog blogFilter={store.getState().blogFilter}/>
               <div className="row">

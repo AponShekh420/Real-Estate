@@ -57,7 +57,7 @@ const Home = () => {
           >
             <div className="col-lg-9">
               <div className="main-title2">
-                <h2 className="title">Properties by Cities</h2>
+                <h2 className="title">Communities by Cities</h2>
                 <p className="paragraph">
                   Aliquam lacinia diam quis lacus euismod
                 </p>
@@ -67,7 +67,7 @@ const Home = () => {
 
             <div className="col-lg-3">
               <div className="text-start text-lg-end mb-3">
-                <Link className="ud-btn2" href="/map-v3">
+                <Link className="ud-btn2" href="/summary">
                   See All Cities
                   <i className="fal fa-arrow-right-long" />
                 </Link>
