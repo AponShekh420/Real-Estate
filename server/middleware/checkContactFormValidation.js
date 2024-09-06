@@ -7,10 +7,6 @@ const checkContactFormValidation = [
     .isLength({min: 4})
     .withMessage("The name is too short")
     .trim(),
-  check("phone")
-    .isLength({min: 6})
-    .withMessage("Please provide a valid phone number.")
-    .trim(),
   check("email")
     .isEmail()
     .withMessage("Please enter a valid email address")

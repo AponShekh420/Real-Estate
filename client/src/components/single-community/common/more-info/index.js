@@ -1,30 +1,58 @@
-"use client";
-import Select from "react-select";
+"use client"
+import React, { useState } from "react";
+import { BeatLoader } from "react-spinners";
 import SingleAgentInfo from "./SingleAgentInfo";
 
-const InfoWithForm = () => {
-  const inqueryType = [
-    { value: "Engineer", label: "Engineer" },
-    { value: "Doctor", label: "Doctor" },
-    { value: "Employee", label: "Employee" },
-    { value: "Businessman", label: "Businessman" },
-    { value: "Other", label: "Other" },
-  ];
+const InfoWithForm = ({data}) => {
 
-  const customStyles = {
-    option: (styles, { isFocused, isSelected, isHovered }) => {
-      return {
-        ...styles,
-        backgroundColor: isSelected
-          ? "#eb6753"
-          : isHovered
-          ? "#eb675312"
-          : isFocused
-          ? "#eb675312"
-          : undefined,
-      };
-    },
-  };
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [successMsg, setSuccessMsg] = useState("");
+
+
+
+
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    setErrors({});
+    setSuccessMsg("");
+    try {
+      setLoading(true);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/email/more-info/send`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+          email,
+          message,
+          communityTitle: data?.title,
+          communityUrl: data?.slug
+        })
+      })
+      const resData = await res.json();
+      setLoading(false);
+      if(resData?.msg) {
+        setName("");
+        setEmail("");
+        setPhone("");
+        setMessage("");
+        setSuccessMsg(resData?.msg);
+      } else {
+        setErrors(resData.errors);
+      }
+    } catch(err) {
+      console.log(err.message)
+    }
+  }
+  
 
   return (
     <>
@@ -32,7 +60,13 @@ const InfoWithForm = () => {
 
       <div className="row">
         <div className="col-md-12">
-          <form className="form-style1 row">
+          <form 
+            className="form-style1 row"
+            action={`${process.env.NEXT_PUBLIC_BACKEND_API}/api/email/more-info/send`}
+            method="post"
+            onSubmit={submitHandler}
+            encType="multipart/form-data"
+          >
             <div className="col-md-6">
               <div className="mb20">
                 <label className="heading-color ff-heading fw600 mb10">
@@ -41,8 +75,11 @@ const InfoWithForm = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Ali Tufan"
+                  placeholder="Enter your full name"
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
                 />
+                <p className="text-danger">{errors?.name?.msg}</p>
               </div>
             </div>
             {/* End .col */}
@@ -56,12 +93,15 @@ const InfoWithForm = () => {
                   type="text"
                   className="form-control"
                   placeholder="Enter your phone"
+                  onChange={(e) => setPhone(e.target.value)}
+                  value={phone}
                 />
+                <p className="text-danger">{errors?.phone?.msg}</p>
               </div>
             </div>
             {/* End .col */}
 
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="mb20">
                 <label className="heading-color ff-heading fw600 mb10">
                   Email
@@ -69,29 +109,11 @@ const InfoWithForm = () => {
                 <input
                   type="email"
                   className="form-control"
-                  placeholder="creativelayers088"
+                  placeholder="example@gmail.com"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
                 />
-              </div>
-            </div>
-            {/* End .col */}
-
-            <div className="col-md-6">
-              <div className="widget-wrapper sideborder-dropdown">
-                <label className="heading-color ff-heading fw600 mb10">
-                  I&apos;m a
-                </label>
-                <div className="form-style2 input-group">
-                  <Select
-                    defaultValue={[inqueryType[0]]}
-                    name="colors"
-                    options={inqueryType}
-                    styles={customStyles}
-                    className="custom-react_select"
-                    classNamePrefix="select"
-                    required
-                    isClearable={false}
-                  />
-                </div>
+                <p className="text-danger">{errors?.email?.msg}</p>
               </div>
             </div>
             {/* End .col */}
@@ -106,24 +128,30 @@ const InfoWithForm = () => {
                   rows={4}
                   placeholder="Hello, I am interested in [Renovated apartment at last floor]"
                   defaultValue={""}
+                  onChange={(e) => setMessage(e.target.value)}
+                  value={message}
                 />
+                <p className="text-danger">{errors?.message?.msg}</p>
               </div>
             </div>
             {/* End .col */}
 
-            <div className="checkbox-style1 d-block d-sm-flex align-items-center justify-content-between mb10">
-              <label className="custom_checkbox fz14 ff-heading">
-                By submitting this form I agree to Terms of Use
-                <input type="checkbox" />
-                <span className="checkmark" />
-              </label>
-            </div>
-            {/* End .col */}
-
             <div className="btn-area mt20">
-              <button className="ud-btn btn-white2">
-                Request Information <i className="fal fa-arrow-right-long" />
+              <button type="submit" className={`ud-btn btn-white2 d-flex align-items-center justify-content-center ${loading ? "opacity-50": "opacity-100"}`} disabled={loading}>
+                {!loading && "Request Information"}
+                {loading ? (<BeatLoader color="#000000" size={22} loading={loading} />) : (<i className="fal fa-arrow-right-long" />)}
               </button>
+            </div>
+
+            <div className="mt25 col-12">
+              {successMsg && (
+                <div className="alert alert-success text-center" role="alert">
+                  {successMsg}
+                </div>)}
+              {errors?.fail && (
+                <div className="alert alert-danger text-center" role="alert">
+                  {errors?.fail?.msg}
+                </div>)}
             </div>
           </form>
         </div>
