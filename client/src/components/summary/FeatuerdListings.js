@@ -51,7 +51,7 @@ const FeaturedListings = ({state: stateProps, city: cityProps, area: areaProps})
                   height={248}
                   style={{height:'230px'}}
                   className="w-100  cover"
-                  src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${listing?.imgs[listing.imgs.length -1]}`}
+                  src={listing?.thumbnail ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${listing?.thumbnail}` : `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${listing?.imgs[listing?.imgs?.length -1]}`}
                   alt="listings"
                 />
                 <div className="sale-sticker-wrap">

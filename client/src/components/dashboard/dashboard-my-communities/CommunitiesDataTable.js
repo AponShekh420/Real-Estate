@@ -46,7 +46,7 @@ const CommunitiesDataTable = ({communitiesData, setDeleteData}) => {
                     width={110}
                     height={94}
                     className="w-100"
-                    src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${community?.imgs[community?.imgs?.length -1]}`}
+                    src={community?.thumbnail ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${community?.thumbnail}` : `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${community?.imgs[community?.imgs?.length -1]}`}
                     alt="community"
                   />
                 </div>

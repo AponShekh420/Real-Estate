@@ -49,7 +49,7 @@ const Wishlist = ({listing}) => {
   }
 
   useEffect(() => {
-    userInfo && getAllReview();
+    getAllReview();
   }, [notify])
 
   return (
