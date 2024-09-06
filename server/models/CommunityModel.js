@@ -97,6 +97,7 @@ const CommunitySchema = mongoose.Schema({
   },
   lat: Number,
   long: Number,
+  thumbnail: String,
 }, {timestamps: true});
 
 

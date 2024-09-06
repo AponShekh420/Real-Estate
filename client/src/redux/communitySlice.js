@@ -33,6 +33,7 @@ const initialState = {
   errors: {},
   zip: "",
   amenities: [],
+  thumbnail: ""
 }
 
 

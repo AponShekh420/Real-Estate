@@ -1,4 +1,6 @@
+import Link from "next/link";
 import TimeManager from "./TimeManager";
+import Wishlist from "./Wishlist";
 
 const PropertyHeader = ({ data }) => {
   return (
@@ -51,9 +53,7 @@ const PropertyHeader = ({ data }) => {
         <div className="single-property-content">
           <div className="property-action text-lg-end">
             <div className="d-flex mb20 mb10-md align-items-center justify-content-lg-end">
-              <a className="icon mr10" href="#">
-                <span className="flaticon-like" />
-              </a>
+              <Wishlist data={data}/>
               <a className="icon mr10" href="#">
                 <span className="flaticon-new-tab" />
               </a>

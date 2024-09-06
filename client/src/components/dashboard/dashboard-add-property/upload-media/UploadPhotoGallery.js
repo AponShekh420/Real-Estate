@@ -11,7 +11,7 @@ const UploadPhotoGallery = () => {
   const pathname = usePathname();
 
   // redux
-  const {errors, imgs, deleteImgUrls} = useSelector((state)=> state.community);
+  const {errors, imgs, deleteImgUrls, thumbnail} = useSelector((state)=> state.community);
   const dispatch = useDispatch();
 
 
@@ -83,12 +83,22 @@ const UploadPhotoGallery = () => {
         dispatch(addCommunityFieldValue({
           imgUrl: newImages,
         }));
+        if(DeletedImageUrl == thumbnail) {
+          dispatch(addCommunityFieldValue({
+            thumbnail: ""
+          }))
+        }
       } else {
         dispatch(addCommunityFieldValue({
           imgs: newImages,
           deleteImgUrls: [...deleteImgUrls, DeletedImageUrl]
         }));
-        console.log("deleteImgs:", deleteImgUrls)
+        
+        if(DeletedImageUrl == thumbnail) {
+          dispatch(addCommunityFieldValue({
+            thumbnail: ""
+          }))
+        }
       }
       dispatch(addCommunityFieldValue({
         imgs: newImages
@@ -152,6 +162,18 @@ const UploadPhotoGallery = () => {
                 place="right"
                 content="Delete Image"
               />
+              <div className="d-flex align-items-center position-absolute justify-content-center" style={{top: 5, right: 10}}>
+              <label 
+                data-tooltip-id={`thumbnail-${index}`}
+              >
+                <input type="checkbox" checked={thumbnail == imageData} onChange={() => dispatch(addCommunityFieldValue({thumbnail: imageData}))} />
+              </label>
+                <ReactTooltip
+                  id={`thumbnail-${index}`}
+                  place="top"
+                  content="Set Thumbnail"
+                />
+              </div>
             </div>
           </div>
         ))}

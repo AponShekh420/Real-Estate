@@ -1,3 +1,4 @@
+"use client"
 import getWishlist from "@/lib/getWishlist";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -18,7 +19,7 @@ const Wishlist = ({listing}) => {
     try {
       const res = await getWishlist();
       if(res?.data) {
-        setWislist(res?.data?.communities?.map(community => community._id))
+        setWislist(res?.data?.communities?.map(community => community?._id))
       }
     } catch(err) {
       console.log(err.message)
@@ -53,14 +54,14 @@ const Wishlist = ({listing}) => {
 
   return (
     <>
-      {wishlist.includes(listing._id) ? (
-        <Link href="#" className="d-flex align-items-center justify-content-center" onClick={() => userInfo && wishlistHanlder(listing._id)}>
+      {wishlist.includes(listing?._id) ? (
+        <Link href="#" className="d-flex align-items-center justify-content-center" onClick={() => userInfo && wishlistHanlder(listing?._id)}>
           <i class="fa-solid fa-heart" style={{color: "red"}}></i>
         </Link>
       ) : (
         <Link 
           href="#" 
-          onClick={() => userInfo && wishlistHanlder(listing._id)}
+          onClick={() => userInfo && wishlistHanlder(listing?._id)}
           data-bs-toggle={`${userInfo ? null : "modal"}`}
           data-bs-target="#loginSignupModal"
           role={userInfo ? null : "button"}

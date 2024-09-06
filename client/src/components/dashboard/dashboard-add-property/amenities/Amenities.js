@@ -49,8 +49,12 @@ const Amenities = () => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/amenity/getall`);
       const { data } = await res.json();
       
-      const unpopular = data.filter(amenity => !amenity.popular);
-      const popular = data.filter(amenity => amenity.popular);
+      // Sort amenities alphabetically by name
+      const sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
+
+
+      const unpopular = sortedData.filter(amenity => !amenity.popular);
+      const popular = sortedData.filter(amenity => amenity.popular);
 
       setUnpopularAmenities(transformData(unpopular));
       setPopularAmenities(transformData(popular));
@@ -168,9 +172,9 @@ const Amenities = () => {
           <input type="checkbox" checked={allChecked} onChange={handleAllCheck} /> All Unpopular
         </label>
       </div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div style={{ display: "flex", justifyContent: "start" }} className="gap-sm-3 gap-lg-3 gap-0 d-sm-flex d-block">
         {Object.keys(unpopularAmenities).map((columnKey, index) => (
-          <div key={index} className="col-sm-5 col-lg-3 col-xxl-2">
+          <div key={index} className="col-sm-5 col-lg-3 col-xxl-2 col-12">
             <div className="checkbox-style1">
               {unpopularAmenities[columnKey].map((amenity, amenityIndex) => (
                 <div className="d-flex justify-content-between align-items-center mb10" key={amenityIndex}>
@@ -207,9 +211,9 @@ const Amenities = () => {
       </div>
 
       {/* Popular Amenities Section */}
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div style={{ display: "flex", justifyContent: "start" }} className="gap-sm-3 gap-lg-3 gap-0 d-sm-flex d-block">
         {Object.keys(popularAmenities).map((columnKey, index) => (
-          <div key={index} className="col-sm-5 col-lg-3 col-xxl-2">
+          <div key={index} className="col-sm-5 col-lg-3 col-xxl-2 col-12">
             <div className="checkbox-style1">
               {popularAmenities[columnKey].map((amenity, amenityIndex) => (
                 <div className="d-flex justify-content-between align-items-center mb10" key={amenityIndex}>
