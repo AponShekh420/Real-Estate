@@ -19,6 +19,7 @@ const amenityRouter = require("./routers/amenityRouter");
 const reviewRouter = require("./routers/reviewRouter");
 const commentRouter = require("./routers/commentRouter");
 const wishlistRouter = require("./routers/wishlistRouter");
+const emailNotifyRouter = require("./routers/emailNotifyRouter");
 
 // user
 const userRouter = require("./routers/userRouter");
@@ -88,6 +89,9 @@ app.use('/api/comment', commentRouter);
 
 // community wishlist
 app.use('/api/wishlist', wishlistRouter);
+
+// email messeging
+app.use('/api/email', emailNotifyRouter);
 
 
 
