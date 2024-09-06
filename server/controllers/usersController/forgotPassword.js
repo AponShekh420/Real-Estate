@@ -24,17 +24,17 @@ const forgotPassword = async (req, res) => {
 
     const socialLoginMsg = `<h2>Forgot your password?</h2>
 
-    Because this account signs in using ${user?.provider}, CompanyName does not store your password. If you still wish to reset your ${user?.provider} password you will need to visit their website to do so.
+    <p>Because this account signs in using ${user?.provider}, CompanyName does not store your password. If you still wish to reset your ${user?.provider} password you will need to visit their website to do so.</p>
 
-    If you no longer want to use your ${user?.provider} account to sign in to CompanyName, sign in to the <a href="url/register">CompanyName Account Center</a> to disconnect it.
+    <p>If you no longer want to use your ${user?.provider} account to sign in to CompanyName, sign in to the <a href="${process.env.CLIENT_URL}/register">CompanyName Account Center</a> to disconnect it.</p>
 
-    If you're not sure why you're receiving this message, you can report it to us by emailing placeholderemail@envato.com.
+    <p>If you're not sure why you're receiving this message, you can report it to us by emailing placeholderemail@envato.com.</p>
 
-    Thanks,
-    companyName`
+    <p>Thanks,</p>
+    <p style="line-height:0">companyName</p>`
 
 
-    const message = user.provider !== "local" ? socialLoginMsg : `Forgot Password? Click on this this link to reset your Password: ${resetUrl}`
+    const message = user.provider !== "local" ? socialLoginMsg : `<h2>Forgot Password?</h2> Click on this this link to reset your Password: <a href="${resetUrl}">${resetUrl}</a>`
 
     try {
       await sendEmail({
