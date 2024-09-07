@@ -14,6 +14,7 @@ import Testimonial from "@/components/home/Testimonial";
 import FilterProperties from "@/components/home/FilterProperties";
 import Footer from "@/components/common/default-footer";
 import store from "@/redux/store";
+import RecentBlogs from "@/components/home/RecentBlogs";
 
 
 export const metadata = {
@@ -93,6 +94,13 @@ const Home = () => {
       <section className="pt-0 pb60">
         <div className="container">
           <FilterProperties />
+        </div>
+      </section>
+
+      <section className="pt-0 pb60">
+        <div className="container">
+          <RecentBlogs blogsCatagory={null} total={6} dateStatus={true} notCatagory={"66a55dd8d0c49928d7845d12"}/>
+          <RecentBlogs blogsCatagory={"66a55dd8d0c49928d7845d12"} total={3} dateStatus={false} notCatagory={""}/>
         </div>
       </section>
 

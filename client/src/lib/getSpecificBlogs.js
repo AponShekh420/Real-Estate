@@ -1,4 +1,4 @@
-const getSpecificBlogs = async (limitStart, limitEnd, active, catagory, subcatagory, titleSearch) => {
+const getSpecificBlogs = async (limitStart, limitEnd, active, catagory, subcatagory, titleSearch, notCatagory=null) => {
 
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/blog/get-by-filter`, {
@@ -14,6 +14,7 @@ const getSpecificBlogs = async (limitStart, limitEnd, active, catagory, subcatag
         active,
         limitStart: limitStart,
         limitEnd: limitEnd,
+        notCatagoryId: notCatagory?._id || null,
       })
     })
     const dataRes = await res.json();
