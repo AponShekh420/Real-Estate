@@ -1,6 +1,6 @@
 "use client";
 import Select from "react-select";
-import PriceRange from "./PriceRange";
+import PriceRange from "../advance-filter/PriceRange";
 import Bedroom from "./Bedroom";
 import Bathroom from "./Bathroom";
 import Amenities from "./Amenities";

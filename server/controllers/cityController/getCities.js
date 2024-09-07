@@ -3,7 +3,7 @@ const CityModel = require("../../models/CityModel");
 // upload the state on database
 const getCities = async (req, res)=> {
   try {
-    const cities = await CityModel.find({active: true}).populate("state");
+    const cities = await CityModel.find({active: true, community: { $exists: true, $ne: [] }}).populate("state");
     if(cities) {
       res.status(200).json({
         msg: "Got All Cities",

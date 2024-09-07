@@ -6,6 +6,7 @@ import SelectMultiField from "./SelectMulitField";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addCommunityFilterValue, removeCommunityFilterValues } from "@/redux/communityFilterSlice";
+import PriceRange from "./PriceRange";
 
 const AdvanceFilterModal = () => {  
   const router = useRouter();
@@ -48,6 +49,19 @@ const AdvanceFilterModal = () => {
         {/* End modal-header */}
 
         <div className="modal-body pb-0">
+
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="widget-wrapper">
+                <h6 className="list-title mb20">Price Range</h6>
+                <div className="range-slider-style modal-version">
+                  <PriceRange />
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* End .row */}
+
           <div className="col-12">
             <div className="widget-wrapper">
               <h6 className="list-title">Title</h6>
