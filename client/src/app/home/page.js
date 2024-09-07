@@ -35,7 +35,7 @@ const Home = () => {
 
       {/* Home Banner Style V1 */}
       <section className="home-banner-style4 p0 bgc-white">
-        <div className="home-style4 maxw1600 bdrs24 position-relative mx-auto mx20-lg">
+        <div className="home-style4 maxw1600 bdrs24 position-relative mx-auto mx20-lg py50" style={{height: "auto", background: "#BCBCBC"}}>
           <div className="container">
             <div className="row">
               <div className="col-xl-9">

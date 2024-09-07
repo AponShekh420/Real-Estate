@@ -18,7 +18,7 @@ const HeroContent = () => {
   ];
 
   return (
-    <div className="advance-search-tab mt60 mt30-lg mx-auto animate-up-3">
+    <div className="advance-search-tab mt10-sm mt30-md mx-auto animate-up-3" style={{marginTop: "-83px"}}>
       <ul className="nav nav-tabs p-0 m-0">
         {tabs.map((tab) => (
           <li className="nav-item" key={tab.id}>

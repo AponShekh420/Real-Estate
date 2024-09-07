@@ -3,6 +3,8 @@ import HeroContent from "./HeroContent";
 import Image from "next/image";
 import Category from "./Category";
 import VideoBox from "./VideoBox";
+import dynamic from "next/dynamic";
+const Maps = dynamic(() => import('./Maps'), { ssr: false });
 
 const Hero = () => {
   return (
@@ -33,6 +35,12 @@ const Hero = () => {
           /> */}
           {/* <VideoBox /> */}
         </div>
+
+        <div className="w-100 h-auto">
+          <Maps/>
+        </div>
+
+
         <HeroContent />
       </div>
       {/* End Hero content */}
