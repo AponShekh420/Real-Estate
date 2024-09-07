@@ -3,6 +3,7 @@ const express = require("express");
 
 // internal controllers imported
 const addState = require("../controllers/stateController/addState");
+const getStatesOnlyWithCommunities = require("../controllers/stateController/getStatesOnlyWithCommunities");
 const updateState = require("../controllers/stateController/updateState");
 const deleteState = require("../controllers/stateController/deleteState");
 const deactiveState = require("../controllers/stateController/deactiveState");
@@ -30,7 +31,10 @@ router.put('/active', activeState);
 
 
 // get state data to display in frontend page 
-router.post("/get-by-slug", getStateBySlug)
+router.post("/get-by-slug", getStateBySlug);
+
+router.get('/get-only-with-communities', getStatesOnlyWithCommunities);
+
 
 
 module.exports = router;

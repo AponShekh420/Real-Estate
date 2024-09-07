@@ -7,11 +7,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // Import Tippy's default CSS
 import stateLabels from './stateLabelData';
 
-const stateData = {
-  California: 120,
-  Texas: 85,
-  // Add other states with their community counts
-};
+const stateData = {};
 
 
 
@@ -24,10 +20,24 @@ const Maps = () => {
   };
 
 
+  const getStates = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/get-only-with-communities`);
+      const resData = await res.json();
+      if(resData?.data) {
+        const {data} = resData;
+        data?.forEach(state => stateData[state?.name?.toLowerCase()] = state?.community?.length);
+        return;
+      }
+    } catch(err) {
+      console.log(err.message)
+    }
+  }
+
 
   useEffect(()=> {
-    console.log("stateLength:", stateLabels.length)
-  })
+    getStates();
+  }, [])
 
   return (
     <div style={{ display: 'flex', justifyContent: 'start', alignItems: 'center', height: '100%', width: '100%', }}>
@@ -40,7 +50,8 @@ const Maps = () => {
             {({ geographies }) =>
               geographies.map((geo) => {
                 const stateName = geo.properties.name;
-                const communities = stateData[stateName] || 0;
+                const lowerCaseState = stateName?.toLowerCase();
+                const communities = stateData[lowerCaseState] || 0;
 
                 return (
                   <Tippy

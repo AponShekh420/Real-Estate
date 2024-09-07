@@ -36,7 +36,7 @@ const Hero = () => {
           {/* <VideoBox /> */}
         </div>
 
-        <div className="w-100 h-auto">
+        <div className="w-100 h-auto" style={{minHeight: "200px"}}>
           <Maps/>
         </div>
 

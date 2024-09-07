@@ -15,6 +15,7 @@ import FilterProperties from "@/components/home/FilterProperties";
 import Footer from "@/components/common/default-footer";
 import store from "@/redux/store";
 import RecentBlogs from "@/components/home/RecentBlogs";
+import StateList from "@/components/home/StateList";
 
 
 export const metadata = {
@@ -324,6 +325,10 @@ const Home = () => {
       </section>
       {/* Our CTA */}
 
+
+      <section className="pb-0 pt30">
+        <StateList />
+      </section>
       {/* Start Our Footer */}
       <section className="footer-style1 pt60 pb-0">
         <Footer />
