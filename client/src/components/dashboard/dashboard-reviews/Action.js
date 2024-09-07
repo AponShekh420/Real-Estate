@@ -21,9 +21,9 @@ const getStatusStyle = (active) => {
 };
 
 
-const Action = ({review}) => {
+const Action = ({review, action}) => {
   const [actionLoading, setActionLoading] = useState(false);
-  const [status, setStatus] = useState(false);
+  const [status, setStatus] = useState(action);
 
   const statusHandler = async (id) => {
     try {
@@ -70,7 +70,7 @@ const Action = ({review}) => {
       <ReactTooltip
         id={`${review?._id}`}
         place="top"
-        content={status ? "Click To Panding" : "Click To Approve"}
+        content={!status ? "Click To Approve" : "Click To Panding"}
       />
     </div>
   );

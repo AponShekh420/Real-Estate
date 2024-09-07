@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import Select from "react-select";
 import { BeatLoader } from "react-spinners";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const inqueryType = [
@@ -36,6 +35,7 @@ const ReviewBoxForm = ({data}) => {
   const [review, setReview] = useState("");
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const [successMsg, setSuccessMsg] = useState("");
 
   // redux
   const {userInfo} = useSelector(state => state.user)
@@ -44,6 +44,7 @@ const ReviewBoxForm = ({data}) => {
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevents the default form submission behavior
     setErrors({})
+    setSuccessMsg("");
     try {
       setLoading(true)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/review/add`, {
@@ -63,10 +64,7 @@ const ReviewBoxForm = ({data}) => {
       if(reviewData.msg) {
         setReview("");
         setRating(5);
-        toast.success(reviewData.msg, {
-          position: "top-right",
-          autoClose: 1500,
-        });
+        setSuccessMsg(reviewData?.msg);
       } else {
         setErrors(reviewData?.errors)
       }
@@ -128,9 +126,19 @@ const ReviewBoxForm = ({data}) => {
             {!loading && "Submit Review"}
             {loading ? (<BeatLoader color="white" size={22} loading={loading} />) : (<i className="fal fa-arrow-right-long" />)}
           </button>
-          <ToastContainer/>
         </div>
         {/* End .col-6 */}
+
+        <div className="mt25">
+          {successMsg && (
+            <div className="alert alert-success text-center" role="alert">
+              {successMsg}
+            </div>)}
+          {errors?.server && (
+          <div className="alert alert-danger text-center" role="alert">
+            {errors?.server?.msg}
+          </div>)}
+        </div>
         
       </div>
     </form>

@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import Moment from "react-moment";
 
 
-const SingleComment = ({data, setComments, comments}) => {
+const SingleComment = ({data, setComments, comments, notify}) => {
   const [loading, setLoading] = useState(false);
   const [showMore, setShowMore] = useState(false);
 
@@ -33,7 +33,7 @@ const SingleComment = ({data, setComments, comments}) => {
 
   useEffect(() => {
     getComment()
-  }, [])
+  }, [notify])
 
 
   return (

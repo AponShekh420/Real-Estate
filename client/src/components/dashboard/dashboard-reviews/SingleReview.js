@@ -105,7 +105,7 @@ const SingleReview = ({data, reviews, setReviews, setTotalPages, currentPage}) =
                 Not helpful
               </a>
             </div>
-            <Action review={review}/>
+            <Action review={review} action={review?.active}/>
           </div>
         </div>
       ))}

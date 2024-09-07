@@ -10,7 +10,7 @@ const sortOptions = [
   "Price High",
 ];
 
-const AllComment = ({data}) => {
+const AllComment = ({data, notify}) => {
   const [comments, setComments] = useState([]);
   return (
     <div className="product_single_content mb50">
@@ -35,7 +35,7 @@ const AllComment = ({data}) => {
           </div>
           {/* End review filter */}
 
-          <SingleComment data={data} comments={comments} setComments={setComments}/>
+          <SingleComment data={data} comments={comments} setComments={setComments} notify={notify}/>
           {/* End reviews */}
         </div>
       </div>

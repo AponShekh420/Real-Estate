@@ -13,6 +13,7 @@ import RelatedPosts from "@/components/single-post/RelatedPosts";
 import { notFound } from "next/navigation";
 import AllComment from "@/components/single-post/comment";
 import CommentBoxForm from "@/components/single-post/CommentBoxForm";
+import Container from "@/components/single-post/Container";
 
 export const metadata = {
   title: "Blog Single  || Homez - Real Estate NextJS Template",
@@ -71,14 +72,8 @@ const BlogSingle = async ({params}) => {
               <Pagination />
               {/* End Blog Single pagination */}
 
-              <AllComment data={res} />
-              {/* End  AllReviews */}
-
-              <div className="bsp_reveiw_wrt">
-                <h6 className="fz17">Leave A Comment</h6>
-                <CommentBoxForm data={res}/>
-              </div>
-              {/* End ReviewBoxForm */}
+              <Container data={res}/>
+              {/* End commentBox */}
             </div>
           </div>
         </div>

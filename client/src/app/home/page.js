@@ -91,14 +91,18 @@ const Home = () => {
       {/* End Explore property-city */}
 
       {/* Popular Property */}
-      <section className="pt-0 pb60">
+      {/* <section className="pt-0 pb60">
         <div className="container">
           <FilterProperties />
         </div>
-      </section>
+      </section> */}
 
       <section className="pt-0 pb60">
         <div className="container">
+          <div className="main-title2">
+            <h2 className="title">Useful Information for 55 and Over Shoppers</h2>
+            <p className="paragraph">Aliquam lacinia diam quis lacus euismod</p>
+          </div>
           <RecentBlogs blogsCatagory={null} total={6} dateStatus={true} notCatagory={"66a55dd8d0c49928d7845d12"}/>
           <RecentBlogs blogsCatagory={"66a55dd8d0c49928d7845d12"} total={3} dateStatus={false} notCatagory={""}/>
         </div>

@@ -30,16 +30,18 @@ const customStyles = {
 };
 
 
-const ReviewBoxForm = ({data}) => {
+const ReviewBoxForm = ({data, setNotify}) => {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const [successMsg, setSuccessMsg] = useState("");
 
   // redux
   const {userInfo} = useSelector(state => state.user)
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevents the default form submission behavior
+    setSuccessMsg("");
     setErrors({})
     try {
       setLoading(true)
@@ -58,10 +60,8 @@ const ReviewBoxForm = ({data}) => {
       setLoading(false)
       if(commentData.msg) {
         setText("");
-        toast.success(commentData.msg, {
-          position: "top-right",
-          autoClose: 1500,
-        });
+        setSuccessMsg(commentData?.msg);
+        setNotify(Math.random() * 100)
       } else {
         setErrors(commentData?.errors)
       }
@@ -103,10 +103,18 @@ const ReviewBoxForm = ({data}) => {
             {!loading && "Submit Comment"}
             {loading ? (<BeatLoader color="white" size={22} loading={loading} />) : (<i className="fal fa-arrow-right-long" />)}
           </button>
-          <ToastContainer/>
         </div>
         {/* End .col-6 */}
-        
+        <div className="mt25">
+          {successMsg && (
+            <div className="alert alert-success text-center" role="alert">
+              {successMsg}
+            </div>)}
+          {errors?.server && (
+          <div className="alert alert-danger text-center" role="alert">
+            {errors?.server?.msg}
+          </div>)}
+        </div>
       </div>
     </form>
     {/* Signup Modal */}
