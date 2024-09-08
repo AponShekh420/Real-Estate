@@ -99,7 +99,7 @@ const Home = () => {
       </section> */}
 
       <section className="pt-0 pb60">
-        <div className="container">
+        <div className="container" data-aos="fade-up" data-aos-delay="300">
           <div className="main-title2">
             <h2 className="title">Useful Information for 55 and Over Shoppers</h2>
             <p className="paragraph">Aliquam lacinia diam quis lacus euismod</p>

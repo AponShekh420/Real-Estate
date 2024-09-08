@@ -29,7 +29,7 @@ const RecentBlogs = ({total, blogsCatagory, dateStatus, notCatagory}) => {
 
   return (
     <div className="row">
-      <div className="col-lg-12" data-aos="fade-up" data-aos-delay="300">
+      <div className="col-lg-12">
         <div className="row">
           {loading ? (
             <BlogsListLoader contentNumber={dateStatus ? 6 : 3}/>
