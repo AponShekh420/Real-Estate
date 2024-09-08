@@ -201,7 +201,7 @@ export default function ListingMap() {
     googleMapsApiKey: "AIzaSyAAz77U5XQuEME6TpftaMdX0bBelQxXRlM",
   });
   const center = useMemo(
-    () => ({ lat: 39.8097343, lng: -98.5556199 }),
+    () => ({ lat: 36.8097343, lng: -98.5556199 }),
     []
   );
 
@@ -243,7 +243,7 @@ export default function ListingMap() {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={4}
+          zoom={4.4}
           options={option}
         >
           <MarkerClusterer>
