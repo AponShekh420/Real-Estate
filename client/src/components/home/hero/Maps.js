@@ -9,7 +9,14 @@ import stateLabels from './stateLabelData';
 
 const stateData = {};
 
-
+const abbreviateStates = {
+  "Delaware": "DE",
+  "New Hampshire": "NH",
+  "Rhode Island": "RI",
+  "Connecticut": "CT",
+  "Massachusetts": "MA",
+  // Add more as needed
+};
 
 
 const Maps = () => {
@@ -41,10 +48,11 @@ const Maps = () => {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'start', alignItems: 'center', height: '100%', width: '100%', }}>
-      <div style={{ width: '85%', maxWidth: '1200px', height: 'auto', position: 'relative' }}>
+      <div style={{ width: '100%', maxWidth: '1200px', height: 'auto', position: 'relative' }}>
         <ComposableMap
           projection={geoAlbersUsa()} // Set the projection to focus on the USA
           style={{ width: '100%', height: 'auto' }}
+          viewBox='0 0 1000 600'
         >
           <Geographies geography="https://cdn.jsdelivr.net/npm/us-atlas/states-10m.json">
             {({ geographies }) =>
@@ -94,7 +102,7 @@ const Maps = () => {
                 fontSize="10px"
                 style={{ pointerEvents: 'none' }} // Ensure the text doesn't interfere with interactions
               >
-                {name}
+                 {abbreviateStates[name] || name}
               </text>
             </Marker>
           ))}

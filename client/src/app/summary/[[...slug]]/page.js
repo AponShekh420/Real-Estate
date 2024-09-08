@@ -10,6 +10,7 @@ import ReadMore from "@/components/common/ReadMore";
 import store from "@/redux/store";
 import { removeCommunityFilterValues } from "@/redux/communityFilterSlice";
 import Breadcumb from "@/components/summary/Breadcumb";
+import ListingMap from "@/components/summary/ListingMap";
 
 export const metadata = {
   title: "55 home || summary",
@@ -46,6 +47,18 @@ const SummaryPage = async ({params}) => {
       {/* Mobile Nav  */}
       <MobileMenu />
       {/* End Mobile Nav  */}
+
+      <section className="property-header-map p-0">
+        <div className="inner-style1">
+          <div className="container-fluid p-0">
+            <div id="map" style={{ height: "650px" }}>
+              <ListingMap/>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
 
       {/* Breadcumb Sections */}
       <section className="breadcumb-section bgc-f7">

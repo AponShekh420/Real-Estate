@@ -15,6 +15,7 @@ const getCommunities = require("../controllers/communityController/getCommunitie
 const checkCommunityValidation = require("../middleware/checkCommunityValidation");
 const useValidationResult = require("../middleware/common/useValidationResult");
 const getCommunitiesByFilter = require("../controllers/communityController/getCommunitiesByFilter");
+const getCommunitiesForMap = require("../controllers/communityController/getCommunitiesForMap");
 
 
 
@@ -55,7 +56,8 @@ router.post('/get-communities', getCommunities)
 
 
 // get data for display on frontend page 
-router.post('/get-by-filter', getCommunitiesByFilter)
+router.post('/get-by-filter', getCommunitiesByFilter);
+router.get('/get-for-map', getCommunitiesForMap);
 
 
 module.exports = router;

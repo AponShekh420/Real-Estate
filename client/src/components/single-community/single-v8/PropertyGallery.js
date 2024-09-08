@@ -11,9 +11,9 @@ import "photoswipe/dist/photoswipe.css";
 const PropertyGallery = ({ id, data }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-  const {imgs: images} = data;
+  const {imgs: images, thumbnail} = data;
 
-  console.log(images)
+  console.log("thumbnail:", thumbnail)
 
   return (
     <>
@@ -33,11 +33,12 @@ const PropertyGallery = ({ id, data }) => {
             modules={[FreeMode, Navigation, Thumbs]}
             className="mySwiper2 position-relative sp-img-content"
           >
-            {images.map((item, i) => (
-              <SwiperSlide key={i}>
+
+            {thumbnail && (
+              <SwiperSlide>
                 <Item
-                  original={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${item}`}
-                  thumbnail={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${item}`}
+                  original={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${thumbnail}`}
+                  thumbnail={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${thumbnail}`}
                   width={1206}
                   height={671}
                 >
@@ -47,7 +48,7 @@ const PropertyGallery = ({ id, data }) => {
                       height={671}
                       ref={ref}
                       onClick={open}
-                      src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${item}`}
+                      src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${thumbnail}`}
                       alt="gallery"
                       className="w-100 h-auto bdrs12 pointer"
                     />
@@ -60,12 +61,44 @@ const PropertyGallery = ({ id, data }) => {
                   </button>
                 ): null}
               </SwiperSlide>
-            ))}
+            )}
+
+
+            {images.map((item, i) => 
+              (item != thumbnail) && (
+                <SwiperSlide key={i}>
+                  <Item
+                    original={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${item}`}
+                    thumbnail={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${item}`}
+                    width={1206}
+                    height={671}
+                  >
+                    {({ ref, open }) => (
+                      <Image
+                        width={1206}
+                        height={671}
+                        ref={ref}
+                        onClick={open}
+                        src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${item}`}
+                        alt="gallery"
+                        className="w-100 h-auto bdrs12 pointer"
+                      />
+                    )}
+                  </Item>
+
+                  {images.length > 1 ? (
+                    <button className="all-tag popup-img border-0 pe-none">
+                      See All {images.length} Photos
+                    </button>
+                  ): null}
+                </SwiperSlide>
+              )
+            )}
           </Swiper>
         </Gallery>
 
         <div className="row">
-          <div className={`${images.length < 4 ? "col-lg-4 col-md-5" : "col-lg-7 col-md-8"}`}>
+          <div className={`${images.length < 4 ? "col-lg-5 col-md-6" : "col-lg-8 col-md-9"}`}>
             <Swiper
               onSwiper={setThumbsSwiper}
               loop={true}
@@ -76,17 +109,29 @@ const PropertyGallery = ({ id, data }) => {
               modules={[FreeMode, Navigation, Thumbs]}
               className="mySwiper mt20"
             >
-              {images.map((item, i) => (
-                <SwiperSlide key={i}>
+              { thumbnail && (
+                <SwiperSlide>
                   <Image
                     height={90}
                     width={83}
-                    src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${item}`}
+                    src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${thumbnail}`}
                     alt="image"
                     className="w-100 bdrs12 cover pointer"
                   />
                 </SwiperSlide>
-              ))}
+              )}
+              {images.map((item, i) => 
+                (item != thumbnail) && 
+                  <SwiperSlide key={i}>
+                    <Image
+                      height={90}
+                      width={83}
+                      src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${item}`}
+                      alt="image"
+                      className="w-100 bdrs12 cover pointer"
+                    />
+                  </SwiperSlide>
+                )}
             </Swiper>
           </div>
         </div>
