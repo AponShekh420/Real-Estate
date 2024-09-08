@@ -14,19 +14,26 @@ const uploadLocationImg = require("../middleware/uploadLocationImg");
 const useLocationValidationResult = require("../middleware/useLocationValidationResult");
 
 
+
+// auth checker
+const authCheck = require("../middleware/common/users/authCheck");
+const adminAuthCheck = require("../middleware/common/users/adminAuthCheck");
+
+
+
 // callback function of configure
 const router = express.Router();
 
 
 // route controller
-router.post('/add', uploadLocationImg, checkAreaValidation, useLocationValidationResult, addArea);
-router.put('/update', uploadLocationImg, checkAreaValidation, useLocationValidationResult, updateArea);
-router.delete('/delete', deleteArea);
+router.post('/add', authCheck, adminAuthCheck, uploadLocationImg, checkAreaValidation, useLocationValidationResult, addArea);
+router.put('/update', authCheck, adminAuthCheck, uploadLocationImg, checkAreaValidation, useLocationValidationResult, updateArea);
+router.delete('/delete', authCheck, adminAuthCheck, deleteArea);
 
 
 // active and deactive
-router.put('/deactive', deactiveArea);
-router.put('/active', activeArea);
+router.put('/deactive', authCheck, adminAuthCheck, deactiveArea);
+router.put('/active', authCheck, adminAuthCheck, activeArea);
 
 
 

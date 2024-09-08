@@ -16,6 +16,14 @@ const checkCommunityValidation = require("../middleware/checkCommunityValidation
 const useValidationResult = require("../middleware/common/useValidationResult");
 const getCommunitiesByFilter = require("../controllers/communityController/getCommunitiesByFilter");
 
+
+
+// auth checker
+const authCheck = require("../middleware/common/users/authCheck");
+const adminAuthCheck = require("../middleware/common/users/adminAuthCheck");
+
+
+
 // callback function of configure
 const router = express.Router();
 
@@ -25,19 +33,19 @@ router.get('/single-community/:slug', getSingleCommunity);
 
 
 // route controller
-router.post('/add', checkCommunityValidation, useValidationResult, addCommunity);
-router.put('/update', checkCommunityValidation, useValidationResult, useCommunityImgsDeletor, updateCommuity);
-router.delete('/delete', deleteCommunity);
+router.post('/add', authCheck, adminAuthCheck, checkCommunityValidation, useValidationResult, addCommunity);
+router.put('/update', authCheck, adminAuthCheck, checkCommunityValidation, useValidationResult, useCommunityImgsDeletor, updateCommuity);
+router.delete('/delete', authCheck, adminAuthCheck, deleteCommunity);
 
 
 // community active and deactive
-router.put('/deactive', deactiveCommunity);
-router.put('/active', activeCommunity);
+router.put('/deactive', authCheck, adminAuthCheck, deactiveCommunity);
+router.put('/active', authCheck, adminAuthCheck, activeCommunity);
 
 
 // community image uploading and deleting
-router.post('/upload', uploadCommunityImages);
-router.delete('/imgdelete', communityImageDelete);
+router.post('/upload', authCheck, adminAuthCheck, uploadCommunityImages);
+router.delete('/imgdelete', authCheck, adminAuthCheck, communityImageDelete);
 
 
 

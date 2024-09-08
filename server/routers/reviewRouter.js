@@ -4,7 +4,6 @@ const express = require("express");
 // internal controllers imported
 // const getSingleBlog = require("../controllers/blogController/getSingleBlog");
 const useValidationResult = require("../middleware/common/useValidationResult");
-const authCheck = require("../middleware/common/users/authCheck");
 const checkReviewValidation = require("../middleware/checkReviewValidation");
 const addReview = require("../controllers/reviewController/addReview");
 const getReviews = require("../controllers/reviewController/getReviews");
@@ -13,6 +12,12 @@ const like = require("../controllers/reviewController/like");
 const dislike = require("../controllers/reviewController/dislike");
 const getAllReviews = require("../controllers/reviewController/getAllReviews");
 const approveAndPandingReview = require("../controllers/reviewController/approveAndPandingReview");
+
+
+
+// auth checker
+const authCheck = require("../middleware/common/users/authCheck");
+const adminAuthCheck = require("../middleware/common/users/adminAuthCheck");
 
 // callback function of configure
 const router = express.Router();
@@ -24,7 +29,7 @@ const router = express.Router();
 
 // route controller
 router.post('/add', authCheck, checkReviewValidation, useValidationResult, addReview);
-router.put('/update', authCheck, checkReviewValidation, useValidationResult, updateReview);
+router.put('/update', authCheck, adminAuthCheck, checkReviewValidation, useValidationResult, updateReview);
 
 
 // like, dislike

@@ -13,8 +13,16 @@ const checkCommunityValidation = require("../middleware/checkCommunityValidation
 const useValidationResult = require("../middleware/common/useValidationResult");
 const useBlogImgDeletor = require("../middleware/useBlogImgDeletor");
 const checkBlogValidation = require("../middleware/checkBlogValidation");
-const authCheck = require("../middleware/common/users/authCheck");
 const getBlogsByFilter = require("../controllers/blogController/getBlogsByFilter");
+
+
+
+// auth checker
+const authCheck = require("../middleware/common/users/authCheck");
+const contributorOrAdminAuthCheck = require("../middleware/common/users/contributorOrAdminAuthCheck");
+
+
+
 
 // callback function of configure
 const router = express.Router();
@@ -25,15 +33,15 @@ router.get('/single-blog/:slug', getSingleBlog);
 
 
 // route controller
-router.post('/add', authCheck, checkBlogValidation, useValidationResult, addBlog);
-router.put('/update', authCheck, checkBlogValidation, useValidationResult, useBlogImgDeletor, updateBlog);
-router.delete('/delete', deleteBlog);
+router.post('/add', authCheck, contributorOrAdminAuthCheck, checkBlogValidation, useValidationResult, addBlog);
+router.put('/update', authCheck, contributorOrAdminAuthCheck, checkBlogValidation, useValidationResult, useBlogImgDeletor, updateBlog);
+router.delete('/delete', authCheck, contributorOrAdminAuthCheck, deleteBlog);
 
 
 
 // blog image uploading and deleting
-router.post('/upload', uploadBlogImage);
-router.delete('/imgdelete', blogImgDelete);
+router.post('/upload', authCheck, contributorOrAdminAuthCheck, uploadBlogImage);
+router.delete('/imgdelete', authCheck, contributorOrAdminAuthCheck, blogImgDelete);
 
 
 

@@ -55,7 +55,7 @@ const StateList = () => {
             <div key={index} style={{ flex: 1, padding: "0 10px" }}>
               <ul>
                 {column?.map((state, idx) => (
-                  <li key={idx} className="text-capitalize">
+                  <li key={idx} className="text-capitalize fw-bold">
                     <Link href={`/summary/${state?.slug}`}>
                       {state?.name}
                     </Link>

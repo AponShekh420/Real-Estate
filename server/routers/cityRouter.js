@@ -15,18 +15,26 @@ const useLocationValidationResult = require("../middleware/useLocationValidation
 const getCities = require("../controllers/cityController/getCities");
 
 
+
+// auth checker
+const authCheck = require("../middleware/common/users/authCheck");
+const adminAuthCheck = require("../middleware/common/users/adminAuthCheck");
+
+
+
+
 // callback function of configure
 const router = express.Router();
 
 
 // route controller
-router.post('/add', uploadLocationImg, checkCityValidation, useLocationValidationResult, addCity);
-router.put('/update', uploadLocationImg, checkCityValidation, useLocationValidationResult, updateCity);
-router.delete('/delete', deleteCity);
+router.post('/add', authCheck, adminAuthCheck, uploadLocationImg, checkCityValidation, useLocationValidationResult, addCity);
+router.put('/update', authCheck, adminAuthCheck, uploadLocationImg, checkCityValidation, useLocationValidationResult, updateCity);
+router.delete('/delete', authCheck, adminAuthCheck, deleteCity);
 
 // city deactive and active 
-router.put('/deactive', deactiveCity);
-router.put('/active', activeCity);
+router.put('/deactive', authCheck, adminAuthCheck, deactiveCity);
+router.put('/active', authCheck, adminAuthCheck, activeCity);
 
 // get state data to display in frontend page 
 router.post("/get-by-slug", getCityBySlug);

@@ -8,15 +8,22 @@ const deleteModelsTab = require("../controllers/communityModelsController/delete
 const uploadModelImg = require("../middleware/uploadModelImg");
 const getModels = require("../controllers/communityModelsController/getModels");
 
+
+
+// auth checker
+const authCheck = require("../middleware/common/users/authCheck");
+const adminAuthCheck = require("../middleware/common/users/adminAuthCheck");
+
+
 // callback function of configure
 const router = express.Router();
 
 
 // route controller
 router.get('/get/:id', getModels);
-router.post('/add', uploadModelImg, addModelsTab);
-router.put('/update', uploadModelImg, updateModelsTab);
-router.delete('/delete', deleteModelsTab);
+router.post('/add', authCheck, adminAuthCheck, uploadModelImg, addModelsTab);
+router.put('/update', authCheck, adminAuthCheck, uploadModelImg, updateModelsTab);
+router.delete('/delete', authCheck, adminAuthCheck, deleteModelsTab);
 
 
 

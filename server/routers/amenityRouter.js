@@ -4,6 +4,8 @@ const express = require("express");
 // internal controllers imported
 const addAmenity = require("../controllers/amenityController/addAmenity");
 const checkAmenityValidation = require("../middleware/checkAmenityValidation");
+const authCheck = require("../middleware/common/users/authCheck");
+const adminAuthCheck = require("../middleware/common/users/adminAuthCheck");
 
 const useValidationResult = require("../middleware/common/useValidationResult");
 const updateAmenity = require("../controllers/amenityController/updateAmenity");
@@ -15,9 +17,9 @@ const router = express.Router();
 
 
 // route controller
-router.post('/add', checkAmenityValidation, useValidationResult, addAmenity);
-router.put('/update', checkAmenityValidation, useValidationResult, updateAmenity);
-router.delete('/delete', deleteAmenity);
+router.post('/add', authCheck, adminAuthCheck, checkAmenityValidation, useValidationResult, addAmenity);
+router.put('/update', authCheck, adminAuthCheck, checkAmenityValidation, useValidationResult, updateAmenity);
+router.delete('/delete', authCheck, adminAuthCheck, deleteAmenity);
 router.get('/getall', getAmenities);
 
 
