@@ -13,6 +13,7 @@ const getCatagoryData = async (params) => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/catagory/get-by-slug`, {
         method: "POST",
         cache: 'no-store',
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -34,6 +35,7 @@ const getCatagoryData = async (params) => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/subcatagory/get-by-slug`, {
         method: "POST",
         cache: 'no-store',
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },

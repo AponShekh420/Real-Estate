@@ -22,6 +22,7 @@ const DeleteCommunity = ({community, setDeleteData}) => {
           "Content-Type": "application/json"
         },
         method: "DELETE",
+        credentials: "include",
         body: JSON.stringify({
           communityId: community?._id
         })

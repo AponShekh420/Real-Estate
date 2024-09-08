@@ -55,6 +55,7 @@ const StateList = () => {
 
     const manualData = {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
@@ -69,6 +70,7 @@ const StateList = () => {
     
     const multipartDataWithFile = {
       method: "POST",
+      credentials: "include",
       body: formData
     }
 
@@ -114,6 +116,7 @@ const StateList = () => {
 
     const manualData = {
       method: "PUT",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
@@ -129,6 +132,7 @@ const StateList = () => {
 
     const multipartDataWithFile = {
       method: "PUT",
+      credentials: "include",
       body: formData
     }
 

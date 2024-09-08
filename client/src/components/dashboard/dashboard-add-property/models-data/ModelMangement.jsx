@@ -49,6 +49,7 @@ const ModelMangement = () => {
 
     const manualData = {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
@@ -62,6 +63,7 @@ const ModelMangement = () => {
     
     const multipartDataWithFile = {
       method: "POST",
+      credentials: "include",
       body: formData
     }
 

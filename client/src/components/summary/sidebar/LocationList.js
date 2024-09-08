@@ -19,7 +19,7 @@ const LocationList = () => {
   const getExistingDataToUpdate = async () => {
     try {
       setLoading(true)
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/getall/active`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/getall/active`, {credentials: "include"});
       const currentLocationData = await res.json();
       setLoading(false)
       if(currentLocationData?.message) {

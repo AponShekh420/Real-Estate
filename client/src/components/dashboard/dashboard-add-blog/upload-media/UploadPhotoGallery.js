@@ -46,6 +46,7 @@ const UploadPhotoGallery = () => {
         setLoading(true);
         const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/blog/upload`, {
           method: "POST",
+          credentials: "include",
           body: formData
         })
         const resData = await res.json();
@@ -89,6 +90,7 @@ const UploadPhotoGallery = () => {
       if(!editPageValidation) {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/blog/imgdelete`, {
           method: "DELETE",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json"
           },

@@ -29,6 +29,7 @@ const AmenitiesHanlder = ({setPopular, setAmenityName, setEmoji, setEdit, popula
       setErrors({});
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/amenity/update`, {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -67,6 +68,7 @@ const AmenitiesHanlder = ({setPopular, setAmenityName, setEmoji, setEdit, popula
       setErrors({});
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/amenity/add`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },

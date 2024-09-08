@@ -21,6 +21,7 @@ const DeleteAmenity = ({amenity, columnKey, setNotify}) => {
       setDeleteLoading(true)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/amenity/delete`, {
         method: "DELETE",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },

@@ -22,6 +22,7 @@ const SignUp = ({signInTabBtn, modalCloseBtn}) => {
       setLoading(true)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/register`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },

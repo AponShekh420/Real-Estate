@@ -30,6 +30,7 @@ const StateItem = ({state}) => {
       setLoading(true)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/deactive`, {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -65,6 +66,7 @@ const StateItem = ({state}) => {
       setLoading(true)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/active`, {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -98,6 +100,7 @@ const StateItem = ({state}) => {
       setDeleteLoading(true)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/delete`, {
         method: "DELETE",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },

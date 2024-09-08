@@ -29,6 +29,7 @@ const CityItem = ({eachCity, state}) => {
       setLoading(true)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/deactive`, {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -69,6 +70,7 @@ const CityItem = ({eachCity, state}) => {
       setLoading(true)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/active`, {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -108,6 +110,7 @@ const CityItem = ({eachCity, state}) => {
       setDeleteLoading(true)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/delete`, {
         method: "DELETE",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },

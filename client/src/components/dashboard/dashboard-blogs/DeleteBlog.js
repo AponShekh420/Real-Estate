@@ -22,6 +22,7 @@ const DeleteBlog = ({blog, setDeleteData}) => {
           "Content-Type": "application/json"
         },
         method: "DELETE",
+        credentials: "include",
         body: JSON.stringify({
           blogId: blog?._id
         })

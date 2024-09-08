@@ -46,7 +46,7 @@ const Amenities = () => {
 
   const fetchAmenities = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/amenity/getall`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/amenity/getall`, {credentials: "include"});
       const { data } = await res.json();
       
       // Sort amenities alphabetically by name

@@ -31,6 +31,7 @@ const AreaItem = ({eachArea, city, state}) => {
       setLoading(true)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/area/deactive`, {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -71,6 +72,7 @@ const AreaItem = ({eachArea, city, state}) => {
       setLoading(true)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/area/active`, {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -110,6 +112,7 @@ const AreaItem = ({eachArea, city, state}) => {
       setDeleteLoading(true)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/area/delete`, {
         method: "DELETE",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },

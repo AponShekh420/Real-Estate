@@ -52,6 +52,7 @@ const AreaList = () => {
 
     const manualData = {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
@@ -68,6 +69,7 @@ const AreaList = () => {
     
     const multipartDataWithFile = {
       method: "POST",
+      credentials: "include",
       body: formData
     }
 
@@ -118,6 +120,7 @@ const AreaList = () => {
 
     const manualData = {
       method: "PUT",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
@@ -135,6 +138,7 @@ const AreaList = () => {
 
     const multipartDataWithFile = {
       method: "PUT",
+      credentials: "include",
       body: formData
     }
 

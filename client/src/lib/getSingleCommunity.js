@@ -1,7 +1,8 @@
 const getSingleCommunity = async (slug) => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/single-community/${slug}`, {
-      cache: 'no-cache'
+      cache: 'no-cache',
+      credentials: "include",
     })
     const dataRes = await res.json();
     if(dataRes) {

@@ -24,7 +24,7 @@ const SingleModel = () => {
       if(communityId == "0") {
         return;
       }
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/get/${communityId}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/get/${communityId}`, {credentials: "include"});
       const currentData = await res.json();
       setModelsData(currentData.data)
     } catch(err) {
@@ -37,6 +37,7 @@ const SingleModel = () => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/delete`, {
         method: "DELETE",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         }, 

@@ -36,6 +36,7 @@ const ResetPassword = ({token}) => {
       setLoading(true)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/user/reset-password/${token}`, {
         method: "PATCH",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },

@@ -13,6 +13,7 @@ const getLocationData = async (params) => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/get-by-slug`, {
         method: "POST",
         cache: 'no-store',
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -36,6 +37,7 @@ const getLocationData = async (params) => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/get-by-slug`, {
         method: "POST",
         cache: 'no-store',
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -58,6 +60,7 @@ const getLocationData = async (params) => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/area/get-by-slug`, {
         method: "POST",
         cache: 'no-store',
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },

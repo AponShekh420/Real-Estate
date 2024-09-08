@@ -106,7 +106,7 @@ const BlogPublish = () => {
 
   const getExistingDataToUpdate = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/blog/single-blog/${slug}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/blog/single-blog/${slug}`, {credentials: "include"});
       const existingBlogData = await res.json();
       console.log(existingBlogData)
       if(existingBlogData?.errors?.notFound) {

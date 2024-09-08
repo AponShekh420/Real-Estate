@@ -36,7 +36,7 @@ const SelectMultiField = () => {
 
   const fetchStateData = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/getall/anytype`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/getall/anytype`, {credentials: "include"});
       const stateData = await res.json();
       setStateOptions(stateData.data);
     } catch(err){

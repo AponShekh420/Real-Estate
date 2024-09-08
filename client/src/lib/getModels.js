@@ -1,6 +1,6 @@
 const getModels = async (data) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/get/${data?._id}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/get/${data?._id}`, {credentials: "include"});
     const currentData = await res.json();
     if(currentData.data) {
       return currentData.data

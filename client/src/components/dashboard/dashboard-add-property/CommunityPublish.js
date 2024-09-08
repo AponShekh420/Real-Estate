@@ -35,6 +35,7 @@ const CommunityPublish = () => {
       setLoading(true)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/add`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -72,6 +73,7 @@ const CommunityPublish = () => {
       console.log("title:", community.title)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/update`, {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -108,7 +110,7 @@ const CommunityPublish = () => {
 
   const getExistingDataToUpdate = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/single-community/${slug}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/single-community/${slug}`, {credentials: "include"});
       const existingCommunityData = await res.json();
       console.log(existingCommunityData)
       if(existingCommunityData?.errors?.notFound) {

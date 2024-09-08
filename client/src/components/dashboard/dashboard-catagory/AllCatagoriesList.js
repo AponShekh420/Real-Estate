@@ -27,7 +27,7 @@ const AllCatagoriesList = () => {
   const getExistingDataToUpdate = async () => {
     try {
       setLoading(true)
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/catagory/getall`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/catagory/getall`, {credentials: "include"});
       const currentCatagoryData = await res.json();
       setLoading(false)
       if(currentCatagoryData?.message) {

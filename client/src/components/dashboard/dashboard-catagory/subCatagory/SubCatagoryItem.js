@@ -28,6 +28,7 @@ const SubCatagoryItem = ({eachSubcatagory, catagory}) => {
       setDeleteLoading(true)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/subcatagory/delete`, {
         method: "DELETE",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },

@@ -39,6 +39,7 @@ const AddCatagoryContent = () => {
       setSubcatagoryLoading(true);
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/subcatagory/add`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -75,6 +76,7 @@ const AddCatagoryContent = () => {
       setCatagoryLoading(true);
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/catagory/add`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -123,6 +125,7 @@ const AddCatagoryContent = () => {
       setCatagoryLoading(true);
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/catagory/update`, {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
@@ -160,6 +163,7 @@ const AddCatagoryContent = () => {
       setSubcatagoryLoading(true);
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/subcatagory/update`, {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
