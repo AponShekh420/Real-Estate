@@ -4,34 +4,64 @@ import Amenities from "./Amenities";
 import { useRouter } from "next/navigation";
 import SelectMultiField from "./SelectMulitField";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { addCommunityFilterValue, removeCommunityFilterValues } from "@/redux/communityFilterSlice";
 import PriceRange from "./PriceRange";
 
+const customStyles = {
+  option: (styles, { isFocused, isSelected, isHovered }) => {
+    return {
+      ...styles,
+      backgroundColor: isSelected
+        ? "#eb6753"
+        : isHovered
+        ? "#eb675312"
+        : isFocused
+        ? "#eb675312"
+        : undefined,
+    };
+  },
+};
+
+
+
 const AdvanceFilterModal = () => {  
+
+  // redux
+  const {city: currentCity, state: currentState, titleSearch: currentTitleSearch, gated: currentGated, ageRestrictions: currentAgeRestrictions, amenities: currentAmenities} = useSelector(state => state.communityFilter);
+  const dispatch = useDispatch();
+
+  // react state
+  const [amenities, setAmenities] = useState([...currentAmenities]);
+  const [titleSearch, setTitleSearch] = useState(currentTitleSearch || "");
+  const [city, setCity] = useState(currentCity || "");
+  const [state, setState] = useState(currentState || "");
+  const [gated, setGated] = useState(currentGated || true);
+  const [ageRestrictions, setAgeRestrictions] = useState(currentAgeRestrictions || true);
+
+  // redirect route
   const router = useRouter();
 
-  const {state, city, titleSearch} = useSelector(state => state.communityFilter);
-  const dispatch = useDispatch();
-  
+  const submitHanlder = () => {
+    dispatch(addCommunityFilterValue({
+      titleSearch,
+      city,
+      state,
+      gated,
+      ageRestrictions,
+      amenities
+    }))
+    router.push(`/summary${state ? `/${state?.slug}` : ""}${city ? `/${city?.slug}` : ""}`)
+  }
 
-  const customStyles = {
-    option: (styles, { isFocused, isSelected, isHovered }) => {
-      return {
-        ...styles,
-        backgroundColor: isSelected
-          ? "#eb6753"
-          : isHovered
-          ? "#eb675312"
-          : isFocused
-          ? "#eb675312"
-          : undefined,
-      };
-    },
-  };
+
   useEffect(()=> {
-    dispatch(removeCommunityFilterValues())
-  }, [])
+    console.log("amenitiesList:", amenities)
+  }, [amenities])
+
+
+
+
   return (
     <div className="modal-dialog modal-dialog-centered modal-lg">
       <div className="modal-content">
@@ -70,9 +100,7 @@ const AdvanceFilterModal = () => {
                   type="text"
                   className="form-control"
                   placeholder="Write your community name"
-                  onChange={(e)=> dispatch(addCommunityFilterValue({
-                    titleSearch: e.target.value
-                  }))}
+                  onChange={(e)=> setTitleSearch(e.target.value)}
                   value={titleSearch}
                 />
               </div>
@@ -81,7 +109,7 @@ const AdvanceFilterModal = () => {
           {/* End .col-6 */}
 
           <div className="row">
-            <SelectMultiField/>
+            <SelectMultiField state={state} setState={setState} setCity={setCity} city={city} gated={gated} setGated={setGated} ageRestrictions={ageRestrictions} setAgeRestrictions={setAgeRestrictions}/>
             {/* End .col-md-6 */}
           </div>
           {/* End .row */}
@@ -92,7 +120,7 @@ const AdvanceFilterModal = () => {
                 <h6 className="list-title mb10">Amenities</h6>
               </div>
             </div>
-            <Amenities />
+            <Amenities amenities={amenities} setAmenities={setAmenities}/>
           </div>
         </div>
         {/* End modal body */}
@@ -103,7 +131,7 @@ const AdvanceFilterModal = () => {
             <u>Reset all filters</u>
           </button>
           <div className="btn-area">
-            <button data-bs-dismiss="modal" type="submit" className="ud-btn btn-thm" onClick={() => router.push(`/summary${state ? `/${state?.slug}` : ""}${city ? `/${city?.slug}` : ""}`)} >
+            <button data-bs-dismiss="modal" type="submit" className="ud-btn btn-thm" onClick={submitHanlder} >
               <span className="flaticon-search align-text-top pr10" />
               Search
             </button>

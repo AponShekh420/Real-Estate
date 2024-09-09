@@ -15,6 +15,9 @@ const initialState = {
   data: [],
   totalPages: 1,
   currentPage: 1,
+  amenities: [],
+  ageRestrictions: true,
+  gated: true
 }
 
 

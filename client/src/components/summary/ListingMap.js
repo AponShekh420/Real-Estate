@@ -248,7 +248,7 @@ export default function ListingMap() {
         >
           <MarkerClusterer>
             {(clusterer) =>
-              listings.map((marker) => (
+              listings?.map((marker) => (
                 <Marker
                   key={marker.id}
                   position={{
@@ -264,8 +264,8 @@ export default function ListingMap() {
           {getLocation !== null && (
             <InfoWindow
               position={{
-                lat: getLocation.lat,
-                lng: getLocation.long,
+                lat: getLocation?.lat,
+                lng: getLocation?.long,
               }}
               onCloseClick={closeCardHandler}
             >
@@ -300,22 +300,22 @@ export default function ListingMap() {
                     <p className="list-text">{getLocation?.location}</p>
                     <div className="list-meta d-flex align-items-center">
                       <a href="#">
-                        <span className="flaticon-bed" /> {getLocation.bed} bed
+                        <span className="flaticon-bed" /> {getLocation?.bed} bed
                       </a>
                       <a href="#">
-                        <span className="flaticon-shower" /> {getLocation.bath}{" "}
+                        <span className="flaticon-shower" /> {getLocation?.bath}{" "}
                         bath
                       </a>
                       <a href="#">
-                        <span className="flaticon-expand" /> {getLocation.sqft}{" "}
+                        <span className="flaticon-expand" /> {getLocation?.sqft}{" "}
                         sqft
                       </a>
                     </div>
                     <hr className="mt-2 mb-2" />
                     <div className="list-meta2 d-flex justify-content-between align-items-center">
-                      <span className="for-what">For {getLocation?.status.map((item, index) => (getLocation.status.length > (index + 1)) ? `${item}/`: item)}</span>
+                      <span className="for-what">For {getLocation?.status?.map((item, index) => (getLocation?.status?.length > (index + 1)) ? `${item}/`: item)}</span>
                       <div className="icons d-flex align-items-center">
-                        <Link href={`/community/${getLocation.slug}`}>
+                        <Link href={`/community/${getLocation?.slug}`}>
                           <span className="flaticon-fullscreen" />
                         </Link>
                         <Wishlist listing={getLocation}/>

@@ -8,6 +8,7 @@ const PriceRange = ({ filterFunctions }) => {
   // price range handler
   const handleOnChange = (value) => {
     setPrice(value);
+    console.log("price:", price)
     filterFunctions?.handlepriceRange(value);
   };
 

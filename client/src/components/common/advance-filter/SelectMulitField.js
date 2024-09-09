@@ -1,9 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import {useSelector, useDispatch} from "react-redux"
-import { addCommunityFieldValue } from "@/redux/communitySlice";
 import Select from 'react-select'
-import { addCommunityFilterValue } from "@/redux/communityFilterSlice";
 
 const customStyles = {
   option: (styles, { isFocused, isSelected, isHovered }) => {
@@ -20,19 +17,24 @@ const customStyles = {
   },
 };
 
+const ageRestrictionsOptions = [
+  {value: true, label: "Yes"},
+  {value: false, label: "No"}
+]
+const gatedOptions = [
+  {value: true, label: "Yes"},
+  {value: false, label: "No"}
+]
 
-const SelectMultiField = () => {
-  const { state, city } = useSelector((state)=> state.communityFilter)
-  const dispatch = useDispatch()
+
+const SelectMultiField = ({city, setCity, setState, state, gated, ageRestrictions, setAgeRestrictions, setGated}) => {
 
   // options
   const [stateOptions, setStateOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
 
   const cityHanlder = (currentState) => {
-    dispatch(addCommunityFilterValue({
-      city: "",
-    }))
+    setCity("")
     const cityOptionValues = currentState.value.city.map(item => item.active && item).length > 0 ? currentState.value.city.map(item => item.active && item) : [];
     setCityOptions(cityOptionValues[0] ? cityOptionValues : []);
   }
@@ -74,7 +76,7 @@ const SelectMultiField = () => {
               }))}
               onChange={(e)=> {
                 cityHanlder(e);
-                dispatch(addCommunityFilterValue({state: e.value}))
+                setState(e.value);
               }}
               value={{value: state?.name, label: state?.name}}
             />
@@ -98,7 +100,7 @@ const SelectMultiField = () => {
                 label: `${item.name}`,
               }))}
               onChange={(e)=> {
-                dispatch(addCommunityFilterValue({city: e.value}))
+                setCity(e.value)
               }}
               placeholder="please select"
               value={{value: city?.name, label: city?.name}}
@@ -106,6 +108,62 @@ const SelectMultiField = () => {
           </div>
         </div>
       </div>
+      {/* gated select start */}
+      <div className="col-sm-6">
+        <div className="widget-wrapper">
+          <h6 className="list-title">Gated</h6>
+          <div className="d-flex">
+            <Select
+              instanceId="asdfdsdfasdf"
+              name="gated"
+              id="asdfdsdfasdf"
+              styles={customStyles}
+              className="select-custom"
+              classNamePrefix="select"
+              // isMulti
+              options={gatedOptions?.map((item) => ({
+                value: item.value,
+                label: `${item.label}`,
+              }))}
+              onChange={(e)=> {
+                setGated(e.value)
+              }}
+              placeholder="please select"
+              value={{value: gated, label: gated ? "Yes" : "No"}}
+            />
+          </div>
+        </div>
+      </div>
+      {/* gated select end */}
+
+
+      {/* gated select start */}
+      <div className="col-sm-6">
+        <div className="widget-wrapper">
+          <h6 className="list-title">Age Restrictions</h6>
+          <div className="d-flex">
+            <Select
+              instanceId="sdfkjalksdjf"
+              name="agerestrictions"
+              id="sdfkjalksdjf"
+              styles={customStyles}
+              className="select-custom"
+              classNamePrefix="select"
+              // isMulti
+              options={ageRestrictionsOptions?.map((item) => ({
+                value: item.value,
+                label: `${item.label}`,
+              }))}
+              onChange={(e)=> {
+                setAgeRestrictions(e.value)
+              }}
+              placeholder="please select"
+              value={{value: ageRestrictions, label: ageRestrictions ? "Yes" : "No"}}
+            />
+          </div>
+        </div>
+      </div>
+      {/* gated select end */}
     </>
   );
 };
