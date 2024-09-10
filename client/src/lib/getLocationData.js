@@ -51,6 +51,7 @@ const getLocationData = async (params) => {
       if(city) {
         store.dispatch(addCommunityFilterValue({
           city: city?.data,
+          state: city?.data?.state
         }));
         return city;
       } else {

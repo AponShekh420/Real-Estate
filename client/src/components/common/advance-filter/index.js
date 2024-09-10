@@ -28,7 +28,7 @@ const customStyles = {
 const AdvanceFilterModal = () => {  
 
   // redux
-  const {city: currentCity, state: currentState, titleSearch: currentTitleSearch, gated: currentGated, ageRestrictions: currentAgeRestrictions, amenities: currentAmenities} = useSelector(state => state.communityFilter);
+  const {city: currentCity, price: currentPrice, state: currentState, titleSearch: currentTitleSearch, gated: currentGated, ageRestrictions: currentAgeRestrictions, amenities: currentAmenities} = useSelector(state => state.communityFilter);
   const dispatch = useDispatch();
 
   // react state
@@ -36,8 +36,9 @@ const AdvanceFilterModal = () => {
   const [titleSearch, setTitleSearch] = useState(currentTitleSearch || "");
   const [city, setCity] = useState(currentCity || "");
   const [state, setState] = useState(currentState || "");
-  const [gated, setGated] = useState(currentGated || true);
-  const [ageRestrictions, setAgeRestrictions] = useState(currentAgeRestrictions || true);
+  const [gated, setGated] = useState(currentGated || "Any");
+  const [ageRestrictions, setAgeRestrictions] = useState(currentAgeRestrictions || "Any");
+  const [price, setPrice] = useState(currentPrice || [0, 1000000000]);
 
   // redirect route
   const router = useRouter();
@@ -45,21 +46,24 @@ const AdvanceFilterModal = () => {
   const submitHanlder = () => {
     dispatch(addCommunityFilterValue({
       titleSearch,
-      city,
-      state,
       gated,
       ageRestrictions,
-      amenities
+      amenities,
+      price
     }))
     router.push(`/summary${state ? `/${state?.slug}` : ""}${city ? `/${city?.slug}` : ""}`)
   }
 
-
-  useEffect(()=> {
-    console.log("amenitiesList:", amenities)
-  }, [amenities])
-
-
+  const resetAdvanceSearch = () => {
+    setTitleSearch("");
+    setCity("");
+    setState("");
+    setGated("Any");
+    setAgeRestrictions("Any");
+    setPrice([0, 1000000000]);
+    setAmenities([])
+    dispatch(removeCommunityFilterValues())
+  }
 
 
   return (
@@ -85,7 +89,7 @@ const AdvanceFilterModal = () => {
               <div className="widget-wrapper">
                 <h6 className="list-title mb20">Price Range</h6>
                 <div className="range-slider-style modal-version">
-                  <PriceRange />
+                  <PriceRange setPrice={setPrice} price={price} currentPrice={currentPrice}/>
                 </div>
               </div>
             </div>
@@ -126,7 +130,7 @@ const AdvanceFilterModal = () => {
         {/* End modal body */}
 
         <div className="modal-footer justify-content-between">
-          <button className="reset-button" onClick={()=> dispatch(removeCommunityFilterValues())}>
+          <button className="reset-button" onClick={resetAdvanceSearch}>
             <span className="flaticon-turn-back" />
             <u>Reset all filters</u>
           </button>

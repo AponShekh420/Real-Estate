@@ -4,7 +4,7 @@ const { default: store } = require("@/redux/store");
 
 const getCommunities = async () => {
 
-  const { titleSearch, state, area, city, homeTypes, status, active, currentPage, ageRestrictions, gated, amenities } = store.getState().communityFilter;
+  const { titleSearch, state, area, city, homeTypes, status, active, currentPage, ageRestrictions, gated, amenities, price } = store.getState().communityFilter;
   const {dispatch} = store;
 
 
@@ -29,6 +29,7 @@ const getCommunities = async () => {
         amenities,
         gated,
         ageRestrictions,
+        price,
         limitStart: (currentPage - 1 ) * 10,
         limitEnd: currentPage * 10,
       })

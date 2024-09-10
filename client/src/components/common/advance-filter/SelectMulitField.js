@@ -18,12 +18,14 @@ const customStyles = {
 };
 
 const ageRestrictionsOptions = [
-  {value: true, label: "Yes"},
-  {value: false, label: "No"}
+  {value: "Yes", label: "Yes"},
+  {value: "No", label: "No"},
+  {value: "Any", label: "Any"},
 ]
 const gatedOptions = [
-  {value: true, label: "Yes"},
-  {value: false, label: "No"}
+  {value: "Yes", label: "Yes"},
+  {value: "No", label: "No"},
+  {value: "Any", label: "Any"},
 ]
 
 
@@ -129,7 +131,7 @@ const SelectMultiField = ({city, setCity, setState, state, gated, ageRestriction
                 setGated(e.value)
               }}
               placeholder="please select"
-              value={{value: gated, label: gated ? "Yes" : "No"}}
+              value={{value: gated, label: gated}}
             />
           </div>
         </div>
@@ -158,7 +160,7 @@ const SelectMultiField = ({city, setCity, setState, state, gated, ageRestriction
                 setAgeRestrictions(e.value)
               }}
               placeholder="please select"
-              value={{value: ageRestrictions, label: ageRestrictions ? "Yes" : "No"}}
+              value={{value: ageRestrictions, label: ageRestrictions}}
             />
           </div>
         </div>

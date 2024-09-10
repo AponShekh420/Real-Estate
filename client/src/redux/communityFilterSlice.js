@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   titleSearch: "",
-  state: "",
-  city: "",
-  area: "",
+  state: {},
+  city: {},
+  area: {},
   homeTypes: [],
   active: true,
   status: "",
@@ -16,8 +16,9 @@ const initialState = {
   totalPages: 1,
   currentPage: 1,
   amenities: [],
-  ageRestrictions: true,
-  gated: true
+  ageRestrictions: "Any",
+  gated: "Any",
+  price: [0, 1000000000]
 }
 
 
