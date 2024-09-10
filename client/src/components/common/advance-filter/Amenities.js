@@ -1,10 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
 
 const Amenities = ({amenities, setAmenities}) => {
   const [unpopularAmenities, setUnpopularAmenities] = useState({});
   const [popularAmenities, setPopularAmenities] = useState({});
   const [notify, setNotify] = useState("");
+  const [toggleAmenities, setToggleAmenities] = useState(false);
 
 
 
@@ -23,7 +26,7 @@ const Amenities = ({amenities, setAmenities}) => {
 
   // Transform data into columns
   const transformData = (array) => {
-    const chunks = chunkArray(array, 2);
+    const chunks = chunkArray(array, 5);
     const result = {};
     chunks.forEach((chunk, index) => {
       result[`column${index + 1}`] = chunk;
@@ -118,37 +121,8 @@ const Amenities = ({amenities, setAmenities}) => {
 
   return (
     <div className="row">
-      {/* Unpopular Amenities Section */}
-      <div style={{ marginBottom: "15px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <label>
-          <input type="checkbox" checked={allChecked} onChange={handleAllCheck} /> All Unpopular
-        </label>
-      </div>
-      <div className="d-flex flex-wrap">
-        {Object.keys(unpopularAmenities).map((columnKey, index) => (
-          <div key={index} className="col-sm-6 col-md-4 col-12">
-            <div className="checkbox-style1">
-              {unpopularAmenities[columnKey].map((amenity, amenityIndex) => (
-                <div className="d-flex justify-content-between align-items-center mb10" key={amenityIndex}>
-                  <label className="custom_checkbox d-flex align-items-center" style={{ lineHeight: "20px" }}>
-                    {amenity?.icon}{amenity?.name}
-                    <input
-                      className="p-0 m-0"
-                      type="checkbox"
-                      checked={amenities.some((a) => a._id === amenity._id)}
-                      onChange={(e) => checkHanlder(e, amenity)}
-                    />
-                    <span className="checkmark" style={{ top: 3 }} />
-                  </label>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-
       {/* Divider */}
-      <div style={{ margin: "15px 0", borderTop: "1px solid black", position: "relative" }}>
+      <div style={{ marginBottom: "12px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <label>
           <input type="checkbox" checked={allPopularChecked} onChange={handleAllPopularCheck} /> All Popular
         </label>
@@ -177,6 +151,49 @@ const Amenities = ({amenities, setAmenities}) => {
           </div>
         ))}
       </div>
+
+      {/* Unpopular Amenities Section */}
+
+      <div className="collapse" id="collapseExample">
+        <div>
+          <div style={{ margin: "12px 0", borderTop: "1px solid black", position: "relative" }}>
+            <label>
+              <input type="checkbox" checked={allChecked} onChange={handleAllCheck} /> All Unpopular
+            </label>
+          </div>
+          <div className="d-flex flex-wrap">
+            {Object.keys(unpopularAmenities).map((columnKey, index) => (
+              <div key={index} className="col-sm-6 col-md-4 col-12">
+                <div className="checkbox-style1">
+                  {unpopularAmenities[columnKey].map((amenity, amenityIndex) => (
+                    <div className="d-flex justify-content-between align-items-center mb10" key={amenityIndex}>
+                      <label className="custom_checkbox d-flex align-items-center" style={{ lineHeight: "20px" }}>
+                        {amenity?.icon}{amenity?.name}
+                        <input
+                          className="p-0 m-0"
+                          type="checkbox"
+                          checked={amenities.some((a) => a._id === amenity._id)}
+                          onChange={(e) => checkHanlder(e, amenity)}
+                        />
+                        <span className="checkmark" style={{ top: 3 }} />
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      <div className="d-flex align-items-center justify-content-center mt15 mb15">
+        <a className="d-flex gap-1 align-items-center fw-bold" data-bs-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onClick={() => setToggleAmenities((old)=> !old)}>
+          {toggleAmenities ? "View Less" : "View All"}
+          {toggleAmenities ? <IoIosArrowUp /> : <IoIosArrowDown />}
+        </a>
+      </div>
+
+
     </div>
   );
 };

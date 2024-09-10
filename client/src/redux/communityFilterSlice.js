@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   titleSearch: "",
-  state: {},
-  city: {},
-  area: {},
+  state: "",
+  city: "",
+  area: "",
   homeTypes: [],
   active: true,
   status: "",

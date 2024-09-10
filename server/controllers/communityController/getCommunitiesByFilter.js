@@ -7,8 +7,10 @@ const CommunityModel = require("../../models/CommunityModel")
 // This controller will give us communities data by filter
 const getCommunitiesByFilter = async (req, res) => {
 
-  const {stateId, cityId, areaId, status, homeTypes, titleSearch, active, limitStart, limitEnd, amenities} = req.body
+  const {stateId, cityId, areaId, status, homeTypes, titleSearch, active, limitStart, limitEnd, amenities, gated, price, ageRestrictions } = req.body
 
+
+  // filter start
   const dataQueryObj = {}
   stateId ? dataQueryObj.state = stateId : null
   cityId ? dataQueryObj.city = cityId : null
@@ -18,7 +20,22 @@ const getCommunitiesByFilter = async (req, res) => {
   homeTypes?.length > 0 ? dataQueryObj.homeTypes = {$in: homeTypes} : null
   amenities?.length > 0 ? dataQueryObj.amenities = {$in: amenities.map(amenity => amenity._id)} : null
 
-  
+  price ? dataQueryObj.minPrice = {$gte: price[0], $lte: price[1] } : null
+  price ? dataQueryObj.maxPrice = {$gte: price[0], $lte: price[1] } : null
+
+  if(ageRestrictions == "No") {
+    dataQueryObj.ageRestrictions = false
+  } else if(ageRestrictions == "Yes") {
+    dataQueryObj.ageRestrictions = true
+  }
+
+  if(gated == "No") {
+    dataQueryObj.gated = false
+  } else if(gated == "Yes") {
+    dataQueryObj.gated = true
+  }
+  // filter end
+
 
   try {
     const data = await CommunityModel.find({
