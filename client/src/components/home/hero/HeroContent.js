@@ -128,7 +128,7 @@ const HeroContent = () => {
                             <li className="bdrt1 dropdown-item" tabIndex={-1}>
                               <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-cente">
                                 <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{community?.title}, {community?.state?.name}, USA</p>
-                                <p className="mb-0" style={{color: "#EE4C34", fontWeight: "500"}}>Community</p>
+                                <p className="mb-0">Community</p>
                               </div>
                             </li>
                           </Link>
@@ -138,7 +138,7 @@ const HeroContent = () => {
                             <li className="bdrt1 dropdown-item" tabIndex={-1}>
                               <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-center">
                                 <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{state?.name}, USA</p>
-                                <p className="mb-0" style={{color: "#EE4C34", fontWeight: "500"}}>State</p>
+                                <p className="mb-0">State</p>
                               </div>
                             </li>
                           </Link>
@@ -148,7 +148,7 @@ const HeroContent = () => {
                             <li className="bdrt1 dropdown-item" tabIndex={-1}>
                               <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-center">
                                 <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{area?.name}, {area?.state?.abbreviation}, USA</p>
-                                <p className="mb-0" style={{color: "#EE4C34", fontWeight: "500"}}>Area</p>
+                                <p className="mb-0">Area</p>
                               </div>
                             </li>
                           </Link>
@@ -158,7 +158,7 @@ const HeroContent = () => {
                             <li className="bdrt1 dropdown-item" tabIndex={-1}>
                               <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-center">
                                 <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{blog?.title}</p>
-                                <p className="mb-0" style={{color: "#EE4C34", fontWeight: "500"}}>Blog</p>
+                                <p className="mb-0">Blog</p>
                               </div>
                             </li>
                           </Link>

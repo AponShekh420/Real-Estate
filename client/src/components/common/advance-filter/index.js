@@ -47,10 +47,12 @@ const AdvanceFilterModal = () => {
     dispatch(addCommunityFilterValue({
       titleSearch,
       gated,
+      state,
+      city,
       ageRestrictions,
       amenities,
       price
-    }))
+    }));
     router.push(`/summary${state ? `/${state?.slug}` : ""}${city ? `/${city?.slug}` : ""}`)
   }
 
@@ -65,6 +67,11 @@ const AdvanceFilterModal = () => {
     dispatch(removeCommunityFilterValues())
   }
 
+
+  useEffect(()=> {
+    setState(currentState);
+    setCity(currentCity);
+  }, [currentState, currentCity])
 
   return (
     <div className="modal-dialog modal-dialog-centered modal-lg">

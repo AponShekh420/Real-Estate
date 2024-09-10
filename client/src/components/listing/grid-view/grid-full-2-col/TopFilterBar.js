@@ -1,8 +1,8 @@
 'use client'
 
 import React from "react";
-import ListingStatus from "../../../summary/sidebar/ListingStatus";
-import PropertyType from "../../../summary/sidebar/PropertyType";
+import ListingStatus from "../../../summary/ListingStatus";
+import PropertyType from "../../../summary/PropertyType";
 import PriceRange from "../../../summary/sidebar/PriceRange";
 import Bedroom from "../../../summary/sidebar/Bedroom";
 import Bathroom from "../../../summary/sidebar/Bathroom";

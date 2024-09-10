@@ -2,8 +2,8 @@
 
 import React from "react";
 import SearchBox from "./SearchBox";
-import ListingStatus from "./ListingStatus";
-import PropertyType from "./PropertyType";
+import ListingStatus from "../ListingStatus";
+import PropertyType from "../PropertyType";
 import LocationList from "./LocationList";
 import { useSelector } from "react-redux";
 import store from "@/redux/store";
@@ -31,10 +31,10 @@ const ListingSidebar = ({filterFunctions}) => {
       </div> */}
 
 
-      <div className="widget-wrapper">
+      {/* <div className="widget-wrapper">
         <h6 className="list-title">Find your home</h6>
         <SearchBox />
-      </div>
+      </div> */}
       {/* End .widget-wrapper */}
 
 
@@ -46,20 +46,20 @@ const ListingSidebar = ({filterFunctions}) => {
       </div>
       {/* End .widget-wrapper */}
 
-      <div className="widget-wrapper">
+      {/* <div className="widget-wrapper">
         <h6 className="list-title">Listing Status</h6>
         <div className="radio-element">
           <ListingStatus />
         </div>
-      </div>
+      </div> */}
       {/* End .widget-wrapper */}
 
-      <div className="widget-wrapper">
+      {/* <div className="widget-wrapper">
         <h6 className="list-title">Community Type</h6>
         <div className="checkbox-style1">
           <PropertyType filterFunctions={filterFunctions} />
         </div>
-      </div>
+      </div> */}
       
     </div>
   );

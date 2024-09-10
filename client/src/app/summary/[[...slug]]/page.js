@@ -11,6 +11,8 @@ import store from "@/redux/store";
 import { removeCommunityFilterValues } from "@/redux/communityFilterSlice";
 import Breadcumb from "@/components/summary/Breadcumb";
 import ListingMap from "@/components/summary/ListingMap";
+import TopFilterBar2 from "@/components/summary/TopFilterBar2";
+import AdvanceFilterModal from "@/components/common/advance-filter";
 
 export const metadata = {
   title: "55 home || summary",
@@ -47,6 +49,39 @@ const SummaryPage = async ({params}) => {
       {/* Mobile Nav  */}
       <MobileMenu />
       {/* End Mobile Nav  */}
+
+      <section className="advance-search-menu style2 position-relative pt15 pb5 bb1 dn-992">
+        {/* <!-- Advance Feature Modal Start --> */}
+        <div className="advance-feature-modal">
+          <div
+            className="modal fade"
+            id="advanceSeachModal"
+            tabIndex={-1}
+            aria-labelledby="advanceSeachModalLabel"
+            aria-hidden="true"
+          >
+            <AdvanceFilterModal/>
+          </div>
+        </div>
+        {/* <!-- Advance Feature Modal End --> */}
+
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="advance-search-list at-1col-v2 no-box-shadow d-flex justify-content-between">
+                <div className="dropdown-lists">
+                  <ul className="p-0 mb-0">
+                    <TopFilterBar2 />
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* End Advance Search */}
+
+
 
       <section className="property-header-map p-0">
         <div className="inner-style1">
