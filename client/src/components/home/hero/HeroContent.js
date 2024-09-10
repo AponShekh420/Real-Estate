@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { addCommunityFilterValue } from "@/redux/communityFilterSlice";
+import { useDispatch } from "react-redux";
 
 
 let searchIntervel;
@@ -13,6 +15,8 @@ const HeroContent = () => {
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
   
+  const dispatch = useDispatch();
+
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -54,6 +58,18 @@ const HeroContent = () => {
     }
   }
 
+
+  const searchResult = async (e) => {
+    e.preventDefault();
+    dispatch(addCommunityFilterValue({
+      titleSearch: search,
+      status: activeTab,
+    }));
+    router.push("/summary");
+  }
+
+
+
   useEffect(()=> {
     clearInterval(searchIntervel)
     searchIntervel = setTimeout(()=> {
@@ -87,7 +103,7 @@ const HeroContent = () => {
               <div className="row">
                 <div className="col-md-8 col-lg-9">
                   <div className="advance-search-field position-relative text-start">
-                  <form className="form-search position-relative">
+                  <form className="form-search position-relative" onSubmit={searchResult} action={"#"}>
                     <div className="box-search dropdown position-relative">
                       <span className="icon flaticon-home-1" />
                       <input
@@ -167,7 +183,8 @@ const HeroContent = () => {
                     </button>
                     <button
                       className="advance-search-icon ud-btn btn-dark ms-4"
-                      type="submit"
+                      type="button"
+                      onClick={searchResult}
                     >
                       <span className="flaticon-search" />
                     </button>
