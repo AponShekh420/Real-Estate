@@ -20,6 +20,7 @@ const reviewRouter = require("./routers/reviewRouter");
 const commentRouter = require("./routers/commentRouter");
 const wishlistRouter = require("./routers/wishlistRouter");
 const emailNotifyRouter = require("./routers/emailNotifyRouter");
+const suggestionRouter = require("./routers/suggestionRouter");
 
 // user
 const userRouter = require("./routers/userRouter");
@@ -92,6 +93,10 @@ app.use('/api/wishlist', wishlistRouter);
 
 // email messeging
 app.use('/api/email', emailNotifyRouter);
+
+
+// search suggestion
+app.use('/api/suggestion', suggestionRouter);
 
 
 
