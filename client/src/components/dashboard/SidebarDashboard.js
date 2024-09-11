@@ -25,6 +25,12 @@ const SidebarDashboard = ({user}) => {
           roles: ["admin"],
         },
         {
+          href: "/dashboard/subscribers",
+          icon: "FaLocationDot",
+          text: "Subscribers",
+          roles: ["admin"],
+        },
+        {
           href: "/dashboard/catagory",
           icon: "FaLocationDot",
           text: "Catagory",

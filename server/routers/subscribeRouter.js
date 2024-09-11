@@ -20,7 +20,7 @@ const router = express.Router();
 
 
 // route controller
-router.post('/getall', getSubscribers)
+router.post('/getall', authCheck, adminAuthCheck, useValidationResult, getSubscribers)
 router.post('/add', checkSubscriberValidation, useValidationResult, addSubscriber);
 router.delete('/delete/:id', authCheck, adminAuthCheck, useValidationResult, deleteSubscriber);
 

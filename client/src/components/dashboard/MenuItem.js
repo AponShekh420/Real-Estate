@@ -1,6 +1,7 @@
 "use client"
 import { usePathname } from "next/navigation";
 import { CiLocationOn } from "react-icons/ci";
+import { FaUsersViewfinder } from "react-icons/fa6";
 import { HiOutlineNewspaper } from "react-icons/hi2";
 import { GiCheckboxTree } from "react-icons/gi";
 import { PiNotePencilThin } from "react-icons/pi";
@@ -93,6 +94,8 @@ const MenuItem = ({itemIndex, item, headerItem, userInfo}) => {
                 <PiNotePencilThin size={22} className="mr15"/>
               ): item.text === "Users" ? (
                 <PiUsersThreeThin size={22} className="mr15"/>
+              ) : item.text === "Subscribers" ? (
+                <FaUsersViewfinder size={22} className="mr15"/>
               ) : (
                 <i className={`${item.icon} mr15`} />
               )}
