@@ -12,6 +12,7 @@ const adminAuthCheck = require("../middleware/common/users/adminAuthCheck");
 const addSubscriber = require("../controllers/subscribeController/addSubscriber");
 const deleteSubscriber = require("../controllers/subscribeController/deleteSubscriber");
 const getSubscribers = require("../controllers/subscribeController/getSubscribers");
+const exportSubscribers = require("../controllers/subscribeController/exportSubscribers");
 
 
 
@@ -23,6 +24,10 @@ const router = express.Router();
 router.post('/getall', authCheck, adminAuthCheck, useValidationResult, getSubscribers)
 router.post('/add', checkSubscriberValidation, useValidationResult, addSubscriber);
 router.delete('/delete/:id', authCheck, adminAuthCheck, useValidationResult, deleteSubscriber);
+
+
+// export all subscribers;
+router.get('/export', authCheck, adminAuthCheck, useValidationResult, exportSubscribers);
 
 
 module.exports = router;
