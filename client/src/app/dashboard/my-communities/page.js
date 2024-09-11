@@ -43,7 +43,7 @@ const DashboardMyCommunities = async () => {
             <div className="dashboard__content bgc-f7">
               <div className="row pb40">
                 <div className="col-lg-12">
-                  <DboardMobileNavigation />
+                  <DboardMobileNavigation user={user}/>
                 </div>
                 {/* End .col-12 */}
               </div>

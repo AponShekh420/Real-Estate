@@ -1,14 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { usePathname } from "next/navigation";
 import MenuItem from "./MenuItem";
-import { useSelector } from "react-redux";
 
-const DboardMobileNavigation = () => {
+const DboardMobileNavigation = ({user}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const user = useSelector(state => state.user);
-
-
 
   const sidebarItems = [
     {
@@ -18,81 +13,83 @@ const DboardMobileNavigation = () => {
           href: "/dashboard",
           icon: "flaticon-discovery",
           text: "Dashboard",
+          roles: ["admin"], // Specify roles that can access this item
         },
-        // {
-        //   href: "/dashboard/message",
-        //   icon: "flaticon-chat-1",
-        //   text: "Message",
-        // },
       ],
     },
     {
       title: "MANAGE LISTINGS",
       items: [
         {
+          href: "/dashboard/users",
+          icon: "FaLocationDot",
+          text: "Users",
+          roles: ["admin"],
+        },
+        {
+          href: "/dashboard/subscribers",
+          icon: "FaLocationDot",
+          text: "Subscribers",
+          roles: ["admin"],
+        },
+        {
           href: "/dashboard/catagory",
           icon: "FaLocationDot",
           text: "Catagory",
+          roles: ["admin", "contributor"],
         },
         {
           href: "/dashboard/add-blog",
           icon: "FaLocationDot",
           text: "Add New Blog",
+          roles: ["admin", "contributor"],
         },
         {
           href: "/dashboard/blogs",
           icon: "FaLocationDot",
           text: "Blogs",
+          roles: ["admin", "contributor"],
         },
         {
           href: "/dashboard/location",
           icon: "FaLocationDot",
           text: "Location",
+          roles: ["admin"],
         },
         {
           href: "/dashboard/add-community",
           icon: "flaticon-new-tab",
-          text: "Add New Commmunity",
+          text: "Add New Community",
+          roles: ["admin"],
         },
         {
           href: "/dashboard/my-communities",
           icon: "flaticon-home",
           text: "My Communities",
+          roles: ["admin"],
         },
-        {
-          href: "/dashboard/my-favourites",
-          icon: "flaticon-like",
-          text: "My Favorites",
-        },
-        // {
-        //   href: "/dashboard/saved-search",
-        //   icon: "flaticon-search-2",
-        //   text: "Saved Search",
-        // },
         {
           href: "/dashboard/reviews",
           icon: "flaticon-review",
           text: "Reviews",
+          roles: ["admin"],
         },
       ],
     },
     {
       title: "MANAGE ACCOUNT",
       items: [
-        // {
-        //   href: "/dashboard/my-package",
-        //   icon: "flaticon-protection",
-        //   text: "My Package",
-        // },
         {
           href: "/dashboard/my-profile",
           icon: "flaticon-user",
           text: "My Profile",
+          roles: ["user", "admin", "contributor"],
         },
         {
           href: "/login",
           icon: "flaticon-logout",
           text: "Logout",
+          roles: ["user", "admin", "contributor"],
         },
       ],
     },
@@ -109,64 +106,24 @@ const DboardMobileNavigation = () => {
         </button>
         <ul className={`dropdown-content ${isDropdownOpen ? "show" : ""}`}>
           {sidebarItems.map((section, sectionIndex) => {
-            let enable = true;
-            if(user.role !== "admin" && section.title == "MAIN") {
-              enable = false
-            }
-            return enable ? (
+            // Check if any item in the section is visible to the user
+            const isSectionVisible = section.items.some(item => item.roles.includes(user?.role));
+
+            // If the section is not visible, skip rendering it
+            if (!isSectionVisible) return null;
+
+            return (
               <div key={sectionIndex}>
                 {section.items.map((item, itemIndex) => {
-                  let enable = false;
-                  if(user.role == 'admin' && item.text == "Dashboard") {
-                    enable = true
-                  }
+                  // Check if the user's role is included in the item's allowed roles
+                  const isAuthorized = item.roles.includes(user?.role);
 
-                  if(user && item.text == "Logout") {
-                    enable = true
-                  }
-
-                  if(user && item.text == "My Profile") {
-                    enable = true
-                  }
-
-                  if(user.role == "admin" && item.text == "Reviews") {
-                    enable = true
-                  }
-
-                  if(user && item.text == "My Favorites") {
-                    enable = true
-                  }
-
-                  if(user.role == "admin" && item.text == "My Communities") {
-                    enable = true
-                  }
-
-                  if(user.role == "admin" && item.text == "Add New Commmunity") {
-                    enable = true
-                  }
-
-                  if(user.role == "admin" && item.text == "Location") {
-                    enable = true
-                  }
-
-                  if((user.role == "admin" || user.role == "contributor") && item.text == "Blogs") {
-                    enable = true
-                  }
-
-                  if((user.role == "admin" || user.role == "contributor") && item.text == "Add New Blog") {
-                    enable = true
-                  }
-
-                  if((user.role == "admin" || user.role == "contributor") && item.text == "Catagory") {
-                    enable = true
-                  }
-
-                  return enable ? (
-                    <MenuItem itemIndex={itemIndex} item={item}/>
-                  ) : "";
+                  return isAuthorized ? (
+                    <MenuItem key={itemIndex} item={item} />
+                  ) : null;
                 })}
               </div>
-            ) : "";
+            );
           })}
         </ul>
       </div>

@@ -4,14 +4,39 @@ import Image from "next/image";
 import ContactInfo from "./ContactInfo";
 import Social from "./Social";
 import ProSidebarContent from "./ProSidebarContent";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import UserAvatar from "../UserAvatar";
 
 const MobileMenu = () => {
+
+  const [navbar, setNavbar] = useState(false);
+  const {userInfo, loading} = useSelector(state => state.user)
+
+  const changeBackground = () => {
+    if (window.scrollY >= 10) {
+      setNavbar(true);
+    } else {
+      setNavbar(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", changeBackground);
+    return () => {
+      window.removeEventListener("scroll", changeBackground);
+    };
+  }, []);
+
+
   return (
     <div className="mobilie_header_nav stylehome1">
       <div className="mobile-menu">
         <div className="header innerpage-style">
           <div className="menu_and_widgets">
             <div className="mobile_menu_bar d-flex justify-content-between align-items-center">
+
+              {/* humbargar menu */}
               <a
                 className="menubar"
                 href="#"
@@ -26,17 +51,26 @@ const MobileMenu = () => {
                   alt="mobile icon"
                 />
               </a>
+
+              {/* header logo */}
               <Link className="mobile_logo" href="/">
                 <Image
-                  width={138}
+                  width={120}
                   height={44}
-                  src="/images/header-logo2.svg"
+                  src="/images/55&up-logo.png"
                   alt="logo"
                 />
               </Link>
-              <Link href="/login">
-                <span className="icon fz18 far fa-user-circle" />
-              </Link>
+
+
+              {/* avatar */}
+              {userInfo ? (
+                <UserAvatar userInfo={userInfo} mobile={true}/>
+              ) : (
+                <Link href="/login" className={`${!loading ? null : "opacity-25"}`}>
+                  <span className="icon fz18 far fa-user-circle" />
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -68,7 +102,7 @@ const MobileMenu = () => {
               <ProSidebarContent />
               {/* End .hiddenbar_navbar_menu */}
 
-              <div className="hiddenbar_footer position-relative bdrt1">
+              <div className="hiddenbar_footer position-relative">
                 <div className="row pt45 pb30 pl30">
                   <ContactInfo />
                 </div>

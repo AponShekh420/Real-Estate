@@ -13,7 +13,7 @@ import {logout as logoutAction} from "@/redux/userSlice"
 
 
 
-const MenuItem = ({itemIndex, item, headerItem, userInfo}) => {
+const MenuItem = ({itemIndex, item, headerItem, userInfo, mobile}) => {
   const pathname = usePathname();
   const router = useRouter();
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const MenuItem = ({itemIndex, item, headerItem, userInfo}) => {
         item.text == "Logout" ? (
           <Link
             key={itemIndex}
-            className={`dropdown-item ${
+            className={`dropdown-item ${mobile && "py-0"} ${
               pathname == item.href ? "-is-active" : ""
             } `}
             href={"#"}
@@ -49,7 +49,7 @@ const MenuItem = ({itemIndex, item, headerItem, userInfo}) => {
         ) : (
           <Link
             key={itemIndex}
-            className={`dropdown-item ${
+            className={`dropdown-item ${mobile && "py-0"} ${
               pathname == item.href ? "-is-active" : ""
             } `}
             href={((item.text == "My Profile") && (userInfo.role == "admin" || userInfo?.role == "contributor")) ? `/dashboard/${item.href}`: item.href}

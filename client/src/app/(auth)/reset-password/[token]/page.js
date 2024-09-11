@@ -38,10 +38,10 @@ const Reset = async ({params}) => {
                 <div className="text-center mb40">
                   <Link href="/">
                     <Image
-                      width={138}
+                      width={120}
                       height={44}
                       className="mb25"
-                      src="/images/header-logo2.svg"
+                      src="/images/55&up-logo.png"
                       alt="logo"
                     />
                   </Link>

@@ -1,7 +1,7 @@
 import MenuItem from "../dashboard/MenuItem";
 import Image from "next/image";
 
-const UserAvatar = ({userInfo}) => {
+const UserAvatar = ({userInfo, mobile}) => {
   const menuItems = [
     {
       href: "/dashboard",
@@ -32,10 +32,10 @@ const UserAvatar = ({userInfo}) => {
     <ul className="mb0 d-flex justify-content-center justify-content-sm-end p-0">
       <li className=" user_setting">
         <div className="dropdown">
-          <a className="btn" href="#" data-bs-toggle="dropdown">
+          <a className={`btn ${mobile && "p0"}`} href="#" data-bs-toggle="dropdown">
             <Image
-              width={32}
-              height={32}
+              width={mobile ? "22" : "32"}
+              height={mobile ? "22" : "32"}
               style={{objectFit: "cover"}}
               className="rounded-circle"
               src={userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar || "/images/user_avatar.png"}
@@ -71,7 +71,7 @@ const UserAvatar = ({userInfo}) => {
                 const isAuthorized = item?.roles.includes(userInfo?.role);
 
                 return isAuthorized ? (
-                  <MenuItem key={itemIndex} item={item} headerItem={true} userInfo={userInfo}/>
+                  <MenuItem key={itemIndex} item={item} headerItem={true} userInfo={userInfo} mobile={mobile}/>
                 ) : null;
               })}
             </div>

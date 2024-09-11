@@ -43,7 +43,7 @@ const DashboardEditBlog = async () => {
             <div className="dashboard__content property-page bgc-f7">
               <div className="row pb40 d-block d-lg-none">
                 <div className="col-lg-12">
-                  <DboardMobileNavigation />
+                  <DboardMobileNavigation user={user}/>
                 </div>
                 {/* End .col-12 */}
               </div>
