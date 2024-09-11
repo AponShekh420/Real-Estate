@@ -5,7 +5,7 @@ const getState = async (req, res)=> {
   const {status} = req.params;
   const validation = status != 'anytype' ? {active: status == "active" ? true : false} : {$or: [{active: true}, {active: false}]};
   try {
-    const state = await StateModel.find(validation).populate({path: "city", populate: {path: "area"}})
+    const state = await StateModel.find(validation).sort({ createdAt: -1 }).populate({path: "city", populate: {path: "area"}})
     if(state) {
       res.status(200).json({
         message: "Got the all state",

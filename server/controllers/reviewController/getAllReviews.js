@@ -3,7 +3,7 @@ const ReviewModel = require("../../models/ReviewModel");
 const getAllReviews = async (req, res) => {
 
   try {
-    const data = await ReviewModel.find().populate({
+    const data = await ReviewModel.find().sort({ createdAt: -1 }).populate({
       path: 'user',
       select: '-password',  // Exclude the password field
     }).populate("community");

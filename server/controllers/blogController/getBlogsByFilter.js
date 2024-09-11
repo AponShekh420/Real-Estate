@@ -21,7 +21,7 @@ const getBlogsByFilter = async (req, res) => {
     const data = await BlogModel.find({
       ...dataQueryObj,
       active,
-    }).skip(limitStart).limit(limitEnd);
+    }).sort({ createdAt: -1 }).skip(limitStart).limit(limitEnd);
 
     if(data) {
       res.status(200).json({

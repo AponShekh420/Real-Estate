@@ -17,7 +17,7 @@ const getComments = async (req, res) => {
   const {blogId} = req.params;
 
   try {
-    const data = await CommentModel.find({blog: blogId}).populate({
+    const data = await CommentModel.find({blog: blogId}).sort({ createdAt: -1 }).populate({
       path: 'user',
       select: '-password',  // Exclude the password field
     }).populate("blog");

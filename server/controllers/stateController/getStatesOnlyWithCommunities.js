@@ -6,7 +6,7 @@ const getStatesOnlyWithCommunities = async (req, res)=> {
     const state = await StateModel.find({
       active: true,
       community: { $exists: true, $ne: [] } 
-    }).select("name slug _id community");
+    }).sort({ createdAt: -1 }).select("name slug _id community");
     if(state) {
       res.status(200).json({
         message: "Got the all state",
