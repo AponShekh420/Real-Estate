@@ -10,10 +10,10 @@ const getCommunities = async (req, res) => {
      // Filter the results based on the populated fields
      const filteredCommunities = getCommunitiesData.filter(community => {
       return (
-        community.title.match(new RegExp(searchParams, 'i')) ||
-        community.state?.name.match(new RegExp(searchParams, 'i')) ||
-        community.city?.name.match(new RegExp(searchParams, 'i')) ||
-        community.area?.name.match(new RegExp(searchParams, 'i'))
+        community?.title?.match(new RegExp(searchParams, 'i')) ||
+        community?.state?.name.match(new RegExp(searchParams, 'i')) ||
+        community?.city?.name.match(new RegExp(searchParams, 'i')) ||
+        community?.area?.name.match(new RegExp(searchParams, 'i'))
       );
     });
 
