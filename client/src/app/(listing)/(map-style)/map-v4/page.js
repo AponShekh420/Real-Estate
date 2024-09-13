@@ -1,8 +1,8 @@
-import DefaultHeader from "@/components/common/DefaultHeader";
+// import DefaultHeader from "@/components/common/DefaultHeader";
 
-import MobileMenu from "@/components/common/mobile-menu";
+// import MobileMenu from "@/components/common/mobile-menu";
 
-import PropertyFilteringMapFive from "@/components/listing/map-style/map-v4/PropertyFilteringMapFive";
+// import PropertyFilteringMapFive from "@/components/listing/map-style/map-v4/PropertyFilteringMapFive";
 
 import React from "react";
 
@@ -14,16 +14,17 @@ const MapV4 = () => {
   return (
     <>
       {/* Main Header Nav */}
-      <DefaultHeader />
+      {/* <DefaultHeader /> */}
       {/* End Main Header Nav */}
 
       {/* Mobile Nav  */}
-      <MobileMenu />
+      {/* <MobileMenu /> */}
       {/* End Mobile Nav  */}
-      <PropertyFilteringMapFive/>
+      {/* <PropertyFilteringMapFive/> */}
 
    
       {/* Property Filtering */}
+      <h1>Hello world</h1>
     </>
   );
 };

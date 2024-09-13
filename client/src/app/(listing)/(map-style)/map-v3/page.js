@@ -1,7 +1,7 @@
-import DefaultHeader from "@/components/common/DefaultHeader";
-import MobileMenu from "@/components/common/mobile-menu";
+// import DefaultHeader from "@/components/common/DefaultHeader";
+// import MobileMenu from "@/components/common/mobile-menu";
 
-import PropertyFilteringMapFour from "@/components/listing/map-style/map-v3/PropertyFilteringMapFour";
+// import PropertyFilteringMapFour from "@/components/listing/map-style/map-v3/PropertyFilteringMapFour";
 
 import React from "react";
 
@@ -13,17 +13,18 @@ const MapV3 = () => {
   return (
     <>
       {/* Main Header Nav */}
-      <DefaultHeader />
+      {/* <DefaultHeader /> */}
       {/* End Main Header Nav */}
 
       {/* Mobile Nav  */}
-      <MobileMenu />
+      {/* <MobileMenu /> */}
       {/* End Mobile Nav  */}
 
       {/* start  filter sidebar */}
-      <PropertyFilteringMapFour/>
+      {/* <PropertyFilteringMapFour/> */}
    
       {/* Property Filtering */}
+      <h1>Hello world</h1>
     </>
   );
 };
