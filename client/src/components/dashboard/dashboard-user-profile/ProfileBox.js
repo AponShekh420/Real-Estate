@@ -25,7 +25,7 @@ const ProfileBox = ({setUploadedImage, uploadedImage, setUploadedImageChanged, e
             width={240}
             height={220}
             className="w-100 cover h-100"
-            src={(!uploadedImageChanged && oldImgUrl ) ? userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? userInfo?.avatar ? `${process.env.SERVER_IMG_PATH}/assets/users/${userInfo?.avatar}` : "/images/user_avatar.png" : userInfo?.avatar : uploadedImage || "/images/listings/profile-1.jpg"}
+            src={(!uploadedImageChanged && oldImgUrl ) ? userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? userInfo?.avatar ? `${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/users/${userInfo?.avatar}` : "/images/user_avatar.png" : userInfo?.avatar : uploadedImage || "/images/listings/profile-1.jpg"}
             alt="profile avatar"
           />
 

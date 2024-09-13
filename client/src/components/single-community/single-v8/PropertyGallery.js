@@ -37,8 +37,8 @@ const PropertyGallery = ({ id, data }) => {
             {thumbnail && (
               <SwiperSlide>
                 <Item
-                  original={`${process.env.SERVER_IMG_PATH}/assets/communityImgs/${thumbnail}`}
-                  thumbnail={`${process.env.SERVER_IMG_PATH}/assets/communityImgs/${thumbnail}`}
+                  original={`${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/communityImgs/${thumbnail}`}
+                  thumbnail={`${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/communityImgs/${thumbnail}`}
                   width={1206}
                   height={671}
                 >
@@ -48,7 +48,7 @@ const PropertyGallery = ({ id, data }) => {
                       height={671}
                       ref={ref}
                       onClick={open}
-                      src={`${process.env.SERVER_IMG_PATH}/assets/communityImgs/${thumbnail}`}
+                      src={`${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/communityImgs/${thumbnail}`}
                       alt="gallery"
                       className="w-100 h-auto bdrs12 pointer"
                     />
@@ -68,8 +68,8 @@ const PropertyGallery = ({ id, data }) => {
               (item != thumbnail) && (
                 <SwiperSlide key={i}>
                   <Item
-                    original={`${process.env.SERVER_IMG_PATH}/assets/communityImgs/${item}`}
-                    thumbnail={`${process.env.SERVER_IMG_PATH}/assets/communityImgs/${item}`}
+                    original={`${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/communityImgs/${item}`}
+                    thumbnail={`${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/communityImgs/${item}`}
                     width={1206}
                     height={671}
                   >
@@ -79,7 +79,7 @@ const PropertyGallery = ({ id, data }) => {
                         height={671}
                         ref={ref}
                         onClick={open}
-                        src={`${process.env.SERVER_IMG_PATH}/assets/communityImgs/${item}`}
+                        src={`${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/communityImgs/${item}`}
                         alt="gallery"
                         className="w-100 h-auto bdrs12 pointer"
                       />
@@ -114,7 +114,7 @@ const PropertyGallery = ({ id, data }) => {
                   <Image
                     height={90}
                     width={83}
-                    src={`${process.env.SERVER_IMG_PATH}/assets/communityImgs/${thumbnail}`}
+                    src={`${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/communityImgs/${thumbnail}`}
                     alt="image"
                     className="w-100 bdrs12 cover pointer"
                   />
@@ -126,7 +126,7 @@ const PropertyGallery = ({ id, data }) => {
                     <Image
                       height={90}
                       width={83}
-                      src={`${process.env.SERVER_IMG_PATH}/assets/communityImgs/${item}`}
+                      src={`${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/communityImgs/${item}`}
                       alt="image"
                       className="w-100 bdrs12 cover pointer"
                     />

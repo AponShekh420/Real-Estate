@@ -45,7 +45,7 @@ const BlogsDataTable = ({blogsData, setDeleteData}) => {
                     width={110}
                     height={94}
                     className="w-100"
-                    src={`${process.env.SERVER_IMG_PATH}/assets/blogs/${blog?.img}`}
+                    src={`${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/blogs/${blog?.img}`}
                     alt={blog.img}
                   />
                 </div>

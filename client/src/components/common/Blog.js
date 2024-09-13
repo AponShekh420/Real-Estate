@@ -14,7 +14,7 @@ const Blog = ({data}) => {
                 width={386}
                 height={271}
                 className="w-100 h-100 cover"
-                src={`${process.env.SERVER_IMG_PATH}/assets/blogs/${blog?.img}`}
+                src={`${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/blogs/${blog?.img}`}
                 alt="blog"
               />
             </div>

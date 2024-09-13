@@ -13,7 +13,7 @@ const Models = ({modelsData}) => {
                   width={140}
                   height={140}
                   className="w70"
-                  src={`${process.env.SERVER_IMG_PATH}/assets/communityModels/${element.img}`}
+                  src={`${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/communityModels/${element.img}`}
                   alt="agent"
                 />
               </div>

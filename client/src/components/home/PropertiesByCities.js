@@ -64,7 +64,7 @@ const PropertiesByCities = () => {
                     width={100}
                     height={100}
                     className="w-100 h-100 cover"
-                    src={city?.img ? `${process.env.SERVER_IMG_PATH}/assets/location/${city?.img}` : "/images/city_placeholder.png"}
+                    src={city?.img ? `${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/location/${city?.img}` : "/images/city_placeholder.png"}
                     alt="cities"
                   />
                 </div>
