@@ -19,7 +19,7 @@ const LatestPost = async () => {
               width={90} 
               height={80} 
               alt="blog" 
-              src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/blogs/${post?.img}`}
+              src={`${process.env.SERVER_IMG_PATH}/assets/blogs/${post?.img}`}
             />
           </div>
           <div className="news-content flex-shrink-1 ms-3">

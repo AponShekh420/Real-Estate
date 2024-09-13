@@ -17,7 +17,7 @@ export default function Details({id, data}) {
                     height={40}
                     style={{objectFit: "cover"}}
                     className="rounded-circle mr10"
-                    src={data?.auther?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? data?.auther?.avatar ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${data?.auther?.avatar}` : "/images/user_avatar.png" : data?.auther?.avatar}
+                    src={data?.auther?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? data?.auther?.avatar ? `${process.env.SERVER_IMG_PATH}/assets/users/${data?.auther?.avatar}` : "/images/user_avatar.png" : data?.auther?.avatar}
                     alt={data?.auther?.firstName + " " + data?.auther?.lastName}
                   />
                   <a className="pr15 bdrr1" href="#">
@@ -51,7 +51,7 @@ export default function Details({id, data}) {
                   priority
                   className="w-100 h-100 cover"
                   // style={{maxHeight:'600px',objectFit:'cover'}}
-                  src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/blogs/${data.img}`}
+                  src={`${process.env.SERVER_IMG_PATH}/assets/blogs/${data.img}`}
                   alt={data?.title}
                 />
               </div>

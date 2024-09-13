@@ -145,7 +145,7 @@ const UploadPhotoGallery = () => {
                 width={212}
                 height={194}
                 className="w-100 bdrs12 cover"
-                src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityImgs/${imageData}`}
+                src={`${process.env.SERVER_IMG_PATH}/assets/communityImgs/${imageData}`}
                 alt={`Uploaded Image ${index + 1}`}
               />
               <button

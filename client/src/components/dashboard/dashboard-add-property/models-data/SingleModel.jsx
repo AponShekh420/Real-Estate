@@ -101,7 +101,7 @@ const SingleModel = () => {
                   width={70}
                   height={70}
                   className="w70"
-                  src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/communityModels/${element.img}`}
+                  src={`${process.env.SERVER_IMG_PATH}/assets/communityModels/${element.img}`}
                   alt="agent"
                 />
               </div>

@@ -65,7 +65,7 @@ const UsersTable = ({usersData, setDeleteData}) => {
                         height={50}
                         style={{objectFit: "cover"}}
                         className="rounded-circle"
-                        src={user?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? user?.avatar ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${user?.avatar}` : "/images/user_avatar.png" : user?.avatar}
+                        src={user?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? user?.avatar ? `${process.env.SERVER_IMG_PATH}/assets/users/${user?.avatar}` : "/images/user_avatar.png" : user?.avatar}
                         alt={user?.firstName + " " + user?.lastName}
                       />
                       <div className="meta d-sm-flex justify-content-sm-between align-items-center">

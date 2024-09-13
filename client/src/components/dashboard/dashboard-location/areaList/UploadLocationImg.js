@@ -32,7 +32,7 @@ const UploadLocationImg = () => {
             width={100}
             height={100}
             className="w-100 cover h-100"
-            src={(!uploadedImageChanged && oldImgUrl ) ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/location/${oldImgUrl}` : uploadedImage || "/images/listings/profile-1.jpg"}
+            src={(!uploadedImageChanged && oldImgUrl ) ? `${process.env.SERVER_IMG_PATH}/assets/location/${oldImgUrl}` : uploadedImage || "/images/listings/profile-1.jpg"}
             alt="profile avatar"
           />
 

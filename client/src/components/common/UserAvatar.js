@@ -38,7 +38,7 @@ const UserAvatar = ({userInfo, mobile}) => {
               height={mobile ? "22" : "32"}
               style={{objectFit: "cover"}}
               className="rounded-circle"
-              src={userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar || "/images/user_avatar.png"}
+              src={userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? `${process.env.SERVER_IMG_PATH}/assets/users/${userInfo?.avatar}` : userInfo?.avatar || "/images/user_avatar.png"}
               alt={"Profile Pic"}
             />
           </a>
@@ -54,7 +54,7 @@ const UserAvatar = ({userInfo, mobile}) => {
                         height={50}
                         className="rounded-circle"
                         style={{objectFit: "cover"}}
-                        src={userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar || "/images/user_avatar.png"}
+                        src={userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? `${process.env.SERVER_IMG_PATH}/assets/users/${userInfo?.avatar}` : userInfo?.avatar || "/images/user_avatar.png"}
                         alt={userInfo?.firstName + " " + userInfo?.lastName}
                       />
                       <div className="meta d-sm-flex justify-content-sm-between align-items-center">

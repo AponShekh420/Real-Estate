@@ -163,7 +163,7 @@ const UploadPhotoGallery = () => {
                   width={100}
                   height={100}
                   className="w-100 h-100 bdrs12 cover"
-                  src={`${process.env.NEXT_PUBLIC_BACKEND_API}/assets/blogs/${img}`}
+                  src={`${process.env.SERVER_IMG_PATH}/assets/blogs/${img}`}
                   alt={`Uploaded Image ${img}`}
                 />
                 <button
