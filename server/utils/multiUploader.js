@@ -68,12 +68,12 @@ const uploader = (subFolder, fileType, fileSize, err_msg) => {
     const upload = multer({
         storage: multerS3({
             s3: s3,
-            bucket: 'assets-upload/' + subFolder, // Your Space name and subfolder
+            bucket: 'assets-upload', // Use the correct bucket name without a slash
             acl: 'public-read', // Permissions for the uploaded file
             key: (req, file, cb) => {
                 const fileExt = path.extname(file.originalname);
                 const fileName = file.originalname.replace(fileExt, '').toLowerCase().split(' ').join('-') + "-" + Date.now();
-                cb(null, fileName + fileExt); // Save file with timestamp
+                cb(null, subFolder + '/' + fileName + fileExt); // Save file in the subfolder
             }
         }),
         limits: {
@@ -90,6 +90,7 @@ const uploader = (subFolder, fileType, fileSize, err_msg) => {
 
     return upload;
 };
+
 
 module.exports = uploader;
 
