@@ -39,7 +39,7 @@ const UserAvatar = ({userInfo, mobile}) => {
               style={{objectFit: "cover"}}
               className="rounded-circle"
               src={userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? `${process.env.NEXT_PUBLIC_BACKEND_API}/assets/users/${userInfo?.avatar}` : userInfo?.avatar || "/images/user_avatar.png"}
-              alt={userInfo?.firstName + " " + userInfo?.lastName}
+              alt={"Profile Pic"}
             />
           </a>
           <div className="dropdown-menu">
