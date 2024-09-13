@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 
 
 app.use(cors({
-  origin: ["http://localhost:3000", "http://127.0.0.1:3000", "https://real-estate-ten-phi.vercel.app"],
+  origin: ["http://localhost:3000", "http://127.0.0.1:3000", "https://real-estate-ten-phi.vercel.app", process.env.CLIENT_URL],
   credentials: true,
   methods: "GET, POST, PATCH, DELETE, PUT"
 }))
