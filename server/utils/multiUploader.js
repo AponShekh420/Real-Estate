@@ -68,7 +68,7 @@ const uploader = (subFolder, fileType, fileSize, err_msg) => {
     const upload = multer({
         storage: multerS3({
             s3: s3,
-            bucket: 'real-estate/' + subFolder, // Your Space name and subfolder
+            bucket: 'assets-upload/' + subFolder, // Your Space name and subfolder
             acl: 'public-read', // Permissions for the uploaded file
             key: (req, file, cb) => {
                 const fileExt = path.extname(file.originalname);
