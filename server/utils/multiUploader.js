@@ -73,7 +73,7 @@ const uploader = (subFolder, fileType, fileSize, err_msg) => {
             key: (req, file, cb) => {
                 const fileExt = path.extname(file.originalname);
                 const fileName = file.originalname.replace(fileExt, '').toLowerCase().split(' ').join('-') + "-" + Date.now();
-                cb(null, subFolder + '/' + fileName + fileExt); // Save file in the subfolder
+                cb(null, "assets/" + subFolder + '/' + fileName + fileExt); // Save file in the subfolder
             }
         }),
         limits: {
