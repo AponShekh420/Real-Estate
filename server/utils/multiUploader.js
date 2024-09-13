@@ -47,15 +47,19 @@
 // for production
 
 const multer = require('multer');
-const aws = require('aws-sdk');
+const { S3Client } = require('@aws-sdk/client-s3');
+const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 const multerS3 = require('multer-s3');
 const path = require('path');
 
-// Configure AWS SDK for DigitalOcean Spaces
-const s3 = new aws.S3({
-    endpoint: new aws.Endpoint('nyc3.digitaloceanspaces.com'), // Use your region's endpoint
-    accessKeyId: process.env.DO_SPACES_KEY,  // Store your keys in environment variables
-    secretAccessKey: process.env.DO_SPACES_SECRET,
+// Configure AWS SDK for DigitalOcean Spaces using AWS SDK v3
+const s3 = new S3Client({
+    endpoint: 'https://nyc3.digitaloceanspaces.com', // DigitalOcean Spaces endpoint
+    region: 'nyc3', // The region for your space
+    credentials: {
+        accessKeyId: process.env.DO_SPACES_KEY,
+        secretAccessKey: process.env.DO_SPACES_SECRET
+    }
 });
 
 // Configure Multer-S3 for file uploads to Spaces
@@ -64,7 +68,7 @@ const uploader = (subFolder, fileType, fileSize, err_msg) => {
     const upload = multer({
         storage: multerS3({
             s3: s3,
-            bucket: 'assets-upload/' + subFolder, // Your Space name and subfolder
+            bucket: 'real-estate/' + subFolder, // Your Space name and subfolder
             acl: 'public-read', // Permissions for the uploaded file
             key: (req, file, cb) => {
                 const fileExt = path.extname(file.originalname);
@@ -88,3 +92,4 @@ const uploader = (subFolder, fileType, fileSize, err_msg) => {
 };
 
 module.exports = uploader;
+
