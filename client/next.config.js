@@ -13,6 +13,11 @@ const nextConfig = {
         hostname: 'lh3.googleusercontent.com', // Corrected
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'assets-upload.nyc3.digitaloceanspaces.com',
+        pathname: '/assets/**', // Wildcard pattern for all assets
+      },
     ],
   },
 
