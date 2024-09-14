@@ -45,8 +45,8 @@ const BlogsDataTable = ({blogsData, setDeleteData}) => {
                     width={110}
                     height={94}
                     className="w-100"
-                    src={`${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/blogs/${blog?.img}`}
-                    alt={blog.img}
+                    src={blog?.img}
+                    alt={blog?.img}
                   />
                 </div>
                 <div className="list-content py-0 p-0 mt-2 mt-xxl-0 ps-xxl-4">

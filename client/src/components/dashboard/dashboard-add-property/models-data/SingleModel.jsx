@@ -91,7 +91,7 @@ const SingleModel = () => {
             <BsFillPencilFill color="green" size={16} cursor="pointer" onClick={(e) => editHandler(element)}/>
             <MdDeleteForever color="red" size={20} cursor="pointer" onClick={(e)=> {
                 e.preventDefault();
-                deleteModel(element._id)
+                deleteModel(element?._id)
               }}/>
           </div>
           <div className="row">
@@ -101,14 +101,14 @@ const SingleModel = () => {
                   width={70}
                   height={70}
                   className="w70"
-                  src={`${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/communityModels/${element.img}`}
+                  src={element?.img}
                   alt="agent"
                 />
               </div>
               <div className="single-contant ml30 ml0-xs">
-                <h6 className="title mb-1">{element.name}</h6>
+                <h6 className="title mb-1">{element?.name}</h6>
                 <div className="agent-meta mb10 d-md-flex align-items-center">
-                  <p>{element.desc}</p>
+                  <p>{element?.desc}</p>
                 </div>
               </div>
             </div>

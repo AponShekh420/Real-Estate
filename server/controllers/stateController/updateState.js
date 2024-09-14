@@ -29,7 +29,7 @@ const updateState = async (req, res)=> {
       slug,
       active,
       abbreviation,
-      img: uploadedImageChanged ? req?.files[0]?.filename : oldImgUrl,
+      img: uploadedImageChanged ? req?.files[0]?.location : oldImgUrl,
     })
 
     if(uploadedImageChanged) {

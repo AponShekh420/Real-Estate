@@ -44,7 +44,7 @@ const SingleReview = ({data, setReviews, reviews}) => {
               height={60}
               style={{objectFit: "cover"}}
               className="rounded-circle mr-3"
-              src={review?.user?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? `${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/users/${review?.user?.avatar}` : review?.user?.avatar || "/images/user_avatar.png"}
+              src={review?.user?.avatar || "/images/user_avatar.png"}
               alt={review?.user?.firstName + " " + review?.user?.lastName}
             />
             <div className="ml20">

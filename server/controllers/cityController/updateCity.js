@@ -30,7 +30,7 @@ const updateCity = async (req, res) => {
       active,
       abbreviation,
       desc,
-      img: uploadedImageChanged ? req?.files[0]?.filename : oldImgUrl,
+      img: uploadedImageChanged ? req?.files[0]?.location : oldImgUrl,
       state: stateId
     })
 

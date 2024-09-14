@@ -26,6 +26,9 @@ const SelectMultiField = () => {
   // options
   const [catagoryOptions, setCatagoryOptions] = useState([]);
 
+
+
+  const {notify} = useSelector(state =>  state.catagory);
   const {errors, catagoryId} = useSelector((state)=> state.subcatagory);
   const dispatch = useDispatch();
 
@@ -34,7 +37,7 @@ const SelectMultiField = () => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/catagory/getall`, {credentials: "include"});
       const catagoryData = await res.json();
-      catagoryData.data.shift();
+      catagoryData.data.pop();
       setCatagoryOptions(catagoryData.data);
     } catch(err){
       console.log(err.message)
@@ -43,7 +46,7 @@ const SelectMultiField = () => {
 
   useEffect(()=> {
     fetchCatagoryData();
-  }, [])
+  }, [notify])
 
   // useEffect(()=> {
   //   console.log(catagoryId._id, cityName, abbreviation, description)

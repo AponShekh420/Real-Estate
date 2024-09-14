@@ -22,7 +22,7 @@ const addCity = async (req, res) => {
       abbreviation,
       name,
       desc,
-      img: req?.files ? req?.files[0]?.filename : "",
+      img: req?.files ? req?.files[0]?.location : "",
       state: stateId
     })
 

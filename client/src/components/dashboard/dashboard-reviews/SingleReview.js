@@ -51,7 +51,7 @@ const SingleReview = ({data, reviews, setReviews, setTotalPages, currentPage}) =
               height={60}
               style={{objectFit: "cover"}}
               className="rounded-circle mr-3"
-              src={review?.user?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? `${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/users/${review?.user?.avatar}` : review?.user?.avatar || "/images/user_avatar.png"}
+              src={review?.user?.avatar}
               alt={review?.user?.firstName + " " + review?.user?.lastName}
             />
             <div className="ml20">
@@ -87,7 +87,7 @@ const SingleReview = ({data, reviews, setReviews, setTotalPages, currentPage}) =
                     width={110}
                     height={90}
                     className="bdrs6"
-                    src={`${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/communityImgs/${image}`}
+                    src={image}
                     alt={image}
                   />
                 </Link>

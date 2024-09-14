@@ -46,7 +46,7 @@ const SingleComment = ({data, setComments, comments, notify}) => {
               height={60}
               style={{objectFit: "cover"}}
               className="rounded-circle mr-3"
-              src={comment?.user?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? `${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/users/${comment?.user?.avatar}` : comment?.user?.avatar || "/images/user_avatar.png"}
+              src={comment?.user?.avatar || "/images/user_avatar.png"}
               alt={comment?.user?.firstName + " " + comment?.user?.lastName}
             />
             <div className="ml20">

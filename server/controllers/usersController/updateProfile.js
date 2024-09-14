@@ -17,7 +17,7 @@ const updateProfile = async (req, res)=> {
       companyName,
       about,
       taxNumber,
-      avatar: (uploadedImageChanged && uploadedImage) ? req?.files[0]?.filename : uploadedImageChanged ? "user_avatar.png" : oldImgUrl,
+      avatar: (uploadedImageChanged && uploadedImage) ? req?.files[0]?.location : uploadedImageChanged ? "/images/user_avatar.png" : oldImgUrl,
     }
 
 
@@ -33,7 +33,7 @@ const updateProfile = async (req, res)=> {
 
 
     if(uploadedImageChanged) {
-      if(oldImgUrl && oldImgUrl?.split("/")[2] !== "lh3.googleusercontent.com" && oldImgUrl !== "user_avatar.png") {
+      if(oldImgUrl && oldImgUrl?.split("/")[2] !== "lh3.googleusercontent.com" && oldImgUrl !== "/images/user_avatar.png") {
         unlink(path.join(__dirname, `../../public/assets/users/${oldImgUrl}`), (err)=> {
           if(err) {
               console.log(err)

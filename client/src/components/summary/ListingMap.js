@@ -277,7 +277,7 @@ export default function ListingMap() {
                       height={248}
                       style={{height:'230px'}}
                       className="w-100 h-100  cover"
-                      src={getLocation?.thumbnail ? `${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/communityImgs/${getLocation?.thumbnail}` : `${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/communityImgs/${getLocation?.imgs[getLocation?.imgs?.length -1]}`}
+                      src={getLocation?.thumbnail || getLocation?.imgs[getLocation?.imgs?.length -1]}
                       alt="listings"
                     />
                     <div className="sale-sticker-wrap">

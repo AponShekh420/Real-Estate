@@ -14,7 +14,7 @@ const uploadBlogImage = (req, res) => {
             })
         } else {
             res.status(200).json({
-                message: req.file.filename,
+                message: req.file.location,
             })
         }
    });

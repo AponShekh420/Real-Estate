@@ -14,6 +14,7 @@ const register = async (req, res) => {
         email,
         provider: "local",
         accountId: null,
+        avatar: "/images/user_avatar.png"
       });
       const status = await NewUser.save();
       if(status) {

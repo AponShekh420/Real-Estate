@@ -14,7 +14,7 @@ const uploadCommunityImages = (req, res) => {
             })
         } else {
             res.status(200).json({
-                message: req.files.map((eachFile)=> eachFile.filename),
+                message: req.files.map((eachFile)=> eachFile.location),
             })
         }
    });

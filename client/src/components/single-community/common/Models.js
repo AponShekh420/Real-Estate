@@ -13,14 +13,14 @@ const Models = ({modelsData}) => {
                   width={140}
                   height={140}
                   className="w70"
-                  src={`${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/communityModels/${element.img}`}
+                  src={element?.img}
                   alt="agent"
                 />
               </div>
               <div className="single-contant ml30 ml0-xs">
-                <h5 className="title mb-1">{element.name}</h5>
+                <h5 className="title mb-1">{element?.name}</h5>
                 <div className="agent-meta d-md-flex align-items-center">
-                  <p>{element.desc}</p>
+                  <p>{element?.desc}</p>
                 </div>
               </div>
             </div>

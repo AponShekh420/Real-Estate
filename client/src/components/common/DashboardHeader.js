@@ -109,7 +109,7 @@ const DashboardHeader = () => {
                             height={44}
                             style={{objectFit: "cover"}}
                             className="rounded-circle"
-                            src={userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? userInfo?.avatar ? `${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/users/${userInfo?.avatar}` : "/images/user_avatar.png" : userInfo?.avatar}
+                            src={userInfo?.avatar}
                             alt={userInfo?.firstName + " " + userInfo?.lastName}
                           />
                         </a>
@@ -128,7 +128,7 @@ const DashboardHeader = () => {
                                         height={50}
                                         style={{objectFit: "cover"}}
                                         className="rounded-circle"
-                                        src={userInfo?.avatar?.split("/")[2] !== "lh3.googleusercontent.com" ? userInfo?.avatar ? `${process.env.NEXT_PUBLIC_SERVER_IMG_PATH}/assets/users/${userInfo?.avatar}` : "/images/user_avatar.png" : userInfo?.avatar}
+                                        src={userInfo?.avatar}
                                         alt={userInfo?.firstName + " " + userInfo?.lastName}
                                       />
                                       <div className="meta d-sm-flex justify-content-sm-between align-items-center">

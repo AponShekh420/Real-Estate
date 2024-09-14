@@ -34,7 +34,7 @@ const updateArea = async (req, res) => {
       desc,
       state: stateId,
       city: cityId,
-      img: uploadedImageChanged ? req?.files[0]?.filename : oldImgUrl,
+      img: uploadedImageChanged ? req?.files[0]?.location : oldImgUrl,
       abbreviation
     });
 

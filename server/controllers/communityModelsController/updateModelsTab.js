@@ -8,7 +8,7 @@ const updateModelsTab = async (req, res) => {
     const CMTUpdateStatus = await CMTModel.findByIdAndUpdate(CMTId, {
       name: CMTName,
       desc,
-      img: uploadedImageChanged ? req.files[0].filename : oldImgUrl,
+      img: uploadedImageChanged ? req.files[0].location : oldImgUrl,
     });
 
     if(uploadedImageChanged) {
