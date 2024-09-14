@@ -52,6 +52,10 @@ const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 const multerS3 = require('multer-s3');
 const path = require('path');
 
+const dotenv = require("dotenv");
+
+dotenv.config();
+
 // Configure AWS SDK for DigitalOcean Spaces using AWS SDK v3
 const s3 = new S3Client({
     endpoint: 'https://nyc3.digitaloceanspaces.com', // DigitalOcean Spaces endpoint

@@ -25,7 +25,7 @@ const addState = async (req, res)=> {
       desc,
       active,
       abbreviation,
-      img: req?.files ? req?.files[0]?.filename : "",
+      img: req?.files ? req?.files[0]?.location : "",
     })
 
     const status = await State.save();

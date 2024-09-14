@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['assets-upload.nyc3.digitaloceanspaces.com'],
+    // domains: ['assets-upload.nyc3.digitaloceanspaces.com'],
     remotePatterns: [
       {
         protocol: 'http',
