@@ -40,7 +40,8 @@ const UploadPhotoGallery = () => {
             errors: resData.errors
           }))
         } else {
-          const latestImags = resData.message;
+          const latestImags = resData?.message;
+          console.log("uploded image of community:", latestImags)
           const newImages = [...imgs, ...latestImags];
           dispatch(addCommunityFieldValue({
             imgs: newImages
