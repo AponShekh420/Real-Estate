@@ -16,7 +16,7 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'assets-upload.nyc3.digitaloceanspaces.com',
-        pathname: '/assets/**', // Wildcard pattern for all assets
+        pathname: '/**', // Wildcard pattern for all assets
       },
     ],
   },
