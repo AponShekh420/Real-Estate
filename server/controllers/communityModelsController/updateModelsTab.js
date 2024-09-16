@@ -1,6 +1,8 @@
-const { unlink } = require("fs");
 const CMTModel = require("../../models/CMTModel");
-const path = require('path');
+const deleteFileFromSpace = require("../../utils/deleteFileFromSpace ");
+
+
+
 const updateModelsTab = async (req, res) => {
   const {CMTId, CMTName, desc, oldImgUrl, uploadedImageChanged} = req.body;
   try {
@@ -12,11 +14,7 @@ const updateModelsTab = async (req, res) => {
     });
 
     if(uploadedImageChanged) {
-      unlink(path.join(__dirname, `../../public/assets/communityModels/${oldImgUrl}`), (err)=> {
-        if(err) {
-            console.log(err)
-        }
-      });
+      await deleteFileFromSpace('assets-upload', oldImgUrl);
     }
 
     if(CMTUpdateStatus) {

@@ -5,6 +5,7 @@ const StateModel = require('../../models/StateModel')
 const CommunityModel = require('../../models/CommunityModel')
 const {unlink} = require('fs');
 const path = require("path");
+const deleteFileFromSpace = require('../../utils/deleteFileFromSpace ');
 
 const deleteArea = async (req, res) => {
   const {areaId} = req.body
@@ -37,14 +38,9 @@ const deleteArea = async (req, res) => {
       // try to check those cities, areas, and communities has update or not
       if(cityUpdateStatus && communtiyUpdateStatus) {
         if(areaDeleteStatus?.img) {
-          unlink(path.join(__dirname, `../../public/assets/location/${areaDeleteStatus.img}`), (err)=> {
-            if(err) {
-                console.log(err)
-            } else {
-              res.status(200).json({
-                msg: "The area has deleted successfully"
-              })
-            }
+          await deleteFileFromSpace('assets-upload', areaDeleteStatus.img);
+          res.status(200).json({
+            msg: "The area has deleted successfully"
           })
         } else {
           res.status(200).json({

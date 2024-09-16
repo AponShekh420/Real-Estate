@@ -1,6 +1,7 @@
 const path = require("path");
 const {unlink} = require('fs');
 const UserModel = require("../../models/UserModel");
+const deleteFileFromSpace = require("../../utils/deleteFileFromSpace ");
 
 // upload the user on database
 const updateProfile = async (req, res)=> {
@@ -34,11 +35,7 @@ const updateProfile = async (req, res)=> {
 
     if(uploadedImageChanged) {
       if(oldImgUrl && oldImgUrl?.split("/")[2] !== "lh3.googleusercontent.com" && oldImgUrl !== "/images/user_avatar.png") {
-        unlink(path.join(__dirname, `../../public/assets/users/${oldImgUrl}`), (err)=> {
-          if(err) {
-              console.log(err)
-          }
-        });
+        await deleteFileFromSpace('assets-upload', oldImgUrl);
       }
     }
 

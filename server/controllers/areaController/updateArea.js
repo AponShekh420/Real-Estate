@@ -2,8 +2,7 @@ const AreaModel = require("../../models/AreaModel");
 const CityModel = require("../../models/CityModel");
 const CommunityModel = require("../../models/CommunityModel");
 const StateModel = require("../../models/StateModel");
-const path = require("path");
-const {unlink} = require('fs');
+const deleteFileFromSpace = require("../../utils/deleteFileFromSpace ");
 
 
 const updateArea = async (req, res) => {
@@ -40,11 +39,7 @@ const updateArea = async (req, res) => {
 
     if(uploadedImageChanged) {
       if(oldImgUrl) {
-        unlink(path.join(__dirname, `../../public/assets/location/${oldImgUrl}`), (err)=> {
-          if(err) {
-              console.log(err)
-          }
-        });
+        await deleteFileFromSpace('assets-upload', oldImgUrl);
       }
     }
     // updating the state collection to add area in area field on state

@@ -3,6 +3,7 @@ const StateModel = require("../../models/StateModel");
 const CommunityModel = require("../../models/CommunityModel");
 const path = require("path");
 const {unlink} = require('fs');
+const deleteFileFromSpace = require("../../utils/deleteFileFromSpace ");
 
 
 const updateCity = async (req, res) => {
@@ -36,11 +37,7 @@ const updateCity = async (req, res) => {
 
     if(uploadedImageChanged) {
       if(oldImgUrl) {
-        unlink(path.join(__dirname, `../../public/assets/location/${oldImgUrl}`), (err)=> {
-          if(err) {
-              console.log(err)
-          }
-        });
+        await deleteFileFromSpace('assets-upload', oldImgUrl);
       }
     }
 
