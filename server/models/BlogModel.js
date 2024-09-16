@@ -21,7 +21,7 @@ const BlogSchema = mongoose.Schema({
   },
   catagory: {
     type: mongoose.Types.ObjectId,
-    required: true,
+    default: process.env.uncatagoryId,
     ref: "Catagory"
   },
   subcatagory: {

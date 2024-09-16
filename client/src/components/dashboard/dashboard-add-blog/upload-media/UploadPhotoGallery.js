@@ -78,6 +78,7 @@ const UploadPhotoGallery = () => {
   };
 
   const handleDelete = async (img) => {
+    fileInputRef.current.value = "";
     dispatch(addBlogFieldValue({
       errors: {}
     }))

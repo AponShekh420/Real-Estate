@@ -39,8 +39,10 @@ const addBlog = async (req, res) => {
 
     // check: the blog has upload in database or not
     if(blog) {
+
+      const validCatagoryId = catagoryId || process.env.uncatagoryId;
       // push the blog in catagory blogs list
-      const catagoryUpdate = await CatagoryModel.findByIdAndUpdate(catagoryId || "66a0b384885b42cf193f9d63", {
+      const catagoryUpdate = await CatagoryModel.findByIdAndUpdate(validCatagoryId, {
         $push: {
           blogs: blog[0]._id
         }

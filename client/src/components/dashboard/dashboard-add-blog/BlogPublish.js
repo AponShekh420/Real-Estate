@@ -46,7 +46,7 @@ const BlogPublish = () => {
         })
       })
       const dataRes = await res.json();
-      setLoading(false)
+      setLoading(false);
       if(dataRes.msg) {
         dispatch(removeAllBlogFieldValue());
         toast.success(dataRes.msg, {

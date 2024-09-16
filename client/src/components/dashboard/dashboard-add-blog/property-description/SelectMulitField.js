@@ -41,7 +41,7 @@ const SelectMultiField = () => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/catagory/getall`, {credentials: "include"});
       const catagoryData = await res.json();
-      catagoryData.data.shift();
+      catagoryData.data.pop();
       setCatagoryOptions(catagoryData.data);
     } catch(err){
       console.log(err.message)

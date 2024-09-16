@@ -5,10 +5,20 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommunityFieldValue } from "@/redux/communitySlice";
 import { usePathname } from "next/navigation";
+import { MoonLoader } from "react-spinners";
+
+const override = {
+  display: "flex",
+  margin: "0 auto",
+  borderColor: "red",
+};
+
+
 
 const UploadPhotoGallery = () => {
   const fileInputRef = useRef(null);
   const pathname = usePathname();
+  const [loading, setLoading] = useState(false)
 
   // redux
   const {errors, imgs, deleteImgUrls, thumbnail} = useSelector((state)=> state.community);
@@ -29,12 +39,14 @@ const UploadPhotoGallery = () => {
 
     try {
       if(files.length >= 1) {
+        setLoading(true);
         const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/upload`, {
           method: "POST",
           credentials: "include",
           body: formData
         })
         const resData = await res.json();
+        setLoading(false);
         if(resData.error) {
           dispatch(addCommunityFieldValue({
             errors: resData.errors
@@ -62,7 +74,7 @@ const UploadPhotoGallery = () => {
   };
 
   const handleDelete = async (index) => {
-
+    fileInputRef.current.value = "";
     dispatch(addCommunityFieldValue({
       errors: {}
     }))
@@ -136,6 +148,19 @@ const UploadPhotoGallery = () => {
           />
         </label>
       </div>
+
+      <div className="w-100 h-100 top-0 d-flex align-items-center justify-content-center position-absolute" style={{zIndex: loading ? "100" : "-2000", display: loading ? "flex": "none"}}>
+        <MoonLoader
+          color="black"
+          loading={loading}
+          cssOverride={override}
+          size={30}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
+
+
 
       {/* Display uploaded images */}
       <div className="row profile-box position-relative d-md-flex align-items-end mb50">
