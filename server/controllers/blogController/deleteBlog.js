@@ -1,15 +1,17 @@
 const BlogModel = require('../../models/BlogModel')
 const CatagoryModel = require('../../models/CatagoryModel')
-const SubcatagoryModel = require('../../models/SubcatagoryModel')
+const SubcatagoryModel = require('../../models/SubcatagoryModel');
+const deleteFileFromSpace = require('../../utils/deleteFileFromSpace ');
 
 const deleteBlog = async (req, res) => {
   const {blogId} = req.body;
 
   try {
     const blogDeleteStatus = await BlogModel.findByIdAndDelete(blogId);
+    await deleteFileFromSpace('assets-upload', blogDeleteStatus?.img);
     if(blogDeleteStatus) {
       // Delete the blog field from catagory
-      const catagoryUpdateStatus = await CatagoryModel.updateOne({
+      const catagoryUpdateStatus = await CatagoryModel.updateMany({
         blogs: {
           $in: blogId,
         }
@@ -20,7 +22,7 @@ const deleteBlog = async (req, res) => {
       });
 
       // Delete the blog field from subcatagory
-      const subcatagoryUpdateStatus = await SubcatagoryModel.updateOne({
+      const subcatagoryUpdateStatus = await SubcatagoryModel.updateMany({
         blogs: {
           $in: blogId,
         }

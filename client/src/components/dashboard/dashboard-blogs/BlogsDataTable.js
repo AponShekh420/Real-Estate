@@ -53,7 +53,9 @@ const BlogsDataTable = ({blogsData, setDeleteData}) => {
                   <div className="h6 list-title">
                     <Link href={`/post/${blog?.slug}`}>{blog?.title}</Link>
                   </div>
-                  <span className="list-text mb-0 text-capitalize" href="#" style={{fontWeight: 500, fontSize: "13px"}}>{blog?.catagory?.name}{blog.subcatagory ? `, ${blog.subcatagory.name}` : ``}</span>
+                  <span className="list-text mb-0 text-capitalize" href="#" style={{fontWeight: 500, fontSize: "13px"}}>
+                    {blog?.catagory.map((item, index) => (blog.catagory.length > (index + 1)) ? `${item.name}, `: item.name)}
+                  </span>
                   <div className="list-price">
                     <p className="list-text mb-0" style={{fontWeight: "500", fontSize: "14px", color: "#8b2323"}} >{blog?.auther?.firstName} {blog?.auther?.lastName}</p>
                   </div>

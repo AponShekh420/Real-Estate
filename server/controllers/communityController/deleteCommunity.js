@@ -42,6 +42,14 @@ const deleteCommunity = async (req, res) => {
         }
       });
   
+
+      // delete imgs of community 
+
+      for(let img of communityDeleteStatus?.imgs) {
+        await deleteFileFromSpace('assets-upload', img)
+      }
+
+      
       // if is done then, should send the response
       if(stateUpdateStatus && cityUpdateStatus && areaUpdateStatus) {
         res.status(200).json({

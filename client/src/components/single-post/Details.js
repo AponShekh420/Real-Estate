@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import TimeManager from '../single-community/common/TimeManager';
+import Link from 'next/link';
 
 export default function Details({id, data}) {
   return (
@@ -23,9 +24,17 @@ export default function Details({id, data}) {
                   <a className="pr15 bdrr1" href="#">
                     {data?.auther?.firstName} {data?.auther?.lastName}
                   </a>
-                  <a className="ml15 pr15 bdrr1" href="#">
-                    {data?.catagory?.name}
-                  </a>
+                  <div className="ml15 pr15 bdrr1">
+                    {data?.catagory.map((item, index) => (data.catagory.length > (index + 1)) ? (
+                      <Link href={`/blogs/${item?.slug}`}>
+                        {item.name},
+                      </Link>
+                    ): (
+                      <Link href={`/blogs/${item?.slug}`}>
+                        {" " + item.name}
+                      </Link>
+                    ))}
+                  </div>
                   <a className="ml15" href="#">
                     <i className="far fa-clock pe-2" />
                     <TimeManager data={data}/>

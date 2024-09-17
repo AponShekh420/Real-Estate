@@ -128,14 +128,14 @@ const UploadPhotoGallery = () => {
       <div
         className="upload-img position-relative overflow-hidden bdrs12 text-center mb30 px-2"
       >
-        <div className="icon mb30">
+        <div className="icon mb30" style={{visibility: loading ? "hidden" : "visible"}}>
           <span className="flaticon-upload" />
         </div>
-        <h4 className="title fz17 mb10">Upload/Drag photos of your property</h4>
-        <p className="text mb25">
-          Photos must be JPEG or PNG format and at least 2048x768
+        <h4 className="title fz17 mb10" style={{visibility: loading ? "hidden" : "visible"}}>Upload/Drag photos of your property</h4>
+        <p className="text mb25" style={{visibility: loading ? "hidden" : "visible"}}>
+          Photos must be JPEG, JPG or PNG format
         </p>
-        <label className="ud-btn btn-white">
+        <label className="ud-btn btn-white" style={{visibility: loading ? "hidden" : "visible"}}>
           Browse Files
           <input
             ref={fileInputRef}
@@ -147,7 +147,6 @@ const UploadPhotoGallery = () => {
             style={{ display: "none" }}
           />
         </label>
-      </div>
 
       <div className="w-100 h-100 top-0 d-flex align-items-center justify-content-center position-absolute" style={{zIndex: loading ? "100" : "-2000", display: loading ? "flex": "none"}}>
         <MoonLoader
@@ -159,6 +158,8 @@ const UploadPhotoGallery = () => {
           data-testid="loader"
         />
       </div>
+    </div>
+    
 
 
 

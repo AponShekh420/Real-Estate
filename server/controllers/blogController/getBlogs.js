@@ -16,10 +16,20 @@ const getBlogs = async (req, res) => {
 
      // Filter the results based on the populated fields
      const filteredCommunities = getBlogsData.filter(blog => {
+
+      const categoryMatch = blog.catagory?.some(c =>
+        c.name.match(new RegExp(searchParams, "i"))
+      );
+
+      const subcategoryMatch = blog.subcatagory?.some(sc =>
+        sc.name.match(new RegExp(searchParams, "i"))
+      );
+
+
       return (
         blog.title.match(new RegExp(searchParams, 'i')) ||
-        blog.catagory?.name.match(new RegExp(searchParams, 'i')) ||
-        blog.subcatagory?.name.match(new RegExp(searchParams, 'i')) ||
+        categoryMatch ||
+        subcategoryMatch ||
         blog.auther?.email.match(new RegExp(searchParams, 'i')) ||
         blog.auther?.role.match(new RegExp(searchParams, 'i')) ||
         blog.auther?.firstName.match(new RegExp(searchParams, 'i')) ||

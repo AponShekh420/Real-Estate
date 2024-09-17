@@ -32,15 +32,15 @@ const updateBlog = async (req, res) => {
     }
 
 
-    console.log(currentBlog.state)
+    const catagoriesIdArray = catagoryId.length > 0 ? catagoryId : [process.env.uncatagoryId];
 
     // upload the community in database
     const blog = await BlogModel.findByIdAndUpdate(blogId, {
       title,
       slug,
       desc,
-      catagory: catagoryId || process.env.uncatagoryId,
-      subcatagory: subcatagoryId || null,
+      catagory: catagoriesIdArray,
+      subcatagory: subcatagoryId || [],
       img,
       active,
       metaTitle,
@@ -50,41 +50,36 @@ const updateBlog = async (req, res) => {
     console.log(blog);
 
 
-    // check: the community has upload in database or not
     if(blog) {
 
-      // if the new state, area, city are not same with oldCommunity data then we should remove these from our community field of state, area, city
-      if(currentBlog.catagory != catagoryId) {
-        // pull the community in state community list
-        await CatagoryModel.findByIdAndUpdate(currentBlog.catagory, {
-          $pull: {
-            blogs: currentBlog._id
-          }
-        });
+      // Handle category changes
+      if (currentBlog.catagory.toString() !== catagoriesIdArray.toString()) {
+        // Pull the blog from old categories
+        await CatagoryModel.updateMany(
+          { _id: { $in: currentBlog.catagory } },
+          { $pull: { blogs: currentBlog._id } }
+        );
 
-        // push the community in new state community list
-        const catagoryUpdate = await CatagoryModel.findByIdAndUpdate(catagoryId, {
-          $push: {
-            blogs: blog._id
-          }
-        })
+        // Push the blog into new categories
+        await CatagoryModel.updateMany(
+          { _id: { $in: catagoriesIdArray } },
+          { $push: { blogs: blog._id } }
+        );
       }
 
-      // check the city
-      if(currentBlog.subcatagory != subcatagoryId) {
-        // pull the community in city community list
-        await SubcatagoryModel.findByIdAndUpdate(currentBlog.subcatagory, {
-          $pull: {
-            blogs: currentBlog._id
-          }
-        });
+      // Handle subcategory changes
+      if (currentBlog.subcatagory.toString() !== subcatagoryId.toString()) {
+        // Pull the blog from old subcategories
+        await SubcatagoryModel.updateMany(
+          { _id: { $in: currentBlog.subcatagory } },
+          { $pull: { blogs: currentBlog._id } }
+        );
 
-        // push the community in new city community list
-        const subcatagoryUpdate = await SubcatagoryModel.findByIdAndUpdate(subcatagoryId, {
-          $push: {
-            blogs: blog._id
-          }
-        })
+        // Push the blog into new subcategories
+        await SubcatagoryModel.updateMany(
+          { _id: { $in: subcatagoryId } },
+          { $push: { blogs: blog._id } }
+        );
       }
 
 

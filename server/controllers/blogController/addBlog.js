@@ -20,7 +20,7 @@ const addBlog = async (req, res) => {
       slug = `${slug}-${duplicateBlogCount}`;
     }
 
-    // Continue with the rest of your code...
+    const catagoriesIdArray = catagoryId.length > 0 ? catagoryId : [process.env.uncatagoryId];
 
 
     // upload the blog in database
@@ -28,8 +28,8 @@ const addBlog = async (req, res) => {
       title,
       slug,
       desc,
-      catagory: catagoryId || process.env.uncatagoryId,
-      subcatagory: subcatagoryId || null,
+      catagory: catagoriesIdArray,
+      subcatagory: subcatagoryId || [],
       img,
       active,
       auther: req.user._id,
@@ -37,20 +37,29 @@ const addBlog = async (req, res) => {
       metaDesc,
     });
 
+
+
     // check: the blog has upload in database or not
     if(blog) {
 
-      const validCatagoryId = catagoryId || process.env.uncatagoryId;
+      const catagoryQueryObj = catagoryId.length > 0 ? {$or: catagoryId.map(eachCatagory => ({_id: eachCatagory?._id}))} : {_id: process.env.uncatagoryId};
+
+      console.log("catagoryQueryObj:", catagoryQueryObj)
       // push the blog in catagory blogs list
-      const catagoryUpdate = await CatagoryModel.findByIdAndUpdate(validCatagoryId, {
+      const catagoryUpdate = await CatagoryModel.updateMany(catagoryQueryObj, {
         $push: {
           blogs: blog[0]._id
         }
       })
 
+
+
+
+      const subcatagoryQueryObj = {$or: subcatagoryId.map(eachCatagory => ({_id: eachCatagory?._id}))};
+
       // push the blog in subcatagory blogs list
-      if(subcatagoryId) {
-        await SubcatagoryModel.findByIdAndUpdate(subcatagoryId, {
+      if(subcatagoryId?.length > 0) {
+        await SubcatagoryModel.updateMany(subcatagoryQueryObj, {
           $push: {
             blogs: blog[0]._id
           }

@@ -49,7 +49,7 @@ const DeleteBlog = ({blog, setDeleteData}) => {
           className="icon btn btn-primary"
           style={{ border: "none" }}
           data-tooltip-id={`delete-${blog?._id}`}
-          data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
+          // data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
           disabled={loading}
           onClick={deleteBlogHanlder}
         >

@@ -38,7 +38,7 @@ const deleteState = async (req, res) => {
       // try to check those cities, areas, and communities has update or not
       if(cityUpdateStatus && communtiyUpdateStatus && areaUpdateStatus) {
         if(stateDeleteStatus?.img) {
-          await deleteFileFromSpace('assets-upload', stateDeleteStatus.img);
+          await deleteFileFromSpace('assets-upload', stateDeleteStatus?.img);
           res.status(200).json({
             msg: "The state has deleted successfully"
           })

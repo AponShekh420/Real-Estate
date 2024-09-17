@@ -19,15 +19,20 @@ const BlogSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  catagory: {
-    type: mongoose.Types.ObjectId,
-    default: process.env.uncatagoryId,
-    ref: "Catagory"
-  },
-  subcatagory: {
-    type: mongoose.Types.ObjectId,
-    ref: "Subcatagory"
-  },
+  catagory: [
+    {
+      type: mongoose.Types.ObjectId,
+      default: [process.env.uncatagoryId],
+      ref: "Catagory"
+    }
+  ],
+  subcatagory: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Subcatagory",
+      default: [],
+    }
+  ],
   img: {
       type: String,
       required: true

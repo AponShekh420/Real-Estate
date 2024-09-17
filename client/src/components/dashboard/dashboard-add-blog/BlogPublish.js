@@ -41,8 +41,8 @@ const BlogPublish = () => {
         },
         body: JSON.stringify({
           ...blog,
-          catagoryId: blog?.catagoryId?._id,
-          subcatagoryId: blog?.subcatagoryId?._id,
+          catagoryId: blog?.catagoryId,
+          subcatagoryId: blog?.subcatagoryId,
         })
       })
       const dataRes = await res.json();
@@ -76,8 +76,8 @@ const BlogPublish = () => {
         },
         body: JSON.stringify({
           ...blog,
-          catagoryId: blog?.catagoryId?._id,
-          subcatagoryId: blog?.subcatagoryId?._id,
+          catagoryId: blog?.catagoryId,
+          subcatagoryId: blog?.subcatagoryId,
         })
       })
       const dataRes = await res.json();
