@@ -9,14 +9,14 @@ import stateLabels from './stateLabelData';
 
 const stateData = {};
 
-const abbreviateStates = {
-  "Delaware": "DE",
-  "New Hampshire": "NH",
-  "Rhode Island": "RI",
-  "Connecticut": "CT",
-  "Massachusetts": "MA",
-  // Add more as needed
-};
+// const abbreviateStates = {
+//   "Delaware": "DE",
+//   "New Hampshire": "NH",
+//   "Rhode Island": "RI",
+//   "Connecticut": "CT",
+//   "Massachusetts": "MA",
+//   // Add more as needed
+// };
 
 
 const Maps = () => {
@@ -76,14 +76,20 @@ const Maps = () => {
                       style={{
                         default: {
                           fill: "#D6D6DA",
+                          stroke: "#000",       // Add black outline
+                          strokeWidth: 0.5,        // Outline thickness
                           outline: "none"
                         },
                         hover: {
                           fill: "#F53",
+                          stroke: "#000",        // Keep outline during hover
+                          strokeWidth: 1,        // Increase thickness on hover
                           outline: "none"
                         },
                         pressed: {
                           fill: "#E42",
+                          stroke: "#000",        // Keep outline during press
+                          strokeWidth: 1.5,      // Increase thickness when pressed
                           outline: "none"
                         }
                       }}
@@ -94,7 +100,7 @@ const Maps = () => {
             }
           </Geographies>
 
-          {stateLabels.map(({ name, coordinates }) => (
+          {/* {stateLabels.map(({ name, coordinates }) => (
             <Marker key={name} coordinates={coordinates}>
               <text
                 textAnchor="middle"
@@ -105,7 +111,7 @@ const Maps = () => {
                  {abbreviateStates[name] || name}
               </text>
             </Marker>
-          ))}
+          ))} */}
         </ComposableMap>
       </div>
     </div>
