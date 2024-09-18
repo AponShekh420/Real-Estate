@@ -9,6 +9,7 @@ import {modules, formats} from '@/components/common/quillEditorConfig'
 import "react-quill/dist/quill.snow.css";
 import "@/components/common/styles/quillEditor.css"
 import dynamic from "next/dynamic";
+import Categories from "./Categories";
 
 
 // Dynamically import React Quill with SSR disabled
@@ -49,7 +50,7 @@ const PropertyDescription = () => {
 
 
   return (
-    <form className="form-style1">
+    <div className="form-style1">
       <div className="row">
         <div className="col-sm-12">
           <div className="mb20">
@@ -74,7 +75,7 @@ const PropertyDescription = () => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Listed in
+              Status
             </label>
             <div className="location-area">
               <Select
@@ -98,9 +99,6 @@ const PropertyDescription = () => {
           </div>
         </div>
         {/* End .col-6 */}
-        
-        <SelectMultiField/>
-        {/* End .col-6 */}
 
 
 
@@ -118,8 +116,20 @@ const PropertyDescription = () => {
         {/* End .col-6 */}
 
 
+
+
+        <div className="col-12 mt30">
+          <div className="ps-widget bgc-white bdrs12 overflow-hidden position-relative">
+            <h4 className="title fz17">Select Catagories</h4>
+            <div className="row">
+              <Categories />
+            </div>
+          </div>
+        </div>
+        {/* End .col-6 */}
+
       </div>
-    </form>
+    </div>
   );
 };
 
