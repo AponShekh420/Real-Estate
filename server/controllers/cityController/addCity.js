@@ -1,41 +1,42 @@
+const AreaModel = require("../../models/AreaModel");
 const CityModel = require("../../models/CityModel");
-const StateModel = require("../../models/StateModel");
+
 
 const addCity = async (req, res) => {
   try {
-    const {name, desc, abbreviation, stateId, active} = req.body;
+    const {name, desc, stateId, areaId, active, abbreviation} = req.body;
 
     // slug making
-    const duplicateArea = await CityModel.find({name});
+    const duplicateCity = await CityModel.find({name: name});
 
     let slug;
-    if(duplicateArea.length > 0){
-      slug = name.toLowerCase().trim().split(' ').join("-") + "-" + duplicateArea.length;
+    if(duplicateCity.length > 0){
+      slug = name.toLowerCase().trim().split(' ').join("-") + "-" + duplicateCity.length;
     } else {
       slug = name.toLowerCase().trim().split(' ').join("-");
     }
 
-    
+
     const City = await CityModel.insertMany({
-      slug,
-      active,
-      abbreviation,
       name,
       desc,
+      active,
+      state: stateId,
+      area: areaId,
+      abbreviation,
       img: req?.files ? req?.files[0]?.location : "",
-      state: stateId
-    })
+      slug,
+    });
 
-    // updating the state collection to add area in area field on state
+    // updating the areaModel collection to add city in area field on areaModel
     if(City) {
-      const state = await StateModel.findByIdAndUpdate(stateId, {
-          $push: {
-            city: City[0]._id
-          }
-        })
-
-      // check validation: is state has updated or not
-      if(state) {
+      const city = await AreaModel.findByIdAndUpdate(areaId, {
+        $push: {
+          city: City[0]._id
+        }
+      })
+      // check validation: is area has updated or not
+      if(city) {
         res.status(200).json({
           msg: "The City Has Added Successfully"
         })
@@ -43,7 +44,7 @@ const addCity = async (req, res) => {
         res.status(500).json({
           errors: {
             locationUpdate: {
-              msg: "The city couldn't merge with the state, try again"
+              msg: "There was an server side error"
             }
           }
         })

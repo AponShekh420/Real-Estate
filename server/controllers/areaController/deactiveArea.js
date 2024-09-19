@@ -1,5 +1,6 @@
-const AreaModel = require('../../models/AreaModel');
 const CommunityModel = require('../../models/CommunityModel');
+const CityModel = require('../../models/CityModel');
+const AreaModel = require('../../models/AreaModel');
 
 const deactiveArea = async (req, res) => {
   const {areaId} = req.body;
@@ -9,12 +10,15 @@ const deactiveArea = async (req, res) => {
     });
 
     if(deactiveArea) {
+      const cityUpdateStatus = await CityModel.updateMany({area: areaId}, {
+        active: false
+      });
       const communities = await CommunityModel.updateMany({area: areaId}, {
         active: false
-      })
-      if(communities) {
+      });
+      if(communities && cityUpdateStatus) {
         res.status(200).json({
-          msg: "The area has deactivated"
+          msg: "The Area has deactivated"
         })
       } else {
         res.status(500).json({

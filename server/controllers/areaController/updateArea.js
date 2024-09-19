@@ -1,21 +1,21 @@
-const AreaModel = require("../../models/AreaModel");
 const CityModel = require("../../models/CityModel");
-const CommunityModel = require("../../models/CommunityModel");
 const StateModel = require("../../models/StateModel");
+const CommunityModel = require("../../models/CommunityModel");
+const path = require("path");
+const {unlink} = require('fs');
 const deleteFileFromSpace = require("../../utils/deleteFileFromSpace ");
 
 
 const updateArea = async (req, res) => {
-  
   try {
-    const {name, desc, stateId, areaId, cityId, active, abbreviation, oldImgUrl, uploadedImageChanged} = req.body;
-
+    const {name, desc, stateId, areaId, abbreviation, active, oldImgUrl, uploadedImageChanged } = req.body;
+    
     // slug making
     const duplicateArea = await AreaModel.find({name, _id: {$ne: areaId}});
     const currentArea = await AreaModel.findById(areaId);
 
     let slug;
-    if(name == currentArea?.name) {
+    if(name === currentArea?.name) {
       slug = currentArea.slug
     } else {
       if(duplicateArea.length > 0){
@@ -25,84 +25,64 @@ const updateArea = async (req, res) => {
       }
     }
 
-
     const Area = await AreaModel.findByIdAndUpdate(areaId, {
       name,
       slug,
       active,
+      abbreviation,
       desc,
-      state: stateId,
-      city: cityId,
       img: uploadedImageChanged ? req?.files[0]?.location : oldImgUrl,
-      abbreviation
-    });
+      state: stateId
+    })
 
     if(uploadedImageChanged) {
       if(oldImgUrl) {
         await deleteFileFromSpace('assets-upload', oldImgUrl);
       }
     }
-    // updating the state collection to add area in area field on state
+
+
+    // updating the state collection to add city in city field on state
     if(Area) {
 
       const communitisList = await CommunityModel.find({area: areaId}).select('_id');
 
+
        // change the state from communtiy
-       const communityUpdateStatus = await CommunityModel.updateMany({area: areaId}, {
-        city: cityId,
+      const communityUpdateStatus = await CommunityModel.updateMany({area: areaId}, {
         state: stateId
       });
 
-      console.log(Area)
 
-      // remove the old city and the communtiy from old city
-      const OldCity = await CityModel.updateMany({
+
+      // remove the old city of state
+      const oldState = await StateModel.updateMany({
         area: {
           $in: areaId
         }
       }, {
         $pull: {
-          area: areaId
+          area: areaId,
         },
         $pullAll: {
           community: communitisList
         }
       })
-
-
-      // remove the old city of state
-      const oldState = await StateModel.updateMany({
-        _id: Area.state
-      }, 
-      {
-        $pullAll: {
-          community: communitisList
-        }
-      })
-
       
-      // adding the area in city
-      if(OldCity && oldState && communitisList && communityUpdateStatus) {
-        const city = await CityModel.findByIdAndUpdate(cityId, {
-          $push: {
-            area: Area._id,
-            community: {
-              $each: communitisList
-            }
-          }
-        })
-
-        // push community in new state community field or aray
+      // adding the city in new state
+      if(oldState && communitisList && communityUpdateStatus) {
         const state = await StateModel.findByIdAndUpdate(stateId, {
-          $push: {
-            community: {
-              $each: communitisList
+            $push: {
+              area: Area._id,
+              community: {
+                $each: communitisList
+              }
             }
-          }
-        })
+          })
+
 
         // check validation: is state has updated or not
-        if(city && state) {
+        if(state) {
           res.status(200).json({
             msg: "The Area Has updated Successfully"
           })

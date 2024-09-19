@@ -1,10 +1,7 @@
 // import models
-const AreaModel = require('../../models/AreaModel');
 const CityModel = require('../../models/CityModel');
-const StateModel = require('../../models/StateModel')
+const AreaModel = require('../../models/AreaModel');
 const CommunityModel = require('../../models/CommunityModel')
-const {unlink} = require('fs');
-const path = require("path");
 const deleteFileFromSpace = require('../../utils/deleteFileFromSpace ');
 
 const deleteCity = async (req, res) => {
@@ -13,11 +10,11 @@ const deleteCity = async (req, res) => {
   try {
     const cityDeleteStatus = await CityModel.findByIdAndDelete(cityId);
 
-    // check: if the state has deleted successfully then we should remove this stateId from city, area, and communtiy and make the city, area and community deactive
+    // check: if the area has deleted successfully then we should remove this cityId from city and communtiy and make the area and community deactive
     if(cityDeleteStatus) {
 
       // update the city collection to delete this state id
-      const stateUpdateStatus = await StateModel.updateMany({
+      const areaUpdateStatus = await AreaModel.updateMany({
         city: {
           $in: cityId
         }
@@ -29,12 +26,6 @@ const deleteCity = async (req, res) => {
       }
     );
 
-      // update the area collection to delete this state id
-      const areaUpdateStatus = await AreaModel.updateMany({city: cityId}, {
-        city: null,
-        active: false
-      });
-
       // update the community collection to delete this state id
       const communtiyUpdateStatus = await CommunityModel.updateMany({city: cityId}, {
         city: null,
@@ -42,7 +33,7 @@ const deleteCity = async (req, res) => {
       });
 
       // try to check those cities, areas, and communities has update or not
-      if(stateUpdateStatus && communtiyUpdateStatus && areaUpdateStatus) {
+      if(areaUpdateStatus && communtiyUpdateStatus) {
         if(cityDeleteStatus?.img) {
           await deleteFileFromSpace('assets-upload', cityDeleteStatus.img);
           res.status(200).json({

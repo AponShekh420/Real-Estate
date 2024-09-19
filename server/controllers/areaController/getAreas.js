@@ -1,19 +1,13 @@
 const AreaModel = require("../../models/AreaModel");
 
 // upload the state on database
-const getAreaBySlug = async (req, res)=> {
-  const {active, slug} = req.body;
-  const validation = {
-    active,
-    slug,
-  };
-
+const getAreas = async (req, res)=> {
   try {
-    const area = await AreaModel.findOne(validation).populate("state");
-    if(area) {
+    const areas = await AreaModel.find({active: true, community: { $exists: true, $ne: [] }}).sort({ createdAt: -1 }).populate("state");
+    if(areas) {
       res.status(200).json({
-        message: "Got the area data",
-        data: area
+        msg: "Got All Area",
+        data: areas
       });
     } else {
       res.status(500).json({
@@ -31,4 +25,4 @@ const getAreaBySlug = async (req, res)=> {
 }
 
 
-module.exports = getAreaBySlug;
+module.exports = getAreas;

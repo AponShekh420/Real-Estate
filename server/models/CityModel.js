@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-// schema of area
+// schema of city
 const citySchema = mongoose.Schema({
   name: {
     type: String,
@@ -11,23 +11,21 @@ const citySchema = mongoose.Schema({
     type: String,
     required: true
   },
-  desc: String,
   slug: {
     type: String,
     required: true
   },
+  desc: String,
   state: {
     type: mongoose.Types.ObjectId,
-    ref: "State",
     required: true,
+    ref: "State"
   },
-  area: [
-    {
-      type: mongoose.Types.ObjectId,
-      default: [],
-      ref: "Area"
-    }
-  ],
+  area: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+    ref: "Area"
+  },
   community: [
     {
       type: mongoose.Types.ObjectId
@@ -43,9 +41,9 @@ const citySchema = mongoose.Schema({
 }, {timestamps: true})
 
 
-// model of area
+// model of city
 const CityModel = mongoose.models.City || mongoose.model("City", citySchema);
 
 
-
 module.exports = CityModel;
+

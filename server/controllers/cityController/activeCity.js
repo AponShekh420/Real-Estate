@@ -1,29 +1,23 @@
 const AreaModel = require('../../models/AreaModel');
 const CommunityModel = require('../../models/CommunityModel');
 const CityModel = require('../../models/CityModel');
-const StateModel = require('../../models/StateModel');
 
 const activeCity = async (req, res) => {
   const {cityId} = req.body;
   try {
 
-    const parents = await StateModel.findOne({
+    const parents = await AreaModel.findOne({
       city: {
         $in: cityId
       }
-    });
+    }).populate({path: "state"});
     
-    if(parents?.active) {
-      const activeCityStatus = await CityModel.findByIdAndUpdate(cityId, {
+    if(parents?.active && parents?.state.active && (parents?.state !== null) && (parents?.area !== null)) {
+      const activeAreaStatus = await CityModel.findByIdAndUpdate(cityId, {
         active: true,
       });
   
-      if(activeCityStatus) {
-        const activeAllAreaStatus = await AreaModel.updateMany({city: cityId}, {
-          active: true
-        })
-
-
+      if(activeAreaStatus) {
         const communities = await CommunityModel.updateMany({
           city: cityId,
           $and: [
@@ -41,7 +35,7 @@ const activeCity = async (req, res) => {
         }, {
           active: true
         })
-        if(communities && activeAllAreaStatus) {
+        if(communities) {
           res.status(200).json({
             msg: "The city has activated"
           })
@@ -66,8 +60,8 @@ const activeCity = async (req, res) => {
     } else {
       res.status(400).json({
         errors: {
-          locationUpdate: {
-            msg: "Take care of parents first"
+          server: {
+            msg: "There was an server side error"
           }
         }
       })

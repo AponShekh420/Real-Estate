@@ -3,8 +3,6 @@ const AreaModel = require('../../models/AreaModel');
 const CityModel = require('../../models/CityModel');
 const StateModel = require('../../models/StateModel')
 const CommunityModel = require('../../models/CommunityModel')
-const {unlink} = require('fs');
-const path = require("path");
 const deleteFileFromSpace = require('../../utils/deleteFileFromSpace ');
 
 const deleteArea = async (req, res) => {
@@ -13,11 +11,11 @@ const deleteArea = async (req, res) => {
   try {
     const areaDeleteStatus = await AreaModel.findByIdAndDelete(areaId);
 
-    // check: if the area has deleted successfully then we should remove this areaId from city and communtiy and make the area and community deactive
+    // check: if the state has deleted successfully then we should remove this stateId from city, area, and communtiy and make the city, area and community deactive
     if(areaDeleteStatus) {
 
       // update the city collection to delete this state id
-      const cityUpdateStatus = await CityModel.updateMany({
+      const stateUpdateStatus = await StateModel.updateMany({
         area: {
           $in: areaId
         }
@@ -29,6 +27,12 @@ const deleteArea = async (req, res) => {
       }
     );
 
+      // update the area collection to delete this state id
+      const cityUpdateStatus = await CityModel.updateMany({area: areaId}, {
+        area: null,
+        active: false
+      });
+
       // update the community collection to delete this state id
       const communtiyUpdateStatus = await CommunityModel.updateMany({area: areaId}, {
         area: null,
@@ -36,15 +40,15 @@ const deleteArea = async (req, res) => {
       });
 
       // try to check those cities, areas, and communities has update or not
-      if(cityUpdateStatus && communtiyUpdateStatus) {
+      if(stateUpdateStatus && communtiyUpdateStatus && cityUpdateStatus) {
         if(areaDeleteStatus?.img) {
           await deleteFileFromSpace('assets-upload', areaDeleteStatus.img);
           res.status(200).json({
-            msg: "The area has deleted successfully"
+            msg: "The Area has deleted successfully"
           })
         } else {
           res.status(200).json({
-            msg: "The area has deleted successfully"
+            msg: "The Area has deleted successfully"
           })
         }
       } else {

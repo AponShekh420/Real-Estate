@@ -1,13 +1,12 @@
 const AreaModel = require("../../models/AreaModel");
-const CityModel = require("../../models/CityModel");
-
+const StateModel = require("../../models/StateModel");
 
 const addArea = async (req, res) => {
   try {
-    const {name, desc, stateId, cityId, active, abbreviation} = req.body;
+    const {name, desc, abbreviation, stateId, active} = req.body;
 
     // slug making
-    const duplicateArea = await AreaModel.find({name: name});
+    const duplicateArea = await AreaModel.find({name});
 
     let slug;
     if(duplicateArea.length > 0){
@@ -16,27 +15,27 @@ const addArea = async (req, res) => {
       slug = name.toLowerCase().trim().split(' ').join("-");
     }
 
-
+    
     const Area = await AreaModel.insertMany({
+      slug,
+      active,
+      abbreviation,
       name,
       desc,
-      active,
-      state: stateId,
-      city: cityId,
-      abbreviation,
       img: req?.files ? req?.files[0]?.location : "",
-      slug,
-    });
+      state: stateId
+    })
 
-    // updating the areaModel collection to add city in area field on areaModel
+    // updating the state collection to add area in area field on state
     if(Area) {
-      const city = await CityModel.findByIdAndUpdate(cityId, {
-        $push: {
-          area: Area[0]._id
-        }
-      })
-      // check validation: is area has updated or not
-      if(city) {
+      const state = await StateModel.findByIdAndUpdate(stateId, {
+          $push: {
+            area: Area[0]._id
+          }
+        })
+
+      // check validation: is state has updated or not
+      if(state) {
         res.status(200).json({
           msg: "The Area Has Added Successfully"
         })
@@ -44,7 +43,7 @@ const addArea = async (req, res) => {
         res.status(500).json({
           errors: {
             locationUpdate: {
-              msg: "There was an server side error"
+              msg: "The Area couldn't merge with the state, try again"
             }
           }
         })

@@ -1,6 +1,6 @@
 const CityModel = require("../../models/CityModel");
 
-// upload the state on database
+// upload the city on database
 const getCityBySlug = async (req, res)=> {
   const {active, slug} = req.body;
   const validation = {
@@ -9,7 +9,7 @@ const getCityBySlug = async (req, res)=> {
   };
 
   try {
-    const city = await CityModel.findOne(validation).populate("state");
+    const city = await CityModel.findOne(validation);
     if(city) {
       res.status(200).json({
         message: "Got the city data",
