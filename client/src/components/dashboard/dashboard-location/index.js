@@ -30,6 +30,7 @@ const AddLocationContent = () => {
           >
             1. State
           </button>
+          
           <button
             className="nav-link fw600"
             id="nav-item2-tab"
@@ -39,10 +40,11 @@ const AddLocationContent = () => {
             role="tab"
             aria-controls="nav-item2"
             aria-selected="false"
-            onClick={()=> setCurrentTab("city")}
+            onClick={() => setCurrentTab("area")}
           >
-            2. City
+            2. Area
           </button>
+
           <button
             className="nav-link fw600"
             id="nav-item3-tab"
@@ -52,9 +54,9 @@ const AddLocationContent = () => {
             role="tab"
             aria-controls="nav-item3"
             aria-selected="false"
-            onClick={() => setCurrentTab("area")}
+            onClick={()=> setCurrentTab("city")}
           >
-            3. Area
+            3. City
           </button>
         </div>
       </nav>
@@ -79,7 +81,7 @@ const AddLocationContent = () => {
           aria-labelledby="nav-item2-tab"
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            {currentTab === "city" ? <CityList /> : <div></div> }
+            {currentTab === "area" ? <AreaList /> : <div></div> }
           </div>
         </div>
 
@@ -90,9 +92,11 @@ const AddLocationContent = () => {
           aria-labelledby="nav-item3-tab"
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            {currentTab === "area" ? <AreaList /> : <div></div> }
+            {currentTab === "city" ? <CityList /> : <div></div> }
           </div>
         </div>
+
+
       </div>
       
       <ToastContainer/>

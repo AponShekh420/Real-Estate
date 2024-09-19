@@ -13,6 +13,10 @@ const checkCityValidation = [
     .isLength({min: 1})
     .withMessage("Must be select a state")
     .trim(),
+  check("cityId")
+    .isLength({min: 1})
+    .withMessage("Must be select a city")
+    .trim(),
 ]
 
 module.exports = checkCityValidation;

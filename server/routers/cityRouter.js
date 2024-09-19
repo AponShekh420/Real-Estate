@@ -2,25 +2,20 @@
 const express = require("express");
 
 // internal controllers imported
-const addCity = require("../controllers/cityController/addCity");
-const updateCity = require("../controllers/cityController/updateCity");
-const deleteCity = require("../controllers/cityController/deleteCity");
-const deactiveCity = require("../controllers/cityController/deactiveCity");
-const activeCity = require("../controllers/cityController/activeCity");
 const checkCityValidation = require("../middleware/checkCityValidation");
-const useValidationResult = require("../middleware/common/useValidationResult");
-const getCityBySlug = require("../controllers/cityController/getCityBySlug");
 const uploadLocationImg = require("../middleware/uploadLocationImg");
 const useLocationValidationResult = require("../middleware/useLocationValidationResult");
-const getCities = require("../controllers/cityController/getCities");
-
+const addCity = require("../controllers/cityController/addCity");
+const updateCity = require("../controllers/cityController/updateCity");
+const deactiveCity = require("../controllers/cityController/deactiveCity");
+const activeCity = require("../controllers/cityController/activeCity");
+const getCityBySlug = require("../controllers/cityController/getCityBySlug");
+const deleteCity = require("../controllers/cityController/deleteCity");
 
 
 // auth checker
 const authCheck = require("../middleware/common/users/authCheck");
 const adminAuthCheck = require("../middleware/common/users/adminAuthCheck");
-
-
 
 
 // callback function of configure
@@ -32,16 +27,15 @@ router.post('/add', authCheck, adminAuthCheck, uploadLocationImg, checkCityValid
 router.put('/update', authCheck, adminAuthCheck, uploadLocationImg, checkCityValidation, useLocationValidationResult, updateCity);
 router.delete('/delete', authCheck, adminAuthCheck, deleteCity);
 
-// city deactive and active 
+
+// active and deactive
 router.put('/deactive', authCheck, adminAuthCheck, deactiveCity);
 router.put('/active', authCheck, adminAuthCheck, activeCity);
 
+
+
 // get state data to display in frontend page 
 router.post("/get-by-slug", getCityBySlug);
-
-
-router.get("/getall", getCities);
-
 
 
 module.exports = router;

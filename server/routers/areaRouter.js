@@ -2,22 +2,23 @@
 const express = require("express");
 
 // internal controllers imported
-const addArea = require("../controllers/areaController/addArea");
-const updateArea = require("../controllers/areaController/updateArea");
-const deleteArea = require("../controllers/areaController/deleteArea");
-const deactiveArea = require("../controllers/areaController/deactiveArea");
-const activeArea = require("../controllers/areaController/activeArea");
 const checkAreaValidation = require("../middleware/checkAreaValidation");
-const useValidationResult = require("../middleware/common/useValidationResult");
-const getAreaBySlug = require("../controllers/areaController/getAreaBySlug");
 const uploadLocationImg = require("../middleware/uploadLocationImg");
 const useLocationValidationResult = require("../middleware/useLocationValidationResult");
+const addArea = require("../controllers/areaController/addArea");
+const updateArea = require("../controllers/areaController/updateArea");
+const deactiveArea = require("../controllers/areaController/deactiveArea");
+const activeArea = require("../controllers/areaController/activeArea");
+const getAreaBySlug = require("../controllers/areaController/getAreaBySlug");
+const getAreas = require("../controllers/areaController/getAreas");
+const deleteArea = require("../controllers/areaController/deleteArea");
 
 
 
 // auth checker
 const authCheck = require("../middleware/common/users/authCheck");
 const adminAuthCheck = require("../middleware/common/users/adminAuthCheck");
+
 
 
 
@@ -30,15 +31,16 @@ router.post('/add', authCheck, adminAuthCheck, uploadLocationImg, checkAreaValid
 router.put('/update', authCheck, adminAuthCheck, uploadLocationImg, checkAreaValidation, useLocationValidationResult, updateArea);
 router.delete('/delete', authCheck, adminAuthCheck, deleteArea);
 
-
-// active and deactive
+// city deactive and active 
 router.put('/deactive', authCheck, adminAuthCheck, deactiveArea);
 router.put('/active', authCheck, adminAuthCheck, activeArea);
 
-
-
 // get state data to display in frontend page 
 router.post("/get-by-slug", getAreaBySlug);
+
+
+router.get("/getall", getAreas);
+
 
 
 module.exports = router;
