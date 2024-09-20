@@ -144,7 +144,7 @@ const AreaItem = ({eachArea, state}) => {
     dispatch(addAreaFields({
       stateId: state,
       areaName: eachArea.name,
-      description: eachArea.desc,
+      desc: eachArea.desc,
       abbreviation: eachArea.abbreviation,
       active: eachArea.active,
       edit: true,

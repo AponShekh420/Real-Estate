@@ -1,17 +1,12 @@
-const path = require("path");
-const {unlink} = require("fs");
+const deleteFileFromSpace = require("../utils/deleteFileFromSpace");
 
 
 const useBlogImgDeletor = async (req, res, next) => {
     const {deleteImgUrls} = req.body;
     try {
-      deleteImgUrls.forEach((eachUrl)=> {
-        unlink(path.join(__dirname, `../public/assets/blogs/${eachUrl}`), (err)=> {
-          if(err) {
-              console.log(err)
-          }
-        })
-      })
+      for(let img of deleteImgUrls) {
+        await deleteFileFromSpace('assets-upload', img)
+      }
       next();
     } catch(err) {
         console.log(err);

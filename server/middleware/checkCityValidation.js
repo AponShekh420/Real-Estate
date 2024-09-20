@@ -13,9 +13,9 @@ const checkCityValidation = [
     .isLength({min: 1})
     .withMessage("Must be select a state")
     .trim(),
-  check("cityId")
+  check("areaId")
     .isLength({min: 1})
-    .withMessage("Must be select a city")
+    .withMessage("Must be select a Area")
     .trim(),
 ]
 

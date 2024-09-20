@@ -1,7 +1,7 @@
 const BlogModel = require('../../models/BlogModel')
 const CatagoryModel = require('../../models/CatagoryModel')
 const SubcatagoryModel = require('../../models/SubcatagoryModel');
-const deleteFileFromSpace = require('../../utils/deleteFileFromSpace ');
+const deleteFileFromSpace = require('../../utils/deleteFileFromSpace');
 
 const deleteBlog = async (req, res) => {
   const {blogId} = req.body;

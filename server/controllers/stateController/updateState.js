@@ -1,7 +1,7 @@
 const StateModel = require("../../models/StateModel");
 const path = require("path");
 const {unlink} = require('fs');
-const deleteFileFromSpace = require("../../utils/deleteFileFromSpace ");
+const deleteFileFromSpace = require("../../utils/deleteFileFromSpace");
 
 // upload the state on database
 const updateState = async (req, res)=> {

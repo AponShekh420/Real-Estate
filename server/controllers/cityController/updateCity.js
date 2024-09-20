@@ -2,7 +2,7 @@ const AreaModel = require("../../models/AreaModel");
 const CityModel = require("../../models/CityModel");
 const CommunityModel = require("../../models/CommunityModel");
 const StateModel = require("../../models/StateModel");
-const deleteFileFromSpace = require("../../utils/deleteFileFromSpace ");
+const deleteFileFromSpace = require("../../utils/deleteFileFromSpace");
 
 
 const updateCity = async (req, res) => {

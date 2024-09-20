@@ -9,7 +9,6 @@ import {modules, formats} from '@/components/common/quillEditorConfig'
 import "react-quill/dist/quill.snow.css";
 import "@/components/common/styles/quillEditor.css"
 import { useDispatch, useSelector } from "react-redux";
-import { addCityFields, removeAllCityFields } from "@/redux/citySlice";
 import dynamic from "next/dynamic";
 import { ImUpload } from "react-icons/im";
 import { HashLoader } from "react-spinners";
@@ -32,7 +31,7 @@ const AreaList = () => {
 
 
   // redux
-  const {errors, stateId, active, desc, abbreviation, areaName, edit: areaEdit, cityId: areaUpdateId, uploadedImageChanged: areaUploadedImageChanged, oldImgUrl: areaOldImgUrl, uploadedImage: areaUploadedImage} = useSelector((state)=> state.area);
+  const {errors, stateId, active, desc, abbreviation, areaName, edit: areaEdit, areaId: areaUpdateId, uploadedImageChanged: areaUploadedImageChanged, oldImgUrl: areaOldImgUrl, uploadedImage: areaUploadedImage} = useSelector((state)=> state.area);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -188,7 +187,7 @@ const AreaList = () => {
         <div className="d-flex justify-content-between align-items-center">
           <h4 className="title fz17 mb30">Creating Area</h4>
           <div className="d-flex align-items-center gap-2 flex-row-reverse">
-            <button className={`bdrs0 btn-primary rounded-2 py-1 px-2 d-flex gap-2 justify-content-center align-items-center ${areaLoading ? "opacity-50" : "opacity-100"}`} type="submit" disabled={areaLoading}>{areaEdit ? "Update City" : "Add New City"}
+            <button className={`bdrs0 btn-primary rounded-2 py-1 px-2 d-flex gap-2 justify-content-center align-items-center ${areaLoading ? "opacity-50" : "opacity-100"}`} type="submit" disabled={areaLoading}>{areaEdit ? "Update Area" : "Add New Area"}
               {!areaLoading ? <ImUpload /> : <HashLoader
                 color="#ffffff"
                 loading={areaLoading}

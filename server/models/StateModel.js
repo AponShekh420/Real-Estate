@@ -16,11 +16,11 @@ const StateSchema = mongoose.Schema({
     required: true
   },
   desc: String,
-  city: [
+  area: [
     {
       type: mongoose.Types.ObjectId,
       default: [],
-      ref: "City",
+      ref: "Area",
     }
   ],
   community: [

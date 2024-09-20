@@ -1,4 +1,4 @@
-const deleteFileFromSpace = require("../../utils/deleteFileFromSpace ");
+const deleteFileFromSpace = require("../../utils/deleteFileFromSpace");
 
 const communityImageDelete = async (req, res, next) => {
     const {imgUrl} = req.body;

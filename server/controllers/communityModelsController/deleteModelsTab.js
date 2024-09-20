@@ -1,5 +1,5 @@
 const CMTModel = require("../../models/CMTModel");
-const deleteFileFromSpace = require("../../utils/deleteFileFromSpace ");
+const deleteFileFromSpace = require("../../utils/deleteFileFromSpace");
 const deleteModelsTab = async (req, res) => {
   const { CMTId } = req.body;
   try {

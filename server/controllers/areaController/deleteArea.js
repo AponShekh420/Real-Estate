@@ -3,7 +3,7 @@ const AreaModel = require('../../models/AreaModel');
 const CityModel = require('../../models/CityModel');
 const StateModel = require('../../models/StateModel')
 const CommunityModel = require('../../models/CommunityModel')
-const deleteFileFromSpace = require('../../utils/deleteFileFromSpace ');
+const deleteFileFromSpace = require('../../utils/deleteFileFromSpace');
 
 const deleteArea = async (req, res) => {
   const {areaId} = req.body

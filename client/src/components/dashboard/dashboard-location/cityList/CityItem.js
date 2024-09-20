@@ -1,5 +1,4 @@
 import DeleteModal from "@/components/common/DeleteModal";
-import { addAreaFields } from "@/redux/areaSlice";
 import { addCityFields } from "@/redux/citySlice";
 import { addStateFields } from "@/redux/stateSlice";
 import { usePathname } from "next/navigation";
@@ -143,11 +142,11 @@ const CityItem = ({eachCity, area, state}) => {
 
 
   const editHandler = () => {
-    dispatch(addAreaFields({
+    dispatch(addCityFields({
       stateId: state,
       areaId: area,
-      areaName: eachCity.name,
-      description: eachCity.desc,
+      cityName: eachCity.name,
+      desc: eachCity.desc,
       abbreviation: eachCity.abbreviation,
       active: eachCity.active,
       edit: true,

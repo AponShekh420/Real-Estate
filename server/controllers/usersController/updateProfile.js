@@ -1,7 +1,7 @@
 const path = require("path");
 const {unlink} = require('fs');
 const UserModel = require("../../models/UserModel");
-const deleteFileFromSpace = require("../../utils/deleteFileFromSpace ");
+const deleteFileFromSpace = require("../../utils/deleteFileFromSpace");
 
 // upload the user on database
 const updateProfile = async (req, res)=> {

@@ -1,5 +1,4 @@
 "use client";
-import { addCityFields } from "@/redux/citySlice";
 import { addSubcatagoryFields } from "@/redux/subCatagorySlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

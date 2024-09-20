@@ -184,7 +184,7 @@ const CityList = () => {
     >
 
       <div className="d-flex justify-content-between align-items-center">
-        <h4 className="title fz17 mb30">Creating Area</h4>
+        <h4 className="title fz17 mb30">Creating City</h4>
         <div className="d-flex align-items-center gap-2 flex-row-reverse">
           <button className={`bdrs0 btn-primary rounded-2 py-1 px-2 d-flex gap-2 justify-content-center align-items-center ${cityLoading ? "opacity-50" : "opacity-100"}`} disabled={cityLoading} type="submit">{cityEdit ? "Update City": "Add New City"}
             {!cityLoading ? <ImUpload /> : <HashLoader

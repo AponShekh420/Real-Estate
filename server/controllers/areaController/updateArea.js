@@ -1,9 +1,9 @@
-const CityModel = require("../../models/CityModel");
+const AreaModel = require("../../models/AreaModel");
 const StateModel = require("../../models/StateModel");
 const CommunityModel = require("../../models/CommunityModel");
 const path = require("path");
 const {unlink} = require('fs');
-const deleteFileFromSpace = require("../../utils/deleteFileFromSpace ");
+const deleteFileFromSpace = require("../../utils/deleteFileFromSpace");
 
 
 const updateArea = async (req, res) => {
@@ -35,6 +35,8 @@ const updateArea = async (req, res) => {
       state: stateId
     })
 
+
+    
     if(uploadedImageChanged) {
       if(oldImgUrl) {
         await deleteFileFromSpace('assets-upload', oldImgUrl);

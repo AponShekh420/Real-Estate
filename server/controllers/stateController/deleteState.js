@@ -5,7 +5,7 @@ const StateModel = require('../../models/StateModel')
 const CommunityModel = require('../../models/CommunityModel')
 const {unlink} = require('fs');
 const path = require("path");
-const deleteFileFromSpace = require('../../utils/deleteFileFromSpace ');
+const deleteFileFromSpace = require('../../utils/deleteFileFromSpace');
 
 
 const deleteState = async (req, res) => {

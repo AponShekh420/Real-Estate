@@ -7,7 +7,7 @@ const initialState = {
   desc: "",
   abbreviation: "",
   stateId: "",
-  edit: false,
+  areaId: "",
   errors: {},
   cityId: "",
   oldImgUrl: "",
