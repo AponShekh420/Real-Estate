@@ -1,9 +1,8 @@
 "use client";
-import { addCityFields } from "@/redux/citySlice";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Select from 'react-select';
-
+import {useSelector, useDispatch} from "react-redux"
+import Select from "react-select"
+import { addCityFields } from "@/redux/citySlice";
 
 const customStyles = {
   option: (styles, { isFocused, isSelected, isHovered }) => {
@@ -21,17 +20,30 @@ const customStyles = {
 };
 
 
+
+
+
 const SelectMultiField = () => {
+  const {errors, stateId, areaId, active} = useSelector((state)=> state.city)
+  const dispatch = useDispatch()
+
   // options
   const [stateOptions, setStateOptions] = useState([]);
+  const [areaOptions, setAreaOptions] = useState([]);
 
-  const {errors, stateId, active} = useSelector((state)=> state.city);
-  const dispatch = useDispatch();
 
   const statusOption = [
     { value: "Active", label: "Active" },
     { value: "Deactive", label: "Deactive" },
   ];
+
+  const areaHanlder = (currentState) => {
+    dispatch(addCityFields({
+      areaId: "",
+    }))
+    const areaOptionValues = currentState.value.area
+    setAreaOptions(areaOptionValues);
+  }
 
 
   const fetchStateData = async () => {
@@ -48,11 +60,6 @@ const SelectMultiField = () => {
     fetchStateData();
   }, [])
 
-  // useEffect(()=> {
-  //   console.log(stateId._id, active, cityName, abbreviation, description)
-  // }, [stateId])
-
-
   return (
     <>
       <div className="col-sm-12 col-xl-12">
@@ -62,8 +69,8 @@ const SelectMultiField = () => {
           </label>
           <div className="location-area">
             <Select
-              id="kdjfksdjfs"
-              instanceId="kdjfksdjfs"
+              id="sdfiouiaweu"
+              instanceId="sdfiouiaweu"
               styles={customStyles}
               className="select-custom pl-0"
               classNamePrefix="select"
@@ -74,13 +81,41 @@ const SelectMultiField = () => {
                 label: `${item.name} (${item.active ? "Active": "Deactive"})`,
               }))}
               onChange={(e)=> {
+                areaHanlder(e);
                 dispatch(addCityFields({stateId: e.value}))
               }}
               value={{value: stateId?.name, label: stateId?.name}}
             />
-            {/* <p className="text-danger">{errors?.stateId?.msg}</p> */}
+            <p className="text-danger">{errors?.stateId?.msg}</p>
           </div>
-          <p className="text-danger">{errors?.stateId?.msg}</p>
+        </div>
+      </div>
+      <div className="col-sm-12 col-xl-12">
+        <div className="mb20">
+          <label className="heading-color ff-heading fw600 mb10">
+            Area
+          </label>
+          <div className="location-area">
+            <Select
+              instanceId="sduiwuernsdfjsd"
+              id="sduiwuernsdfjsd"
+              styles={customStyles}
+              className="select-custom pl-0"
+              classNamePrefix="select"
+              required
+              // isMulti
+              options={areaOptions?.map((item) => ({
+                value: item,
+                label: `${item.name} (${item.active ? "Active": "Deactive"})`,
+              }))}
+              onChange={(e)=> {
+                dispatch(addCityFields({areaId: e.value}))
+              }}
+              placeholder="please select"
+              value={{value: areaId?.name, label: areaId?.name}}
+            />
+            <p className="text-danger">{errors?.areaId?.msg}</p>
+          </div>
         </div>
       </div>
 
@@ -91,8 +126,8 @@ const SelectMultiField = () => {
           </label>
           <div className="location-area">
             <Select
-              instanceId="sidufiwer"
-              id="sidufiwer"
+              instanceId="iosufwen"
+              id="iosufwen"
               defaultValue={[statusOption[0]]}
               name="colors"
               options={statusOption}

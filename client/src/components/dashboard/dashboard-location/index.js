@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import StateList from "./stateList";
-import CityList from "./cityList";
 import AreaList from "./areaList";
+import CityList from "./cityList";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import '@/components/dashboard/dashboard-location/style.css';

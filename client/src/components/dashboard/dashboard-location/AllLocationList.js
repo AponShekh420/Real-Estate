@@ -62,14 +62,14 @@ const AllLocationList = () => {
               <StateItem state={state}/>
               {/* fist chiled */}
               <ul className="w-90 list-unstyled ml10" style={{marginTop: "2px", }}> {/**height: 0, overflow: "hidden" */}
-                {state.city.map((eachCity, cityIndex)=> (
-                  <li className={`${path.split('/')[3] === eachCity.slug ? "text-danger": ""}`} key={cityIndex}>
-                    <CityItem eachCity={eachCity} state={state}/>
+                {state?.area?.map((eachArea, areaIndex)=> (
+                  <li className={`${path.split('/')[3] === eachArea.slug ? "text-danger": ""}`} key={areaIndex}>
+                    <AreaItem eachArea={eachArea} state={state}/>
                     {/* second child */}
                     <ul className="w-90 list-unstyled ml10" style={{marginTop: "2px"}}> {/**height: 0, overflow: "hidden" */}
-                      {eachCity.area.map((eachArea, areaIndex)=> (
-                        <li className={`${path.split('/')[4] === eachArea.slug ? "text-danger": ""}`} key={areaIndex}>
-                          <AreaItem eachArea={eachArea} state={state} city={eachCity}/>
+                      {eachArea?.city?.map((eachCity, cityIndex)=> (
+                        <li className={`${path.split('/')[4] === eachCity.slug ? "text-danger": ""}`} key={cityIndex}>
+                          <CityItem eachCity={eachCity} state={state} area={eachArea}/>
                         </li>
                       ))}
                     </ul>
