@@ -14,7 +14,7 @@ const initialState = {
   minPrice: 0,
   maxPrice: 0,
   homeTypes: [],
-  communitySize: 0,
+  communitySize: "0",
   ageRestrictions: true,
   gated: true,
   builtStart: "",

@@ -126,7 +126,7 @@ const DetailsFiled = () => {
               Phone
             </label>
             <input
-              type="number"
+              type="text"
               className="form-control"
               placeholder="Type your phone number"
               onChange={(e)=> {
@@ -145,7 +145,7 @@ const DetailsFiled = () => {
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">Community Size</label>
             <input
-              type="number"
+              type="text"
               className="form-control"
               placeholder="Type the community size"
               onChange={(e)=> {
