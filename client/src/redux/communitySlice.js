@@ -24,7 +24,6 @@ const initialState = {
   bathrooms: 0,
   garages: 0,
   active: true,
-  status: [],
   sqft: 0,
   lat: 0,
   long: 0,

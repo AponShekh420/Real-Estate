@@ -2,7 +2,6 @@
 
 import React from "react";
 import PropertyType from "./PropertyType";
-import ListingStatus from "./ListingStatus";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommunityFilterValue } from "@/redux/communityFilterSlice";
 import getCommunities from "@/lib/getCommunities";
@@ -40,9 +39,7 @@ const TopFilterBar2 = ({filterFunctions} ) => {
           value={titleSearch}
         />
       </li>
-      <li className="list-inline-item position-relative">
-        <ListingStatus/>
-      </li>
+      
       {/* End li Listing Status */}
 
       <li className="list-inline-item position-relative">

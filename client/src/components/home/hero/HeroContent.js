@@ -10,7 +10,6 @@ let searchIntervel;
 
 const HeroContent = () => {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState("Buy");
   const [suggestion, setSuggestion] = useState(false);
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
@@ -22,11 +21,6 @@ const HeroContent = () => {
     setActiveTab(tab);
   };
 
-  const tabs = [
-    { id: "Buy", label: "Buy" },
-    { id: "Rent", label: "Rent" },
-    { id: "Sold", label: "Sold" },
-  ];
 
 
   const searchHanlder = async () => {
@@ -45,7 +39,6 @@ const HeroContent = () => {
         },
         body: JSON.stringify({
           search,
-          status: activeTab
         })
       });
       const resData = await res.json();
@@ -63,7 +56,6 @@ const HeroContent = () => {
     e.preventDefault();
     dispatch(addCommunityFilterValue({
       titleSearch: search,
-      status: activeTab,
     }));
     router.push("/summary");
   }
@@ -75,29 +67,14 @@ const HeroContent = () => {
     searchIntervel = setTimeout(()=> {
       searchHanlder();
     }, 700)
-  }, [activeTab, search])
+  }, [search])
 
 
   return (
     <div className="advance-search-tab mt0-sm mt0-md mx-auto animate-up-3" style={{marginTop: "-83px"}}>
-      <ul className="nav nav-tabs p-0 m-0">
-        {tabs.map((tab) => (
-          <li className="nav-item" key={tab.id}>
-            <button
-              className={`nav-link ${activeTab === tab.id ? "active" : ""}`}
-              onClick={() => handleTabClick(tab.id)}
-            >
-              {tab.label}
-            </button>
-          </li>
-        ))}
-      </ul>
-
-      <div className="tab-content">
-        {tabs.map((tab) => (
+      <div className="tab-content" style={{borderTopLeftRadius: "12px"}}>
           <div
-            className={`${activeTab === tab.id ? "active" : ""} tab-pane`}
-            key={tab.id}
+            className={"active"}
           >
             <div className="advance-content-style1">
               <div className="row">
@@ -144,7 +121,7 @@ const HeroContent = () => {
                           </Link>
                         ))}
                         {data?.areas?.map((area) => (
-                          <Link href={`/summary/${area?.state?.slug}/${area?.city?.slug}/${area?.slug}`} key={area?.slug} passHref>
+                          <Link href={`/summary/${area?.state?.slug}/${area?.slug}`} key={area?.slug} passHref>
                             <li className="bdrt1 dropdown-item" tabIndex={-1}>
                               <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-center">
                                 <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{area?.name}, {area?.state?.abbreviation}, USA</p>
@@ -193,7 +170,6 @@ const HeroContent = () => {
               </div>
             </div>
           </div>
-        ))}
       </div>
     </div>
   );

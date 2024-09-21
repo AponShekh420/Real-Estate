@@ -3,12 +3,11 @@ import { addCommunityFieldValue } from "@/redux/communitySlice";
 import { useDispatch, useSelector } from "react-redux";
 import Select from 'react-select'
 const PropertyDescription = () => {
-  const {errors, title, homeTypes, active, status, maxPrice, minPrice, description} = useSelector((state)=> state.community)
+  const {errors, title, homeTypes, active, maxPrice, minPrice, description} = useSelector((state)=> state.community)
   const dispatch = useDispatch();
 
   const homeTypeOptions= [
-    { value: "Single", label: "Single" },
-    { value: "Family", label: "Family" },
+    { value: "Single-Family", label: "Single-Family" },
     { value: "Condos", label: "Condos" },
     { value: "Manufactured", label: "Manufactured" },
     { value: "Attached", label: "Attached" },
@@ -96,7 +95,7 @@ const PropertyDescription = () => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Listed in
+              Status
             </label>
             <div className="location-area">
               <Select
@@ -121,34 +120,6 @@ const PropertyDescription = () => {
         </div>
         {/* End .col-6 */}
 
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
-              Community Status
-            </label>
-            <div className="location-area">
-              <Select
-                instanceId="fwieriwer"
-                id="fwieriwer"
-                name="colors"
-                options={communityStatus}
-                styles={customStyles}
-                className="select-custom pl-0"
-                classNamePrefix="select"
-                required
-                isMulti
-                onChange={(e)=> {
-                  dispatch(addCommunityFieldValue({
-                    status: e.map((eachElement)=> eachElement.value)
-                  }))
-                }}
-                value={status.map(eachElement => ({value: eachElement, label: eachElement}))}
-              />
-              <p className="text-danger">{errors?.status?.msg}</p>
-            </div>
-          </div>
-        </div>
-        {/* End .col-6 */}
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb30">

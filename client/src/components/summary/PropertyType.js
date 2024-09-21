@@ -8,12 +8,11 @@ const PropertyType = () => {
   const dispatch = useDispatch();
   const [currentHomeTypes, setCurrentHomeTypes] = useState([...homeTypes]);
 
-  const options = [
-    { label: "Family" },
-    { label: "Single", defaultChecked: true },
-    { label: "Condos" },
-    { label: "Villa" },
-   
+  const options= [
+    { value: "Single-Family", label: "Single-Family" },
+    { value: "Condos", label: "Condos" },
+    { value: "Manufactured", label: "Manufactured" },
+    { value: "Attached", label: "Attached" },
   ];
 
   const handlepropertyTypes = (elm) => {
