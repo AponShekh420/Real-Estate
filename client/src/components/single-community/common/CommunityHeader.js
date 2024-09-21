@@ -13,13 +13,6 @@ const PropertyHeader = ({ data }) => {
               {data?.city?.name} City, {data?.state?.abbreviation}, USA
             </p>
             <a
-              className="ff-heading text-thm fz15 bdrr1 pr10 ml0-sm ml10 bdrrn-sm"
-              href="#"
-            >
-              <i className="fas fa-circle fz10 pe-2" />
-              For {data?.status?.map((item, index) => (data?.status?.length > (index + 1)) ? `${item}/`: item)}
-            </a>
-            <a
               className="ff-heading bdrr1 fz15 pr10 ml10 ml0-sm bdrrn-sm"
               href="#"
             >

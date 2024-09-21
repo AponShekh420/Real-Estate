@@ -12,10 +12,6 @@ const CommunityDetails = ({data}) => {
         value: `${data.communitySize}`,
       },
       {
-        label: "Status",
-        value: `For ${data?.status?.join("/")}`,
-      },
-      {
         label: "Age Restrictions",
         value: data.ageRestrictions ? "55+" : "N/A",
       },

@@ -85,7 +85,8 @@ const FeaturedListings = ({state: stateProps, city: cityProps, area: areaProps})
                 </div>
                 <hr className="mt-2 mb-2" />
                 <div className="list-meta2 d-flex justify-content-between align-items-center">
-                  <span className="for-what">For {listing?.status.map((item, index) => (listing.status.length > (index + 1)) ? `${item}/`: item)}</span>
+                  <span className="for-what">{/*here would be the buttom oparation*/}</span>
+                  {/* For {listing?.status.map((item, index) => (listing.status.length > (index + 1)) ? `${item}/`: item)} */}
                   <div className="icons d-flex align-items-center">
                     <Link href={`/community/${listing.slug}`}>
                       <span className="flaticon-fullscreen" />
