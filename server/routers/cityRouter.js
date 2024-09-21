@@ -11,6 +11,7 @@ const deactiveCity = require("../controllers/cityController/deactiveCity");
 const activeCity = require("../controllers/cityController/activeCity");
 const getCityBySlug = require("../controllers/cityController/getCityBySlug");
 const deleteCity = require("../controllers/cityController/deleteCity");
+const getCities = require("../controllers/cityController/getCities");
 
 
 // auth checker
@@ -36,6 +37,11 @@ router.put('/active', authCheck, adminAuthCheck, activeCity);
 
 // get state data to display in frontend page 
 router.post("/get-by-slug", getCityBySlug);
+
+
+// to display on home page
+router.get("/getall", getCities);
+
 
 
 module.exports = router;

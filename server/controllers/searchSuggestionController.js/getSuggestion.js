@@ -11,12 +11,11 @@ const BlogModel = require("../../models/BlogModel")
 // This controller will give us communities data by filter
 const getSuggestions = async (req, res) => {
 
-  const {search, status} = req.body;
+  const {search} = req.body;
 
   try {
     const communities = await CommunityModel.find({
       title: {$regex: search, $options: "i"},
-      status: {$in: [status]},
       active: true,
     }).select("title slug state city area").limit(2).populate("state", "name abbreviation").populate("city", "name").populate("area", "name abbreviation");
 

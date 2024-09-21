@@ -71,7 +71,7 @@ const PropertiesByCities = () => {
                 <div className="feature-content pt25">
                   <div className="top-area">
                     <h6 className="title mb-1">
-                      <Link href={`/summary/${city?.state?.slug}/${city?.slug}`}>{city.name}</Link>
+                      <Link href={`/summary/${city?.state?.slug}/${city?.area?.slug}/${city?.slug}`}>{city.name}</Link>
                     </h6>
                     <p className="fz15 fw400 dark-color mb-0">
                       {city?.community?.length} communities

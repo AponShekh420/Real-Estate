@@ -34,7 +34,7 @@ const TopFilterBar2 = ({filterFunctions} ) => {
         <input
           type="text"
           className="form-control search-field"
-          placeholder="Enter an address, neighborhood, city, or ZIP code"
+          placeholder="Enter an title, state, area and city etc."
           onChange={(e)=> searchHandler(e)}
           value={titleSearch}
         />

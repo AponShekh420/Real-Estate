@@ -48,17 +48,16 @@ const CommunityPublish = () => {
       })
       const dataRes = await res.json();
       setLoading(false)
-      if(dataRes.msg) {
+      if(dataRes?.msg) {
         dispatch(removeAllCommunityFieldValue());
-        toast.success(dataRes.msg, {
+        toast.success(dataRes?.msg, {
           position: "top-right",
           autoClose: 1500,
         });
         setTimeout(()=> {
-          router.push(`/dashboard/edit-community/${dataRes.data.slug}`)
+          router.push(`/dashboard/edit-community/${dataRes?.data?.slug}`)
         }, 1500)
       } else {
-        console.log(dataRes.errors)
         dispatch(addCommunityFieldValue({errors: dataRes?.errors}))
       }
       console.log(dataRes)
@@ -70,7 +69,6 @@ const CommunityPublish = () => {
   const updateCommunity = async () => {
     try {
       setLoading(true);
-      console.log("title:", community.title)
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/update`, {
         method: "PUT",
         credentials: "include",
@@ -86,16 +84,16 @@ const CommunityPublish = () => {
       })
       const dataRes = await res.json();
       setLoading(false)
-      if(dataRes.msg) {
-        toast.success(dataRes.msg, {
+      if(dataRes?.msg) {
+        toast.success(dataRes?.msg, {
           position: "top-right",
           autoClose: 1500,
         });
         setTimeout(()=> {
           router.push('/dashboard/my-communities')
         }, 1500)
-      } else if(dataRes.errors.locationUpdate) {
-        toast.error(dataRes.errors.locationUpdate.msg, {
+      } else if(dataRes?.errors?.locationUpdate) {
+        toast.error(dataRes?.errors?.locationUpdate.msg, {
           position: "top-right",
           autoClose: 1500,
         });
@@ -157,7 +155,7 @@ const CommunityPublish = () => {
 
   useEffect(()=> {
     if(editPageValidation) {
-      dispatch(addCommunityFieldValue({loading: true}));
+      dispatch(addCommunityFieldValue({loading: true, errors: {}}));
       getExistingDataToUpdate();
     } else {
       dispatch(removeAllCommunityFieldValue());
