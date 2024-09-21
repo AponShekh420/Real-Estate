@@ -72,7 +72,7 @@ const DefaultHeader = () => {
               <div className="col-auto">
                 <div className="d-flex align-items-center">
                   <a href="tel:+012305094502" className="ph-info info-phone d-flex align-items-center mx-2 mx-xl-4 gap-1">
-                    <i class="fa-light fa-phone"></i>
+                    <i className="fa-light fa-phone"></i>
                     +(0) 123 050 945 02
                   </a>
 

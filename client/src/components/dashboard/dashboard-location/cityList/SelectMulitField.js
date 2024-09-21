@@ -28,7 +28,6 @@ const SelectMultiField = () => {
   const dispatch = useDispatch()
 
   // options
-  const [stateOptions, setStateOptions] = useState([]);
   const [areaOptions, setAreaOptions] = useState([]);
 
 
@@ -37,20 +36,12 @@ const SelectMultiField = () => {
     { value: "Deactive", label: "Deactive" },
   ];
 
-  const areaHanlder = (currentState) => {
-    dispatch(addCityFields({
-      areaId: "",
-    }))
-    const areaOptionValues = currentState.value.area
-    setAreaOptions(areaOptionValues);
-  }
-
 
   const fetchStateData = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/getall/anytype`, {credentials: "include"});
-      const stateData = await res.json();
-      setStateOptions(stateData.data);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/area/getall/anytype`, {credentials: "include"});
+      const areaData = await res.json();
+      setAreaOptions(areaData.data);
     } catch(err){
       console.log(err.message)
     }
@@ -62,34 +53,6 @@ const SelectMultiField = () => {
 
   return (
     <>
-      <div className="col-sm-12 col-xl-12">
-        <div className="mb20">
-          <label className="heading-color ff-heading fw600 mb10">
-            State
-          </label>
-          <div className="location-area">
-            <Select
-              id="sdfiouiaweu"
-              instanceId="sdfiouiaweu"
-              styles={customStyles}
-              className="select-custom pl-0"
-              classNamePrefix="select"
-              required
-              // isMulti
-              options={stateOptions?.map((item) => ({
-                value: item,
-                label: `${item.name} (${item.active ? "Active": "Deactive"})`,
-              }))}
-              onChange={(e)=> {
-                areaHanlder(e);
-                dispatch(addCityFields({stateId: e.value}))
-              }}
-              value={{value: stateId?.name, label: stateId?.name}}
-            />
-            <p className="text-danger">{errors?.stateId?.msg}</p>
-          </div>
-        </div>
-      </div>
       <div className="col-sm-12 col-xl-12">
         <div className="mb20">
           <label className="heading-color ff-heading fw600 mb10">
@@ -109,7 +72,7 @@ const SelectMultiField = () => {
                 label: `${item.name} (${item.active ? "Active": "Deactive"})`,
               }))}
               onChange={(e)=> {
-                dispatch(addCityFields({areaId: e.value}))
+                dispatch(addCityFields({areaId: e?.value, stateId: e?.value?.state}))
               }}
               placeholder="please select"
               value={{value: areaId?.name, label: areaId?.name}}

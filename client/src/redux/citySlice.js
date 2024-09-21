@@ -5,7 +5,6 @@ const initialState = {
   active: true,
   cityName: "",
   desc: "",
-  abbreviation: "",
   stateId: "",
   areaId: "",
   errors: {},

@@ -7,10 +7,6 @@ const citySchema = mongoose.Schema({
     type: String,
     required: true
   },
-  abbreviation: {
-    type: String,
-    required: true
-  },
   slug: {
     type: String,
     required: true

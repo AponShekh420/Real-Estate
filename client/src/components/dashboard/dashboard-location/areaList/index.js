@@ -31,7 +31,7 @@ const AreaList = () => {
 
 
   // redux
-  const {errors, stateId, active, desc, abbreviation, areaName, edit: areaEdit, areaId: areaUpdateId, uploadedImageChanged: areaUploadedImageChanged, oldImgUrl: areaOldImgUrl, uploadedImage: areaUploadedImage} = useSelector((state)=> state.area);
+  const {errors, stateId, active, desc, areaName, edit: areaEdit, areaId: areaUpdateId, uploadedImageChanged: areaUploadedImageChanged, oldImgUrl: areaOldImgUrl, uploadedImage: areaUploadedImage} = useSelector((state)=> state.area);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -51,7 +51,6 @@ const AreaList = () => {
 
     const formData = new FormData(e.target);
     formData.append("active", active);
-    formData.append("abbreviation", abbreviation);
     formData.append("name", areaName);
     formData.append("desc", desc);
     formData.append("stateId", stateId._id);
@@ -64,7 +63,6 @@ const AreaList = () => {
       },
       body: JSON.stringify({
         active: active,
-        abbreviation: abbreviation,
         name: areaName,
         desc: desc,
         stateId: stateId._id,
@@ -112,7 +110,6 @@ const AreaList = () => {
 
     const formData = new FormData(e.target);
     formData.append("active", active);
-    formData.append("abbreviation", abbreviation);
     formData.append("name", areaName);
     formData.append("desc", desc);
     formData.append("stateId", stateId._id);
@@ -130,7 +127,6 @@ const AreaList = () => {
       },
       body: JSON.stringify({
         active: active,
-        abbreviation: abbreviation,
         name: areaName,
         desc: desc,
         stateId: stateId._id,
@@ -229,20 +225,6 @@ const AreaList = () => {
               placeholder="Type a city name"
             />
             <p className="text-danger">{errors?.name?.msg}</p>
-          </div>
-        </div>
-
-        <div className="col-sm-12 col-xl-12">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">Abbreviation</label>
-            <input type="text" className="form-control" 
-              onChange={(e)=> dispatch(addAreaFields({
-                abbreviation: e.target.value
-              }))}
-              value={abbreviation}
-              placeholder="Type abbreviations name of the city"
-            />
-            <p className="text-danger">{errors?.abbreviation?.msg}</p>
           </div>
         </div>
 

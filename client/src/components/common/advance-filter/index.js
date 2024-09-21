@@ -28,13 +28,14 @@ const customStyles = {
 const AdvanceFilterModal = () => {  
 
   // redux
-  const {city: currentCity, price: currentPrice, state: currentState, titleSearch: currentTitleSearch, gated: currentGated, ageRestrictions: currentAgeRestrictions, amenities: currentAmenities} = useSelector(state => state.communityFilter);
+  const {city: currentCity, price: currentPrice, area: currentArea, state: currentState, titleSearch: currentTitleSearch, gated: currentGated, ageRestrictions: currentAgeRestrictions, amenities: currentAmenities} = useSelector(state => state.communityFilter);
   const dispatch = useDispatch();
 
   // react state
   const [amenities, setAmenities] = useState([...currentAmenities]);
   const [titleSearch, setTitleSearch] = useState(currentTitleSearch || "");
   const [city, setCity] = useState(currentCity || "");
+  const [area, setArea] = useState(currentArea || "");
   const [state, setState] = useState(currentState || "");
   const [gated, setGated] = useState(currentGated || "Any");
   const [ageRestrictions, setAgeRestrictions] = useState(currentAgeRestrictions || "Any");
@@ -49,16 +50,18 @@ const AdvanceFilterModal = () => {
       gated,
       state,
       city,
+      area,
       ageRestrictions,
       amenities,
       price
     }));
-    router.push(`/summary${state ? `/${state?.slug}` : ""}${city ? `/${city?.slug}` : ""}`)
+    router.push(`/summary${state ? `/${state?.slug}` : ""}${area ? `/${area?.slug}` : ""}${city ? `/${city?.slug}` : ""}`)
   }
 
   const resetAdvanceSearch = () => {
     setTitleSearch("");
     setCity("");
+    setArea("");
     setState("");
     setGated("Any");
     setAgeRestrictions("Any");
@@ -120,7 +123,7 @@ const AdvanceFilterModal = () => {
           {/* End .col-6 */}
 
           <div className="row">
-            <SelectMultiField state={state} setState={setState} setCity={setCity} city={city} gated={gated} setGated={setGated} ageRestrictions={ageRestrictions} setAgeRestrictions={setAgeRestrictions}/>
+            <SelectMultiField state={state} setState={setState} setArea={setArea} area={area} setCity={setCity} city={city} gated={gated} setGated={setGated} ageRestrictions={ageRestrictions} setAgeRestrictions={setAgeRestrictions}/>
             {/* End .col-md-6 */}
           </div>
           {/* End .row */}

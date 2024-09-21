@@ -54,25 +54,25 @@ const LocationList = () => {
               </Link>
               {/* fist chiled */}
               <ul className="w-90 list-unstyled ml10" style={{marginTop: "2px", height: path.split('/')[2] === state.slug ? "100%": "0", overflow: path.split('/')[2] === state.slug ? "visible": "hidden" }}> {/**height: 0, overflow: "hidden" */}
-                {state.city.map((eachCity, cityIndex)=> {
-                  if(eachCity?.active) {
+                {state.area.map((eachArea, cityIndex)=> {
+                  if(eachArea?.active) {
                     return (
-                      <li className={`${path.split('/')[3] === eachCity.slug ? "text-danger": ""}`} key={cityIndex}>
-                        <Link href={`/summary/${state.slug}/${eachCity.slug}`}>
+                      <li className={`${path.split('/')[3] === eachArea.slug ? "text-danger": ""}`} key={cityIndex}>
+                        <Link href={`/summary/${state.slug}/${eachArea.slug}`}>
                           <div className="d-flex justify-content-between align-items-center">
-                            <p className={`text-capitalize m-0 ${path.split('/')[3] === eachCity.slug ? "text-danger": ""}`}>{eachCity.name} ({eachCity.community.length})</p>
-                            {path.split('/')[3] !== eachCity.slug ? <IoIosArrowDown className="p-0"/> : <IoIosArrowUp className="p-0 text-danger"/> }
+                            <p className={`text-capitalize m-0 ${path.split('/')[3] === eachArea.slug ? "text-danger": ""}`}>{eachArea.name} ({eachArea.community.length})</p>
+                            {path.split('/')[3] !== eachArea.slug ? <IoIosArrowDown className="p-0"/> : <IoIosArrowUp className="p-0 text-danger"/> }
                           </div>
                         </Link>
                         {/* second child */}
-                        <ul className="w-90 list-unstyled ml10" style={{marginTop: "2px", height: path.split('/')[3] === eachCity.slug ? "100%": "0", overflow: path.split('/')[3] === eachCity.slug ? "visible": "hidden" }}> {/**height: 0, overflow: "hidden" */}
-                          {eachCity.area.map((eachArea, areaIndex)=> {
-                            if(eachArea.active) {
+                        <ul className="w-90 list-unstyled ml10" style={{marginTop: "2px", height: path.split('/')[3] === eachArea.slug ? "100%": "0", overflow: path.split('/')[3] === eachArea.slug ? "visible": "hidden" }}> {/**height: 0, overflow: "hidden" */}
+                          {eachArea.city.map((eachCity, areaIndex)=> {
+                            if(eachCity.active) {
                               return (
-                                <li className={`${path.split('/')[4] === eachArea.slug ? "text-danger": ""}`} key={areaIndex}>
-                                  <Link href={`/summary/${state.slug}/${eachCity.slug}/${eachArea.slug}`}>
+                                <li className={`${path.split('/')[4] === eachCity.slug ? "text-danger": ""}`} key={areaIndex}>
+                                  <Link href={`/summary/${state.slug}/${eachArea.slug}/${eachCity.slug}`}>
                                     <div className="d-flex justify-content-between align-items-center">
-                                      <p className={`text-capitalize m-0 ${path.split('/')[4] === eachArea.slug ? "text-danger": ""}`}>{eachArea.name} ({eachArea.community.length})</p>
+                                      <p className={`text-capitalize m-0 ${path.split('/')[4] === eachCity.slug ? "text-danger": ""}`}>{eachCity.name} ({eachCity?.community?.length})</p>
                                     </div>
                                   </Link>
                                 </li>

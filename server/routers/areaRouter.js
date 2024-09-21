@@ -39,7 +39,7 @@ router.put('/active', authCheck, adminAuthCheck, activeArea);
 router.post("/get-by-slug", getAreaBySlug);
 
 
-router.get("/getall", getAreas);
+router.get("/getall/:status", getAreas);
 
 
 

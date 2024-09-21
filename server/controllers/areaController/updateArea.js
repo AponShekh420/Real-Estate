@@ -8,7 +8,7 @@ const deleteFileFromSpace = require("../../utils/deleteFileFromSpace");
 
 const updateArea = async (req, res) => {
   try {
-    const {name, desc, stateId, areaId, abbreviation, active, oldImgUrl, uploadedImageChanged } = req.body;
+    const {name, desc, stateId, areaId, active, oldImgUrl, uploadedImageChanged } = req.body;
     
     // slug making
     const duplicateArea = await AreaModel.find({name, _id: {$ne: areaId}});
@@ -29,7 +29,6 @@ const updateArea = async (req, res) => {
       name,
       slug,
       active,
-      abbreviation,
       desc,
       img: uploadedImageChanged ? req?.files[0]?.location : oldImgUrl,
       state: stateId

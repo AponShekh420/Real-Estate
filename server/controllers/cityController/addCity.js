@@ -4,7 +4,7 @@ const CityModel = require("../../models/CityModel");
 
 const addCity = async (req, res) => {
   try {
-    const {name, desc, stateId, areaId, active, abbreviation} = req.body;
+    const {name, desc, stateId, areaId, active} = req.body;
 
     // slug making
     const duplicateCity = await CityModel.find({name: name});
@@ -23,7 +23,6 @@ const addCity = async (req, res) => {
       active,
       state: stateId,
       area: areaId,
-      abbreviation,
       img: req?.files ? req?.files[0]?.location : "",
       slug,
     });

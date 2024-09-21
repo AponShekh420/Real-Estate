@@ -29,15 +29,39 @@ const gatedOptions = [
 ]
 
 
-const SelectMultiField = ({city, setCity, setState, state, gated, ageRestrictions, setAgeRestrictions, setGated}) => {
+const SelectMultiField = ({area, setArea, city, setCity, setState, state, gated, ageRestrictions, setAgeRestrictions, setGated}) => {
 
   // options
   const [stateOptions, setStateOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
 
   const cityHanlder = (currentState) => {
-    setCity("")
-    const cityOptionValues = currentState.value.city.map(item => item.active && item).length > 0 ? currentState.value.city.map(item => item.active && item) : [];
+    setCity("");
+    setArea("");
+    const areaList = currentState.value.area.filter(item => item.active) || [];
+
+    // Initialize cityOptionValues as an empty array
+    let cityOptionValues = [];
+
+    // Iterate over the areaList to extract active cities
+    areaList.forEach(area => {
+      const activeCities = area.city?.filter(city => city.active).map(city => ({
+        area: {
+          _id: area._id,
+          slug: area.slug,
+          name: area.name,
+        },
+        city: {
+          _id: city._id,
+          name: city.name,
+          slug: city.slug,
+        },
+      })) || [];
+
+      // Append active cities to cityOptionValues
+      cityOptionValues = [...cityOptionValues, ...activeCities];
+    });
+    
     setCityOptions(cityOptionValues[0] ? cityOptionValues : []);
   }
 
@@ -99,10 +123,11 @@ const SelectMultiField = ({city, setCity, setState, state, gated, ageRestriction
               // isMulti
               options={cityOptions?.map((item) => ({
                 value: item,
-                label: `${item.name}`,
+                label: `${item?.city?.name}`,
               }))}
               onChange={(e)=> {
-                setCity(e.value)
+                setArea(e.value.area)
+                setCity(e.value.city)
               }}
               placeholder="please select"
               value={{value: city?.name, label: city?.name}}

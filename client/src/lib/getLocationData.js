@@ -34,7 +34,7 @@ const getLocationData = async (params) => {
       }
 
     } else if(slug?.length == 2 && slug !== undefined) {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/get-by-slug`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/area/get-by-slug`, {
         method: "POST",
         cache: 'no-store',
         credentials: "include",
@@ -46,19 +46,19 @@ const getLocationData = async (params) => {
           active: true
         })
       });
-      const city = await res.json();
+      const area = await res.json();
 
-      if(city) {
+      if(area) {
         store.dispatch(addCommunityFilterValue({
-          city: city?.data,
-          state: city?.data?.state
+          area: area?.data,
+          state: area?.data?.state
         }));
-        return city;
+        return area;
       } else {
         return;
       }
     } else if(slug?.length === 3 && slug !== undefined) {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/area/get-by-slug`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/city/get-by-slug`, {
         method: "POST",
         cache: 'no-store',
         credentials: "include",
@@ -70,13 +70,15 @@ const getLocationData = async (params) => {
           active: true
         })
       });
-      const area = await res.json();
+      const city = await res.json();
 
-      if(area) {
+      if(city) {
         store.dispatch(addCommunityFilterValue({
-          area: area?.data,
+          city: city?.data,
+          state: city?.data?.state,
+          area: city?.data?.area
         }));
-        return area;
+        return city;
       } else {
         return;
       }

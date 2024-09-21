@@ -3,7 +3,7 @@ const StateModel = require("../../models/StateModel");
 
 const addArea = async (req, res) => {
   try {
-    const {name, desc, abbreviation, stateId, active} = req.body;
+    const {name, desc, stateId, active} = req.body;
 
     // slug making
     const duplicateArea = await AreaModel.find({name});
@@ -19,7 +19,6 @@ const addArea = async (req, res) => {
     const Area = await AreaModel.insertMany({
       slug,
       active,
-      abbreviation,
       name,
       desc,
       img: req?.files ? req?.files[0]?.location : "",

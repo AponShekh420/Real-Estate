@@ -27,7 +27,7 @@ const CityList = () => {
   const [cityLoading, setCityLoading] = useState(false);
 
   // redux
-  const {errors, active: cityActive, desc, abbreviation, cityName, stateId: stateIdForCity, areaId: areaIdForCity, edit: cityEdit, cityId: cityUpdateId, uploadedImageChanged: cityUploadedImageChanged, oldImgUrl: cityOldImgUrl, uploadedImage: cityUploadedImage} = useSelector((state)=> state.city);
+  const {errors, active: cityActive, desc, cityName, stateId: stateIdForCity, areaId: areaIdForCity, edit: cityEdit, cityId: cityUpdateId, uploadedImageChanged: cityUploadedImageChanged, oldImgUrl: cityOldImgUrl, uploadedImage: cityUploadedImage} = useSelector((state)=> state.city);
 
   const dispatch = useDispatch();
 
@@ -44,7 +44,6 @@ const CityList = () => {
 
     const formData = new FormData(e.target);
     formData.append("active", cityActive);
-    formData.append("abbreviation", abbreviation);
     formData.append("name", cityName);
     formData.append("desc", desc);
     formData.append("stateId", stateIdForCity._id);
@@ -58,7 +57,6 @@ const CityList = () => {
       },
       body: JSON.stringify({
         active: cityActive,
-        abbreviation: abbreviation,
         name: cityName,
         desc: desc,
         stateId: stateIdForCity._id,
@@ -108,7 +106,6 @@ const CityList = () => {
 
     const formData = new FormData(e.target);
     formData.append("active", cityActive);
-    formData.append("abbreviation", abbreviation);
     formData.append("name", cityName);
     formData.append("desc", desc);
     formData.append("stateId", stateIdForCity._id);
@@ -126,7 +123,6 @@ const CityList = () => {
       },
       body: JSON.stringify({
         active: cityActive,
-        abbreviation: abbreviation,
         name: cityName,
         desc: desc,
         stateId: stateIdForCity._id,
@@ -236,22 +232,6 @@ const CityList = () => {
       {/* End .row */}
 
       <div className="row">
-        <div className="col-sm-12 col-xl-12">
-          <div className="mb30">
-            <label className="heading-color ff-heading fw600 mb10">
-              Abbreviation
-            </label>
-            <input type="text" className="form-control"
-              onChange={(e)=> {
-                dispatch(addCityFields({abbreviation: e.target.value}))
-              }}
-              value={abbreviation}
-            />
-            <p className="text-danger">{errors?.abbreviation?.msg}</p>
-          </div>
-        </div>
-        {/* End .col-sm-6 */}
-
         <div className="text-editor">
           <ReactQuill
             theme="snow"
