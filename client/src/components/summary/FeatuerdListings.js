@@ -54,14 +54,14 @@ const FeaturedListings = ({state: stateProps, city: cityProps, area: areaProps})
                   src={listing?.thumbnail || listing?.imgs[listing?.imgs?.length -1]}
                   alt="listings"
                 />
-                <div className="sale-sticker-wrap">
+                {/* <div className="sale-sticker-wrap">
                   {!listing?.status?.includes("Rent") && (
                     <div className="list-tag fz12">
                       <span className="flaticon-electricity me-2" />
                       FEATURED
                     </div>
                   )}
-                </div>
+                </div> */}
   
                 <div className="list-price">
                   ${listing.minPrice} <span>-</span> ${listing.maxPrice}
