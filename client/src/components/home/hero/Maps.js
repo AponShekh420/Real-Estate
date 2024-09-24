@@ -47,7 +47,7 @@ const Maps = () => {
   }, [])
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'start', alignItems: 'center', height: '100%', width: '100%', }}>
+    <div className='home-hero-map'>
       <div style={{ width: '100%', maxWidth: '1200px', height: 'auto', position: 'relative' }}>
         <ComposableMap
           projection={geoAlbersUsa()} // Set the projection to focus on the USA

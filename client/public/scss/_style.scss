@@ -3567,7 +3567,7 @@ li {
 
 /*Home 4 Banner Content*/
 .home-style4 {
-    background-image: url(../images/home/home-4.jpg);
+    background-image: url(../images/home/home-4-banner.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     position: relative;
@@ -3577,13 +3577,31 @@ li {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    height: 660px;
+    height: auto;
+    background-size: cover;
 }
 @media (max-width: 991.98px) {
     .home-style4 {
         height: 620px;
     }
 }
+
+.home-hero-map {
+    display: flex;
+    justify-content: start;
+    align-items: center; 
+    height: 75%;
+    width: 75%;
+    margin-bottom: 40px;
+}
+@media (max-width: 991px) {
+    .home-hero-map {
+        height: 100%;
+        width: 100%;
+        margin-bottom: 0px;
+    }
+}
+
 
 .inner-banner-style4 .hero-sub-title {
     color: var(--headings-color);
