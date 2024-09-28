@@ -11,6 +11,7 @@ const UploadPhotoGallery = () => {
   const dispatch = useDispatch();
 
   const [uploadedImages, setUploadedImages] = useState([...imgs]);
+  const [thumbnailList, setThumbnailList] = useState([...imgs]);
 
   // Initial images from the server (could be URLs or image paths)
 
@@ -39,6 +40,9 @@ const UploadPhotoGallery = () => {
     const nowUploadImages = [...uploadedImages];
 
     for (const file of files) {
+      const fileName = file?.name
+      setThumbnailList([...thumbnailList, fileName])
+      console.log("file:", file)
       const reader = new FileReader();
       reader.onload = (e) => {
         nowUploadImages.push(e.target.result);
@@ -120,7 +124,7 @@ const UploadPhotoGallery = () => {
               <label 
                 data-tooltip-id={`thumbnail-${index}`}
               >
-                <input type="checkbox" checked={thumbnail == imageData} onChange={() => dispatch(addCommunityFieldValue({thumbnail: imageData}))} />
+                <input type="checkbox" checked={thumbnailList.indexOf(thumbnail) === index} onChange={() => dispatch(addCommunityFieldValue({thumbnail: thumbnailList[index]}))} />
               </label>
                 <ReactTooltip
                   id={`thumbnail-${index}`}

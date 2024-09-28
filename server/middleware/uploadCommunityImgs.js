@@ -32,6 +32,24 @@ const uploadCommunityImages = (req, res, next) => {
             await deleteFileFromSpace('assets-upload', file)
         }
 
+
+        //thumbnail configure
+        existingImages.forEach(fileName => {
+            if(fileName == req?.body?.thumbnail) {
+                req.body.currentThumbnail = fileName
+            }
+        });
+
+        const newFiles = req.files;
+
+        newFiles.forEach(file => {
+            if(file.originalname == req?.body?.thumbnail) {
+                req.body.currentThumbnail = file.location
+            }
+        })
+        // thumbnail configure end
+
+
        req.body.imgs = updatedImages;
        next();
    });
