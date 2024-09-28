@@ -66,7 +66,7 @@ const UploadPhotoGallery = () => {
   useEffect(()=> {
     setUploadedImages([...imgs]);
     setThumbnailList([...imgs]);
-  }, [])
+  }, [imgs])
 
 
 
