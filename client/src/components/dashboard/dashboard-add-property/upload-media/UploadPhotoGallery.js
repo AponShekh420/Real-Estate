@@ -1,6 +1,6 @@
 "use client";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommunityFieldValue } from "@/redux/communitySlice";
@@ -61,6 +61,12 @@ const UploadPhotoGallery = () => {
   const handleDragOver = (event) => {
     event.preventDefault();
   };
+
+
+  useEffect(()=> {
+    setUploadedImages([...imgs]);
+    setThumbnailList([...imgs]);
+  }, [])
 
 
 
