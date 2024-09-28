@@ -7,21 +7,22 @@ const updateCommuity = require("../controllers/communityController/updateCommuni
 const deleteCommunity = require("../controllers/communityController/deleteCommunity");
 const deactiveCommunity = require("../controllers/communityController/deactiveCommunity");
 const activeCommunity = require("../controllers/communityController/activeCommunity");
-const uploadCommunityImages = require("../controllers/communityController/uploadCommunityImages");
 const getSingleCommunity = require("../controllers/communityController/getSingleCommunity");
 const communityImageDelete = require("../controllers/communityController/communityImgDelete");
-const useCommunityImgsDeletor = require("../middleware/useCommunityImgsDeletor");
 const getCommunities = require("../controllers/communityController/getCommunities");
 const checkCommunityValidation = require("../middleware/checkCommunityValidation");
-const useValidationResult = require("../middleware/common/useValidationResult");
 const getCommunitiesByFilter = require("../controllers/communityController/getCommunitiesByFilter");
 const getCommunitiesForMap = require("../controllers/communityController/getCommunitiesForMap");
+
+
+const useCommunityValidationResult = require("../middleware/useCommunityValidationResult");
 
 
 
 // auth checker
 const authCheck = require("../middleware/common/users/authCheck");
 const adminAuthCheck = require("../middleware/common/users/adminAuthCheck");
+const uploadCommunityImages = require("../middleware/uploadCommunityImgs");
 
 
 
@@ -34,8 +35,8 @@ router.get('/single-community/:slug', getSingleCommunity);
 
 
 // route controller
-router.post('/add', authCheck, adminAuthCheck, checkCommunityValidation, useValidationResult, addCommunity);
-router.put('/update', authCheck, adminAuthCheck, checkCommunityValidation, useValidationResult, useCommunityImgsDeletor, updateCommuity);
+router.post('/add', authCheck, adminAuthCheck, uploadCommunityImages, checkCommunityValidation, useCommunityValidationResult, addCommunity);
+router.put('/update', authCheck, adminAuthCheck, uploadCommunityImages, checkCommunityValidation, useCommunityValidationResult, updateCommuity);
 router.delete('/delete', authCheck, adminAuthCheck, deleteCommunity);
 
 

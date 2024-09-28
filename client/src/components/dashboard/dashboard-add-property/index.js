@@ -1,15 +1,20 @@
 "use client"
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropertyDescription from "./property-description";
 import UploadMedia from "./upload-media";
 import LocationField from "./LocationField";
 import DetailsFiled from "./details-field";
 import Amenities from "./amenities/Amenities";
 import ModelMangement from "./models-data/ModelMangement"
-import { usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { MoonLoader } from "react-spinners";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addCommunityFieldValue, removeAllCommunityFieldValue } from "@/redux/communitySlice";
+import getDataByFilter from "@/data/community/getDataByFilter";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const override = {
   display: "block",
@@ -18,12 +23,148 @@ const override = {
 };
 
 
-const AddPropertyTabContent = () => {
+const AddPropertyTabContent = ({submitBtn}) => {
+
+  // url data 
   const pathname = usePathname();
-  const {loading} = useSelector(state=> state.community)
+  const {slug} = useParams();
+  const router = useRouter();
+
+  // redux
+  const community = useSelector((state)=> state.community)
+  const dispatch = useDispatch();
+
 
   const editPageValidation = pathname.split("/")[2] === "edit-community" ? true : false;
-  
+
+
+
+  // add community
+  const addCommunity = async (e) => {
+    e.preventDefault();
+    const formData = getDataByFilter(community, e);
+    try {
+      dispatch(addCommunityFieldValue({loading: true}));
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/add`, {
+        method: "POST",
+        credentials: "include",
+        body: formData
+      })
+      const dataRes = await res.json();
+      dispatch(addCommunityFieldValue({loading: false}));
+      if(dataRes?.msg) {
+        dispatch(removeAllCommunityFieldValue());
+        toast.success(dataRes?.msg, {
+          position: "top-right",
+          autoClose: 1500,
+        });
+        setTimeout(()=> {
+          router.push(`/dashboard/edit-community/${dataRes?.data?.slug}`)
+        }, 1500)
+      } else {
+        dispatch(addCommunityFieldValue({errors: dataRes?.errors}))
+      }
+      console.log(dataRes)
+    } catch(err) {
+      console.log(err.message)
+    }
+  }
+
+
+
+  // update community
+  const updateCommunity = async (e) => {
+    e.preventDefault();
+    const formData = getDataByFilter(community, e);
+    try {
+      dispatch(addCommunityFieldValue({loading: true}));
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/update`, {
+        method: "PUT",
+        credentials: "include",
+        body: formData
+      })
+      const dataRes = await res.json();
+      dispatch(addCommunityFieldValue({loading: false}));
+      if(dataRes?.msg) {
+        toast.success(dataRes?.msg, {
+          position: "top-right",
+          autoClose: 1500,
+        });
+        setTimeout(()=> {
+          router.push('/dashboard/my-communities')
+        }, 1500)
+      } else if(dataRes?.errors?.locationUpdate) {
+        toast.error(dataRes?.errors?.locationUpdate.msg, {
+          position: "top-right",
+          autoClose: 1500,
+        });
+      } else {
+        dispatch(addCommunityFieldValue({errors: dataRes?.errors}))
+      }
+    } catch(err) {
+      console.log(err.message)
+    }
+  }
+
+
+  const getExistingDataToUpdate = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/single-community/${slug}`, {credentials: "include"});
+      const existingCommunityData = await res.json();
+      console.log(existingCommunityData)
+      if(existingCommunityData?.errors?.notFound) {
+        router.push('/dashboard/my-communities');
+      } else {
+        const {title, website, phone, address, lat, long, active, status, imgs, builtEnd, builtStart, gated, ageRestrictions, communitySize, homeTypes, maxPrice, minPrice, zip, area, city, state, _id, description, amenities, thumbnail } = existingCommunityData.data
+        dispatch(addCommunityFieldValue({
+          communityId: _id,
+          title,
+          description,
+          website, 
+          phone, 
+          address, 
+          lat, 
+          long, 
+          active, 
+          status, 
+          imgs, 
+          builtEnd, 
+          builtStart, 
+          gated, 
+          ageRestrictions, 
+          communitySize, 
+          homeTypes, 
+          maxPrice, 
+          minPrice, 
+          zip, 
+          areaId: area, 
+          cityId: city,
+          stateId: state,
+          loading: false,
+          amenities,
+          thumbnail,
+          existingImages: imgs,
+        }));
+      }
+    } catch(err) {
+      console.log(err.message)
+    }
+  }
+
+  useEffect(()=> {
+    if(editPageValidation) {
+      dispatch(addCommunityFieldValue({loading: true, errors: {}}));
+      getExistingDataToUpdate();
+    } else {
+      dispatch(removeAllCommunityFieldValue());
+      dispatch(addCommunityFieldValue({loading: false}));
+    }
+  }, [])
+
+
+
+
+
   return (
     <>
       <nav>
@@ -107,7 +248,15 @@ const AddPropertyTabContent = () => {
       </nav>
       {/* End nav tabs */}
 
-      <div className="tab-content" id="nav-tabContent">
+      <form 
+        className="tab-content" 
+        id="nav-tabContent" 
+        onSubmit={editPageValidation ? updateCommunity : addCommunity}
+        action={editPageValidation ? `${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/update` : `${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/add`} 
+        method={editPageValidation ? "put": "post"} 
+        encType="multipart/form-data"
+      >
+        <button type="submit" ref={submitBtn} hidden>submit</button>
         <div
           className="tab-pane fade show active"
           id="nav-item1"
@@ -189,14 +338,13 @@ const AddPropertyTabContent = () => {
           </div>
         ): ""}
         
-
-      </div>
+      </form>
       {/* tab loading div */}
-      {loading ? (
+      {community?.loading ? (
         <div className="w-100 position-absolute h-100 z-10 top-0 d-flex justify-content-center align-items-center text-white" style={{backgroundColor:"rgba(255, 255, 255, 0.5)"}}>
           <MoonLoader
             color="black"
-            loading={loading}
+            loading={community?.loading}
             cssOverride={override}
             size={30}
             aria-label="Loading Spinner"

@@ -18,10 +18,12 @@ const override = {
 
 const ModelMangement = () => {
   const [loading, setLoading] = useState(false);
+  const [nameError, setNameError] = useState("");
+  const [descError, setDescError] = useState("");
 
   // redux state
   const {communityId} = useSelector((state)=> state.community)
-  const {CMTName, desc, uploadedImage, edit, CMTId, oldImgUrl, uploadedImageChanged} = useSelector((state)=> state.model);
+  const {CMTName, desc, edit, CMTId, img, deletedImages, newImages} = useSelector((state)=> state.model);
 
   // redux dispatch for action
   const dispatch = useDispatch();
@@ -31,48 +33,60 @@ const ModelMangement = () => {
     dispatch(addModelFields({
       errors: {}
     }));
-    if(uploadedImage == null) {
-      console.log("image null")
+    setNameError("");
+    setDescError("");
+
+    if(!CMTName) {
+      setNameError("A model name is required");
+    }
+    if(!desc) {
+      setDescError("Please enter a model description");
+    }
+    if(!img && newImages.length < 1) {
       dispatch(addModelFields({
         errors: {
           img: {
-            msg: "Please select the image!"
+            msg: "Select a image"
           }
         }
-      }))
+      }));
+    }
+
+    if(!desc || !CMTName || (!img && newImages.length < 1)) {
       return;
     }
-    const formData = new FormData(e.target);
+
+    const formData = new FormData();
     formData.set("CMTName", CMTName);
     formData.set("desc", desc);
     formData.set("communityId", communityId);
-
-    const manualData = {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        CMTName: CMTName,
-        communityId: communityId,
-        desc: desc,
-        uploadedImageChanged: false,
-      })
+    // Add new image if available
+    if (newImages.length > 0) {
+      formData.append('img', newImages[0]); // New image file
     }
-    
+
+    // If no image is uploaded, send the existing image data
+    if (img) {
+      formData.append('existingImage', JSON.stringify(img));
+    } else {
+      formData.append('existingImage', ''); // No existing image
+    }
+
+    // Only pass deletedImage if there's an image to delete
+    if (deletedImages.length > 0) {
+      formData.append('deletedImage', JSON.stringify(deletedImages[0]));
+    }
+
     const multipartDataWithFile = {
       method: "POST",
       credentials: "include",
       body: formData
     }
 
-    const bodyData = uploadedImageChanged ? multipartDataWithFile : manualData;
-    console.log(bodyData)
     try {
       setLoading(true);
       // console.log("img:", img)
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/add`, bodyData);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/add`, multipartDataWithFile);
       const currentData = await res.json();
       setLoading(false)
       if(currentData.msg) {
@@ -80,11 +94,8 @@ const ModelMangement = () => {
           position: "top-right",
           autoClose: 1500,
         });
-
+        dispatch(removeModelAllFields());
         dispatch(addModelFields({
-          CMTName: "",
-          desc: "",
-          uploadedImage: null,
           newDataNotify: currentData,
         }))
       } else {
@@ -111,49 +122,59 @@ const ModelMangement = () => {
     dispatch(addModelFields({
       errors: {}
     }));
-    if(uploadedImage == null) {
-      console.log("image null")
+    setNameError("");
+    setDescError("");
+
+    if(!CMTName) {
+      setNameError("A model name is required");
+    }
+    if(!desc) {
+      setDescError("Please enter a model description");
+    }
+    if(!img && newImages.length < 1) {
       dispatch(addModelFields({
         errors: {
           img: {
-            msg: "Please select the image!"
+            msg: "Select a image"
           }
         }
-      }))
+      }));
+    }
+
+    if(!desc || !CMTName || (!img && newImages.length < 1)) {
       return;
     }
-    const formData = new FormData(e.target);
+
+    const formData = new FormData();
     formData.set("CMTName", CMTName);
     formData.set("desc", desc);
-    formData.set("uploadedImageChanged", uploadedImageChanged);
-    formData.set("oldImgUrl", oldImgUrl);
-    formData.set("uploadedImage", uploadedImage);
     formData.set("CMTId", CMTId);
+    // Add new image if available
+    if (newImages.length > 0) {
+      formData.append('img', newImages[0]); // New image file
+    }
 
-    const manualData = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        CMTName: CMTName,
-        desc: desc,
-        CMTId: CMTId,
-        uploadedImageChanged: false
-      })
+    // If no image is uploaded, send the existing image data
+    if (img) {
+      formData.append('existingImage', JSON.stringify(img));
+    } else {
+      formData.append('existingImage', ''); // No existing image
+    }
+
+    // Only pass deletedImage if there's an image to delete
+    if (deletedImages.length > 0) {
+      formData.append('deletedImage', JSON.stringify(deletedImages[0]));
     }
 
     const multipartDataWithFile = {
       method: "PUT",
+      credentials: "include",
       body: formData
     }
 
-    const bodyData = uploadedImageChanged ? multipartDataWithFile : manualData;
-
     try {
       setLoading(true);
-      // console.log("img:", img)
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/update`, bodyData);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/update`, multipartDataWithFile);
       const currentData = await res.json();
       setLoading(false)
       if(currentData.msg) {
@@ -187,12 +208,7 @@ const ModelMangement = () => {
         <h4 className="title fz17 mb30">Add New Model</h4>
         <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
           <h4 className="title fz17 mb30">Upload photos of your community model</h4>
-          <form className="form-style1" 
-            onSubmit={edit ? updateModel : addModel} 
-            action={edit ? `${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/update` : `${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/add`} 
-            method={edit ? "put": "post"} 
-            encType="multipart/form-data"
-          >
+          <div className="form-style1">
             <div className="row">
               <div className="col-lg-12">
                 <UploadModelImg />
@@ -207,7 +223,6 @@ const ModelMangement = () => {
                     Title
                   </label>
                   <input
-                    required
                     onChange={(e)=> dispatch(addModelFields({
                       CMTName: e.target.value
                     }))}
@@ -216,6 +231,9 @@ const ModelMangement = () => {
                     placeholder="Type The Title Name"
                     value={CMTName}
                   />
+                  <p className={`${nameError ? "text-danger": null}`}>
+                    {nameError}
+                  </p>
                 </div>
               </div>
             </div>
@@ -226,7 +244,6 @@ const ModelMangement = () => {
                     Description
                   </label>
                   <textarea
-                    required
                     onChange={(e)=> dispatch(addModelFields({
                       desc: e.target.value
                     }))}
@@ -236,6 +253,9 @@ const ModelMangement = () => {
                     value={desc}
                   >
                   </textarea>
+                  <p className={`${descError ? "text-danger": null}`}>
+                    {descError}
+                  </p>
                 </div>
               </div>
             </div>
@@ -244,7 +264,7 @@ const ModelMangement = () => {
             <div className="row">
               <div className="col-sm-6 col-xl-12">
                 <div className="mb30 d-flex justify-content-end gap-2">
-                  <button className={`${classes.addModelBtn} bg-white rounded-2 d-flex gap-2 justify-content-center align-items-center ${loading? "opacity-50" : "opacity-100"}`} type="submit" disabled={loading} style={{border: "2px solid green", outline: "none", color: "green", fontWeight: 600}}>
+                  <button className={`${classes.addModelBtn} bg-white rounded-2 d-flex gap-2 justify-content-center align-items-center ${loading? "opacity-50" : "opacity-100"}`} onClick={edit ? updateModel : addModel} disabled={loading} style={{border: "2px solid green", outline: "none", color: "green", fontWeight: 600}}>
                     {edit ? "Update Model": 'Add Model'}
                     {!loading ? <IoIosAddCircleOutline size={18}/> : <HashLoader
                       color="#ffffff"
@@ -267,7 +287,7 @@ const ModelMangement = () => {
               </div>
             </div>
             {/* End .row */}
-          </form>
+          </div>
         </div>
       </div>
       <ToastContainer containerId="containerA"/>

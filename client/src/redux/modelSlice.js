@@ -10,8 +10,9 @@ const initialState = {
   errors: {},
   CMTId: "",
   edit: false,
-  uploadedImageChanged: false,
-  oldImgUrl: "",
+  deletedImages: [],
+  newImages: [],
+  img: "",
 }
 
 

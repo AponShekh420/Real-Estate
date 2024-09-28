@@ -70,9 +70,8 @@ const SingleModel = () => {
       desc: modelValue.desc,
       CMTId: modelValue._id,
       edit: true,
-      oldImgUrl: modelValue.img,
-      uploadedImageChanged: false,
-      uploadedImage: modelValue.img,
+      img: modelValue.img,
+      newDataNotify: Math.random() * 100,
     }))
   }
 

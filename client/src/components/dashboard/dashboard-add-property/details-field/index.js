@@ -3,9 +3,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommunityFieldValue } from "@/redux/communitySlice";
-import dynamic from "next/dynamic";
-
-const AsyncSelect = dynamic(() => import("react-select/async"), { ssr: false });
+import Select from 'react-select'
 
 
 const ageRes = [
@@ -20,7 +18,7 @@ const gatedOption = [
 
 const DetailsFiled = () => {
 
-  const {errors, ageRestrictions, gated, website, sqft, garages, builtEnd, builtStart, bathrooms, bedrooms, communitySize, phone} = useSelector((state)=> state.community);
+  const {errors, ageRestrictions, gated, website, builtEnd, builtStart, communitySize, phone} = useSelector((state)=> state.community);
   const dispatch = useDispatch();
 
   const customStyles = {
@@ -42,7 +40,7 @@ const DetailsFiled = () => {
 
 
   return (
-    <form className="form-style1">
+    <div className="form-style1">
       <div className="row">
 
         <div className="col-sm-6 col-xl-4">
@@ -51,15 +49,15 @@ const DetailsFiled = () => {
               Age Restrictions
             </label>
             <div className="location-area">
-              <AsyncSelect
-                id="sudfuwioeur"
+              <Select
+                id="sdfasdfasdf"
+                instanceId="sdfasdfasdf"
                 defaultValue={[ageRes[0]]}
                 name="colors"
                 options={ageRes}
                 styles={customStyles}
                 className="select-custom pl-0"
                 classNamePrefix="select"
-                required
                 onChange={(e)=> {
                   dispatch(addCommunityFieldValue({
                     ageRestrictions: e.value === "Yes" ? true : false
@@ -78,15 +76,15 @@ const DetailsFiled = () => {
               Gated
             </label>
             <div className="location-area">
-              <AsyncSelect
-                id="sjdfoiuwoei"
+              <Select
+                id="afdasdfasd"
+                instanceId="afdasdfasd"
                 defaultValue={[gatedOption[0]]}
                 name="colors"
                 options={gatedOption}
                 styles={customStyles}
                 className="select-custom pl-0"
                 classNamePrefix="select"
-                required
                 onChange={(e)=> {
                   dispatch(addCommunityFieldValue({
                     gated: e.value === "Yes" ? true : false
@@ -202,7 +200,7 @@ const DetailsFiled = () => {
         </div>
         {/* End .col-4 */}
       </div>
-    </form>
+    </div>
   );
 };
 

@@ -28,7 +28,10 @@ const initialState = {
   errors: {},
   zip: "",
   amenities: [],
-  thumbnail: ""
+  thumbnail: "",
+  existingImages: [],
+  newImages: [],
+  deletedImages: [],
 }
 
 

@@ -41,7 +41,7 @@ const PropertyDescription = () => {
 
 
   return (
-    <form className="form-style1">
+    <div className="form-style1">
       <div className="row">
         <div className="col-sm-12">
           <div className="mb20">
@@ -77,7 +77,6 @@ const PropertyDescription = () => {
                 styles={customStyles}
                 className="select-custom pl-0"
                 classNamePrefix="select"
-                required
                 isMulti
                 onChange={(e)=> {
                   dispatch(addCommunityFieldValue({
@@ -107,7 +106,6 @@ const PropertyDescription = () => {
                 styles={customStyles}
                 className="select-custom pl-0"
                 classNamePrefix="select"
-                required
                 onChange={(e)=> {
                   dispatch(addCommunityFieldValue({
                     active: e.value === "Pending" ? false : true
@@ -183,7 +181,7 @@ const PropertyDescription = () => {
         </div>
         {/* End .row */}
       </div>
-    </form>
+    </div>
   );
 };
 

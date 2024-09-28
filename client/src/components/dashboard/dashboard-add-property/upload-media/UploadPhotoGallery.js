@@ -4,168 +4,93 @@ import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommunityFieldValue } from "@/redux/communitySlice";
-import { usePathname } from "next/navigation";
-import { MoonLoader } from "react-spinners";
-
-const override = {
-  display: "flex",
-  margin: "0 auto",
-  borderColor: "red",
-};
-
-
 
 const UploadPhotoGallery = () => {
-  const fileInputRef = useRef(null);
-  const pathname = usePathname();
-  const [loading, setLoading] = useState(false)
-
-  // redux
-  const {errors, imgs, deleteImgUrls, thumbnail} = useSelector((state)=> state.community);
+  // redux 
+  const {thumbnail, existingImages, newImages, deletedImages, imgs, errors} = useSelector(state => state?.community);
   const dispatch = useDispatch();
 
+  const [uploadedImages, setUploadedImages] = useState([...imgs]);
 
-  const editPageValidation = pathname.split("/")[2] === "edit-community" ? true : false;
+  // Initial images from the server (could be URLs or image paths)
 
+  // Handle image deletion
+  const handleDeleteImage = (index) => {
+    const deletedImg = existingImages[index];
 
-  const handleUpload = async (files) => {
     dispatch(addCommunityFieldValue({
-      errors: {}
+      deletedImages: [...deletedImages, deletedImg],
+      existingImages: existingImages.filter((img, i) => i !== index),
     }))
-    const formData = new FormData();
-    Array.from(files).forEach((file, index) => {
-      formData.append(`file${index}`, file);
-    });
 
-    try {
-      if(files.length >= 1) {
-        setLoading(true);
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/upload`, {
-          method: "POST",
-          credentials: "include",
-          body: formData
-        })
-        const resData = await res.json();
-        setLoading(false);
-        if(resData.error) {
-          dispatch(addCommunityFieldValue({
-            errors: resData.errors
-          }))
-        } else {
-          const latestImags = resData?.message;
-          console.log("uploded image of community:", latestImags)
-          const newImages = [...imgs, ...latestImags];
-          dispatch(addCommunityFieldValue({
-            imgs: newImages
-          }))
-        }
-      } else {
-        return;
-      }
-    } catch(err) {
-      console.log(err.message)
+    const nowDeleteImage = [...uploadedImages];
+    nowDeleteImage.splice(index, 1);
+    setUploadedImages(nowDeleteImage);
+  };
+
+  // Handle new image addition
+  const handleAddNewImage = (files) => {
+    const moreFiles = Array.from(files); // Get new files
+    dispatch(addCommunityFieldValue({
+      newImages: [...newImages, ...moreFiles],
+    }))
+
+    // only for display
+    const nowUploadImages = [...uploadedImages];
+
+    for (const file of files) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        nowUploadImages.push(e.target.result);
+        setUploadedImages(nowUploadImages);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
-
-  const handleButtonClick = () => {
-    // Programmatically trigger the hidden file input
-    fileInputRef.current.click();
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const files = event.dataTransfer.files;
+    handleAddNewImage(files);
   };
 
-  const handleDelete = async (index) => {
-    fileInputRef.current.value = "";
-    dispatch(addCommunityFieldValue({
-      errors: {}
-    }))
-
-    const newImages = [...imgs];
-    const deletedImage = newImages.splice(index, 1);
-    const DeletedImageUrl = deletedImage[0];
-    try {
-      if(!editPageValidation) {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/imgdelete`, {
-          method: "DELETE",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            imgUrl: DeletedImageUrl
-          })
-        })
-        await res.json();
-        dispatch(addCommunityFieldValue({
-          imgUrl: newImages,
-        }));
-        if(DeletedImageUrl == thumbnail) {
-          dispatch(addCommunityFieldValue({
-            thumbnail: ""
-          }))
-        }
-      } else {
-        dispatch(addCommunityFieldValue({
-          imgs: newImages,
-          deleteImgUrls: [...deleteImgUrls, DeletedImageUrl]
-        }));
-        
-        if(DeletedImageUrl == thumbnail) {
-          dispatch(addCommunityFieldValue({
-            thumbnail: ""
-          }))
-        }
-      }
-      dispatch(addCommunityFieldValue({
-        imgs: newImages
-      }));
-    } catch(err){
-      console.log(err.message)
-    }
+  const handleDragOver = (event) => {
+    event.preventDefault();
   };
+
+
 
   return (
     <>
       <div
         className="upload-img position-relative overflow-hidden bdrs12 text-center mb30 px-2"
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
       >
-        <div className="icon mb30" style={{visibility: loading ? "hidden" : "visible"}}>
+        <div className="icon mb30">
           <span className="flaticon-upload" />
         </div>
-        <h4 className="title fz17 mb10" style={{visibility: loading ? "hidden" : "visible"}}>Upload/Drag photos of your property</h4>
-        <p className="text mb25" style={{visibility: loading ? "hidden" : "visible"}}>
-          Photos must be JPEG, JPG or PNG format
+        <h4 className="title fz17 mb10">Upload/Drag photos of your community</h4>
+        <p className="text mb25">
+          Photos must be JPEG or PNG format and at least 2048x768
         </p>
-        <label className="ud-btn btn-white" style={{visibility: loading ? "hidden" : "visible"}}>
+        <label className="ud-btn btn-white">
           Browse Files
           <input
-            ref={fileInputRef}
+            // ref={fileInputRef}
             id="fileInput"
             type="file"
             multiple
             className="ud-btn btn-white"
-            onChange={(e) => handleUpload(e.target.files)}
+            onChange={(e) => handleAddNewImage(e.target.files)}
             style={{ display: "none" }}
           />
         </label>
-
-      <div className="w-100 h-100 top-0 d-flex align-items-center justify-content-center position-absolute" style={{zIndex: loading ? "100" : "-2000", display: loading ? "flex": "none"}}>
-        <MoonLoader
-          color="black"
-          loading={loading}
-          cssOverride={override}
-          size={30}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
       </div>
-    </div>
-    
-
-
 
       {/* Display uploaded images */}
       <div className="row profile-box position-relative d-md-flex align-items-end mb50">
-        {imgs.map((imageData, index) => (
+        {uploadedImages.map((imageData, index) => (
           <div className="col-2" key={index}>
             <div className="profile-img mb20 position-relative">
               <Image
@@ -179,7 +104,7 @@ const UploadPhotoGallery = () => {
                 style={{ border: "none" }}
                 className="tag-del"
                 title="Delete Image"
-                onClick={() => handleDelete(index)}
+                onClick={() => handleDeleteImage(index)}
                 type="button"
                 data-tooltip-id={`delete-${index}`}
               >
@@ -205,9 +130,8 @@ const UploadPhotoGallery = () => {
               </div>
             </div>
           </div>
-        ))}
+          ))}
       </div>
-      <p className="text-danger fs-4">{errors?.imgs?.msg}</p>
     </>
   );
 };

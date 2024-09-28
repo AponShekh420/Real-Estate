@@ -1,28 +1,61 @@
 "use client";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { addModelFields } from "@/redux/modelSlice";
 
 const UploadModelImg = () => {
-  // redux
-  const {errors, uploadedImage, uploadedImageChanged, oldImgUrl} = useSelector((state)=> state.model);
+  // redux 
+  const { img, deletedImages, newImages, errors, newDataNotify } = useSelector(state => state?.model);
   const dispatch = useDispatch();
 
-  const handleUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        dispatch(addModelFields({
-          uploadedImage: e.target.result,
-          uploadedImageChanged: true
-        }));
-      };
-      reader.readAsDataURL(file);
-    }
+  // Initial image from the server (could be a URL or image path)
+  const [uploadedImg, setUploadedImg] = useState(img || ''); // For displaying the current image
+
+  // Handle image deletion
+  const handleDeleteImg = (e) => {
+    e.preventDefault();
+    const deletedImg = img; // Save the current image to deletedImages
+
+    dispatch(addModelFields({
+      deletedImages: [...deletedImages, deletedImg],
+      img: '',  // Clear the current img in Redux state
+    }));
+
+    // Remove from local state
+    setUploadedImg('');
   };
+
+  // Handle new image addition or update
+  const handleAddNewImg = (file) => {
+
+    // deleting the existing one first
+    const deletedImg = img; // Save the current image to deletedImages
+
+    dispatch(addModelFields({
+      deletedImages: [...deletedImages, deletedImg],
+      img: '',  // Clear the current img in Redux state
+    }));
+
+
+    const newFile = file[0]; // Get the first file (single file)
+    dispatch(addModelFields({
+      newImages: [newFile],  // Store new image in Redux
+    }));
+
+    // Display the uploaded image
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setUploadedImg(e.target.result); // Update local state to display the new image
+    };
+    reader.readAsDataURL(newFile);
+  };
+
+
+  useEffect(()=> {
+    setUploadedImg(img)
+  }, [newDataNotify])
 
   return (
     <>
@@ -32,7 +65,7 @@ const UploadModelImg = () => {
             width={240}
             height={220}
             className="w-100 cover h-100"
-            src={(!uploadedImageChanged && oldImgUrl ) ? oldImgUrl : uploadedImage || "/images/listings/profile-1.jpg"}
+            src={uploadedImg  || "/images/listings/profile-1.jpg"}
             alt="profile avatar"
           />
 
@@ -40,10 +73,7 @@ const UploadModelImg = () => {
             className="tag-del"
             style={{ border: "none" }}
             data-tooltip-id="profile_del"
-            onClick={() => dispatch(addModelFields({
-              uploadedImage: null,
-              uploadedImageChanged: true,
-            }))}
+            onClick={handleDeleteImg}
           >
             <span className="fas fa-trash-can" />
           </button>
@@ -58,7 +88,7 @@ const UploadModelImg = () => {
               name="img"
               type="file"
               accept="image/jpeg,image/png"
-              onChange={handleUpload}
+              onChange={(e) => handleAddNewImg(e.target.files)}
               style={{ display: "none" }}
             />
             <div className="ud-btn btn-white2 mb30">
