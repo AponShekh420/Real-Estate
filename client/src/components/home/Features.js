@@ -2,22 +2,22 @@ const Features = () => {
   // Define an array of feature objects
   const features = [
     {
-      icon: "flaticon-security",
-      title: "Property Management",
+      icon: "fa-solid fa-house-chimney-user",
+      title: "Community Search",
       description:
-        "Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.",
+        "We have compiled the nation’s leading database of retirement communities.  We did the research so you don’t have to!",
     },
     {
-      icon: "flaticon-keywording",
-      title: "Mortgage Services",
+      icon: "fa-solid fa-money-check-dollar",
+      title: "Home Buying",
       description:
-        "Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.",
+        "We work with a nationwide network of real estate agents who can assist you with the home buying process.",
     },
     {
-      icon: "flaticon-investment",
-      title: "Currency Services",
+      icon: "fa-solid fa-sack-dollar",
+      title: "Home Financing",
       description:
-        "Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.",
+        "We also have a vast network of mortgage lenders we can recommend to help finance your home.",
     },
   ];
 

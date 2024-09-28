@@ -11,7 +11,6 @@ const ProSidebarContent = () => {
 
   const menuItem = [
     {path: "/", label: "Home"},
-    {path: "/summary", label: "Summary"},
     {path: "/blogs", label: "Blogs"},
     {path: "/about", label: "About"},
     {path: "/contact", label: "Contact"},

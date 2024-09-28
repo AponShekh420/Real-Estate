@@ -50,16 +50,16 @@ const DashboardHeader = () => {
                   <div className="dashboard_header_logo position-relative me-2 me-xl-5">
                     <Link className="logo" href="/">
                       <Image
-                        width={138}
+                        width={90}
                         height={44}
-                        src="/images/header-logo2.svg"
+                        src="/images/55&up-logo.png"
                         alt="Header Logo"
                       />
                     </Link>
                   </div>
                   {/* End Logo */}
 
-                  <a
+                  {/* <a
                     className="dashboard_sidebar_toggle_icon text-thm1 vam"
                     href="#"
                     data-bs-toggle="offcanvas"
@@ -73,7 +73,7 @@ const DashboardHeader = () => {
                       src="/images/dark-nav-icon.svg"
                       alt="humberger menu"
                     />
-                  </a>
+                  </a> */}
                 </div>
               </div>
               {/* End .col-auto */}

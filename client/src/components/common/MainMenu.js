@@ -16,11 +16,6 @@ const MainMenu = () => {
   const [activeLink, setActiveLink] = useState("");
 
   useEffect(() => {
-    homeItems.forEach((elm) => {
-      if (elm.href.split("/")[1] == pathname.split("/")[1]) {
-        setTopMenu("home");
-      }
-    });
     blogItems.forEach((elm) => {
       if (elm.href.split("/")[1] == pathname.split("/")[1]) {
         setTopMenu("blog");
@@ -56,27 +51,6 @@ const MainMenu = () => {
   };
   return (
     <ul className="ace-responsive-menu">
-      <li className="visible_list dropitem">
-        <Link
-          className={`${handleActive("/")} list-item`}
-          href='/'
-        >
-           home
-        </Link>
-      </li>
-      {/* End homeItems */}
-
-      {/* End listings */}
-
-      <li className="visible_list dropitem">
-        <Link
-          className={`${handleActive("/summary")} list-item`}
-          href='/summary'
-        >
-           summary
-        </Link>
-      </li>
-
       {/* about us */}
       <li className="visible_list dropitem">
         <Link

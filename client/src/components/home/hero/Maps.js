@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps';
 import { useRouter } from 'next/navigation';
 import { geoAlbersUsa } from 'd3-geo'; // Import the projection
@@ -9,18 +9,10 @@ import stateLabels from './stateLabelData';
 
 const stateData = {};
 
-// const abbreviateStates = {
-//   "Delaware": "DE",
-//   "New Hampshire": "NH",
-//   "Rhode Island": "RI",
-//   "Connecticut": "CT",
-//   "Massachusetts": "MA",
-//   // Add more as needed
-// };
-
 
 const Maps = () => {
   const router = useRouter();
+  const [changed, setChanged] = useState(0);
 
   const handleStateClick = (stateName) => {
     router.push(`/summary/${stateName.toLowerCase().split(" ").join("-")}`);
@@ -34,6 +26,7 @@ const Maps = () => {
       if(resData?.data) {
         const {data} = resData;
         data?.forEach(state => stateData[state?.name?.toLowerCase()] = state?.community?.length);
+        setChanged(Math.random() * 100);
         return;
       }
     } catch(err) {

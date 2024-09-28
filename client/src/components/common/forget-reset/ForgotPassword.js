@@ -65,10 +65,9 @@ const ForgotPassword = () => {
             <Link href="/">
               <Image
                 width={120}
-                height={44}
-                className="mb25"
+                height={62}
                 src="/images/55&up-logo.png"
-                alt="logo"
+                alt="Header Logo"
               />
             </Link>
             <h2>Forgot Password</h2>

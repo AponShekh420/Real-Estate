@@ -46,7 +46,7 @@ const DefaultHeader = () => {
                   <div className="logos mr40">
                     <Link className="header-logo logo1" href="/">
                       <Image
-                        width={100}
+                        width={90}
                         height={44}
                         src="/images/55&up-logo.png"
                         alt="Header Logo"
@@ -54,7 +54,7 @@ const DefaultHeader = () => {
                     </Link>
                     <Link className="header-logo logo2" href="/">
                       <Image
-                        width={100}
+                        width={90}
                         height={44}
                         src="/images/55&up-logo.png"
                         alt="Header Logo"
@@ -71,9 +71,9 @@ const DefaultHeader = () => {
 
               <div className="col-auto">
                 <div className="d-flex align-items-center">
-                  <a href="tel:+012305094502" className="ph-info info-phone d-flex align-items-center mx-2 mx-xl-4 gap-1">
+                  <a href="tel:800.888.3754" className="ph-info info-phone d-flex align-items-center mx-2 mx-xl-4 gap-1">
                     <i className="fa-light fa-phone"></i>
-                    +(0) 123 050 945 02
+                    800.888.3754
                   </a>
 
                   {userInfo ? (
@@ -90,36 +90,6 @@ const DefaultHeader = () => {
                       <span className="d-none d-xl-block">Login / Register</span>
                     </a>
                   )}
-                  {/* <Link
-                    className="ud-btn btn-white add-property bdrs60 mx-2 mx-xl-4"
-                    href="/dashboard-add-property"
-                  >
-                    Add Property
-                    <i className="fal fa-arrow-right-long" />
-                  </Link> */}
-                  
-                  {/* <a
-                    className="sidemenu-btn filter-btn-right"
-                    href="#"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#SidebarPanel"
-                    aria-controls="SidebarPanelLabel"
-                  >
-                    <Image
-                      width={25}
-                      height={9}
-                      className="img-1"
-                      src="/images/dark-nav-icon.svg"
-                      alt="humberger menu"
-                    />
-                    <Image
-                      width={25}
-                      height={9}
-                      className="img-2"
-                      src="/images/dark-nav-icon.svg"
-                      alt="humberger menu"
-                    />
-                  </a> */}
                 </div>
               </div>
               {/* End .col-auto */}

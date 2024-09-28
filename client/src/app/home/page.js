@@ -11,9 +11,7 @@ import Funfact from "@/components/home/Funfact";
 import ApartmentTypes from "@/components/home/ApartmentTypes";
 import About from "@/components/home/about";
 import Testimonial from "@/components/home/Testimonial";
-import FilterProperties from "@/components/home/FilterProperties";
 import Footer from "@/components/common/default-footer";
-import store from "@/redux/store";
 import RecentBlogs from "@/components/home/RecentBlogs";
 import StateList from "@/components/home/StateList";
 
@@ -91,18 +89,10 @@ const Home = () => {
       </section>
       {/* End Explore property-city */}
 
-      {/* Popular Property */}
-      {/* <section className="pt-0 pb60">
-        <div className="container">
-          <FilterProperties />
-        </div>
-      </section> */}
-
       <section className="pt-0 pb60">
         <div className="container" data-aos="fade-up" data-aos-delay="300">
           <div className="main-title2">
             <h2 className="title">Useful Information for 55 and Over Shoppers</h2>
-            <p className="paragraph">Aliquam lacinia diam quis lacus euismod</p>
           </div>
           <RecentBlogs blogsCatagory={null} total={6} dateStatus={true} notCatagory={"66a55dd8d0c49928d7845d12"}/>
           <RecentBlogs blogsCatagory={"66a55dd8d0c49928d7845d12"} total={3} dateStatus={false} notCatagory={""}/>
@@ -121,14 +111,14 @@ const Home = () => {
               >
                 <div className="mb30">
                   <h2 className="title text-capitalize">
-                    Let’s find the right <br className="d-none d-md-block" />{" "}
-                    selling option for you
+                    Let’s Find the Right Community<br className="d-none d-md-block" />{" "}
+                    for Your Retirement
                   </h2>
                 </div>
                 <div className="why-chose-list style2">
                   <Features />
                 </div>
-                <Link href="#" className="ud-btn btn-dark">
+                <Link href="/about" className="ud-btn btn-dark">
                   Learn More
                   <i className="fal fa-arrow-right-long" />
                 </Link>

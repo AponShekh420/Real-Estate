@@ -35,9 +35,9 @@ const Login = async () => {
                   <Link href="/">
                     <Image
                       width={120}
-                      height={44}
-                      className="mb25"
+                      height={62}
                       src="/images/55&up-logo.png"
+                      className="mb25"
                       alt="logo"
                     />
                   </Link>
