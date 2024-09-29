@@ -1,7 +1,6 @@
 import AdvanceFilterModal from "@/components/common/advance-filter";
 import HeroContent from "./HeroContent";
 import Image from "next/image";
-import Category from "./Category";
 import VideoBox from "./VideoBox";
 import dynamic from "next/dynamic";
 const Maps = dynamic(() => import('./Maps'), { ssr: false });
@@ -59,7 +58,6 @@ const Hero = () => {
       </div>
       {/* <!-- Advance Feature Modal End --> */}
 
-      <Category />
     </>
   );
 };

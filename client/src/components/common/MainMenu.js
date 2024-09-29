@@ -79,7 +79,7 @@ const MainMenu = () => {
           className={`${handleActive("/blogs")} list-item`}
           href='/blogs'
         >
-           blogs
+           blog
         </Link>
       </li>
       {/* End blog */}

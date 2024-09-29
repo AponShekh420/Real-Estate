@@ -10,8 +10,7 @@ const ProSidebarContent = () => {
   const path = usePathname();
 
   const menuItem = [
-    {path: "/", label: "Home"},
-    {path: "/blogs", label: "Blogs"},
+    {path: "/blogs", label: "Blog"},
     {path: "/about", label: "About"},
     {path: "/contact", label: "Contact"},
   ]

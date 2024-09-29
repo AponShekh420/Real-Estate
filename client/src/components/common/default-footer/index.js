@@ -1,8 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import ContactMeta from "./ContactMeta";
-import AppWidget from "./AppWidget";
-import Social from "./Social";
 import Subscribe from "./Subscribe";
 import MenuWidget from "./MenuWidget";
 import Copyright from "./Copyright";
@@ -12,30 +9,24 @@ const Footer = () => {
     <>
       <div className="container">
         <div className="row">
-          <div className="col-lg-5">
+          <div className="col-lg-6">
             <div className="footer-widget mb-4 mb-lg-5">
               <Link className="footer-logo" href="/">
                 <Image
                   width={138}
-                  height={44}
+                  height={70}
                   className="mb40"
-                  src="/images/header-logo.svg"
+                  src="/images/footer/logo-footer.png"
                   alt=""
                 />
               </Link>
-              <ContactMeta />
-              <AppWidget />
-              <div className="social-widget">
-                <h6 className="text-white mb20">Follow us on social media</h6>
-                <Social />
-              </div>
+              <Subscribe />
             </div>
           </div>
           {/* End .col-lg-5 */}
 
-          <div className="col-lg-7">
+          <div className="col-lg-6">
             <div className="footer-widget mb-4 mb-lg-5">
-              <Subscribe />
               <div className="row justify-content-between">
                 <MenuWidget />
               </div>
@@ -46,7 +37,7 @@ const Footer = () => {
       </div>
       {/* End .container */}
 
-      <Copyright />
+      {/* <Copyright /> */}
       {/* End copyright */}
     </>
   );
