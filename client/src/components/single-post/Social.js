@@ -4,7 +4,6 @@ const Social = () => {
   const socialIcons = [
     "fab fa-facebook-f",
     "fab fa-twitter",
-    "fab fa-instagram",
     "fab fa-linkedin-in",
   ];
 

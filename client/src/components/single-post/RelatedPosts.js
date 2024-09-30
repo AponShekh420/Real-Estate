@@ -15,9 +15,6 @@ const RelatedPosts = async ({data}) => {
           >
             <div className="main-title text-start text-md-center">
               <h2 className="title">Related Posts</h2>
-              <p className="paragraph">
-                Aliquam lacinia diam quis lacus euismod
-              </p>
             </div>
           </div>
         </div>

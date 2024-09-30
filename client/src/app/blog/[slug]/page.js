@@ -1,8 +1,6 @@
 import Details from "@/components/single-post/Details";
-import Pagination from "@/components/single-post/Pagination";
 import Social from "@/components/single-post/Social";
 import Tags from "@/components/single-post/Tags";
-import TopComments from "@/components/single-post/TopComments";
 import DefaultHeader from "@/components/common/DefaultHeader";
 import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
@@ -11,9 +9,6 @@ import StringToDomComponent from "@/components/common/StringToDomComponent";
 import "@/components/common/quillEditorTextStyle.css";
 import RelatedPosts from "@/components/single-post/RelatedPosts";
 import { notFound } from "next/navigation";
-import AllComment from "@/components/single-post/comment";
-import CommentBoxForm from "@/components/single-post/CommentBoxForm";
-import Container from "@/components/single-post/Container";
 
 export const metadata = {
   title: "Blog Single  || Homez - Real Estate NextJS Template",
@@ -65,15 +60,6 @@ const BlogSingle = async ({params}) => {
                 </div>
               </div>
               {/* End share social and tags */}
-
-              <TopComments />
-              {/* End TopComments */}
-
-              <Pagination />
-              {/* End Blog Single pagination */}
-
-              <Container data={res}/>
-              {/* End commentBox */}
             </div>
           </div>
         </div>

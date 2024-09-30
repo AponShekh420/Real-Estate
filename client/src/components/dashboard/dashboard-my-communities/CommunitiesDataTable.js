@@ -31,7 +31,6 @@ const CommunitiesDataTable = ({communitiesData, setDeleteData}) => {
         <tr>
           <th scope="col">Listing title</th>
           <th scope="col">Date Published</th>
-          <th scope="col">Listed-In</th>
           <th scope="col">Status</th>
           <th scope="col">Action</th>
         </tr>
@@ -71,7 +70,6 @@ const CommunitiesDataTable = ({communitiesData, setDeleteData}) => {
                 {community?.active ? "Active": "panding"}
               </span>
             </td>
-            <td className="vam">{community?.status.map((item, index) => (community?.status?.length > (index + 1)) ? `${item}/`: item)}</td>
             <td className="vam">
               <div className="d-flex">
                 <Link href={`/dashboard/edit-community/${community?.slug}`}> 

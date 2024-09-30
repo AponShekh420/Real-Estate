@@ -32,37 +32,39 @@ const Blogs = ({blogFilter}) => {
         ) : (data.length > 0) ? (
           data?.map((blog) => (
             <div className="col-sm-6 col-lg-4" key={blog.id}>
-              <div className="blog-style1">
-                <div className="blog-img">
-                  <Image
-                    width={386}
-                    height={271}
-                    className="w-100 h-100 cover"
-                    src={blog.img}
-                    alt="blog"
-                  />
-                </div>
-                <div className="blog-content">
-                  <div className="date">
-                    <span className="month" style={{fontSize: "13px", fontWeight: 400}}>
-                      <Moment format="MMM">
-                        {blog?.createdAt}
-                      </Moment>
-                    </span>
-                    <span className="day" style={{fontSize: "13px", fontWeight: 400}}>
-                      <Moment format="D">
-                        {blog?.createdAt}
-                      </Moment>
-                    </span>
+              <Link href={`/blog/${blog?.slug}`}>
+                <div className="blog-style1">
+                  <div className="blog-img">
+                    <Image
+                      width={386}
+                      height={271}
+                      className="w-100 h-100 cover"
+                      src={blog.img}
+                      alt="blog"
+                    />
                   </div>
-                  <a className="tag" href="#">
-                    {blog?.tag}
-                  </a>
-                  <h6 className="title mt-1">
-                    <Link href={`/blog/${blog?.slug}`}>{blog?.title}</Link>
-                  </h6>
+                  <div className="blog-content">
+                    <div className="date">
+                      <span className="month" style={{fontSize: "13px", fontWeight: 400}}>
+                        <Moment format="MMM">
+                          {blog?.createdAt}
+                        </Moment>
+                      </span>
+                      <span className="day" style={{fontSize: "13px", fontWeight: 400}}>
+                        <Moment format="D">
+                          {blog?.createdAt}
+                        </Moment>
+                      </span>
+                    </div>
+                    <a className="tag" href="#">
+                      {blog?.tag}
+                    </a>
+                    <h6 className="title mt-1">
+                      <Link href={`/blog/${blog?.slug}`}>{blog?.title}</Link>
+                    </h6>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
           ))
         ) : (
