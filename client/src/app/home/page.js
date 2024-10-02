@@ -1,12 +1,12 @@
 import MobileMenu from "@/components/common/mobile-menu";
 import DefaultHeader from "@/components/common/DefaultHeader";
-import PropertiesByCities from "@/components/home/PropertiesByCities";
 import Hero from "@/components/home/hero";
 import Features from "@/components/home/Features";
 import Link from "next/link";
 import Footer from "@/components/common/default-footer";
 import RecentBlogs from "@/components/home/RecentBlogs";
 import StateList from "@/components/home/StateList";
+import CommunityByStates from "@/components/home/CommunityByStates";
 
 
 export const metadata = {
@@ -50,10 +50,7 @@ const Home = () => {
           >
             <div className="col-lg-9">
               <div className="main-title2">
-                <h2 className="title">Communities by Cities</h2>
-                <p className="paragraph">
-                  Aliquam lacinia diam quis lacus euismod
-                </p>
+                <h2 className="title">Popular 55+ Destinations</h2>
               </div>
             </div>
             {/* End col-lg-9 */}
@@ -61,7 +58,7 @@ const Home = () => {
             <div className="col-lg-3">
               <div className="text-start text-lg-end mb-3">
                 <Link className="ud-btn2" href="/summary">
-                  See All Cities
+                  View All
                   <i className="fal fa-arrow-right-long" />
                 </Link>
               </div>
@@ -73,7 +70,7 @@ const Home = () => {
           <div className="row">
             <div className="col-lg-12" data-aos="fade-up" data-aos-delay="300">
               <div className="property-city-slider position-relative">
-                <PropertiesByCities />
+                <CommunityByStates />
               </div>
             </div>
           </div>
