@@ -17,7 +17,7 @@ const checkMoreInfoValidation = [
     .trim(),
   check("message")
     .isLength({min: 2})
-    .withMessage("Please enter a message. This field cannot be left empty or short")
+    .withMessage("Please enter a additional information. This field cannot be left empty or short")
     .trim(),
 ]
 

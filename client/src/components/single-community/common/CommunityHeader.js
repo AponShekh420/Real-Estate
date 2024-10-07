@@ -1,6 +1,8 @@
 import Link from "next/link";
 import TimeManager from "./TimeManager";
 import Wishlist from "./Wishlist";
+import CommunityMinMaxPrice from "@/components/common/CommunityMinMaxPrice";
+
 
 const PropertyHeader = ({ data }) => {
   return (
@@ -9,35 +11,10 @@ const PropertyHeader = ({ data }) => {
         <div className="single-property-content mb30-md">
           <h2 className="sp-lg-title">{data.title}</h2>
           <div className="pd-meta mb15 d-md-flex align-items-center">
-            <p className="text fz15 mb-0 bdrr1 pr10 bdrrn-sm text-capitalize">
-              {data?.city?.name} City, {data?.state?.abbreviation}, USA
+            <p className="text fz15 mb-0 pr10 text-capitalize">
+              {data?.city ? `${data?.city?.name} City` : `${data?.area?.name}`}, {data?.state?.abbreviation}
             </p>
-            <a
-              className="ff-heading bdrr1 fz15 pr10 ml10 ml0-sm bdrrn-sm"
-              href="#"
-            >
-              <i className="far fa-clock pe-2" />
-              <TimeManager data={data}/>
-            </a>
-            {/* <a className="ff-heading ml10 ml0-sm fz15" href="#">
-              <i className="flaticon-fullscreen pe-2 align-text-top" />
-              8721
-            </a> */}
           </div>
-          {/* <div className="property-meta d-flex align-items-center">
-            <a className="text fz15" href="#">
-              <i className="flaticon-bed pe-2 align-text-top" />
-              {data.bed} bed
-            </a>
-            <a className="text ml20 fz15" href="#">
-              <i className="flaticon-shower pe-2 align-text-top" />
-              {data.bath} bath
-            </a>
-            <a className="text ml20 fz15" href="#">
-              <i className="flaticon-expand pe-2 align-text-top" />
-              {data.sqft} sqft
-            </a>
-          </div> */}
         </div>
       </div>
       {/* End .col-lg--8 */}
@@ -47,17 +24,10 @@ const PropertyHeader = ({ data }) => {
           <div className="property-action text-lg-end">
             <div className="d-flex mb20 mb10-md align-items-center justify-content-lg-end">
               <Wishlist data={data}/>
-              <a className="icon mr10" href="#">
-                <span className="flaticon-new-tab" />
-              </a>
-              <a className="icon mr10" href="#">
-                <span className="flaticon-share-1" />
-              </a>
-              <a className="icon" href="#">
-                <span className="flaticon-printer" />
-              </a>
             </div>
-            <h3 className="price mb-0">${data?.minPrice}-${data?.maxPrice}</h3>
+            <h3 className="price mb-0">
+              <CommunityMinMaxPrice data={data}/>
+            </h3>
             <p className="text space fz15"></p>
           </div>
         </div>

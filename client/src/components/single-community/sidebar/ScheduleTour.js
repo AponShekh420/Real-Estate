@@ -1,9 +1,9 @@
 "use client"
+import Link from "next/link";
 import React, { useState } from "react";
 import { BeatLoader } from "react-spinners";
 
 const ScheduleTour = ({data}) => {
-  const [time, setTime] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -19,14 +19,13 @@ const ScheduleTour = ({data}) => {
     setSuccessMsg("");
     try {
       setLoading(true);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/email/schedule/send`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/email/more-info/send`, {
         method: "POST",
         credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          time,
           name,
           phone,
           email,
@@ -58,26 +57,12 @@ const ScheduleTour = ({data}) => {
       <div className="tab-content" id="pills-tabContent">
         <form
           className="form-style1"
-          action={`${process.env.NEXT_PUBLIC_BACKEND_API}/api/email/schedule/send`}
+          action={`${process.env.NEXT_PUBLIC_BACKEND_API}/api/email/more-info/send`}
           method="post"
           onSubmit={submitHandler}
           encType="multipart/form-data"
         >
           <div className="row">
-            <div className="col-md-12">
-              <div className="mb20">
-                <input
-                  type="date"
-                  className="form-control"
-                  placeholder="Time"
-                  onChange={(e) => setTime(e.target.value)}
-                  value={time}
-                />
-                <p className="text-danger">{errors?.time?.msg}</p>
-              </div>
-            </div>
-            {/* End .col-12 */}
-
             <div className="col-lg-12">
               <div className="mb20">
                 <input
@@ -125,7 +110,7 @@ const ScheduleTour = ({data}) => {
                 <textarea
                   cols={30}
                   rows={4}
-                  placeholder="Enter Your Messages"
+                  placeholder="I’d like additional information about [comminty name]."
                   defaultValue={""}
                   onChange={(e) => setMessage(e.target.value)}
                   value={message}
@@ -138,7 +123,7 @@ const ScheduleTour = ({data}) => {
             <div className="col-md-12">
               <div className="d-grid">
                 <button type="submit" className={`ud-btn btn-thm d-flex align-items-center justify-content-center ${loading ? "opacity-50": "opacity-100"}`} disabled={loading}>
-                  {!loading && "Submit a Tour Request"}
+                  {!loading && "Submit Request"}
                   {loading ? (<BeatLoader color="white" size={22} loading={loading} />) : (<i className="fal fa-arrow-right-long" />)}
                 </button>
               </div>
@@ -152,6 +137,11 @@ const ScheduleTour = ({data}) => {
                 <div className="alert alert-danger text-center" role="alert">
                   {errors?.fail?.msg}
                 </div>)}
+              </div>
+              <div>
+                <small style={{color: "gray"}}>
+                  By requesting more information, you consent 55up.com, along with its affiliated real estate or mortgage professionals, may call, text, or email you as it relates to this request.  You can opt out at any time by emailing <a style={{color: "#EE4C34"}} href="mailto:optout@55up.com">optout@55up.com</a>.  By submitting this for you also acknowledge 55up.com’s <Link style={{color: "#EE4C34"}} href="/privacy-policy">Privacy Policy</Link>.
+                </small>
               </div>
             </div>
             {/* End .col-12 */}

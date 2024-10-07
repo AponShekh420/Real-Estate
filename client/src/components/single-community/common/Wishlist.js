@@ -9,6 +9,7 @@ import LoginSignupModal from "../../common/login-signup-modal"
 const Wishlist = ({data}) => {
   const [wishlist, setWislist] = useState([]);
   const [notify, setNotify] = useState(0);
+  const [toggle, setToggle] = useState(false);
 
 
   // redux 
@@ -20,7 +21,7 @@ const Wishlist = ({data}) => {
     try {
       const res = await getWishlist();
       if(res?.data) {
-        setWislist(res?.data?.communities?.map(community => community?._id))
+        setWislist(res?.data?.communities?.map(community => community?._id));
       }
     } catch(err) {
       console.log(err.message)
@@ -51,18 +52,29 @@ const Wishlist = ({data}) => {
 
   useEffect(() => {
     userInfo && getAllReview();
-  }, [notify])
+  }, [notify, userInfo])
+
+
+  useEffect(() => {
+    userInfo && setToggle(wishlist.includes(data?._id));
+  }, [wishlist, userInfo])
 
   return (
     <>
-      {wishlist.includes(data?._id) ? (
-        <Link href="#" className="d-flex align-items-center justify-content-center icon mr10" onClick={() => userInfo && wishlistHanlder(data?._id)}>
+      {toggle ? (
+        <Link href="#" className="d-flex align-items-center justify-content-center icon mr10" onClick={() => {
+          userInfo && wishlistHanlder(data?._id);
+          userInfo && setToggle(pre => !pre);
+        }}>
           <i class="fa-solid fa-heart" style={{color: "red"}}></i>
         </Link>
       ) : (
         <Link 
           href="#" 
-          onClick={() => userInfo && wishlistHanlder(data?._id)}
+          onClick={() => {
+            userInfo && wishlistHanlder(data?._id);
+            userInfo && setToggle(pre => !pre);
+          }}
           data-bs-toggle={`${userInfo ? null : "modal"}`}
           data-bs-target="#loginSignupModal"
           role={userInfo ? null : "button"}

@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import LoginSignupModal from "../common/login-signup-modal";
 
-const Wishlist = ({listing}) => {
+const Wishlist = ({data}) => {
   const [wishlist, setWislist] = useState([]);
   const [notify, setNotify] = useState(0);
+  const [toggle, setToggle] = useState(false);
 
 
   // redux 
@@ -49,25 +50,35 @@ const Wishlist = ({listing}) => {
   }
 
   useEffect(() => {
-    getAllReview();
-  }, [notify])
+    userInfo && getAllReview();
+  }, [notify, userInfo])
+
+
+  useEffect(() => {
+    userInfo && setToggle(wishlist.includes(data?._id));
+  }, [wishlist, userInfo])
 
   return (
     <>
-      {wishlist.includes(listing?._id) ? (
-        <Link href="#" className="d-flex align-items-center justify-content-center" onClick={() => userInfo && wishlistHanlder(listing?._id)}>
+      {toggle ? (
+        <span className="d-flex align-items-center justify-content-center" onClick={() => {
+          userInfo && wishlistHanlder(data?._id);
+          userInfo && setToggle(pre => !pre);
+        }}>
           <i class="fa-solid fa-heart" style={{color: "red"}}></i>
-        </Link>
+        </span>
       ) : (
-        <Link 
-          href="#" 
-          onClick={() => userInfo && wishlistHanlder(listing?._id)}
+        <span 
+          onClick={() => {
+            userInfo && wishlistHanlder(data?._id);
+            userInfo && setToggle(pre => !pre);
+          }}
           data-bs-toggle={`${userInfo ? null : "modal"}`}
           data-bs-target="#loginSignupModal"
           role={userInfo ? null : "button"}
         >
           <span className="flaticon-like" />
-        </Link>
+        </span>
       )}
 
       {/* Signup Modal */}

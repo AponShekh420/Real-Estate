@@ -5,7 +5,6 @@ import MobileMenu from "@/components/common/mobile-menu";
 import EnergyClass from "@/components/single-community/common/EnergyClass";
 import FloorPlans from "@/components/single-community/common/FloorPlans";
 import HomeValueChart from "@/components/single-community/common/HomeValueChart";
-import InfoWithForm from "@/components/single-community/common/more-info";
 import NearbySimilarProperty from "@/components/single-community/common/NearbySimilarProperty";
 import OverView from "@/components/single-community/common/OverView";
 import PropertyAddress from "@/components/single-community/common/CommunityAddress";
@@ -18,7 +17,6 @@ import CommunityDescriptions from "@/components/single-community/common/Communit
 import ReviewBoxForm from "@/components/single-community/common/ReviewBoxForm";
 import VirtualTour360 from "@/components/single-community/common/VirtualTour360";
 import AllReviews from "@/components/single-community/common/reviews";
-import ContactWithAgent from "@/components/single-community/sidebar/ContactWithAgent";
 import ScheduleTour from "@/components/single-community/sidebar/ScheduleTour";
 import PropertyGallery from "@/components/single-community/single-v8/PropertyGallery";
 import React from "react";
@@ -63,13 +61,6 @@ const SingleCommunity = async ({ params }) => {
           <div className="row wrap">
             <div className="col-lg-8">
               <PropertyGallery id={params.id} data={res}/>
-              {/* <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Overview</h4>
-                <div className="row">
-                  <OverView data={res}/>
-                </div>
-              </div> */}
-              {/* End .ps-widget */}
 
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                 <div className="row">
@@ -83,87 +74,6 @@ const SingleCommunity = async ({ params }) => {
                 <div className="row">
                   <PropertyAddress data={res}/>
                 </div>
-              </div>
-              {/* End .ps-widget */}
-
-              
-
-              {/* <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Energy Class</h4>
-                <div className="row">
-                  <EnergyClass data={res}/>
-                </div>
-              </div> */}
-              {/* End .ps-widget */}
-
-              {/* <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Floor Plans</h4>
-                <div className="row">
-                  <div className="col-md-12">
-                    <div className="accordion-style1 style2">
-                      <FloorPlans data={res}/>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
-              {/* End .ps-widget */}
-
-              {/* <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 ">
-                <h4 className="title fz17 mb30">Video</h4>
-                <div className="row">
-                  <PropertyVideo data={res}/>
-                </div>
-              </div> */}
-              {/* End .ps-widget */}
-
-              {/* <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">360° Virtual Tour</h4>
-                <div className="row">
-                  <VirtualTour360 data={res}/>
-                </div>
-              </div> */}
-              {/* End .ps-widget */}
-
-
-              {/* <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Walkscore</h4>
-                <div className="row">
-                  <div className="col-md-12">
-                    <h4 className="fw400 mb20">
-                      10425 Tabor St Los Angeles CA 90034 USA
-                    </h4>
-                    <WalkScore data={res}/>
-                  </div>
-                </div>
-              </div> */}
-              {/* End .ps-widget */}
-
-              {/* <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Mortgage Calculator</h4>
-                <div className="row">
-                  <MortgageCalculator data={res}/>
-                </div>
-              </div> */}
-              {/* End .ps-widget */}
-
-              {/* <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <div className="row">
-                  <PropertyViews />
-                </div>
-              </div> */}
-              {/* End .ps-widget */}
-
-              {/* <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Home Value</h4>
-                <div className="row">
-                  <HomeValueChart data={res}/>
-                </div>
-              </div> */}
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Get More Information</h4>
-                <InfoWithForm data={res}/>
               </div>
               {/* End .ps-widget */}
 
@@ -188,69 +98,16 @@ const SingleCommunity = async ({ params }) => {
             <div className="col-lg-4">
               <div className="column">
                 <div className="default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
-                  <h4 className="form-title mb5">Schedule a tour</h4>
-                  <p className="text">Choose your preferred day</p>
+                  <h4 className="form-title mb5">Get More Information</h4>
+                  <p className="text">We can provide additional details or help you schedule a tour</p>
                   <ScheduleTour data={res}/>
                 </div>
-                {/* End .Schedule a tour */}
-
-                <div className="agen-personal-info position-relative bgc-white default-box-shadow1 bdrs12 p30 mt30">
-                  <div className="widget-wrapper mb-0">
-                    <h6 className="title fz17 mb30">Get More Information</h6>
-                    <ContactWithAgent data={res}/>
-                  </div>
-                </div>
+                {/* End .get more */}
               </div>
             </div>
           </div>
           {/* End .row */}
 
-          {/* <div className="row mt30 align-items-center justify-content-between">
-            <div className="col-auto">
-              <div className="main-title">
-                <h2 className="title">Discover Our Featured Listings</h2>
-                <p className="paragraph">
-                  Aliquam lacinia diam quis lacus euismod
-                </p>
-              </div>
-            </div> */}
-            {/* End header */}
-
-            {/* <div className="col-auto mb30">
-              <div className="row align-items-center justify-content-center">
-                <div className="col-auto">
-                  <button className="featured-prev__active swiper_button">
-                    <i className="far fa-arrow-left-long" />
-                  </button>
-                </div> */}
-                {/* End prev */}
-
-                {/* <div className="col-auto">
-                  <div className="pagination swiper--pagination featured-pagination__active" />
-                </div> */}
-                {/* End pagination */}
-
-                {/* <div className="col-auto">
-                  <button className="featured-next__active swiper_button">
-                    <i className="far fa-arrow-right-long" />
-                  </button>
-                </div> */}
-                {/* End Next */}
-              {/* </div> */}
-              {/* End .col for navigation and pagination */}
-            {/* </div> */}
-            {/* End .col for navigation and pagination */}
-          {/* </div> */}
-          {/* End .row */}
-
-          {/* <div className="row">
-            <div className="col-lg-12">
-              <div className="property-city-slider">
-                <NearbySimilarProperty data={res}/>
-              </div>
-            </div>
-          </div> */}
-          {/* End .row */}
         </div>
         {/* End .container */}
       </section>

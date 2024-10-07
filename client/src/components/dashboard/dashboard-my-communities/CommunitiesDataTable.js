@@ -6,8 +6,8 @@ import Moment from "react-moment";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { MoonLoader } from "react-spinners";
 import DeleteCommunity from "./DeleteCommunity";
-
-
+import CurrencyFormat from 'react-currency-format';
+import CommunityMinMaxPrice from "@/components/common/CommunityMinMaxPrice";
 
 const getStatusStyle = (active) => {
   switch (active) {
@@ -55,7 +55,7 @@ const CommunitiesDataTable = ({communitiesData, setDeleteData}) => {
                   </div>
                   <p className="list-text mb-0">{community?.city?.name} city, {community?.state?.abbreviation}, USA</p>
                   <div className="list-price">
-                    <a href="#">Price: ${community?.minPrice}-${community?.maxPrice}</a>
+                   <span>Price: <CommunityMinMaxPrice data={community}/></span>
                   </div>
                 </div>
               </div>

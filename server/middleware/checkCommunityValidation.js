@@ -26,7 +26,7 @@ const checkCommunityValidation = [
     .withMessage("Must be select a area")
     .trim(),
   check("minPrice")
-    .isLength({min: 4})
+    .isLength({min: 3})
     .withMessage("Must be a min price")
     .trim(),
   check("maxPrice")

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MoonLoader } from "react-spinners";
 import CommunitiesListLoader from "./CommunitiesListLoader";
 import Wishlist from "./Wishlist";
+import CommunityMinMaxPrice from "../common/CommunityMinMaxPrice";
 
 
 const override = {
@@ -64,7 +65,7 @@ const FeaturedListings = ({state: stateProps, city: cityProps, area: areaProps})
                 </div> */}
   
                 <div className="list-price">
-                  ${listing.minPrice} <span>-</span> ${listing.maxPrice}
+                  <CommunityMinMaxPrice data={listing}/>
                 </div>
               </div>
               <div className="list-content">
@@ -87,11 +88,8 @@ const FeaturedListings = ({state: stateProps, city: cityProps, area: areaProps})
                 <div className="list-meta2 d-flex justify-content-between align-items-center">
                   <span className="for-what">{/*here would be the buttom oparation*/}</span>
                   {/* For {listing?.status.map((item, index) => (listing.status.length > (index + 1)) ? `${item}/`: item)} */}
-                  <div className="icons d-flex align-items-center">
-                    <Link href={`/community/${listing.slug}`}>
-                      <span className="flaticon-fullscreen" />
-                    </Link>
-                    <Wishlist listing={listing}/>
+                  <div className="icons d-flex align-items-end h-100">
+                    <Wishlist data={listing}/>
                   </div>
                 </div>
               </div>
