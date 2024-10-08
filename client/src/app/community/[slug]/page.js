@@ -7,7 +7,6 @@ import FloorPlans from "@/components/single-community/common/FloorPlans";
 import HomeValueChart from "@/components/single-community/common/HomeValueChart";
 import NearbySimilarProperty from "@/components/single-community/common/NearbySimilarProperty";
 import OverView from "@/components/single-community/common/OverView";
-import PropertyAddress from "@/components/single-community/common/CommunityAddress";
 import PropertyDetails from "@/components/single-community/common/CommunityDetails";
 import PropertyHeader from "@/components/single-community/common/CommunityHeader";
 import CommunityInfoTab from "@/components/single-community/common/CommunityInfoTab";
@@ -65,14 +64,6 @@ const SingleCommunity = async ({ params }) => {
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                 <div className="row">
                   <CommunityInfoTab data={res}/>
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30 mt30">Address</h4>
-                <div className="row">
-                  <PropertyAddress data={res}/>
                 </div>
               </div>
               {/* End .ps-widget */}

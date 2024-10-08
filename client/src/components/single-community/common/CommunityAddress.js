@@ -33,16 +33,6 @@ const PropertyAddress = ({data}) => {
           </div>
         </div>
       </div>
-
-      <div className="col-md-12">
-        <iframe
-          className="position-relative bdrs12 mt30 h250"
-          loading="lazy"
-          src={`https://maps.google.com/maps?q=${data?.address}&t=m&z=14&output=embed&iwloc=near`}
-          title={data?.address}
-          aria-label={data?.address}
-        />
-      </div>
       {/* End col */}
     </>
   );

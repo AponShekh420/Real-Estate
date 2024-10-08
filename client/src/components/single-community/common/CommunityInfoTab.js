@@ -52,6 +52,19 @@ const CommunityInfoTab = async ({data}) => {
                   Models
                 </button>
               ): null}
+
+              <button
+                className={`nav-link fw600`}
+                id={`nav-item4-tab`}
+                data-bs-toggle="tab"
+                data-bs-target={`#nav-item4`}
+                type="button"
+                role="tab"
+                aria-controls={`nav-item4`}
+                aria-selected={"true"}
+                >
+                  Map
+              </button>
           </div>
         </nav>
         {/* End nav tabs */}
@@ -63,16 +76,13 @@ const CommunityInfoTab = async ({data}) => {
               role="tabpanel"
               aria-labelledby={`nav-item1-tab`}
             >
-              
+              <CommunityDetails data={data}/>
               {data?.description && (
                 <>
                   <h4 className="title fz17 mb10">Description</h4>
                   <CommunityDescriptions data={data}/>
                 </>
                 )}
-
-              <h4 className="title fz17 mt30 mb10">Details</h4>
-              <CommunityDetails data={data}/>
             </div>
 
             {/* amenities */}
@@ -100,6 +110,23 @@ const CommunityInfoTab = async ({data}) => {
                 <Models modelsData={modelsData}/>
               </div>
             ): null}
+
+            <div
+              className={`tab-pane fade fz15`}
+              id={`nav-item4`}
+              role="tabpanel"
+              aria-labelledby={`nav-item4-tab`}
+            >
+              <div className="col-md-12">
+                <iframe
+                  className="position-relative bdrs12 mt30 h250"
+                  loading="lazy"
+                  src={`https://maps.google.com/maps?q=${data?.address}&t=m&z=14&output=embed&iwloc=near`}
+                  title={data?.address}
+                  aria-label={data?.address}
+                />
+              </div>
+            </div>
         </div>
       </div>
     </div>

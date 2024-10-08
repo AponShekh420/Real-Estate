@@ -1,3 +1,4 @@
+import CommunityMinMaxPrice from "@/components/common/CommunityMinMaxPrice";
 import React from "react";
 
 const CommunityDetails = ({data}) => {
@@ -22,12 +23,8 @@ const CommunityDetails = ({data}) => {
         value: data.gated ? "Yes" : "No",
       },
       {
-        label: "Built Start",
-        value: data.builtStart,
-      },
-      {
-        label: "Built End",
-        value: data.builtEnd,
+        label: "Built Date",
+        value: data.builtEnd != "Present" ? `${data.builtStart.split("-")[0]} - ${data.builtEnd.split("-")[0]}` : "New Construction",
       },
       {
         label: "Home Types",
@@ -46,16 +43,31 @@ const CommunityDetails = ({data}) => {
           }`}
         >
           {column.map((detail, index) => (
-            <div key={index} className="d-flex justify-content-between">
-              <div className="pd-list">
-                <p className="fw600 mb10 ff-heading dark-color">
-                  {detail.label}
-                </p>
+            detail.label == "Price Range" ? (
+              <div key={index} className="d-flex justify-content-between">
+                <div className="pd-list">
+                  <p className="fw600 mb10 ff-heading dark-color">
+                    {detail.label}
+                  </p>
+                </div>
+                <div className="pd-list">
+                  <p className="text mb10 text-end" style={{maxWidth: "130px"}}>
+                    <CommunityMinMaxPrice data={data}/>
+                  </p>
+                </div>
               </div>
-              <div className="pd-list">
-                <p className="text mb10 text-end" style={{maxWidth: "130px"}}>{detail.value}</p>
+            ) : (
+              <div key={index} className="d-flex justify-content-between">
+                <div className="pd-list">
+                  <p className="fw600 mb10 ff-heading dark-color">
+                    {detail.label}
+                  </p>
+                </div>
+                <div className="pd-list">
+                  <p className="text mb10 text-end" style={{maxWidth: "130px"}}>{detail.value}</p>
+                </div>
               </div>
-            </div>
+            )
           ))}
         </div>
       ))}

@@ -1,0 +1,21 @@
+/* global.css */
+.amenities ul {
+  list-style-type: disc !important; /* Ensure bullet points */
+  padding-left: 20px !important; /* Ensure indentation */
+}
+
+.amenities ol {
+  list-style-type: decimal !important; /* Ensure numbering */
+  padding-left: 20px !important; /* Ensure indentation */
+}
+
+.amenities li {
+  margin-bottom: 5px !important;
+  list-style-type: inherit !important; /* Ensure space between items */
+}
+
+
+
+.amenities img {
+  max-width: 100% !important;
+}
