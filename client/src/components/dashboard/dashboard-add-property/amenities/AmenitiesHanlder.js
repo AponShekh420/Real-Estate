@@ -43,10 +43,6 @@ const AmenitiesHanlder = ({setPopular, setAmenityName, setEmoji, setEdit, popula
       const currentAmenity = await res.json();
       setLoading(false);
       if(currentAmenity?.msg) {
-        toast.success(currentAmenity?.msg, {
-          position: "top-right",
-          autoClose: 1500,
-        });
         setEdit(false);
         setEmoji("");
         setPopular(false);
@@ -81,10 +77,6 @@ const AmenitiesHanlder = ({setPopular, setAmenityName, setEmoji, setEdit, popula
       const currentAmenity = await res.json();
       setLoading(false);
       if(currentAmenity?.msg) {
-        toast.success(currentAmenity?.msg, {
-          position: "top-right",
-          autoClose: 1500,
-        });
         setEmoji("");
         setPopular(false);
         setPrickerDisplay(false);
@@ -151,7 +143,7 @@ const AmenitiesHanlder = ({setPopular, setAmenityName, setEmoji, setEdit, popula
       {/* col 2 end */}
 
       {/* col 2 */}
-      <div className="col-sm-6 col-xl-4 d-flex mt0-xs mt35" style={{height: "54px"}}>
+      {/* <div className="col-sm-6 col-xl-4 d-flex mt0-xs mt35" style={{height: "54px"}}>
         <div className="mb20 d-flex align-items-center" style={{height: "54px", width: '54px'}}>
           <div className='d-flex align-items-center justify-content-center h-100 w-100 overflow-hidden position-relative pointer'>
             {!emoji ? (
@@ -169,7 +161,7 @@ const AmenitiesHanlder = ({setPopular, setAmenityName, setEmoji, setEdit, popula
             </div>
           ): null}
         </div>
-      </div>
+      </div> */}
       {/* col 2 end */}
 
 

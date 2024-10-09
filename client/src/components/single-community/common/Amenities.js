@@ -1,14 +1,20 @@
 import React from "react";
-import classes from "./amenitiesStyle.module.css"
-const Amenities = ({data}) => {
-  const {amenities} = data;
-  const column1 = (amenities.length / 3) * 2; // will start from 66 of 100;
-  const column2 = (amenities.length / 3) //will start from 33 of 100
+import classes from "./amenitiesStyle.module.css";
 
+const Amenities = ({ data }) => {
+  const { amenities } = data;
+
+  // Sort amenities alphabetically by name
+  const sortedData = amenities.sort((a, b) => a.name.localeCompare(b.name));
+
+  // Calculate the size of each column
+  const columnSize = Math.ceil(sortedData.length / 3);
+
+  // Create three columns by slicing the sorted array
   const featuresAmenitiesData = [
-    [...amenities.slice(column1, amenities.length)],
-    [...amenities.slice(column2, column1)],
-    [...amenities.slice(0, column2)],
+    sortedData.slice(0, columnSize), // First column: from 0 to columnSize
+    sortedData.slice(columnSize, columnSize * 2), // Second column: from columnSize to columnSize*2
+    sortedData.slice(columnSize * 2), // Third column: from columnSize*2 to the end
   ];
 
   return (

@@ -19,7 +19,6 @@ const getDataByFilter = (community) => {
   formData.set("gated", gated);
   formData.set("ageRestrictions", ageRestrictions);
   formData.set("communitySize", communitySize);
-  formData.set("homeTypes", homeTypes);
   formData.set("maxPrice", maxPrice);
   formData.set("minPrice", minPrice);
   formData.set("zip", zip);
@@ -39,6 +38,9 @@ const getDataByFilter = (community) => {
 
 
   formData.set('amenities', JSON.stringify(amenities.map(amenity => amenity._id)));
+
+
+  homeTypes.forEach(type => formData.append("homeTypes[]", type));
 
 
   // Send existing images' URLs and deleted images as separate fields

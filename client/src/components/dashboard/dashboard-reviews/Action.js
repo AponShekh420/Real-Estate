@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MoonLoader } from "react-spinners";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
@@ -44,6 +44,9 @@ const Action = ({review, action}) => {
     }
   }
 
+  useEffect(()=> {
+    setStatus(action);
+  }, [review])
 
   return (
     <div>

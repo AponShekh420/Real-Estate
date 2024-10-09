@@ -179,7 +179,7 @@ const Amenities = () => {
               {unpopularAmenities[columnKey].map((amenity, amenityIndex) => (
                 <div className="d-flex justify-content-between align-items-center mb10" key={amenityIndex}>
                   <label className="custom_checkbox d-flex align-items-center" style={{ lineHeight: "20px" }}>
-                    {amenity?.icon}{amenity?.name}
+                    {amenity?.name}
                     <input
                       className="p-0 m-0"
                       type="checkbox"
@@ -218,7 +218,7 @@ const Amenities = () => {
               {popularAmenities[columnKey].map((amenity, amenityIndex) => (
                 <div className="d-flex justify-content-between align-items-center mb10" key={amenityIndex}>
                   <label className="custom_checkbox d-flex align-items-center" style={{ lineHeight: "20px" }}>
-                    {amenity?.icon}{amenity?.name}
+                    {amenity?.name}
                     <input
                       className="p-0 m-0"
                       type="checkbox"

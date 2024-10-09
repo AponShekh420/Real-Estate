@@ -37,12 +37,12 @@ const ScheduleTour = ({data}) => {
       const resData = await res.json();
       setLoading(false);
       if(resData?.msg) {
+        setSuccessMsg(resData.msg);
         setName("");
         setEmail("");
         setPhone("");
         setMessage("");
         setTime("");
-        setSuccessMsg(resData?.msg);
       } else {
         setErrors(resData.errors);
       }
@@ -116,6 +116,24 @@ const ScheduleTour = ({data}) => {
                   value={message}
                 />
                 <p className="text-danger">{errors?.message?.msg}</p>
+              </div>
+            </div>
+            {/* End .col-12 */}
+
+            <div className="col-md-12">
+              <div className="mb10">
+                <div class="form-check mb10">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" defaultChecked={true}/>
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Subscribe me to 55up.com updates and newsletters.
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+                  <label class="form-check-label" for="flexCheckChecked">
+                    I’d also like to receive information about mortgage and financing options.
+                  </label>
+                </div>
               </div>
             </div>
             {/* End .col-12 */}

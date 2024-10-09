@@ -45,32 +45,25 @@ const FeaturedListings = ({state: stateProps, city: cityProps, area: areaProps})
       ) : (data.length > 0) ? (
         data.map((listing) => (
           <div className={`col-sm-6 col-lg-6`} key={listing.id}>
-            <div className={"listing-style1"}    >
+            <div className={"listing-style1"}>
               <div className="list-thumb" >
-                <Image
-                  width={382}
-                  height={248}
-                  style={{height:'230px'}}
-                  className="w-100  cover"
-                  src={listing?.thumbnail || listing?.imgs[listing?.imgs?.length -1]}
-                  alt="listings"
-                />
-                {/* <div className="sale-sticker-wrap">
-                  {!listing?.status?.includes("Rent") && (
-                    <div className="list-tag fz12">
-                      <span className="flaticon-electricity me-2" />
-                      FEATURED
-                    </div>
-                  )}
-                </div> */}
-  
-                <div className="list-price">
-                  <CommunityMinMaxPrice data={listing}/>
-                </div>
+                <Link href={`/community/${listing.slug}`}>
+                  <Image
+                    width={382}
+                    height={248}
+                    style={{height:'230px'}}
+                    className="w-100  cover"
+                    src={listing?.thumbnail || listing?.imgs[listing?.imgs?.length -1]}
+                    alt="listings"
+                  />
+                  <div className="list-price">
+                    <CommunityMinMaxPrice data={listing}/>
+                  </div>
+                </Link>
               </div>
               <div className="list-content">
                 <h6 className="list-title">
-                  <Link  href={`/community/${listing.slug}`}>{listing.title}</Link>
+                  <Link href={`/community/${listing.slug}`}>{listing.title}</Link>
                 </h6>
                 <p className="list-text">{listing.location}</p>
                 <div className="list-meta d-flex align-items-center">

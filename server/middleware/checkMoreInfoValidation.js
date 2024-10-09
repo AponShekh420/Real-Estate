@@ -8,8 +8,8 @@ const checkMoreInfoValidation = [
     .withMessage("The name is too short")
     .trim(),
   check("phone")
-    .isLength({min: 6})
-    .withMessage("Please provide a valid phone number.")
+    .isLength({min: 5})
+    .withMessage("Please enter a valid US phone number")
     .trim(),
   check("email")
     .isEmail()

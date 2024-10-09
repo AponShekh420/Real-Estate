@@ -6,8 +6,8 @@ const checkCommunityValidation = [
     .withMessage("The title is too short")
     .trim(),
   check("phone")
-    .isLength({min: 6})
-    .withMessage("Must be a valid phone number")
+    .isLength({min: 5})
+    .withMessage("Please enter a valid US phone number")
     .trim(),
   check("address")
     .isLength({min: 3})

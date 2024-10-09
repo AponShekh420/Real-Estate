@@ -16,14 +16,12 @@ const CommunityDetails = ({data}) => {
         label: "Age Restrictions",
         value: data.ageRestrictions ? "55+" : "N/A",
       },
-    ],
-    [
       {
         label: "Gated",
         value: data.gated ? "Yes" : "No",
       },
       {
-        label: "Built Date",
+        label: "Construction Dates",
         value: data.builtEnd != "Present" ? `${data.builtStart.split("-")[0]} - ${data.builtEnd.split("-")[0]}` : "New Construction",
       },
       {
@@ -34,37 +32,35 @@ const CommunityDetails = ({data}) => {
   ];
 
   return (
-    <div className="row">
+    <div className="row mb35">
       {columns.map((column, columnIndex) => (
         <div
           key={columnIndex}
-          className={`col-md-6 col-xl-4${
-            columnIndex === 1 ? " offset-xl-2" : ""
-          }`}
+          className={`col-12`}
         >
           {column.map((detail, index) => (
             detail.label == "Price Range" ? (
-              <div key={index} className="d-flex justify-content-between">
+              <div key={index} className="d-flex justify-content-between bdrb1">
                 <div className="pd-list">
-                  <p className="fw600 mb10 ff-heading dark-color">
-                    {detail.label}
+                  <p className="fw600 mb0 py5 ff-heading dark-color">
+                    {detail.label}:
                   </p>
                 </div>
                 <div className="pd-list">
-                  <p className="text mb10 text-end" style={{maxWidth: "130px"}}>
+                  <p className="text mb0 py5 text-end">
                     <CommunityMinMaxPrice data={data}/>
                   </p>
                 </div>
               </div>
             ) : (
-              <div key={index} className="d-flex justify-content-between">
+              <div key={index} className="d-flex justify-content-between bdrb1">
                 <div className="pd-list">
-                  <p className="fw600 mb10 ff-heading dark-color">
-                    {detail.label}
+                  <p className="fw600 mb0 py5 ff-heading dark-color">
+                    {detail.label}:
                   </p>
                 </div>
                 <div className="pd-list">
-                  <p className="text mb10 text-end" style={{maxWidth: "130px"}}>{detail.value}</p>
+                  <p className="text mb0 py5 text-end">{detail.value}</p>
                 </div>
               </div>
             )

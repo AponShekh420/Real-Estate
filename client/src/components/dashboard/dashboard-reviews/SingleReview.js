@@ -38,7 +38,7 @@ const SingleReview = ({data, reviews, setReviews, setTotalPages, currentPage}) =
 
   useEffect(() => {
     getReviews()
-  }, [])
+  }, [currentPage])
 
 
   return (
