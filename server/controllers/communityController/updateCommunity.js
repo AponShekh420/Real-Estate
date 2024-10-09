@@ -2,6 +2,9 @@ const CommunityModel = require("../../models/CommunityModel");
 const StateModel = require("../../models/StateModel");
 const CityModel = require("../../models/CityModel");
 const AreaModel = require("../../models/AreaModel");
+const mongoose = require('mongoose');
+
+
 
 const updateCommuity = async (req, res) => {
 
@@ -33,6 +36,8 @@ const updateCommuity = async (req, res) => {
     }
 
 
+    // Check if cityId is valid ObjectId or set to null
+    const cityIdValid = cityId && mongoose.Types.ObjectId.isValid(cityId) ? cityId : null;
 
     // upload the community in database
     const community = await CommunityModel.findByIdAndUpdate(communityId, {
@@ -44,7 +49,7 @@ const updateCommuity = async (req, res) => {
       phone,
       address,
       state: stateId,
-      city: cityId,
+      city: cityIdValid,
       area: areaId,
       zip,
       minPrice,
@@ -63,11 +68,9 @@ const updateCommuity = async (req, res) => {
     }).populate("area").populate("state").populate("city");
 
 
-
     // check: the community has upload in database or not
     if(community) {
-
-      if((community?.area?.active === false || community?.state?.active === false || community?.city?.active === false) && (community?.area?.active != null || community?.state?.active != null || community?.city?.active != null)) {
+      if((community?.area?.active === false || community?.state?.active === false) && (community?.area?.active != null || community?.state?.active != null)) {
         // the community has updated, but the community field has not updated from cityModel, stateModel or areaModel, that's why we should delete the community and to send the server side error 
         await CommunityModel.findByIdAndUpdate(community._id, community);
         res.status(500).json({
@@ -96,20 +99,25 @@ const updateCommuity = async (req, res) => {
         }
 
         // check the city
-        if(currentCommunity.city != cityId) {
+        if(currentCommunity?.city != cityId) {
           // pull the community in city community list
-          await CityModel.findByIdAndUpdate(currentCommunity.city, {
-            $pull: {
-              community: currentCommunity._id
-            }
-          });
 
-          // push the community in new city community list
-          const cityUpdate = await CityModel.findByIdAndUpdate(cityId, {
-            $push: {
-              community: community._id
-            }
-          })
+          if(currentCommunity?.city != null) {
+            await CityModel.findByIdAndUpdate(currentCommunity?.city, {
+              $pull: {
+                community: currentCommunity._id
+              }
+            });
+          }
+
+          if(cityIdValid) {
+            // push the community in new city community list
+            await CityModel.findByIdAndUpdate(cityId, {
+              $push: {
+                community: community._id
+              }
+            })
+          }
         }
 
 

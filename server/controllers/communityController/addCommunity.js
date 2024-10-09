@@ -2,6 +2,7 @@ const CommunityModel = require("../../models/CommunityModel");
 const StateModel = require("../../models/StateModel");
 const CityModel = require("../../models/CityModel");
 const AreaModel = require("../../models/AreaModel");
+const mongoose = require('mongoose');
 
 const addCommunity = async (req, res) => {
 
@@ -21,7 +22,8 @@ const addCommunity = async (req, res) => {
       slug = `${slug}-${duplicateCommunityCount}`;
     }
 
-    // Continue with the rest of your code...
+       // Check if cityId is valid ObjectId or set to null
+       const cityIdValid = cityId && mongoose.Types.ObjectId.isValid(cityId) ? cityId : null;
 
 
     // upload the community in database
@@ -34,7 +36,7 @@ const addCommunity = async (req, res) => {
       phone,
       address,
       state: stateId,
-      city: cityId,
+      city: cityIdValid,
       area: areaId,
       zip,
       minPrice,
@@ -62,11 +64,13 @@ const addCommunity = async (req, res) => {
       })
 
       // push the community in city community list
-      const cityUpdate = await CityModel.findByIdAndUpdate(cityId, {
-        $push: {
-          community: community[0]._id
-        }
-      })
+      if(cityIdValid) {
+        await CityModel.findByIdAndUpdate(cityId, {
+          $push: {
+            community: community[0]._id
+          }
+        })
+      }
 
       // push the community in area community list
       const areaUpdate = await AreaModel.findByIdAndUpdate(areaId, {
@@ -76,7 +80,7 @@ const addCommunity = async (req, res) => {
       })
 
       // check: those cityModel, StateModel and areaModel has updated or not
-      if(stateUpdate && cityUpdate && areaUpdate) {
+      if(stateUpdate && areaUpdate) {
         res.status(200).json({
           msg: "The community has added Successfully",
           data: community[0]

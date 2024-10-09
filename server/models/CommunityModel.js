@@ -26,7 +26,7 @@ const CommunitySchema = mongoose.Schema({
   },
   city: {
     type: mongoose.Types.ObjectId,
-    required: true,
+    default: null,
     ref: "City"
   },
   amenities: [

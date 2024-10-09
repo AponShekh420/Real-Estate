@@ -53,7 +53,7 @@ const CommunitiesDataTable = ({communitiesData, setDeleteData}) => {
                   <div className="h6 list-title">
                     <Link href={`/community/${community?.slug}`}>{community?.title}</Link>
                   </div>
-                  <p className="list-text mb-0">{community?.city?.name} city, {community?.state?.abbreviation}, USA</p>
+                  <p className="list-text mb-0 text-capitalize">{community?.city ? `${community?.city?.name} City` : `${community?.area?.name}`}, {community?.state?.abbreviation}</p>
                   <div className="list-price">
                    <span>Price: <CommunityMinMaxPrice data={community}/></span>
                   </div>

@@ -17,10 +17,10 @@ const checkCommunityValidation = [
     .isLength({min: 1})
     .withMessage("Must be select a state")
     .trim(),
-  check("cityId")
-    .isLength({min: 1})
-    .withMessage("Must be select a city")
-    .trim(),
+  // check("cityId")
+  //   .isLength({min: 1})
+  //   .withMessage("Must be select a city")
+  //   .trim(),
   check("areaId")
     .isLength({min: 1})
     .withMessage("Must be select a area")
