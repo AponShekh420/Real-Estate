@@ -52,7 +52,7 @@ const BlogSingle = async ({params}) => {
 
               <div className="bdrt1 bdrb1 d-block d-sm-flex justify-content-between pt50 pt30-sm pb50 pb30-sm">
                 <div className="blog_post_share d-flex align-items-center mb10-sm">
-                  <span className="mr30">Share this post</span>
+                  <span className="mr30">Share</span>
                   <Social />
                 </div>
                 <div className="bsp_tags d-flex">

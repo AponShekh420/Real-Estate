@@ -62,26 +62,30 @@ const FeaturedListings = ({state: stateProps, city: cityProps, area: areaProps})
                 </Link>
               </div>
               <div className="list-content">
-                <h6 className="list-title">
-                  <Link href={`/community/${listing.slug}`}>{listing.title}</Link>
-                </h6>
-                <p className="list-text">{listing.location}</p>
-                <div className="list-meta d-flex align-items-center">
-                  <a href="#">
-                    <span className="flaticon-bed" /> {listing?.bed} bed
-                  </a>
-                  <a href="#">
-                    <span className="flaticon-shower" /> {listing?.bath} bath
-                  </a>
-                  <a href="#">
-                    <span className="flaticon-expand" /> {listing?.sqft} sqft
-                  </a>
-                </div>
-                <hr className="mt-2 mb-2" />
+                <Link href={`/community/${listing.slug}`} className="w-100">
+                  <>
+                    <h6 className="list-title">
+                      <span>{listing.title}</span>
+                    </h6>
+                    <p className="list-text">{listing.location}</p>
+                    <div className="list-meta d-flex align-items-center">
+                      <span>
+                        <span className="flaticon-bed" /> {listing?.bed} bed
+                      </span>
+                      <span>
+                        <span className="flaticon-shower" /> {listing?.bath} bath
+                      </span>
+                      <span>
+                        <span className="flaticon-expand" /> {listing?.sqft} sqft
+                      </span>
+                    </div>
+                    <hr className="mt-2 mb-2" />
+                  </>
+                </Link>
                 <div className="list-meta2 d-flex justify-content-between align-items-center">
                   <span className="for-what">{/*here would be the buttom oparation*/}</span>
                   {/* For {listing?.status.map((item, index) => (listing.status.length > (index + 1)) ? `${item}/`: item)} */}
-                  <div className="icons d-flex align-items-end h-100">
+                  <div className="icons d-flex align-items-end h-100 pointer">
                     <Wishlist data={listing}/>
                   </div>
                 </div>

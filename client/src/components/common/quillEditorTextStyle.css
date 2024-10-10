@@ -14,8 +14,69 @@
   list-style-type: inherit !important; /* Ensure space between items */
 }
 
-
-
 .quillEditorTextHandler img {
   max-width: 100% !important;
+}
+
+.quillEditorTextHandler * {
+  white-space: normal; /* This forces line breaks to behave more like inline elements */
+  margin: 0;
+  padding: 0;
+}
+
+.quillEditorTextHandler p {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 1.5 !important; /* Fine-tune as needed */
+}
+
+.quillEditorTextHandler br {
+  line-height: 0;
+}
+
+
+.quillEditorTextHandler div {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.5 !important;
+}
+
+.quillEditorTextHandler span {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+/* font */
+
+.quillEditorTextHandler .ql-font-arial {
+  font-family: Arial, sans-serif;
+}
+.quillEditorTextHandler .ql-font-comic-sans {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+.quillEditorTextHandler .ql-font-courier-new {
+  font-family: "Courier New", Courier, monospace;
+}
+.quillEditorTextHandler .ql-font-georgia {
+  font-family: Georgia, serif;
+}
+.quillEditorTextHandler .ql-font-helvetica {
+  font-family: Helvetica, sans-serif;
+}
+.quillEditorTextHandler .ql-font-lucida {
+  font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+}
+
+
+.quillEditorTextHandler .ql-size-small {
+  font-size: 0.75em !important;
+}
+
+.quillEditorTextHandler .ql-size-large {
+  font-size: 1.5em !important;
+}
+
+.quillEditorTextHandler .ql-size-huge {
+  font-size: 2.5em !important;
 }

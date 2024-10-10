@@ -1,8 +1,8 @@
 export const modules = {
   toolbar: [
-    [{ 'header': [1, 2, 3, 4, 5, 6] }],
-    [{ 'font': [] }],
-    [{ 'size': [] }],
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ 'font': [] }], // Use the registered fonts
+    [{ 'size': ['small', false, 'large', 'huge'] }], // Custom sizes
     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
     [{ 'list': 'ordered' }, { 'list': 'bullet' }],
     [{ 'script': 'sub' }, { 'script': 'super' }],
@@ -21,4 +21,3 @@ export const formats = [
   'color', 'background',
   'link', 'image', 'video'
 ];
-

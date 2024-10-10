@@ -21,9 +21,9 @@ export default function Details({id, data}) {
                     src={data?.auther?.avatar}
                     alt={data?.auther?.firstName + " " + data?.auther?.lastName}
                   />
-                  <a className="pr15 bdrr1" href="#">
+                  <span className="pr15 bdrr1" style={{cursor: "default"}}>
                     {data?.auther?.firstName} {data?.auther?.lastName}
-                  </a>
+                  </span>
                   <div className="ml15 pr15 bdrr1">
                     {data?.catagory.map((item, index) => (data.catagory.length > (index + 1)) ? (
                       <Link href={`/blogs/${item?.slug}`}>
@@ -35,10 +35,10 @@ export default function Details({id, data}) {
                       </Link>
                     ))}
                   </div>
-                  <a className="ml15" href="#">
+                  <span className="ml15">
                     <i className="far fa-clock pe-2" />
                     <TimeManager data={data}/>
-                  </a>
+                  </span>
                 </div>
               </div>
             </div>

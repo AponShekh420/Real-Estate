@@ -1,4 +1,4 @@
-
+"use client"
 import Image from "next/image";
 import Link from "next/link";
 import TimeManager from "../single-community/common/TimeManager";
@@ -21,12 +21,12 @@ const Blog = ({data}) => {
               </div>
               <div className="blog-content">
                 <div className="date">
-                <a className="body-light-color" href="#">
+                <span className="body-light-color text-dark">
                   <TimeManager data={blog}/>
-                </a>
+                </span>
                 </div>
                 <h6 className="title mt-1">
-                  <Link href={`/blog/${blog?.slug}`}>{blog?.title}</Link>
+                  <span>{blog?.title}</span>
                 </h6>
               </div>
             </div>

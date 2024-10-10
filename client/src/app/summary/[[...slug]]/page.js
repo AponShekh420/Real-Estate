@@ -13,6 +13,9 @@ import Breadcumb from "@/components/summary/Breadcumb";
 import ListingMap from "@/components/summary/ListingMap";
 import TopFilterBar2 from "@/components/summary/TopFilterBar2";
 import AdvanceFilterModal from "@/components/common/advance-filter";
+import StringToDomComponent from "@/components/common/StringToDomComponent";
+import "@/components/common/quillEditorTextStyle.css";
+
 
 export const metadata = {
   title: "55 home || summary",
@@ -82,28 +85,18 @@ const SummaryPage = async ({params}) => {
       {/* End Advance Search */}
 
 
-
-      <section className="property-header-map p-0">
-        <div className="inner-style1">
-          <div className="container-fluid p-0">
-            <div id="map" style={{ height: "650px" }}>
-              <ListingMap/>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-
       {/* Breadcumb Sections */}
       <section className="breadcumb-section bgc-f7">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
               <div className="breadcumb-style1">
-                <h2 className="title">{res?.data?.name} Homes for Sale</h2>
+                <h2 className="title text-capitalize">Top {res?.data?.name} Retirement Communities</h2>
                 <Breadcumb/>
-                {res?.data?.desc ? <ReadMore desc={res?.data?.desc}/> : null}
+                <div className="quillEditorTextHandler mt25">
+                  <StringToDomComponent htmlString={res?.data?.desc} />
+                </div>
+                {/* {res?.data?.desc ? <ReadMore desc={res?.data?.desc}/> : null} */}
                 <a
                   className="filter-btn-left mobile-filter-btn d-block d-lg-none"
                   data-bs-toggle="offcanvas"

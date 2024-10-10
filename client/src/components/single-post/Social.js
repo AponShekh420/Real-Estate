@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Social = () => {
@@ -10,9 +11,9 @@ const Social = () => {
   return (
     <>
       {socialIcons.map((iconClass, index) => (
-        <a className="mr20" key={index} href="#">
+        <span className="mr20" key={index}>
           <i className={iconClass} />
-        </a>
+        </span>
       ))}
     </>
   );
