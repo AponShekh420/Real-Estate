@@ -43,7 +43,6 @@ const CommunityByStates = () => {
       if(resData?.message) {
         setData(resData?.data);
       }
-      console.log("resData:", resData)
     } catch(err) {
       console.log(err)
     }
@@ -96,7 +95,7 @@ const CommunityByStates = () => {
                   <div className="feature-content pt25">
                     <div className="top-area">
                       <h6 className="title mb-1">
-                        <Link href={`/summary/${state?.slug}`}>{state.name} ({state?.community?.length})</Link>
+                        <span href={`/summary/${state?.slug}`}>{state.name} ({state?.community?.length})</span>
                       </h6>
                       <p className="fz15 fw400 dark-color mb-0" style={{ fontSize: '16px' }}>
                         {sanitizeHtml(state?.desc).slice(0, 40)}...

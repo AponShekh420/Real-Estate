@@ -34,7 +34,7 @@ const RecentBlogs = ({total, blogsCatagory, dateStatus, notCatagory}) => {
           {loading ? (
             <BlogsListLoader contentNumber={dateStatus ? 6 : 3}/>
           ) : data?.map((blog) => (
-            <div className="col-sm-6 col-lg-4" key={blog.id}>
+            <div className="col-sm-6 col-lg-4" key={blog._id}>
               <Link href={`/blog/${blog?.slug}`} className="blog-style1">
                 <div className="blog-img">
                   <Image
@@ -65,11 +65,11 @@ const RecentBlogs = ({total, blogsCatagory, dateStatus, notCatagory}) => {
                       </span>
                     </div>
                   )}
-                  <a className="tag" href="#">
+                  <span className="tag">
                     {blog?.tag}
-                  </a>
+                  </span>
                   <h6 className="title mt-1">
-                    <Link href={`/blog/${blog?.slug}`}>{blog?.title}</Link>
+                    <span href={`/blog/${blog?.slug}`}>{blog?.title}</span>
                   </h6>
                 </div>
               </Link>

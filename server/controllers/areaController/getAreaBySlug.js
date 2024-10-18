@@ -9,7 +9,7 @@ const getAreaBySlug = async (req, res)=> {
   };
 
   try {
-    const area = await AreaModel.findOne(validation).populate("state");
+    const area = await AreaModel.findOne(validation).populate("state").populate("city");
     if(area) {
       res.status(200).json({
         message: "Got the area data",

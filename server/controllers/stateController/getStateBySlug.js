@@ -9,7 +9,7 @@ const getStateBySlug = async (req, res)=> {
   };
 
   try {
-    const state = await StateModel.findOne(validation);
+    const state = await StateModel.findOne(validation).populate("area");
     if(state) {
       res.status(200).json({
         message: "Got the state data",

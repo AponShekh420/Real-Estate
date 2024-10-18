@@ -9,7 +9,7 @@ const getCityBySlug = async (req, res)=> {
   };
 
   try {
-    const city = await CityModel.findOne(validation).populate("area").populate("state");
+    const city = await CityModel.findOne(validation).populate({path: "area", populate: {path: "city"}}).populate("state");
     if(city) {
       res.status(200).json({
         message: "Got the city data",
