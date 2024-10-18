@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 import { MoonLoader } from "react-spinners";
+import CommunityMinMaxPrice from "../common/CommunityMinMaxPrice";
 
 const override = {
   display: "block",
@@ -53,22 +54,16 @@ const ListingsFavourites = ({data, currentPage, loading, setNotify}) => {
           <div className="col-md-6 col-lg-4 col-xl-3" key={listing.id}>
             <div className="listing-style1 style2">
               <div className="list-thumb" >
-                <Image
-                  width={382}
-                  height={248}
-                  style={{height:'230px'}}
-                  className="w-100  cover"
-                  src={listing?.thumbnail || listing?.imgs[listing?.imgs?.length -1]}
-                  alt="listings"
-                />
-                <div className="sale-sticker-wrap">
-                  {!listing.status && (
-                    <div className="list-tag fz12">
-                      <span className="flaticon-electricity me-2" />
-                      FEATURED
-                    </div>
-                  )}
-                </div>
+                <Link href={`/community/${listing.slug}`}>
+                  <Image
+                    width={382}
+                    height={248}
+                    style={{height:'230px'}}
+                    className="w-100  cover"
+                    src={listing?.thumbnail || listing?.imgs[listing?.imgs?.length -1]}
+                    alt="listings"
+                  />
+                </Link>
                 <button
                   className="tag-del"
                   title="Delete Item"
@@ -96,15 +91,15 @@ const ListingsFavourites = ({data, currentPage, loading, setNotify}) => {
                 />
   
                 <div className="list-price">
-                  ${listing.minPrice} <span>-</span> ${listing.maxPrice}
+                  <CommunityMinMaxPrice data={listing}/>
                 </div>
               </div>
               <div className="list-content">
                 <h6 className="list-title">
-                  <Link  href={`/community/${listing.slug}`}>{listing.title}</Link>
+                  <Link href={`/community/${listing.slug}`}>{listing.title}</Link>
                 </h6>
                 <p className="list-text">{listing.location}</p>
-                <div className="list-meta d-flex align-items-center">
+                {/* <div className="list-meta d-flex align-items-center">
                   <a href="#">
                     <span className="flaticon-bed" /> {listing?.bed} bed
                   </a>
@@ -114,16 +109,7 @@ const ListingsFavourites = ({data, currentPage, loading, setNotify}) => {
                   <a href="#">
                     <span className="flaticon-expand" /> {listing?.sqft} sqft
                   </a>
-                </div>
-                <hr className="mt-2 mb-2" />
-                <div className="list-meta2 d-flex justify-content-between align-items-center">
-                  <span className="for-what">For {listing?.status.map((item, index) => (listing.status.length > (index + 1)) ? `${item}/`: item)}</span>
-                  <div className="icons d-flex align-items-center">
-                    <Link href={`/community/${listing.slug}`}>
-                      <span className="flaticon-fullscreen" />
-                    </Link>
-                  </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

@@ -24,7 +24,7 @@ const FeaturedListings = ({state: stateProps, city: cityProps, area: areaProps})
   
   // redux
   const dispatch = useDispatch();
-  const { state, area, city, homeTypes, status, data, loading, currentPage, amenities, ageRestrictions, gated, price } = useSelector(state => state.communityFilter);
+  const { state, area, city, homeTypes, status, data, loading, currentPage, amenities, ageRestrictions, gated, price, sorting } = useSelector(state => state.communityFilter);
 
   useEffect(()=> {
     dispatch(addCommunityFilterValue({
@@ -34,7 +34,7 @@ const FeaturedListings = ({state: stateProps, city: cityProps, area: areaProps})
     }))
     getCommunities()
     // console.log("titleSearch:", titleSearch)
-  }, [state, city, area, status, homeTypes, currentPage, amenities, ageRestrictions, gated, price])
+  }, [state, city, area, status, homeTypes, currentPage, amenities, ageRestrictions, gated, price, sorting])
 
 
 

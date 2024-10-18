@@ -7,7 +7,7 @@ const CommunityModel = require("../../models/CommunityModel")
 // This controller will give us communities data by filter
 const getCommunitiesByFilter = async (req, res) => {
 
-  const {stateId, cityId, areaId, homeTypes, titleSearch, active, limitStart, limitEnd, amenities, gated, price, ageRestrictions } = req.body
+  const {stateId, cityId, areaId, homeTypes, titleSearch, active, limitStart, limitEnd, amenities, gated, price, ageRestrictions, sorting } = req.body
 
 
   // filter start
@@ -33,6 +33,19 @@ const getCommunitiesByFilter = async (req, res) => {
   } else if(gated == "Yes") {
     dataQueryObj.gated = true
   }
+
+
+
+  let sortCriteria = {};
+
+  // Determine the sorting based on the option received from the frontend
+  if (sorting === "Lowest Price") {
+    sortCriteria = { minPrice: 1 }; // Ascending order
+  } else if (sorting === "Highest Price") {
+    sortCriteria = { maxPrice: -1 }; // Descending order
+  } else {
+    sortCriteria = {createdAt: -1}; // Default case, no sorting
+  }
   // filter end
 
 
@@ -40,7 +53,7 @@ const getCommunitiesByFilter = async (req, res) => {
     const data = await CommunityModel.find({
       ...dataQueryObj,
       active,
-    }).sort({ createdAt: -1 }).skip(limitStart).limit(limitEnd);
+    }).sort(sortCriteria).skip(limitStart).limit(limitEnd);
 
     if(data) {
       res.status(200).json({

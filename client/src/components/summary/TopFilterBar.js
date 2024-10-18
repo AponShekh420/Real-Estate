@@ -1,10 +1,15 @@
 'use client'
 
-import React from "react";
-import { useSelector } from "react-redux";
+import { addCommunityFilterValue } from "@/redux/communityFilterSlice";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const TopFilterBar = () => {
-  const {currentPage, totalPages, data: communitiesData} = useSelector(state => state.communityFilter)
+  const {currentPage, totalPages, data: communitiesData} = useSelector(state => state.communityFilter);
+  const dispatch = useDispatch();
+  
+
+  
   return (
     <>
       <div className="col-sm-6">
@@ -14,6 +19,29 @@ const TopFilterBar = () => {
           </p>
         </div>
       </div>
+      {/* End .col-sm-6 */}
+
+      <div className="col-sm-6">
+        <div className="page_control_shorting d-flex align-items-center justify-content-center justify-content-sm-end">
+          <div className="pcs_dropdown pr10 d-flex align-items-center bdr1 px10">
+            <span style={{ minWidth: "60px" }}>Sort by</span>
+            <select className="form-select"  onChange={(e)=>dispatch(addCommunityFilterValue({
+                sorting: e.target.value
+              }))} >
+              <option>Default</option>
+              <option>Lowest Price</option>
+              <option>Highest Price</option>
+            </select>
+          </div>
+          {/* <div className={`pl15 pr15 bdrl1 bdrr1 d-none d-md-block cursor  ${!colstyle? 'menuActive':'#' } `}  onClick={()=>setColstyle(false)}>
+            Grid
+          </div>
+          <div className={`pl15 d-none d-md-block cursor  ${colstyle? 'menuActive':'#' }`}   onClick={()=>setColstyle(true)}>
+            List
+          </div> */}
+        </div>
+      </div>
+      {/* End .col-sm-6 */}
     </>
   );
 };

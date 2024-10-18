@@ -17,7 +17,8 @@ const initialState = {
   amenities: [],
   ageRestrictions: "Any",
   gated: "Any",
-  price: [0, 1000000000]
+  price: [0, 1000000000],
+  sorting: "Default"
 }
 
 
