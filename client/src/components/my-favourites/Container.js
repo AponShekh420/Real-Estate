@@ -44,11 +44,9 @@ const Container = () => {
   return (
     <div className="breadcumb-style1">
       <div className="row">
-        <div className="col-xl-12">
-          <ListingsFavourites data={data} currentPage={currentPage} loading={loading} setNotify={setNotify}/>
-          <div className="mt30">
-            <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} data={data}/>
-          </div>
+        <ListingsFavourites data={data} currentPage={currentPage} loading={loading} setNotify={setNotify}/>
+        <div className="mt30">
+          <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} data={data}/>
         </div>
       </div>
     </div>
