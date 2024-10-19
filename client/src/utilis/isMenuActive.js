@@ -8,3 +8,4 @@ export const isParentActive = (children, path) => {
             : item?.subMenu?.some((item2) => item2.path?.split('/')[1] === path.split('/')[1])
     );
 };
+
