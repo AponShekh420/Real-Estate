@@ -5,6 +5,12 @@ const CommunitySchema = mongoose.Schema({
     type: String,
     required: true
   },
+  metaTitle: {
+    type: String,
+  },
+  metaDesc: {
+    type: String,
+  },
   slug: {
     type: String,
     required: true

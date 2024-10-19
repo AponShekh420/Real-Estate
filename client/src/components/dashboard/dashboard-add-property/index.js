@@ -15,6 +15,7 @@ import getDataByFilter from "@/data/community/getDataByFilter";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MetaData from "./meta-data";
 
 const override = {
   display: "block",
@@ -115,7 +116,7 @@ const AddPropertyTabContent = ({submitBtn}) => {
       if(existingCommunityData?.errors?.notFound) {
         router.push('/dashboard/my-communities');
       } else {
-        const {title, website, phone, address, lat, long, active, status, imgs, builtEnd, builtStart, gated, ageRestrictions, communitySize, homeTypes, maxPrice, minPrice, zip, area, city, state, _id, description, amenities, thumbnail } = existingCommunityData.data
+        const {title, website, phone, address, lat, long, active, status, imgs, builtEnd, builtStart, gated, ageRestrictions, communitySize, homeTypes, maxPrice, minPrice, zip, area, city, state, _id, description, amenities, thumbnail, metaTitle, metaDesc } = existingCommunityData.data
         dispatch(addCommunityFieldValue({
           communityId: _id,
           title,
@@ -137,13 +138,15 @@ const AddPropertyTabContent = ({submitBtn}) => {
           maxPrice, 
           minPrice, 
           zip, 
-          areaId: area, 
+          areaId: area,
           cityId: city,
           stateId: state,
           loading: false,
           amenities,
           thumbnail,
           existingImages: imgs,
+          metaTitle,
+          metaDesc
         }));
       }
     } catch(err) {
@@ -229,9 +232,7 @@ const AddPropertyTabContent = ({submitBtn}) => {
           >
             5. Amenities
           </button>
-          
-          {editPageValidation ? (
-            <button
+          <button
             className="nav-link fw600"
             id="nav-item6-tab"
             data-bs-toggle="tab"
@@ -241,7 +242,21 @@ const AddPropertyTabContent = ({submitBtn}) => {
             aria-controls="nav-item6"
             aria-selected="false"
             >
-              6. Models
+              6. Onpage-SEO
+          </button>
+          
+          {editPageValidation ? (
+            <button
+            className="nav-link fw600"
+            id="nav-item7-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-item7"
+            type="button"
+            role="tab"
+            aria-controls="nav-item7"
+            aria-selected="false"
+            >
+              7. Models
             </button>
           ): ""}
         </div>
@@ -320,14 +335,28 @@ const AddPropertyTabContent = ({submitBtn}) => {
           </div>
         </div>
         {/* End tab for Select Amenities */}
-
+        
+        <div
+          className="tab-pane fade"
+          id="nav-item6"
+          role="tabpanel"
+          aria-labelledby="nav-item6-tab"
+        >
+          <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
+            <h4 className="title fz17 mb30">Meta Data for SEO</h4>
+            <div className="row">
+              <MetaData />
+            </div>
+          </div>
+        </div>
+        {/* End tab for SEO */}
         
         {editPageValidation ? (
             <div
             className="tab-pane fade"
-            id="nav-item6"
+            id="nav-item7"
             role="tabpanel"
-            aria-labelledby="nav-item6-tab"
+            aria-labelledby="nav-item7-tab"
           >
             <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
               <h4 className="title fz17 mb30">Add Models</h4>

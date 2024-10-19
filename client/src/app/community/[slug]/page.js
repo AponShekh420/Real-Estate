@@ -24,9 +24,41 @@ import WalkScore from "@/components/single-community/common/WalkScore";
 import getSingleCommunity from "@/lib/getSingleCommunity";
 import { notFound } from "next/navigation";
 
-export const metadata = {
-  title: "Property Single V6 || Homez - Real Estate NextJS Template",
-};
+
+
+// add meta data for each community post
+export const generateMetadata = async ({params}) => {
+  const {slug} = params;
+
+  // get single community data from api
+  const {title, desc, metaTitle, metaDesc, thumbnail, imgs} = await getSingleCommunity(slug)
+
+  return {
+    title: metaTitle || title,
+    description: metaDesc || desc,
+    openGraph: {
+      title: metaTitle || title,
+      description: metaDesc || desc,
+      images: [
+        {
+          url: thumbnail || imgs[imgs.length - 1], // The image you want to display
+          alt: metaTitle || title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: metaTitle || title,
+      description: metaDesc || desc,
+      images: {
+        url: thumbnail || imgs[imgs.length - 1],
+        alt: metaTitle || title,
+      }, // Twitter-specific image
+    },
+  }
+}
+
+
 
 const SingleCommunity = async ({ params }) => {
 

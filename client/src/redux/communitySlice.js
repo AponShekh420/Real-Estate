@@ -32,6 +32,8 @@ const initialState = {
   existingImages: [],
   newImages: [],
   deletedImages: [],
+  metaTitle: "",
+  metaDesc: "",
 }
 
 

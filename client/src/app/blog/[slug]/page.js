@@ -10,10 +10,43 @@ import "@/components/common/quillEditorTextStyle.css";
 import RelatedPosts from "@/components/single-post/RelatedPosts";
 import { notFound } from "next/navigation";
 
-export const metadata = {
-  title: "Blog Single  || Homez - Real Estate NextJS Template",
-};
 
+// add meta data for each blog post
+export const generateMetadata = async ({params}) => {
+  const {slug} = params;
+
+  // get single community data from api
+  const {title, desc, metaTitle, metaDesc, img} = await getSingleBlog(slug);
+
+  return {
+    title: metaTitle || title,
+    description: metaDesc || desc,
+    openGraph: {
+      title: metaTitle || title,
+      description: metaDesc || desc,
+      images: [
+        {
+          url: img, // The image you want to display
+          alt: metaTitle || title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: metaTitle || title,
+      description: metaDesc || desc,
+      images: {
+        url: img,
+        alt: metaTitle || title,
+      }, // Twitter-specific image
+    },
+  }
+}
+
+
+
+
+// single blog page
 const BlogSingle = async ({params}) => {
 
   const {slug} = params;

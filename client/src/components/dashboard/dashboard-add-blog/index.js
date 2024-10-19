@@ -6,6 +6,7 @@ import UploadMedia from "./upload-media";
 import { usePathname } from "next/navigation";
 import { MoonLoader } from "react-spinners";
 import { useSelector } from "react-redux";
+import MetaData from "./meta-data";
 
 const override = {
   display: "block",
@@ -48,6 +49,18 @@ const AddBlogTabContent = () => {
           >
             2. Media
           </button>
+          <button
+            className="nav-link fw600"
+            id="nav-item3-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-item3"
+            type="button"
+            role="tab"
+            aria-controls="nav-item3"
+            aria-selected="false"
+          >
+            3. Onpage-SEO
+          </button>
         </div>
       </nav>
       {/* End nav tabs */}
@@ -76,6 +89,18 @@ const AddBlogTabContent = () => {
         </div>
         {/* End tab for Upload photos of your property */}
         
+        <div
+          className="tab-pane fade"
+          id="nav-item3"
+          role="tabpane3"
+          aria-labelledby="nav-item3-tab"
+        >
+          <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
+            <h4 className="title fz17 mb30">Meta data for SEO</h4>
+            <MetaData />
+          </div>
+        </div>
+        {/* End tab for Property Description */}
 
       </div>
       {/* tab loading div */}

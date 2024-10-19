@@ -14,6 +14,8 @@ const initialState = {
   errors: {},
   auther: "",
   edit: false,
+  metaTitle: "",
+  metaDesc: ""
 }
 
 

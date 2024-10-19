@@ -10,7 +10,7 @@ const updateCommuity = async (req, res) => {
 
   try {
     // send these data from front-end to add a community in database
-    const {lat, long, communityId, title, website, phone, address, stateId, cityId, areaId, zip, minPrice, maxPrice, homeTypes, communitySize, ageRestrictions, gated, builtStart, builtEnd, imgs, active, description, amenities, currentThumbnail} = req.body
+    const {lat, long, communityId, title, website, phone, address, stateId, cityId, areaId, zip, minPrice, maxPrice, homeTypes, communitySize, ageRestrictions, gated, builtStart, builtEnd, imgs, active, description, amenities, currentThumbnail, metaDesc, metaTitle} = req.body
 
     // Find the current community by ID
     const currentCommunity = await CommunityModel.findById(communityId);
@@ -41,6 +41,8 @@ const updateCommuity = async (req, res) => {
 
     // upload the community in database
     const community = await CommunityModel.findByIdAndUpdate(communityId, {
+      metaTitle,
+      metaDesc,
       title,
       slug,
       lat,

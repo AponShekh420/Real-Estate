@@ -38,9 +38,6 @@ const UploadPhotoGallery = () => {
     }))
     const formData = new FormData();
     formData.append('file', file);
-
-    console.log("fileData", file);
-    console.log("FormData", formData);
     try {
       if(file) {
         setLoading(true);

@@ -112,7 +112,7 @@ const BlogPublish = () => {
       if(existingBlogData?.errors?.notFound) {
         router.push('/dashboard/blogs');
       } else {
-        const {title, active, img, subcatagory, catagory, _id, desc} = existingBlogData.data
+        const {title, active, img, subcatagory, catagory, _id, desc, metaTitle, metaDesc} = existingBlogData.data
         dispatch(addBlogFieldValue({
           blogId: _id,
           title,
@@ -121,7 +121,9 @@ const BlogPublish = () => {
           img,
           subcatagoryId: subcatagory,
           catagoryId: catagory,
-          loading: false
+          loading: false,
+          metaTitle,
+          metaDesc
         }));
       }
     } catch(err) {

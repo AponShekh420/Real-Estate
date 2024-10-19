@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const addCommunity = async (req, res) => {
 
   // send these data from front-end to add a community in database
-  const {title, lat, long, website, phone, address, stateId, cityId, areaId, zip, minPrice, maxPrice, homeTypes, communitySize, ageRestrictions, gated, builtStart, builtEnd, imgs, active, description, amenities, currentThumbnail} = req.body
+  const {title, lat, long, website, phone, address, stateId, cityId, areaId, zip, minPrice, maxPrice, homeTypes, communitySize, ageRestrictions, gated, builtStart, builtEnd, imgs, active, description, amenities, currentThumbnail, metaTitle, metaDesc} = req.body
 
   try {
 
@@ -28,6 +28,8 @@ const addCommunity = async (req, res) => {
 
     // upload the community in database
     const community = await CommunityModel.insertMany({
+      metaTitle,
+      metaDesc,
       lat,
       long,
       title,
