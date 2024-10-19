@@ -1,11 +1,10 @@
 "use client"
-import CurrencyFormat from 'react-currency-format';
+import currency from "currency.js";
 
 const CommunityMinMaxPrice = ({data}) => {
   return (
     <>
-      <CurrencyFormat value={data?.minPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <span>{value} - </span>} />
-      <CurrencyFormat value={data?.maxPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <span>{value}</span>} />
+      {currency(data?.minPrice, { fromCents: true, precision: 0 }).format()} - {currency(data?.maxPrice, { fromCents: true, precision: 0 }).format()}
     </>
   );
 }
