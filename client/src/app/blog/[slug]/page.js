@@ -1,6 +1,5 @@
 import Details from "@/components/single-post/Details";
 import Social from "@/components/single-post/Social";
-import Tags from "@/components/single-post/Tags";
 import DefaultHeader from "@/components/common/DefaultHeader";
 import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
@@ -87,9 +86,6 @@ const BlogSingle = async ({params}) => {
                 <div className="blog_post_share d-flex align-items-center mb10-sm">
                   <span className="mr30">Share</span>
                   <Social />
-                </div>
-                <div className="bsp_tags d-flex">
-                  <Tags />
                 </div>
               </div>
               {/* End share social and tags */}

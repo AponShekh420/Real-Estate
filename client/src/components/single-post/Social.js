@@ -1,20 +1,33 @@
-import Link from "next/link";
-import React from "react";
+"use client"
+import React, { useEffect } from "react";
+import {
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+} from "react-share";
+
+
 
 const Social = () => {
-  const socialIcons = [
-    "fab fa-facebook-f",
-    "fab fa-twitter",
-    "fab fa-linkedin-in",
-  ];
-
+  const currentUrl = window.location.href
+ 
   return (
     <>
-      {socialIcons.map((iconClass, index) => (
-        <span className="mr20" key={index}>
-          <i className={iconClass} />
+      <FacebookShareButton url={currentUrl}>
+        <span className="mr20">
+          <i className="fab fa-facebook-f" />
         </span>
-      ))}
+      </FacebookShareButton>
+      <LinkedinShareButton url={currentUrl}>
+        <span className="mr20">
+          <i className="fab fa-linkedin-in" />
+        </span>
+      </LinkedinShareButton>
+      <TwitterShareButton url={currentUrl}>
+        <span className="mr20">
+          <i className="fab fa-twitter" />
+        </span>
+      </TwitterShareButton>
     </>
   );
 };
