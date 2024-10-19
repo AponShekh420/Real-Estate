@@ -4,9 +4,7 @@ import Link from "next/link";
 import React from "react";
 import Moment from "react-moment";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import { MoonLoader } from "react-spinners";
 import DeleteCommunity from "./DeleteCommunity";
-import CurrencyFormat from 'react-currency-format';
 import CommunityMinMaxPrice from "@/components/common/CommunityMinMaxPrice";
 
 const getStatusStyle = (active) => {
