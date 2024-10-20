@@ -6,6 +6,14 @@ const subscribeSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  communities: [
+    {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      default: [],
+      ref: "Community"
+    }
+  ],
 }, {timestamps: true});
 
 

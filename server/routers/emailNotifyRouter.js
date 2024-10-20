@@ -6,6 +6,7 @@ const checkMoreInfoValidation = require("../middleware/checkMoreInfoValidation")
 const checkScheduleValidation = require("../middleware/checkScheduleValidation");
 const checkContactFormValidation = require("../middleware/checkContactFormValidation");
 const useValidationResult = require("../middleware/common/useValidationResult");
+const useSubscriber = require("../middleware/useSubscriber");
 
 
 
@@ -16,7 +17,7 @@ const router = express.Router();
 router.post('/schedule/send', checkScheduleValidation, useValidationResult, sendSchedule);
 
 // get message to admin email for "get more info"
-router.post('/more-info/send', checkMoreInfoValidation, useValidationResult, sendMoreInfo);
+router.post('/more-info/send', checkMoreInfoValidation, useValidationResult, useSubscriber, sendMoreInfo);
 
 // send a message to admin from contact page or form
 router.post('/contact/send', checkContactFormValidation, useValidationResult, contactForm);

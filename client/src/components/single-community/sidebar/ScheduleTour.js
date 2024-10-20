@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
 
 const ScheduleTour = ({data}) => {
@@ -8,6 +8,8 @@ const ScheduleTour = ({data}) => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [subscribe, setSubscribe] = useState(true);
+  const [receiveInformation, setReceiveInformation] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [successMsg, setSuccessMsg] = useState("");
@@ -31,7 +33,10 @@ const ScheduleTour = ({data}) => {
           email,
           message,
           communityTitle: data?.title,
-          communityUrl: data?.slug
+          communityUrl: data?.slug,
+          communityId: data?._id,
+          receiveInformation,
+          subscribe,
         })
       })
       const resData = await res.json();
@@ -123,13 +128,13 @@ const ScheduleTour = ({data}) => {
             <div className="col-md-12">
               <div className="mb10">
                 <div class="form-check mb10">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" defaultChecked={true}/>
+                  <input class="form-check-input" type="checkbox" value={subscribe} id="flexCheckDefault" defaultChecked={subscribe} onChange={()=> setSubscribe(old => !old)}/>
                   <label class="form-check-label" for="flexCheckDefault">
                     Subscribe me to 55up.com updates and newsletters.
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
+                  <input class="form-check-input" type="checkbox" value={receiveInformation} id="flexCheckChecked" onChange={() => setReceiveInformation(old => !old)}/>
                   <label class="form-check-label" for="flexCheckChecked">
                     I’d also like to receive information about mortgage and financing options.
                   </label>

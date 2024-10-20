@@ -91,10 +91,10 @@ const SummaryPage = async ({params}) => {
           <div className="row">
             <div className="col-lg-12">
               <div className="breadcumb-style1">
-                <h2 className="title text-capitalize">Top {res?.data?.name} Retirement Communities</h2>
+                <h2 className="title text-capitalize">Top {res?.data?.name || ""} Retirement Communities</h2>
                 <Breadcumb/>
                 <div className="quillEditorTextHandler mt25">
-                  <StringToDomComponent htmlString={res?.data?.desc} />
+                  <StringToDomComponent htmlString={res?.data?.desc || ""} />
                 </div>
                 {/* {res?.data?.desc ? <ReadMore desc={res?.data?.desc}/> : null} */}
                 <a

@@ -1,19 +1,21 @@
 const sendEmailToAdmin = require("../../utils/sendEmailToAdmin");
 
 const sendMoreInfo = async (req, res) => {
-  const {email, name, phone, message, communityTitle, communityUrl} = req.body;
+  const {email, name, phone, message, communityTitle, communityUrl, receiveInformation, subscribe} = req.body;
   // Create the email template function
-  const getMoreInfoTemplate = (name, phone, email, message, communityTitle, communityUrl) => `
+  const getMoreInfoTemplate = (name, phone, email, message, communityTitle, communityUrl, receiveInformation, subscribe) => `
   <h1>New More Information Request</h1>
   <p><strong>Name:</strong> ${name}</p>
   <p><strong>Phone:</strong> ${phone}</p>
   <p><strong>Email:</strong> ${email}</p>
+  <p><strong>Subscribe:</strong> ${subscribe ? "Yes" : "No"}</p>
+  <p><strong>Receive information:</strong> ${receiveInformation ? "Yes" : "No"}</p>
   <p><strong>Message:</strong> ${message}</p>
   <p><strong>Community:</strong> <a href="${process.env.CLIENT_URL}/community/${communityUrl}">${communityTitle}</a></p>
   <p>Thank you</p>
   `;
 
-  const emailHtml = getMoreInfoTemplate(name, phone, email, message, communityTitle, communityUrl);
+  const emailHtml = getMoreInfoTemplate(name, phone, email, message, communityTitle, communityUrl, receiveInformation, subscribe);
 
 
   try {
