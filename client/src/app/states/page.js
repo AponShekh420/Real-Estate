@@ -8,7 +8,7 @@ export const metadata = {
   title: "States || Real Estate NextJS Template",
 };
 
-const Home = () => {
+const States = () => {
 
   return (
     <>
@@ -24,7 +24,7 @@ const Home = () => {
       <section className="pb40-md pb90">
         <div className="container">
           <div className="row">
-            <div className="col-lg-12" data-aos="fade-up" data-aos-delay="300">
+            <div className="col-lg-12">
               <div className="property-city-slider position-relative">
                 <AllStatesList />
               </div>
@@ -43,4 +43,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default States;

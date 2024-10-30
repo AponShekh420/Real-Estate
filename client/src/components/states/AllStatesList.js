@@ -24,9 +24,6 @@ const AllStatesList = () => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/get-only-with-communities`, {
         credentials: "include",
         method: "POST",
-        body: {
-          limit: 6,
-        }
       });
 
       const resData = await res.json();
@@ -43,9 +40,9 @@ const AllStatesList = () => {
   }, [])
 
   return (
-    <div className="row bg-danger">
+    <div className="row">
       {data?.map((state) => (
-        <Link href={`/summary/${state?.slug}`} key={state._id} className="col-6 col-md-4 col-lg-3 col-xl-2">
+        <Link href={`/summary/${state?.slug}`} key={state._id} className="col-6 col-md-4 col-lg-3 col-xl-2 mb50">
           <div className="item">
             <div className="feature-style3 text-center d-flex flex-column align-items-center">
               <div className="feature-img rounded-circle" style={{width: "176px", height: "176px"}}>

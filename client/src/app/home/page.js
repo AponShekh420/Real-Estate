@@ -57,7 +57,7 @@ const Home = () => {
 
             <div className="col-lg-3">
               <div className="text-start text-lg-end mb-3">
-                <Link className="ud-btn2" href="/summary">
+                <Link className="ud-btn2" href="/states">
                   View All
                   <i className="fal fa-arrow-right-long" />
                 </Link>
