@@ -41,7 +41,7 @@ router.put('/active', authCheck, adminAuthCheck, activeState);
 // get state data to display in frontend page 
 router.post("/get-by-slug", getStateBySlug);
 
-router.get('/get-only-with-communities', getStatesOnlyWithCommunities);
+router.post('/get-only-with-communities', getStatesOnlyWithCommunities);
 
 
 

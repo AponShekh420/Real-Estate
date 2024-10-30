@@ -21,7 +21,10 @@ const Maps = () => {
 
   const getStates = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/get-only-with-communities`, {credentials: "include"});
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/get-only-with-communities`, {
+        credentials: "include",
+        method: "POST"
+      });
       const resData = await res.json();
       if(resData?.data) {
         const {data} = resData;

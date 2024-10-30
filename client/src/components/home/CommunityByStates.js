@@ -37,6 +37,10 @@ const CommunityByStates = () => {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/state/get-only-with-communities`, {
         credentials: "include",
+        method: "POST",
+        body: {
+          limit: 6,
+        }
       });
 
       const resData = await res.json();

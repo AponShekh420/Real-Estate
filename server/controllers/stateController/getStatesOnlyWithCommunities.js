@@ -2,11 +2,12 @@ const StateModel = require("../../models/StateModel");
 
 // upload the state on database
 const getStatesOnlyWithCommunities = async (req, res)=> {
+  const {limit} = req.body;
   try {
     const state = await StateModel.find({
       active: true,
       community: { $exists: true, $ne: [] } 
-    }).sort({ createdAt: -1 }).select("name slug _id community desc img");
+    }).sort({ name: 1 }).limit(limit).select("name slug _id community desc img");
     if(state) {
       res.status(200).json({
         message: "Got the all state",
