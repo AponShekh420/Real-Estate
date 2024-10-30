@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FacebookShareButton,
   LinkedinShareButton,
@@ -9,21 +9,28 @@ import {
 
 
 const Social = () => {
-  const currentUrl = window.location.href
- 
+  const [currentUrl, setCurrentUrl] = useState("");
+
+  useEffect(()=> {
+    if(typeof window !== "undefined") {
+      setCurrentUrl( window?.location?.href);
+    }
+  }, [])
+
+
   return (
     <>
-      <FacebookShareButton url={currentUrl}>
+      <FacebookShareButton url={currentUrl || ""}>
         <span className="me-3">
           <i className="fab fa-facebook-f" />
         </span>
       </FacebookShareButton>
-      <LinkedinShareButton url={currentUrl}>
+      <LinkedinShareButton url={currentUrl || ""}>
         <span className="me-3">
           <i className="fab fa-linkedin-in" />
         </span>
       </LinkedinShareButton>
-      <TwitterShareButton url={currentUrl}>
+      <TwitterShareButton url={currentUrl || ""}>
         <span className="me-3">
           <i className="fab fa-twitter" />
         </span>
