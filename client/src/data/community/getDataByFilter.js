@@ -1,6 +1,6 @@
 const getDataByFilter = (community) => {
 
-  const {title, website, phone, address, lat, long, sqft, active, status, imgs, builtEnd, builtStart, gated, ageRestrictions, communitySize, homeTypes, maxPrice, minPrice, zip, areaId, cityId, stateId, description, amenities, thumbnail, communityId, existingImages, deletedImages, newImages, metaTitle, metaDesc} = community;
+  const {title, website, phone, address, map, sqft, active, status, imgs, builtEnd, builtStart, gated, ageRestrictions, communitySize, homeTypes, maxPrice, minPrice, zip, areaId, cityId, stateId, description, amenities, thumbnail, communityId, existingImages, deletedImages, newImages, metaTitle, metaDesc} = community;
 
   const formData = new FormData();
   formData.set("title", title);
@@ -9,8 +9,7 @@ const getDataByFilter = (community) => {
   formData.set("website", website);
   formData.set("phone", phone);
   formData.set("address", address);
-  formData.set("lat", lat);
-  formData.set("long", long);
+  formData.set("map", map);
   formData.set("sqft", sqft);
   formData.set("active", active);
   formData.set("status", status);

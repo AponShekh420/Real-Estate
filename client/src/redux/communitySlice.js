@@ -21,8 +21,6 @@ const initialState = {
   builtEnd: "",
   imgs: [],
   active: true,
-  lat: 0,
-  long: 0,
   deleteImgUrls: [],
   loading: true,
   errors: {},
@@ -34,6 +32,7 @@ const initialState = {
   deletedImages: [],
   metaTitle: "",
   metaDesc: "",
+  map: "",
 }
 
 

@@ -5,7 +5,14 @@ import Models from "./Models";
 import getModels from "@/lib/getModels";
 
 const CommunityInfoTab = async ({data}) => {
-  const modelsData = await getModels(data)
+  const modelsData = await getModels(data);
+
+  const {map} = data;
+
+  // Use the user-specified location if available; otherwise, default to USA without a specific marker.
+  const locationSrc = map 
+    ? `https://maps.google.com/maps?q=${map}&t=m&z=14&output=embed&iwloc=near`
+    : `https://maps.google.com/maps?q=USA&t=m&z=4&output=embed&iwloc=near`; // Show whole US without a marker
 
   return (
     <div className="col-md-12">
@@ -121,9 +128,9 @@ const CommunityInfoTab = async ({data}) => {
                 <iframe
                   className="position-relative bdrs12 mt30 h250"
                   loading="lazy"
-                  src={`https://maps.google.com/maps?q=${data?.address}&t=m&z=14&output=embed&iwloc=near`}
-                  title={data?.address}
-                  aria-label={data?.address}
+                  src={locationSrc}
+                  title={map || "United States"}
+                  aria-label={map || "United States"}
                 />
               </div>
             </div>

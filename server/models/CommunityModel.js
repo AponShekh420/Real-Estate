@@ -101,8 +101,7 @@ const CommunitySchema = mongoose.Schema({
   sqft: {
     type: Number,
   },
-  lat: Number,
-  long: Number,
+  map: String,
   thumbnail: String,
 }, {timestamps: true});
 

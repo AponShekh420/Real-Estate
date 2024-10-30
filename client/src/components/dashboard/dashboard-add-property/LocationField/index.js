@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCommunityFieldValue } from "@/redux/communitySlice";
 
 const LocationField = () => {
-  const {errors, address, zip, lat, long} = useSelector((state)=> state.community)
+  const {errors, address, zip, map} = useSelector((state)=> state.community)
   const dispatch = useDispatch();
 
 
@@ -47,6 +47,25 @@ const LocationField = () => {
         </div>
 
 
+        <div className="col-sm-6 col-xl-4">
+          <div className="mb20">
+            <label className="heading-color ff-heading fw600 mb10">
+              Map
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter the city, state, or area to locate the map."
+              onChange={(e)=> {
+                dispatch(addCommunityFieldValue({map: e.target.value}))
+              }}
+              value={map}
+            />
+            <p className="text-danger">{errors?.map?.msg}</p>
+          </div>
+        </div>
+        {/* End col-12 */}
+
         <div className="col-sm-12">
           <div className="mb20 mt30">
             <label className="heading-color ff-heading fw600 mb30">
@@ -56,38 +75,6 @@ const LocationField = () => {
           </div>
         </div>
         {/* End col-12 */}
-      </div>
-      {/* End .row */}
-
-      <div className="row">
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb30">
-            <label className="heading-color ff-heading fw600 mb10">
-              Latitude
-            </label>
-            <input type="number" className="form-control"
-              onChange={(e)=> {
-                dispatch(addCommunityFieldValue({lat: e.target.value}))
-              }}
-              value={lat}
-            />
-          </div>
-        </div>
-        {/* End .col-sm-6 */}
-
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb30">
-            <label className="heading-color ff-heading fw600 mb10">
-              Longitude
-            </label>
-            <input type="number" className="form-control"
-              onChange={(e)=> {
-                dispatch(addCommunityFieldValue({long: e.target.value}))
-              }}
-              value={long}
-            />
-          </div>
-        </div>
       </div>
       {/* End .row */}
     </div>

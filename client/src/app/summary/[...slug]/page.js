@@ -15,6 +15,7 @@ import TopFilterBar2 from "@/components/summary/TopFilterBar2";
 import AdvanceFilterModal from "@/components/common/advance-filter";
 import StringToDomComponent from "@/components/common/StringToDomComponent";
 import "@/components/common/quillEditorTextStyle.css";
+import TopTitle from "@/components/summary/TopTitle";
 
 
 export const metadata = {
@@ -91,7 +92,7 @@ const SummaryPage = async ({params}) => {
           <div className="row">
             <div className="col-lg-12">
               <div className="breadcumb-style1">
-                <h2 className="title text-capitalize">Top {res?.data?.name || ""} Retirement Communities</h2>
+                <TopTitle title={res?.data?.name}/>
                 <Breadcumb/>
                 <div className="quillEditorTextHandler mt25">
                   <StringToDomComponent htmlString={res?.data?.desc || ""} />

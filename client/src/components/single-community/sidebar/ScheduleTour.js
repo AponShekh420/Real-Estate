@@ -1,9 +1,11 @@
 "use client"
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { BeatLoader } from "react-spinners";
 
 const ScheduleTour = ({data}) => {
+  const {title} = data;
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -56,6 +58,12 @@ const ScheduleTour = ({data}) => {
     }
   }
   
+
+  useEffect(()=> {
+    setMessage(`I’d like additional information about ${title}`)
+  }, [title])
+
+
 
   return (
     <div className="ps-navtab">
@@ -115,8 +123,8 @@ const ScheduleTour = ({data}) => {
                 <textarea
                   cols={30}
                   rows={4}
-                  placeholder="I’d like additional information about [comminty name]."
-                  defaultValue={""}
+                  placeholder={`Please share any specific questions or details you're looking for`}
+                  defaultValue={`I’d like additional information about ${title}`}
                   onChange={(e) => setMessage(e.target.value)}
                   value={message}
                 />

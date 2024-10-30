@@ -68,15 +68,18 @@ const FeaturedListings = ({state: stateProps, city: cityProps, area: areaProps})
                       <span>{listing.title}</span>
                     </h6>
                     <p className="list-text">{listing.location}</p>
-                    <div className="list-meta d-flex align-items-center">
+                    <div className="list-meta d-flex align-items-center flex-wrap gap-2">
                       <span>
-                        <span className="flaticon-bed" /> {listing?.bed} bed
+                        <span className="fa-thin fa-person" />Age Restricted: {listing?.ageRestrictions ? "Yes" : "No"}
                       </span>
                       <span>
-                        <span className="flaticon-shower" /> {listing?.bath} bath
+                        <span className="fa-sharp fa-light fa-torii-gate" />Gated: {listing?.gated ? "Yes" : "No"}
                       </span>
                       <span>
-                        <span className="flaticon-expand" /> {listing?.sqft} sqft
+                        <span className="fa-light fa-calendar-days" />Built: {listing.builtEnd != "Present" ? `${listing.builtStart.split("-")[0]} - ${listing.builtEnd.split("-")[0]}` : "New Construction"}
+                      </span>
+                      <span>
+                        <span className="fa-light fa-sitemap" />Size: {listing?.communitySize}
                       </span>
                     </div>
                     <hr className="mt-2 mb-2" />
