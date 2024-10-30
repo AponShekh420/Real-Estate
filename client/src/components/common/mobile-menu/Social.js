@@ -1,34 +1,33 @@
-const Social = () => {
-  const socialLinks = [
-    {
-      id: 1,
-      iconClass: "fab fa-facebook-f",
-      href: "#",
-    },
-    {
-      id: 2,
-      iconClass: "fab fa-twitter",
-      href: "#",
-    },
-    {
-      id: 3,
-      iconClass: "fab fa-instagram",
-      href: "#",
-    },
-    {
-      id: 4,
-      iconClass: "fab fa-linkedin-in",
-      href: "#",
-    },
-  ];
+"use client"
+import React, { useEffect } from "react";
+import {
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+} from "react-share";
 
+
+
+const Social = () => {
+  const currentUrl = window.location.href
+ 
   return (
     <>
-      {socialLinks.map((link) => (
-        <a className="me-3" href={link.href} key={link.id}>
-          <i className={link.iconClass}></i>
-        </a>
-      ))}
+      <FacebookShareButton url={currentUrl}>
+        <span className="me-3">
+          <i className="fab fa-facebook-f" />
+        </span>
+      </FacebookShareButton>
+      <LinkedinShareButton url={currentUrl}>
+        <span className="me-3">
+          <i className="fab fa-linkedin-in" />
+        </span>
+      </LinkedinShareButton>
+      <TwitterShareButton url={currentUrl}>
+        <span className="me-3">
+          <i className="fab fa-twitter" />
+        </span>
+      </TwitterShareButton>
     </>
   );
 };
