@@ -51,7 +51,7 @@ const BlogsDataTable = ({blogsData, setDeleteData}) => {
                 </div>
                 <div className="list-content py-0 p-0 mt-2 mt-xxl-0 ps-xxl-4">
                   <div className="h6 list-title">
-                    <Link href={`/post/${blog?.slug}`}>{blog?.title}</Link>
+                    <Link href={`/blog/${blog?.slug}`}>{blog?.title}</Link>
                   </div>
                   <span className="list-text mb-0 text-capitalize" href="#" style={{fontWeight: 500, fontSize: "13px"}}>
                     {blog?.catagory.map((item, index) => (blog.catagory.length > (index + 1)) ? `${item.name}, `: item.name)}
