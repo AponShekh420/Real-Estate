@@ -9,13 +9,15 @@ const initialState = {
   subcatagoryId: [],
   img: "",
   active: false,
-  deleteImgUrls: [],
   loading: true, // manually true kore dite hobe
   errors: {},
   auther: "",
   edit: false,
   metaTitle: "",
-  metaDesc: ""
+  metaDesc: "",
+  uploadedImageChanged: false,
+  uploadedImage: null,
+  oldImgUrl: "",
 }
 
 

@@ -9,7 +9,6 @@ const uploadBlogImage = require("../controllers/blogController/uploadBlogImage")
 const getBlogs = require("../controllers/blogController/getBlogs");
 const blogImgDelete = require("../controllers/blogController/blogImgDelete");
 const getSingleBlog = require("../controllers/blogController/getSingleBlog");
-const checkCommunityValidation = require("../middleware/checkCommunityValidation");
 const useValidationResult = require("../middleware/common/useValidationResult");
 const useBlogImgDeletor = require("../middleware/useBlogImgDeletor");
 const checkBlogValidation = require("../middleware/checkBlogValidation");
@@ -20,6 +19,7 @@ const getBlogsByFilter = require("../controllers/blogController/getBlogsByFilter
 // auth checker
 const authCheck = require("../middleware/common/users/authCheck");
 const contributorOrAdminAuthCheck = require("../middleware/common/users/contributorOrAdminAuthCheck");
+const uploadBlogImg = require("../middleware/uploadBlogImg");
 
 
 
@@ -33,8 +33,8 @@ router.get('/single-blog/:slug', getSingleBlog);
 
 
 // route controller
-router.post('/add', authCheck, contributorOrAdminAuthCheck, checkBlogValidation, useValidationResult, addBlog);
-router.put('/update', authCheck, contributorOrAdminAuthCheck, checkBlogValidation, useValidationResult, useBlogImgDeletor, updateBlog);
+router.post('/add', authCheck, contributorOrAdminAuthCheck, uploadBlogImg, checkBlogValidation, useValidationResult, addBlog);
+router.put('/update', authCheck, contributorOrAdminAuthCheck, uploadBlogImg, checkBlogValidation, useValidationResult, updateBlog);
 router.delete('/delete', authCheck, contributorOrAdminAuthCheck, deleteBlog);
 
 

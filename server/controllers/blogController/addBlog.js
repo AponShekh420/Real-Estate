@@ -5,7 +5,7 @@ const SubcatagoryModel = require("../../models/SubcatagoryModel");
 const addBlog = async (req, res) => {
 
   // send these data from front-end to add a blog in database
-  const {title, metaTitle, metaDesc, desc, catagoryId, subcatagoryId, img, active, auther} = req.body
+  const {title, metaTitle, metaDesc, desc, catagoryId, subcatagoryId, img, active, auther, oldImgUrl, uploadedImageChanged, uploadedImage} = req.body
 
   try {
 
@@ -30,7 +30,7 @@ const addBlog = async (req, res) => {
       desc,
       catagory: catagoriesIdArray,
       subcatagory: subcatagoryId || [],
-      img,
+      img: (uploadedImageChanged && uploadedImage) ? req?.files[0]?.location : uploadedImageChanged ? "" : oldImgUrl,
       active,
       auther: req.user._id,
       metaTitle,

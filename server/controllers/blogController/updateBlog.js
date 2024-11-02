@@ -1,12 +1,13 @@
 const BlogModel = require("../../models/BlogModel");
 const CatagoryModel = require("../../models/CatagoryModel");
 const SubcatagoryModel = require("../../models/SubcatagoryModel");
+const deleteFileFromSpace = require("../../utils/deleteFileFromSpace");
 
 const updateBlog = async (req, res) => {
 
   try {
     // send these data from front-end to add a blog in database
-    const {title, metaTitle, metaDesc, desc, catagoryId, subcatagoryId, img, active, auther, blogId} = req.body
+    const {title, metaTitle, metaDesc, desc, catagoryId, subcatagoryId, img, active, auther, blogId, oldImgUrl, uploadedImageChanged, uploadedImage} = req.body
 
     // Find the current blog by ID
     const currentBlog = await BlogModel.findById(blogId);
@@ -41,19 +42,21 @@ const updateBlog = async (req, res) => {
       desc,
       catagory: catagoriesIdArray,
       subcatagory: subcatagoryId || [],
-      img,
+      img: (uploadedImageChanged && uploadedImage) ? req?.files[0]?.location : uploadedImageChanged ? "" : oldImgUrl,
       active,
       metaTitle,
       metaDesc,
     }).populate("catagory").populate("subcatagory");
 
-    console.log(blog);
 
+    if(JSON.parse(uploadedImageChanged) && oldImgUrl) {
+      await deleteFileFromSpace('assets-upload', oldImgUrl);
+    }
 
     if(blog) {
 
       // Handle category changes
-      if (currentBlog.catagory.toString() !== catagoriesIdArray.toString()) {
+      if (currentBlog?.catagory?.toString() !== catagoriesIdArray?.toString()) {
         // Pull the blog from old categories
         await CatagoryModel.updateMany(
           { _id: { $in: currentBlog.catagory } },
@@ -68,7 +71,7 @@ const updateBlog = async (req, res) => {
       }
 
       // Handle subcategory changes
-      if (currentBlog.subcatagory.toString() !== subcatagoryId.toString()) {
+      if (currentBlog?.subcatagory?.toString() !== subcatagoryId?.toString()) {
         // Pull the blog from old subcategories
         await SubcatagoryModel.updateMany(
           { _id: { $in: currentBlog.subcatagory } },
