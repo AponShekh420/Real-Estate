@@ -18,10 +18,10 @@ const deleteCatagory = async (req, res) => {
         catagory: null,
       });
 
-      // move all blogs to uncatagory
+      // move all blogs to uncategorized
       const existingCatagoryBlogs = await BlogModel.find({catagory: catagoryId});
 
-      const uncatagory = await CatagoryModel.findByIdAndUpdate(process.env.uncatagoryId, {
+      const uncategorized = await CatagoryModel.findByIdAndUpdate(process.env.uncategorizedId, {
         $push: {
           blogs: existingCatagoryBlogs
         }
@@ -30,7 +30,7 @@ const deleteCatagory = async (req, res) => {
 
       // update the community collection to delete this state id
       const blogUpdateStatus = await BlogModel.updateMany({catagory: catagoryId}, {
-        catagory: process.env.uncatagoryId,
+        catagory: process.env.uncategorizedId,
       }, {new: true});
 
 

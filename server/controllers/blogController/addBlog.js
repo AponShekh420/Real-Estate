@@ -20,7 +20,7 @@ const addBlog = async (req, res) => {
       slug = `${slug}-${duplicateBlogCount}`;
     }
 
-    const catagoriesIdArray = catagoryId.length > 0 ? catagoryId : [process.env.uncatagoryId];
+    const catagoriesIdArray = catagoryId.length > 0 ? catagoryId : [process.env.uncategorizedId];
 
 
     // upload the blog in database
@@ -42,7 +42,7 @@ const addBlog = async (req, res) => {
     // check: the blog has upload in database or not
     if(blog) {
 
-      const catagoryQueryObj = catagoryId.length > 0 ? {$or: catagoryId.map(eachCatagory => ({_id: eachCatagory?._id}))} : {_id: process.env.uncatagoryId};
+      const catagoryQueryObj = catagoryId.length > 0 ? {$or: catagoryId.map(eachCatagory => ({_id: eachCatagory?._id}))} : {_id: process.env.uncategorizedId};
 
       console.log("catagoryQueryObj:", catagoryQueryObj)
       // push the blog in catagory blogs list

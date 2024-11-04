@@ -11,7 +11,7 @@ const TabAndHeader = () => {
       <div className="row align-items-center pb40">
         <div className="col-lg-12 d-flex justify-content-between">
           <div className="dashboard_title_area">
-            <h2>Catagory Management</h2>
+            <h2>Category Management</h2>
             <p className="text">We are glad to see you again!</p>
           </div>
         </div>
@@ -30,7 +30,7 @@ const TabAndHeader = () => {
         <div className="col-xl-6">
           <div className="ps-widget bgc-white bdrs12 default-box-shadow2 mb30 overflow-hidden position-relative">
             <div className="p30">
-              <h2>All Catagories List</h2>
+              <h2>All Categories List</h2>
               <AllCatagoriesList/>
             </div>
           </div>

@@ -46,7 +46,7 @@ const CatagoriesList = () => {
   return (
     <div className="w-100">
       <div className="sidebar-widget mb30">
-        <h6 className="widget-title">Catagories</h6>
+        <h6 className="widget-title">Categories</h6>
         {loading ? (
           <ContentLoaderWrapper/>
         ) : (

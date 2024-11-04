@@ -238,9 +238,9 @@ const AddCatagoryContent = () => {
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
             <div className="d-flex justify-content-between align-items-center">
-              <h4 className="title fz17 mb30">Creating Parent Catagory</h4>
+              <h4 className="title fz17 mb30">Creating Category</h4>
               <div className="d-flex align-items-center gap-2 flex-row-reverse">
-                <button className={`bdrs0 btn-primary rounded-2 py-1 px-2 d-flex gap-2 justify-content-center align-items-center ${catagoryLoading ? "opacity-50" : "opacity-100"}`} disabled={catagoryLoading} onClick={catagoryEdit ? updateExistingCatagory : uploadNewCatagory}>{catagoryEdit ? "Update Catagory": "Add New Catagory"}
+                <button className={`bdrs0 btn-primary rounded-2 py-1 px-2 d-flex gap-2 justify-content-center align-items-center ${catagoryLoading ? "opacity-50" : "opacity-100"}`} disabled={catagoryLoading} onClick={catagoryEdit ? updateExistingCatagory : uploadNewCatagory}>{catagoryEdit ? "Update Category": "Add New Category"}
                   {!catagoryLoading ? <ImUpload /> : <HashLoader
                     color="#ffffff"
                     loading={catagoryLoading}
@@ -272,7 +272,7 @@ const AddCatagoryContent = () => {
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
             <div className="d-flex justify-content-between align-items-center">
-              <h4 className="title fz17 mb30">Creating Subcatagory</h4>
+              <h4 className="title fz17 mb30">Creating Subcategory</h4>
               <div className="d-flex align-items-center gap-2 flex-row-reverse">
                 <button className={`bdrs0 btn-primary rounded-2 py-1 px-2 d-flex gap-2 justify-content-center align-items-center ${subcatagoryLoading ? "opacity-50" : "opacity-100"}`} disabled={subcatagoryLoading} onClick={subcatagoryEdit ? updateExistingSubcatagory : uploadNewSubcatagory}>{subcatagoryEdit ? "Update Subcatagory" : "Add New Subcatagory"}
                   {!subcatagoryLoading ? <ImUpload /> : <HashLoader

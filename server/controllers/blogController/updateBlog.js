@@ -33,7 +33,7 @@ const updateBlog = async (req, res) => {
     }
 
 
-    const catagoriesIdArray = catagoryId.length > 0 ? catagoryId : [process.env.uncatagoryId];
+    const catagoriesIdArray = catagoryId.length > 0 ? catagoryId : [process.env.uncategorizedId];
 
     // upload the community in database
     const blog = await BlogModel.findByIdAndUpdate(blogId, {

@@ -120,7 +120,7 @@ const PropertyDescription = () => {
 
         <div className="col-12 mt30">
           <div className="ps-widget bgc-white bdrs12 overflow-hidden position-relative">
-            <h4 className="title fz17">Select Catagories</h4>
+            <h4 className="title fz17">Select Categories</h4>
             <div className="row">
               <Categories />
             </div>

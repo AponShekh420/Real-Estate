@@ -88,7 +88,7 @@ const MenuItem = ({itemIndex, item, headerItem, userInfo, mobile}) => {
                 <CiLocationOn size={22} className="mr15"/>
               ) : item.text === "Blogs" ? (
                 <HiOutlineNewspaper size={22} className="mr15"/>
-              ) : item.text === "Catagory" ? (
+              ) : item.text === "Category" ? (
                 <GiCheckboxTree  size={22} className="mr15"/>
               ): item.text === "Add New Blog" ? (
                 <PiNotePencilThin size={22} className="mr15"/>

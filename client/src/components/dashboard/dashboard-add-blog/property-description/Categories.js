@@ -37,8 +37,8 @@ const Categories = () => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/catagory/getall`, { credentials: "include" });
       let { data } = await res.json();
 
-      // Remove "Uncatagory" from the list
-      data = data.filter(category => category.name.toLowerCase() !== "uncatagory");
+      // Remove "uncategorized" from the list
+      data = data.filter(category => category.name.toLowerCase() !== "uncategorized");
 
       // Sort categories alphabetically by name
       const sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
@@ -55,9 +55,9 @@ const Categories = () => {
     let updatedCatagoryId;
 
     if (e.target.checked) {
-      // Add selected category and remove "Uncatagory" if any other category is selected
+      // Add selected category and remove "uncategorized" if any other category is selected
       updatedCatagoryId = [
-        ...catagoryId.filter((cat) => cat.name.toLowerCase() !== "uncatagory"),
+        ...catagoryId.filter((cat) => cat.name.toLowerCase() !== "uncategorized"),
         category,
       ];
     } else {

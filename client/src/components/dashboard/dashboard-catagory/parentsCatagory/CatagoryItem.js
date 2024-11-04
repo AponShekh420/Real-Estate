@@ -76,7 +76,7 @@ const CatagoryItem = ({catagory}) => {
         <p className={`text-capitalize m-0 ${path.split('/')[2] === catagory.slug ? "text-danger": ""}`}><b>{catagory.name} ({catagory.blogs.length})</b></p>
         <div className="d-flex align-items-center gap-3">
 
-          {catagory.slug !== "uncatagory" && (
+          {catagory.slug !== "uncategorized" && (
             <button
               className="icon btn"
               style={{ border: "none", color: "green", padding: "0px", fontSize: "15px"}}
@@ -87,7 +87,7 @@ const CatagoryItem = ({catagory}) => {
             </button>
           )}
 
-          {catagory.slug !== "uncatagory" && (
+          {catagory.slug !== "uncategorized" && (
             <a 
               style={{ border: "none", color: "red", padding: "0px", fontSize: "16px", cursor: "pointer"}}
               data-tooltip-id={`delete-${catagory?.slug}`}
