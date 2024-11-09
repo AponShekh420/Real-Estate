@@ -84,8 +84,8 @@ const Home = () => {
           <div className="main-title2">
             <h2 className="title">Useful Information for 55 and Over Shoppers</h2>
           </div>
-          <RecentBlogs blogsCatagory={null} total={6} dateStatus={true} notCatagory={{_id: process.env.SPECIFIC_CETEGORY_HOME}}/>
-          <RecentBlogs blogsCatagory={{_id: process.env.SPECIFIC_CETEGORY_HOME}} total={3} dateStatus={false} notCatagory={""}/>
+          <RecentBlogs blogsCatagory={null} total={6} dateStatus={true} notCatagory={process.env.NEXT_PUBLIC_SPECIFIC_CETEGORY_HOME}/>
+          <RecentBlogs blogsCatagory={process.env.NEXT_PUBLIC_SPECIFIC_CETEGORY_HOME} total={3} dateStatus={false} notCatagory={""}/>
         </div>
       </section>
 
