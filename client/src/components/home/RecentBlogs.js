@@ -15,7 +15,7 @@ const RecentBlogs = ({total, blogsCatagory, dateStatus, notCatagory}) => {
   const getRecentBlogs = async() => {
     try {
       setLoading(true);
-      const data = await getSpecificBlogs(0, total, true, {_id: blogsCatagory}, null, null, {_id: notCatagory});
+      const data = await getSpecificBlogs(0, total, true, {_id: blogsCatagory}, null, {_id: notCatagory});
       setLoading(false);
       setData(data);
     } catch(err) {
