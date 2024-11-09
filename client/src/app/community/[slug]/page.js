@@ -31,7 +31,15 @@ export const generateMetadata = async ({params}) => {
   const {slug} = params;
 
   // get single community data from api
-  const {title, desc, metaTitle, metaDesc, thumbnail, imgs} = await getSingleCommunity(slug)
+  const res = await getSingleCommunity(slug);
+
+  // if the data has not founded, that's mean the route are wrong, so redirect on not found page
+  if(slug !==undefined && !res) {
+    notFound();
+  }
+
+  
+  const {title, desc, metaTitle, metaDesc, thumbnail, imgs} = res;
 
   return {
     title: metaTitle || title,

@@ -4,7 +4,6 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
   titleSearch: "",
   catagory: "",
-  subcatagory: "",
   active: true,
   loading: true,
   errors: {},

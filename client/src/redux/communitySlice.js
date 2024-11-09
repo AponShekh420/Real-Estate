@@ -32,6 +32,7 @@ const initialState = {
   deletedImages: [],
   metaTitle: "",
   metaDesc: "",
+  metaSlug: "",
   map: "",
 }
 

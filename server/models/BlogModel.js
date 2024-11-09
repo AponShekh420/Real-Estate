@@ -26,13 +26,6 @@ const BlogSchema = mongoose.Schema({
       ref: "Catagory"
     }
   ],
-  subcatagory: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "Subcatagory",
-      default: [],
-    }
-  ],
   img: {
       type: String,
       required: true

@@ -12,13 +12,13 @@ const Catagory = () => {
       <div className="row">
         <div className="col-sm-12 col-xl-12">
           <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">Catagory Name</label>
+            <label className="heading-color ff-heading fw600 mb10">Category Name</label>
             <input type="text" className="form-control" 
               onChange={(e)=> {
                 dispatch(addCatagoryFields({catagoryName: e.target.value}))
               }}
               value={catagoryName}
-              placeholder="Type a catagory name"
+              placeholder="Type a category name"
             />
             <p className="text-danger">{errors?.name?.msg}</p>
           </div>

@@ -116,7 +116,7 @@ const AddPropertyTabContent = ({submitBtn}) => {
       if(existingCommunityData?.errors?.notFound) {
         router.push('/dashboard/my-communities');
       } else {
-        const {title, website, phone, address, map, active, status, imgs, builtEnd, builtStart, gated, ageRestrictions, communitySize, homeTypes, maxPrice, minPrice, zip, area, city, state, _id, description, amenities, thumbnail, metaTitle, metaDesc } = existingCommunityData.data
+        const {title, website, phone, address, map, active, status, imgs, builtEnd, builtStart, gated, ageRestrictions, communitySize, homeTypes, maxPrice, minPrice, zip, area, city, state, _id, description, amenities, thumbnail, metaTitle, metaDesc, slug } = existingCommunityData.data
         dispatch(addCommunityFieldValue({
           communityId: _id,
           title,
@@ -145,6 +145,7 @@ const AddPropertyTabContent = ({submitBtn}) => {
           existingImages: imgs,
           metaTitle,
           metaDesc,
+          metaSlug: slug,
           map,
         }));
       }

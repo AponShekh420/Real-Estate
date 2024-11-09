@@ -11,13 +11,6 @@ const CatagorySchema = mongoose.Schema({
     type: String,
     required: true
   },
-  subcatagory: [
-    {
-      type: mongoose.Types.ObjectId,
-      default: [],
-      ref: "Subcatagory",
-    }
-  ],
   blogs: [
     {
       type: mongoose.Types.ObjectId

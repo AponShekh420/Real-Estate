@@ -8,8 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { ImUpload } from "react-icons/im";
 import '@/components/dashboard/dashboard-location/style.css';
 import Catagory from "./parentsCatagory";
-import SubCatagory from "./subCatagory";
-import { addSubcatagoryFields, removeAllSubcatagoryFields } from "@/redux/subCatagorySlice";
 import { addCatagoryFields, removeCatagoryAllFields } from "@/redux/catagorySlice";
 
 
@@ -22,53 +20,11 @@ const override = {
 
 const AddCatagoryContent = () => {
   const [catagoryLoading, setCatagoryLoading] = useState(false);
-  const [subcatagoryLoading, setSubcatagoryLoading] = useState(false);
 
   // redux state
-  const {catagoryId, subcatagoryName, edit: subcatagoryEdit, subcatagoryId: subcatagoryUpdateId} = useSelector((state)=> state.subcatagory);
-
   const {catagoryName, edit: catagoryEdit, catagoryId: catagoryUpdateId} = useSelector((state)=> state.catagory);
   
-  
   const dispatch = useDispatch();
-
-// upload new 'State', 'City' and 'Area' through these functions
-  const uploadNewSubcatagory = async (e) => {
-    e.preventDefault();
-    try {
-      setSubcatagoryLoading(true);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/subcatagory/add`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          catagoryId: catagoryId._id,
-          name: subcatagoryName,
-        })
-      });
-      const currentSubcatagory = await res.json();
-      setSubcatagoryLoading(false);
-      if(currentSubcatagory.msg) {
-        toast.success(currentSubcatagory.msg, {
-          position: "top-right",
-          autoClose: 1500,
-        });
-        dispatch(removeAllSubcatagoryFields())
-        dispatch(addCatagoryFields({
-          notify: Math.random(),
-        }))
-      } else {
-        dispatch(addSubcatagoryFields({
-          errors: currentSubcatagory.errors,
-        }))
-      }
-    } catch(err) {
-      console.log(err.message)
-    }
-  }
-
 
   const uploadNewCatagory = async (e) => {
     e.preventDefault();
@@ -104,19 +60,12 @@ const AddCatagoryContent = () => {
       console.log(err.message)
     }
   }
-  // uploading new 'catagory' and 'subcatagory' has ended
 
 
   const cancelCatagoryUpdate = () => {
     dispatch(removeCatagoryAllFields())
   }
 
-  const cancelSubcatagoryUpdate = ()=> {
-    dispatch(removeAllSubcatagoryFields())
-  }
-
-
-  // start here to update catagory and subcatagory
 
   // catagory udpate
   const updateExistingCatagory = async (e) => {
@@ -156,46 +105,6 @@ const AddCatagoryContent = () => {
   }
   
 
-  // subcatagory update
-  const updateExistingSubcatagory = async (e) => {
-    e.preventDefault();
-    try {
-      setSubcatagoryLoading(true);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/subcatagory/update`, {
-        method: "PUT",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          catagoryId: catagoryId._id,
-          name: subcatagoryName,
-          subcatagoryId: subcatagoryUpdateId,
-        })
-      });
-      const currentSubcatagory = await res.json();
-      setSubcatagoryLoading(false);
-      if(currentSubcatagory.msg) {
-        toast.success(currentSubcatagory.msg, {
-          position: "top-right",
-          autoClose: 1500,
-        });
-        dispatch(removeAllSubcatagoryFields());
-        dispatch(addCatagoryFields({
-          notify: Math.random(),
-        }))
-      } else {
-        dispatch(addSubcatagoryFields({
-          errors: currentSubcatagory.errors,
-        }))
-      }
-    } catch(err) {
-      console.log(err.message)
-    }
-  }
-  // here has ended to update catagory and subcatagory
-
-
 
   return (
     <>
@@ -211,19 +120,7 @@ const AddCatagoryContent = () => {
             aria-controls="nav-item1"
             aria-selected="true"
           >
-            1. Catagory
-          </button>
-          <button
-            className="nav-link fw600"
-            id="nav-item2-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#nav-item2"
-            type="button"
-            role="tab"
-            aria-controls="nav-item2"
-            aria-selected="false"
-          >
-            2. Subcatagory
+            Category
           </button>
         </div>
       </nav>
@@ -263,54 +160,7 @@ const AddCatagoryContent = () => {
             <Catagory />
           </div>
         </div>
-
-        <div
-          className="tab-pane fade"
-          id="nav-item2"
-          role="tabpanel"
-          aria-labelledby="nav-item2-tab"
-        >
-          <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <div className="d-flex justify-content-between align-items-center">
-              <h4 className="title fz17 mb30">Creating Subcategory</h4>
-              <div className="d-flex align-items-center gap-2 flex-row-reverse">
-                <button className={`bdrs0 btn-primary rounded-2 py-1 px-2 d-flex gap-2 justify-content-center align-items-center ${subcatagoryLoading ? "opacity-50" : "opacity-100"}`} disabled={subcatagoryLoading} onClick={subcatagoryEdit ? updateExistingSubcatagory : uploadNewSubcatagory}>{subcatagoryEdit ? "Update Subcatagory" : "Add New Subcatagory"}
-                  {!subcatagoryLoading ? <ImUpload /> : <HashLoader
-                    color="#ffffff"
-                    loading={subcatagoryLoading}
-                    cssOverride={override}
-                    size={17}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
-                  />
-                  }
-                </button>
-                {subcatagoryEdit ? (
-                  <button className={`cancelBtn btn btn-outline-danger rounded-2 d-flex gap-2 text-danger justify-content-center align-items-center`} onClick={cancelSubcatagoryUpdate}>
-                    Cancel
-                  </button>
-                  ): (
-                    ""
-                )}
-              </div>
-            </div>
-            <SubCatagory />
-          </div>
-        </div>
       </div>
-      {/* tab loading div */}
-      {/* {loading ? (
-        <div className="w-100 position-absolute h-100 z-10 top-0 d-flex justify-content-center align-items-center text-white" style={{backgroundColor:"rgba(255, 255, 255, 0.5)"}}>
-          <MoonLoader
-            color="black"
-            loading={loading}
-            cssOverride={override}
-            size={30}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
-        </div>
-      ): ""} */}
       <ToastContainer/>
     </>
   );

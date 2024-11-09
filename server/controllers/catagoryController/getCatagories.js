@@ -5,7 +5,7 @@ const getCatagories = async (req, res)=> {
   // const {status} = req.params;
   // const validation = status != 'anytype' ? {active: status == "active" ? true : false} : {$or: [{active: true}, {active: false}]};
   try {
-    const catagories = await CatagoryModel.find().sort({ createdAt: -1 }).populate({path: "subcatagory"})
+    const catagories = await CatagoryModel.find().sort({ createdAt: -1 })
     if(catagories) {
       res.status(200).json({
         message: "Got the all Catagories",

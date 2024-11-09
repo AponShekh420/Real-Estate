@@ -1,6 +1,5 @@
 const BlogModel = require('../../models/BlogModel')
 const CatagoryModel = require('../../models/CatagoryModel')
-const SubcatagoryModel = require('../../models/SubcatagoryModel');
 const deleteFileFromSpace = require('../../utils/deleteFileFromSpace');
 
 const deleteBlog = async (req, res) => {
@@ -21,21 +20,10 @@ const deleteBlog = async (req, res) => {
         }
       });
 
-      // Delete the blog field from subcatagory
-      const subcatagoryUpdateStatus = await SubcatagoryModel.updateMany({
-        blogs: {
-          $in: blogId,
-        }
-      },{
-        $pull: {
-          blogs: blogId,
-        }
-      });
-
       
   
       // if is done then, should send the response
-      if(catagoryUpdateStatus && subcatagoryUpdateStatus) {
+      if(catagoryUpdateStatus) {
         res.status(200).json({
           msg: "The blog has deleted successfully"
         })

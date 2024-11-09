@@ -4,7 +4,7 @@ const { default: store } = require("@/redux/store");
 
 const getBlogs = async () => {
 
-  const { titleSearch, catagory, subcatagory, active, currentPage } = store.getState().blogFilter;
+  const { titleSearch, catagory, active, currentPage } = store.getState().blogFilter;
   const {dispatch} = store;
 
 
@@ -21,7 +21,6 @@ const getBlogs = async () => {
       body: JSON.stringify({
         titleSearch,
         catagoryId: catagory._id,
-        subcatagoryId: subcatagory._id,
         active,
         limitStart: (currentPage - 1 ) * 10,
         limitEnd: currentPage * 10,

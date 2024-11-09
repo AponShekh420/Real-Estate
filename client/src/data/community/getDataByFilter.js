@@ -1,11 +1,12 @@
 const getDataByFilter = (community) => {
 
-  const {title, website, phone, address, map, sqft, active, status, imgs, builtEnd, builtStart, gated, ageRestrictions, communitySize, homeTypes, maxPrice, minPrice, zip, areaId, cityId, stateId, description, amenities, thumbnail, communityId, existingImages, deletedImages, newImages, metaTitle, metaDesc} = community;
+  const {title, website, phone, address, map, sqft, active, status, imgs, builtEnd, builtStart, gated, ageRestrictions, communitySize, homeTypes, maxPrice, minPrice, zip, areaId, cityId, stateId, description, amenities, thumbnail, communityId, existingImages, deletedImages, newImages, metaTitle, metaDesc, metaSlug} = community;
 
   const formData = new FormData();
   formData.set("title", title);
   formData.set("metaTitle", metaTitle);
   formData.set("metaDesc", metaDesc);
+  formData.set("metaSlug", metaSlug);
   formData.set("website", website);
   formData.set("phone", phone);
   formData.set("address", address);

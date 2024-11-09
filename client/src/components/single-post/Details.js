@@ -27,7 +27,7 @@ export default function Details({id, data}) {
                   <div className="ml15 pr15 bdrr1">
                     {data?.catagory.map((item, index) => (data.catagory.length > (index + 1)) ? (
                       <Link href={`/blogs/${item?.slug}`}>
-                        {item.name},
+                        {" " + item.name},
                       </Link>
                     ): (
                       <Link href={`/blogs/${item?.slug}`}>

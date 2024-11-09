@@ -5,7 +5,6 @@ import React from 'react'
 
 import { useEffect, useState } from "react";
 import CatagoryItem from "./parentsCatagory/CatagoryItem";
-import SubCatagoryItem from "./subCatagory/SubCatagoryItem";
 import dynamic from "next/dynamic";
 import store from "@/redux/store";
 import { useSelector } from "react-redux";
@@ -63,14 +62,6 @@ const AllCatagoriesList = () => {
           {catagoryData.map((catagory, stateIndex)=> (
             <li className={`${path.split('/')[2] === catagory.slug ? "text-danger": ""}`} key={stateIndex}>
               <CatagoryItem catagory={catagory}/>
-              {/* fist chiled */}
-              <ul className="w-90 list-unstyled ml10" style={{marginTop: "2px", }}> {/**height: 0, overflow: "hidden" */}
-                {catagory.subcatagory.map((eachSubcatagory, subcatagoryIndex)=> (
-                  <li className={`${path.split('/')[3] === eachSubcatagory.slug ? "text-danger": ""}`} key={subcatagoryIndex}>
-                    <SubCatagoryItem eachSubcatagory={eachSubcatagory} catagory={catagory}/>
-                  </li>
-                ))}
-              </ul>
             </li>
           ))}
         </ul>

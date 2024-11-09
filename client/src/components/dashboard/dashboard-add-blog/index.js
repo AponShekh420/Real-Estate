@@ -156,18 +156,18 @@ const AddBlogTabContent = ({submitBtn}) => {
       if(existingBlogData?.errors?.notFound) {
         router.push('/dashboard/blogs');
       } else {
-        const {title, active, img, subcatagory, catagory, _id, desc, metaTitle, metaDesc} = existingBlogData.data
+        const {title, active, img, catagory, _id, desc, metaTitle, metaDesc, metaSlug, slug} = existingBlogData.data
         dispatch(addBlogFieldValue({
           blogId: _id,
           title,
           desc,
           active, 
           img,
-          subcatagoryId: subcatagory,
           catagoryId: catagory,
           loading: false,
           metaTitle,
           metaDesc,
+          metaSlug: slug,
           uploadedImage: img,
           oldImgUrl: img,
           uploadedImageChanged: false,

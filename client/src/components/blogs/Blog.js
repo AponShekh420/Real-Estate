@@ -11,18 +11,17 @@ import Moment from "react-moment";
 const Blogs = ({blogFilter}) => {  
   // redux
   const dispatch = useDispatch();
-  const { catagory, subcatagory, data, loading, currentPage } = useSelector(state => state.blogFilter);
+  const { catagory, data, loading, currentPage } = useSelector(state => state.blogFilter);
   
-  const {catagory: catagoryProps, subcatagory: subcatagoryProps} = blogFilter;
+  const {catagory: catagoryProps} = blogFilter;
 
   useEffect(()=> {
     dispatch(addBlogFilterValue({
       catagory: catagoryProps,
-      subcatagory: subcatagoryProps,
     }))
     getBlogs()
     // console.log("titleSearch:", titleSearch)
-  }, [catagory, subcatagory, currentPage])
+  }, [catagory, currentPage])
 
   return (
     <>

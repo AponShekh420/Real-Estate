@@ -1,13 +1,12 @@
 const BlogModel = require("../../models/BlogModel");
 const CatagoryModel = require("../../models/CatagoryModel");
-const SubcatagoryModel = require("../../models/SubcatagoryModel");
 const deleteFileFromSpace = require("../../utils/deleteFileFromSpace");
 
 const updateBlog = async (req, res) => {
 
   try {
     // send these data from front-end to add a blog in database
-    const {title, metaTitle, metaDesc, desc, catagoryId, subcatagoryId, img, active, auther, blogId, oldImgUrl, uploadedImageChanged, uploadedImage} = req.body
+    const {title, metaTitle, metaDesc, metaSlug, desc, catagoryId, img, active, auther, blogId, oldImgUrl, uploadedImageChanged, uploadedImage} = req.body
 
     // Find the current blog by ID
     const currentBlog = await BlogModel.findById(blogId);
@@ -17,11 +16,11 @@ const updateBlog = async (req, res) => {
 
     let slug;
     // If the title hasn't changed, keep the current slug
-    if (title === currentBlog.title) {
+    if (title === currentBlog.title && currentBlog.slug == metaSlug) {
       slug = currentBlog.slug;
     } else {
       // Remove special characters and generate slug
-      const sanitizedTitle = title.toLowerCase().trim().replace(/[^\w\s-]/g, '');
+      const sanitizedTitle = metaSlug ? metaSlug.toLowerCase().trim().replace(/[^\w\s-]/g, '') : title.toLowerCase().trim().replace(/[^\w\s-]/g, '');
       slug = sanitizedTitle.split(' ').join('-');
 
       // Check for duplicates excluding the current blog ID
@@ -33,7 +32,7 @@ const updateBlog = async (req, res) => {
     }
 
 
-    const catagoriesIdArray = catagoryId.length > 0 ? catagoryId : [process.env.uncategorizedId];
+    const catagoriesIdArray = catagoryId?.length > 0 ? catagoryId : [process.env.uncategorizedId];
 
     // upload the community in database
     const blog = await BlogModel.findByIdAndUpdate(blogId, {
@@ -41,12 +40,11 @@ const updateBlog = async (req, res) => {
       slug,
       desc,
       catagory: catagoriesIdArray,
-      subcatagory: subcatagoryId || [],
       img: (uploadedImageChanged && uploadedImage) ? req?.files[0]?.location : uploadedImageChanged ? "" : oldImgUrl,
       active,
       metaTitle,
       metaDesc,
-    }).populate("catagory").populate("subcatagory");
+    }).populate("catagory");
 
 
     if(JSON.parse(uploadedImageChanged) && oldImgUrl) {
@@ -69,22 +67,6 @@ const updateBlog = async (req, res) => {
           { $push: { blogs: blog._id } }
         );
       }
-
-      // Handle subcategory changes
-      if (currentBlog?.subcatagory?.toString() !== subcatagoryId?.toString()) {
-        // Pull the blog from old subcategories
-        await SubcatagoryModel.updateMany(
-          { _id: { $in: currentBlog.subcatagory } },
-          { $pull: { blogs: currentBlog._id } }
-        );
-
-        // Push the blog into new subcategories
-        await SubcatagoryModel.updateMany(
-          { _id: { $in: subcatagoryId } },
-          { $push: { blogs: blog._id } }
-        );
-      }
-
 
       // if everything is perfect then would get response
       res.status(200).json({

@@ -6,7 +6,6 @@ const initialState = {
   title: "",
   desc: "",
   catagoryId: [],
-  subcatagoryId: [],
   img: "",
   active: false,
   loading: true, // manually true kore dite hobe
@@ -15,6 +14,7 @@ const initialState = {
   edit: false,
   metaTitle: "",
   metaDesc: "",
+  metaSlug: "",
   uploadedImageChanged: false,
   uploadedImage: null,
   oldImgUrl: "",

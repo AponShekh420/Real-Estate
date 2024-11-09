@@ -9,7 +9,7 @@ const getBlogs = async (req, res) => {
   req?.user?.role !== "admin" ? queryObjConfig.auther = req.user._id : null;
 
   try {
-    const getBlogsData = await BlogModel.find(queryObjConfig).sort({ createdAt: -1 }).populate('catagory').populate("subcatagory").populate({
+    const getBlogsData = await BlogModel.find(queryObjConfig).sort({ createdAt: -1 }).populate('catagory').populate({
         path: 'auther',
         select: '-password',  // Exclude the password field
       });
@@ -21,15 +21,10 @@ const getBlogs = async (req, res) => {
         c.name.match(new RegExp(searchParams, "i"))
       );
 
-      const subcategoryMatch = blog.subcatagory?.some(sc =>
-        sc.name.match(new RegExp(searchParams, "i"))
-      );
-
 
       return (
         blog.title.match(new RegExp(searchParams, 'i')) ||
         categoryMatch ||
-        subcategoryMatch ||
         blog.auther?.email.match(new RegExp(searchParams, 'i')) ||
         blog.auther?.role.match(new RegExp(searchParams, 'i')) ||
         blog.auther?.firstName.match(new RegExp(searchParams, 'i')) ||

@@ -5,7 +5,6 @@ import stateSlice from './stateSlice'
 import areaSlice from './areaSlice'
 import modelSlice from './modelSlice'
 import catagorySlice from './catagorySlice'
-import subCatagorySlice from './subCatagorySlice'
 import userSlice from './userSlice'
 import blogSlice from './blogSlice'
 import communityFilterSlice from './communityFilterSlice'
@@ -20,7 +19,6 @@ const store = configureStore({
     area: areaSlice,
     model: modelSlice,
     catagory: catagorySlice,
-    subcatagory: subCatagorySlice,
     user: userSlice,
     blog: blogSlice,
     communityFilter: communityFilterSlice,

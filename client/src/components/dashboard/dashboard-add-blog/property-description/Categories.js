@@ -151,7 +151,8 @@ const Categories = () => {
 
       {/* View More / View Less Button */}
       <div style={{ textAlign: "center", marginTop: "20px" }}>
-        <button
+        <a
+          type="button"
           onClick={() => setShowMore(!showMore)}
           style={{
             cursor: "pointer",
@@ -163,7 +164,7 @@ const Categories = () => {
           }}
         >
           {showMore ? "View Less" : "View More"}
-        </button>
+        </a>
       </div>
     </div>
   );

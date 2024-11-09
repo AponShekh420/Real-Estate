@@ -5,7 +5,6 @@ const getCatagoryData = async (params) => {
   const {slug} = params
   store.dispatch(addBlogFilterValue({
     catagory: "",
-    subcatagory: "",
   }));
   try {
     console.log(slug)
@@ -31,28 +30,6 @@ const getCatagoryData = async (params) => {
         return;
       }
 
-    } else if(slug?.length == 2 && slug !== undefined) {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/subcatagory/get-by-slug`, {
-        method: "POST",
-        cache: 'no-store',
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          slug: slug[1],
-        })
-      });
-      const subcatagory = await res.json();
-
-      if(subcatagory) {
-        store.dispatch(addBlogFilterValue({
-          subcatagory: subcatagory?.data,
-        }));
-        return subcatagory;
-      } else {
-        return;
-      }
     } else {
       return;
     }

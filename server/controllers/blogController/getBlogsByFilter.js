@@ -7,11 +7,10 @@ const BlogModel = require("../../models/BlogModel")
 // This controller will give us communities data by filter
 const getBlogsByFilter = async (req, res) => {
 
-  const {catagoryId, subcatagoryId, titleSearch, active, limitStart, limitEnd, notCatagoryId} = req.body
+  const {catagoryId, titleSearch, active, limitStart, limitEnd, notCatagoryId} = req.body
 
   const dataQueryObj = {}
   catagoryId ? dataQueryObj.catagory = catagoryId : null
-  subcatagoryId ? dataQueryObj.subcatagory = subcatagoryId : null
   notCatagoryId ? dataQueryObj.catagory = {$ne: notCatagoryId} : null
   titleSearch ? dataQueryObj.title = {$regex: titleSearch || "", $options: "i"} : null
 

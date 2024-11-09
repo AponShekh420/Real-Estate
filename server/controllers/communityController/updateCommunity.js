@@ -10,7 +10,7 @@ const updateCommuity = async (req, res) => {
 
   try {
     // send these data from front-end to add a community in database
-    const {map, communityId, title, website, phone, address, stateId, cityId, areaId, zip, minPrice, maxPrice, homeTypes, communitySize, ageRestrictions, gated, builtStart, builtEnd, imgs, active, description, amenities, currentThumbnail, metaDesc, metaTitle} = req.body
+    const {map, metaSlug, communityId, title, website, phone, address, stateId, cityId, areaId, zip, minPrice, maxPrice, homeTypes, communitySize, ageRestrictions, gated, builtStart, builtEnd, imgs, active, description, amenities, currentThumbnail, metaDesc, metaTitle} = req.body
 
     // Find the current community by ID
     const currentCommunity = await CommunityModel.findById(communityId);
@@ -20,11 +20,11 @@ const updateCommuity = async (req, res) => {
 
     let slug;
     // If the title hasn't changed, keep the current slug
-    if (title === currentCommunity.title) {
+    if (title === currentCommunity.title && currentCommunity?.slug == metaSlug) {
       slug = currentCommunity.slug;
     } else {
       // Remove special characters and generate slug
-      const sanitizedTitle = title.toLowerCase().trim().replace(/[^\w\s-]/g, '');
+      const sanitizedTitle = metaSlug ? metaSlug?.toLowerCase().trim().replace(/[^\w\s-]/g, '') : title.toLowerCase().trim().replace(/[^\w\s-]/g, '');
       slug = sanitizedTitle.split(' ').join('-');
 
       // Check for duplicates excluding the current communtiy ID

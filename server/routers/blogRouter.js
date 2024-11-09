@@ -5,12 +5,12 @@ const express = require("express");
 const addBlog = require("../controllers/blogController/addBlog");
 const updateBlog = require("../controllers/blogController/updateBlog");
 const deleteBlog = require("../controllers/blogController/deleteBlog");
-const uploadBlogImage = require("../controllers/blogController/uploadBlogImage");
+// const uploadBlogImage = require("../controllers/blogController/uploadBlogImage");
 const getBlogs = require("../controllers/blogController/getBlogs");
-const blogImgDelete = require("../controllers/blogController/blogImgDelete");
+// const blogImgDelete = require("../controllers/blogController/blogImgDelete");
 const getSingleBlog = require("../controllers/blogController/getSingleBlog");
 const useValidationResult = require("../middleware/common/useValidationResult");
-const useBlogImgDeletor = require("../middleware/useBlogImgDeletor");
+// const useBlogImgDeletor = require("../middleware/useBlogImgDeletor");
 const checkBlogValidation = require("../middleware/checkBlogValidation");
 const getBlogsByFilter = require("../controllers/blogController/getBlogsByFilter");
 
@@ -40,12 +40,12 @@ router.delete('/delete', authCheck, contributorOrAdminAuthCheck, deleteBlog);
 
 
 // blog image uploading and deleting
-router.post('/upload', authCheck, contributorOrAdminAuthCheck, uploadBlogImage);
-router.delete('/imgdelete', authCheck, contributorOrAdminAuthCheck, blogImgDelete);
+// router.post('/upload', authCheck, contributorOrAdminAuthCheck, uploadBlogImage);
+// router.delete('/imgdelete', authCheck, contributorOrAdminAuthCheck, blogImgDelete);
 
 
 
-// get the blogs by auther/catagory/subcatagory/title
+// get the blogs by auther/catagory/title
 router.post('/get-blogs', authCheck, getBlogs);
 
 

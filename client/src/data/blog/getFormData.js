@@ -1,11 +1,12 @@
 const getFormData = (blog, e) => {
 
-  const {title, active, desc, catagoryId, subcatagoryId, uploadedImage, uploadedImageChanged, oldImgUrl, metaTitle, metaDesc, blogId} = blog;
+  const {title, active, desc, catagoryId, uploadedImage, uploadedImageChanged, oldImgUrl, metaTitle, metaDesc, blogId, metaSlug} = blog;
 
   const formData = new FormData(e.target);
   formData.set("title", title);
   formData.set("metaTitle", metaTitle);
   formData.set("metaDesc", metaDesc);
+  formData.set("metaSlug", metaSlug);
   formData.set("active", active);
   formData.set("uploadedImageChanged", uploadedImageChanged);
   formData.set("oldImgUrl", oldImgUrl);
@@ -14,7 +15,6 @@ const getFormData = (blog, e) => {
   formData.set("blogId", blogId);
 
   catagoryId.forEach(type => formData.append("catagoryId[]", type._id));
-  subcatagoryId.forEach(type => formData.append("subcatagoryId[]", type._id));
 
   return formData;
 }

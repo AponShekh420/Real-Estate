@@ -1,6 +1,5 @@
 // import models
 const CatagoryModel = require('../../models/CatagoryModel');
-const SubcatagoryModel = require('../../models/SubcatagoryModel');
 const BlogModel = require('../../models/BlogModel')
 
 
@@ -12,11 +11,6 @@ const deleteCatagory = async (req, res) => {
 
     // check: if the state has deleted successfully then we should remove this stateId from city, area, and communtiy and make the city, area and community deactive
     if(catagoryDeleteStatus) {
-
-      // update the city collection to delete this state id
-      const subcatagoryUpdateStatus = await SubcatagoryModel.updateMany({catagory: catagoryId}, {
-        catagory: null,
-      });
 
       // move all blogs to uncategorized
       const existingCatagoryBlogs = await BlogModel.find({catagory: catagoryId});
@@ -35,7 +29,7 @@ const deleteCatagory = async (req, res) => {
 
 
       // try to check those cities, areas, and communities has update or not
-      if(subcatagoryUpdateStatus && blogUpdateStatus) {
+      if(blogUpdateStatus) {
         res.status(200).json({
           msg: "The catagory has deleted successfully"
         })

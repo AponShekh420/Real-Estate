@@ -137,7 +137,7 @@ const PersonalInfo = () => {
               disabled
               type="email"
               className="form-control"
-              placeholder="Your Name"
+              placeholder="Your Email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -153,7 +153,7 @@ const PersonalInfo = () => {
               disabled={!update}
               type="text"
               className="form-control"
-              placeholder="Your Name"
+              placeholder="Your Phone Number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
@@ -170,7 +170,7 @@ const PersonalInfo = () => {
               disabled={!update}
               type="text"
               className="form-control"
-              placeholder="Your Name"
+              placeholder="Your First Name"
               required
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
@@ -188,7 +188,7 @@ const PersonalInfo = () => {
               disabled={!update}
               type="text"
               className="form-control"
-              placeholder="Your Name"
+              placeholder="Your Last Name"
               required
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
@@ -206,7 +206,7 @@ const PersonalInfo = () => {
               disabled={!update}
               type="text"
               className="form-control"
-              placeholder="Your Name"
+              placeholder="Your Company Name"
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
             />
@@ -223,7 +223,7 @@ const PersonalInfo = () => {
               disabled={!update}
               type="number"
               className="form-control"
-              placeholder="Your Name"
+              placeholder="Your Tax Number"
               value={taxNumber}
               onChange={(e) => setTaxNumber(e.target.value)}
             />
@@ -240,7 +240,7 @@ const PersonalInfo = () => {
               disabled={!update}
               type="text"
               className="form-control"
-              placeholder="Your Name"
+              placeholder="Your Address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />

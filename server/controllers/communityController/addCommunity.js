@@ -7,12 +7,12 @@ const mongoose = require('mongoose');
 const addCommunity = async (req, res) => {
 
   // send these data from front-end to add a community in database
-  const {title, map, website, phone, address, stateId, cityId, areaId, zip, minPrice, maxPrice, homeTypes, communitySize, ageRestrictions, gated, builtStart, builtEnd, imgs, active, description, amenities, currentThumbnail, metaTitle, metaDesc} = req.body
+  const {title, metaSlug, map, website, phone, address, stateId, cityId, areaId, zip, minPrice, maxPrice, homeTypes, communitySize, ageRestrictions, gated, builtStart, builtEnd, imgs, active, description, amenities, currentThumbnail, metaTitle, metaDesc} = req.body
 
   try {
 
     // Remove special characters and make the slug
-    const sanitizedTitle = title.toLowerCase().trim().replace(/[^\w\s-]/g, '');
+    const sanitizedTitle = metaSlug ? metaSlug.toLowerCase().trim().replace(/[^\w\s-]/g, '') : title.toLowerCase().trim().replace(/[^\w\s-]/g, '');
     let slug = sanitizedTitle.split(' ').join('-');
 
     // Check for duplicates
