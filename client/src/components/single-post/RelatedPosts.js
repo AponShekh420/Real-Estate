@@ -2,7 +2,8 @@ import getSpecificBlogs from "@/lib/getSpecificBlogs";
 import Blog from "../common/Blog";
 
 const RelatedPosts = async ({data}) => {
-  const relatedPostsData = await getSpecificBlogs(0, 3, true, data?.catagory, null, null);
+  console.log(data)
+  const relatedPostsData = await getSpecificBlogs(0, 3, true, null, null, null, data?.catagory?.map(eachCategory => eachCategory?._id), data?._id);
 
   return (
     <section className="pb90 pb20-md pt-0">
