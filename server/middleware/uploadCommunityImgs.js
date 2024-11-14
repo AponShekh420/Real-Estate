@@ -2,7 +2,7 @@ const deleteFileFromSpace = require("../utils/deleteFileFromSpace");
 const uploader = require("../utils/multiUploader");
 
 const uploadCommunityImages = (req, res, next) => {
-  const upload = uploader('communityImgs', ['image/jpeg', 'image/jpg', 'image/png'], 10000000, 'Only jpg, jpeg, and png allowed');
+  const upload = uploader('communityImgs', ['image/jpeg', 'image/jpg', 'image/png'], 20971520, 'Only jpg, jpeg, and png allowed');
   
   upload.any()(req, res, async (err) => {
        if (err) {

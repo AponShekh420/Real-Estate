@@ -2,7 +2,7 @@ const uploader = require("../../../utils/multiUploader");
 
 const uploadAvatar = (req, res, next) => {
     const {uploadedImageChanged, uploadedImage} = req.body;
-    const upload = uploader('users', ['image/jpeg', 'image/jpg', 'image/png'], 1000000000, 'Only jpg, jpeg and png allowed');
+    const upload = uploader('users', ['image/jpeg', 'image/jpg', 'image/png'], 20971520, 'Only jpg, jpeg and png allowed');
     if(uploadedImageChanged == false && uploadedImage == null) {
         next();
     } else {

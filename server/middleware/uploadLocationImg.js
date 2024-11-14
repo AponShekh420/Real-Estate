@@ -1,7 +1,7 @@
 const uploader = require('../utils/multiUploader')
 const uploadLocationImg = (req, res, next) => {
     const {uploadedImageChanged} = req.body;
-    const upload = uploader('location', ['image/jpeg', 'image/jpg', 'image/png'], 1000000000, 'Only jpg, jpeg and png allowed');
+    const upload = uploader('location', ['image/jpeg', 'image/jpg', 'image/png'], 20971520, 'Only jpg, jpeg and png allowed');
     if(uploadedImageChanged == false) {
         next();
     } else {

@@ -5,7 +5,7 @@ const uploadModelImg = (req, res, next) => {
   const upload = uploader(
     'communityModels', // Folder or directory where images will be uploaded
     ['image/jpeg', 'image/jpg', 'image/png'], // Allowed mime types
-    10000000, // Max file size (10MB in this case)
+    20971520, // Max file size (10MB in this case)
     'Only jpg, jpeg, and png allowed' // Error message for invalid file types
   );
 
