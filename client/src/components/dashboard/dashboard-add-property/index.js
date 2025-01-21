@@ -34,7 +34,7 @@ const override = {
 const descriptionFields = ["title", "homeTypes", "maxPrice", "minPrice"];
 const mediaFields = ["imgs"];
 const detailFields = ["phone", "builtStart"];
-const locationFields = ["address"];
+const locationFields = ["address", "airport", "hospital", "militaryBase"];
 
 const AddPropertyTabContent = ({
   submitBtn,

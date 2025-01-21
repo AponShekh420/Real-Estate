@@ -2,14 +2,11 @@ const CommunityModel = require("../../models/CommunityModel");
 
 const getCommunities = async (req, res) => {
   const { searchParams, active, limitEnd, sortby, limitStart } = req.body;
+
   let sortOptions;
   if (sortby == "community_name_asc") {
     sortOptions = {
       title: 1,
-    };
-  } else if (sortby == "date_added_asc") {
-    sortOptions = {
-      createdAt: 1,
     };
   } else if (sortby == "date_edited_asc") {
     sortOptions = {
@@ -18,6 +15,10 @@ const getCommunities = async (req, res) => {
   } else if (sortby == "date_edited_desc") {
     sortOptions = {
       updatedAt: -1,
+    };
+  } else if (sortby == "date_added_asc") {
+    sortOptions = {
+      createdAt: 1,
     };
   } else {
     sortOptions = {

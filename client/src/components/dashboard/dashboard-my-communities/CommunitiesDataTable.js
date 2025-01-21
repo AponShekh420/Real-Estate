@@ -20,6 +20,14 @@ const getStatusStyle = (active) => {
 const CommunitiesDataTable = ({ communitiesData, setDeleteData }) => {
   const { data } = communitiesData;
 
+  const isEditedCheck = (createdAt, updatedAt) => {
+    const createdAtDate = new Date(createdAt);
+    const updatedAtDate = new Date(updatedAt);
+    const isEdited =
+      createdAtDate.getTime() > updatedAtDate.getTime() ? false : true;
+    return isEdited;
+  };
+
   return (
     <table className="table-style3 table at-savesearch">
       <thead className="t-head">
@@ -74,17 +82,14 @@ const CommunitiesDataTable = ({ communitiesData, setDeleteData }) => {
               <p className="text-capitalize">{`${community?.createdby?.firstName}  ${community?.createdby?.lastName}`}</p>
             </td>
             <td className="vam">
-              {community?.createdAt < community?.updatedAt ? (
+              {isEditedCheck(community?.createdAt, community?.updatedAt) &&
+              community?.updatedby ? (
                 <div>
                   <Moment format="D MMM YYYY">{community?.updatedAt}</Moment>
-                  {community?.updatedby ? (
-                    <p className="text-capitalize">{`${community?.updatedby?.firstName}  ${community?.updatedby?.lastName}`}</p>
-                  ) : (
-                    <p>Not updated yet</p>
-                  )}
+                  <p className="text-capitalize">{`${community?.updatedby?.firstName}  ${community?.updatedby?.lastName}`}</p>{" "}
                 </div>
               ) : (
-                <p>Not Edited</p>
+                <p>Not Edited yet</p>
               )}
             </td>
             <td className="vam">
