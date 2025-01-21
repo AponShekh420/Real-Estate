@@ -9,7 +9,7 @@ const override = {
   borderColor: "red",
 };
 
-const DeleteCommunity = ({ community, setDeleteData }) => {
+const DeleteDraftCommunity = ({ community, setDraftDeleteData }) => {
   const [loading, setLoading] = useState(false);
 
   const deleteCommunity = async (e) => {
@@ -17,26 +17,24 @@ const DeleteCommunity = ({ community, setDeleteData }) => {
     try {
       setLoading(true);
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/delete`,
+        `${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/draft/${community?._id}`,
         {
           headers: {
             "Content-Type": "application/json",
           },
           method: "DELETE",
           credentials: "include",
-          body: JSON.stringify({
-            communityId: community?._id,
-          }),
         }
       );
       const currentData = await res.json();
+
       setLoading(false);
       if (currentData.msg) {
         toast.success(currentData.msg, {
           position: "top-right",
           autoClose: 1500,
         });
-        setDeleteData(currentData);
+        setDraftDeleteData(currentData);
       }
     } catch (err) {
       console.log(err.message);
@@ -77,8 +75,9 @@ const DeleteCommunity = ({ community, setDeleteData }) => {
         place="top"
         content="Delete"
       />
+      {/* delete end */}
     </div>
   );
 };
 
-export default DeleteCommunity;
+export default DeleteDraftCommunity;

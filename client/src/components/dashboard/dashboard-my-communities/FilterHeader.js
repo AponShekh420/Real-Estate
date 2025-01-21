@@ -1,9 +1,14 @@
 import Link from "next/link";
-import React from "react";
 
 let searchTime;
 
-const FilterHeader = ({ setSearch, search, setCurrentPage}) => {
+const FilterHeader = ({
+  setSearch,
+  search,
+  setSortValue,
+  sortValue,
+  setCurrentPage,
+}) => {
   return (
     <div className="dashboard_search_meta d-md-flex align-items-center justify-content-xxl-end">
       <div className="item1 mb15-sm">
@@ -13,12 +18,12 @@ const FilterHeader = ({ setSearch, search, setCurrentPage}) => {
             className="form-control bdrs12"
             placeholder="Search"
             required
-            onChange={(e)=> {
+            onChange={(e) => {
               clearTimeout(searchTime);
-              searchTime = setTimeout(()=> {
-                setCurrentPage(1) 
-                setSearch(e.target.value)
-              }, 700)
+              searchTime = setTimeout(() => {
+                setCurrentPage(1);
+                setSearch(e.target.value);
+              }, 700);
             }}
             // value={search}
           />
@@ -34,11 +39,16 @@ const FilterHeader = ({ setSearch, search, setCurrentPage}) => {
           <span style={{ minWidth: "50px" }} className="title-color">
             Sort by:
           </span>
-          <select className="form-select show-tick">
-            <option>Best Seller</option>
-            <option>Best Match</option>
-            <option>Price Low</option>
-            <option>Price High</option>
+          <select
+            onChange={(e) => setSortValue(e.target.value)}
+            defaultValue={"date_added_desc"}
+            className="form-select show-tick"
+          >
+            <option value={"community_name_asc"}>Community Name ASC</option>
+            <option value={"date_added_asc"}>Date Added ASC</option>
+            <option value={"date_added_desc"}>Date Added DESC</option>
+            <option value={"date_edited_asc"}>Date Edited ASC</option>
+            <option value={"date_edited_desc"}>Date Edited DESC</option>
           </select>
         </div>
       </div>

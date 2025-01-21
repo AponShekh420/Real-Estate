@@ -4,14 +4,16 @@ import MainMenu from "@/components/common/MainMenu";
 import SidebarPanel from "@/components/common/sidebar-panel";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import MenuItem from "../dashboard/MenuItem";
 import NavAvatarLoading from "./NavAvatarLoading";
 
 const DashboardHeader = () => {
-  const {userInfo, loading} = useSelector(state =>  state.user);
-
+  const { userInfo, loading } = useSelector((state) => state.user);
+  const pathname = usePathname();
+  const isAddPage = pathname.split("/")[2] === "add-community" ? true : false;
   const menuItems = [
     {
       href: "/dashboard",
@@ -38,6 +40,12 @@ const DashboardHeader = () => {
       roles: ["user", "admin", "contributor"],
     },
   ];
+
+  useEffect(() => {
+    if (!isAddPage) {
+      localStorage.removeItem("draftCommunityId");
+    }
+  }, [pathname]);
 
   return (
     <>
@@ -104,10 +112,10 @@ const DashboardHeader = () => {
                     <li className=" user_setting">
                       <div className="dropdown">
                         <a className="btn" href="#" data-bs-toggle="dropdown">
-                         <Image
+                          <Image
                             width={44}
                             height={44}
-                            style={{objectFit: "cover"}}
+                            style={{ objectFit: "cover" }}
                             className="rounded-circle"
                             src={userInfo?.avatar}
                             alt={userInfo?.firstName + " " + userInfo?.lastName}
@@ -115,26 +123,48 @@ const DashboardHeader = () => {
                         </a>
                         <div className="dropdown-menu">
                           {loading ? (
-                            <NavAvatarLoading/>
+                            <NavAvatarLoading />
                           ) : (
                             <div className="user_setting_content">
                               <div className="col-12 mb10">
-                                <div className="message_container mt30-md" style={{boxShadow: "none", borderRadius: "none"}}>
+                                <div
+                                  className="message_container mt30-md"
+                                  style={{
+                                    boxShadow: "none",
+                                    borderRadius: "none",
+                                  }}
+                                >
                                   <div className="user_heading px-0 py-4 pt-0">
                                     <div className="wrap">
                                       <span className="contact-status online" />
                                       <Image
                                         width={50}
                                         height={50}
-                                        style={{objectFit: "cover"}}
+                                        style={{ objectFit: "cover" }}
                                         className="rounded-circle"
                                         src={userInfo?.avatar}
-                                        alt={userInfo?.firstName + " " + userInfo?.lastName}
+                                        alt={
+                                          userInfo?.firstName +
+                                          " " +
+                                          userInfo?.lastName
+                                        }
                                       />
                                       <div className="meta d-sm-flex justify-content-sm-between align-items-center">
                                         <div className="authors">
-                                          <h6 className="name mb-0">{userInfo?.firstName} {userInfo?.lastName}</h6>
-                                          <p className="preview" style={{wordBreak: "break-all", overflowWrap: "break-word", width: "100%"}}>{userInfo?.email}</p>
+                                          <h6 className="name mb-0">
+                                            {userInfo?.firstName}{" "}
+                                            {userInfo?.lastName}
+                                          </h6>
+                                          <p
+                                            className="preview"
+                                            style={{
+                                              wordBreak: "break-all",
+                                              overflowWrap: "break-word",
+                                              width: "100%",
+                                            }}
+                                          >
+                                            {userInfo?.email}
+                                          </p>
                                         </div>
                                       </div>
                                     </div>
@@ -142,10 +172,17 @@ const DashboardHeader = () => {
                                 </div>
                               </div>
                               {menuItems?.map((item, itemIndex) => {
-                                const isAuthorized = item?.roles.includes(userInfo?.role);
+                                const isAuthorized = item?.roles.includes(
+                                  userInfo?.role
+                                );
 
                                 return isAuthorized ? (
-                                  <MenuItem key={itemIndex} item={item} headerItem={true} userInfo={userInfo}/>
+                                  <MenuItem
+                                    key={itemIndex}
+                                    item={item}
+                                    headerItem={true}
+                                    userInfo={userInfo}
+                                  />
                                 ) : null;
                               })}
                             </div>

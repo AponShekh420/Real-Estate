@@ -1,8 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import MenuItem from "./MenuItem";
 
-const DboardMobileNavigation = ({user}) => {
+const DboardMobileNavigation = ({ user }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const sidebarItems = [
@@ -107,7 +107,9 @@ const DboardMobileNavigation = ({user}) => {
         <ul className={`dropdown-content ${isDropdownOpen ? "show" : ""}`}>
           {sidebarItems.map((section, sectionIndex) => {
             // Check if any item in the section is visible to the user
-            const isSectionVisible = section.items.some(item => item.roles.includes(user?.role));
+            const isSectionVisible = section.items.some((item) =>
+              item.roles.includes(user?.role)
+            );
 
             // If the section is not visible, skip rendering it
             if (!isSectionVisible) return null;

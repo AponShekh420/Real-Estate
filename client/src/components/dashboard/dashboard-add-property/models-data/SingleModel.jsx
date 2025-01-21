@@ -1,52 +1,56 @@
-"use client"
+"use client";
 
-import { MdDeleteForever } from "react-icons/md";
-import { BsFillPencilFill } from "react-icons/bs";
-import Image from "next/image";
-import classes from './communityModel.module.css'
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toast, ToastContainer } from "react-toastify";
 import { addModelFields } from "@/redux/modelSlice";
-
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { BsFillPencilFill } from "react-icons/bs";
+import { MdDeleteForever } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import classes from "./communityModel.module.css";
 
 const SingleModel = () => {
   const [modelsData, setModelsData] = useState([]);
   const [deletedDataMsg, setDeletedDataMsg] = useState("");
 
   // redux
-  const {communityId} = useSelector(state => state.community);
-  const {newDataNotify} = useSelector(state => state.model);
+  const { communityId } = useSelector((state) => state.community);
+  const { newDataNotify } = useSelector((state) => state.model);
   const dispatch = useDispatch();
 
   const getModelsData = async () => {
     try {
-      if(communityId == "0") {
+      if (communityId == "0") {
         return;
       }
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/get/${communityId}`, {credentials: "include"});
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/get/${communityId}`,
+        { credentials: "include" }
+      );
       const currentData = await res.json();
-      setModelsData(currentData.data)
-    } catch(err) {
-      console.log(err.message)
+      setModelsData(currentData.data);
+    } catch (err) {
+      console.log(err.message);
     }
-  }
-
+  };
 
   const deleteModel = async (modelId) => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/delete`, {
-        method: "DELETE",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        }, 
-        body: JSON.stringify({
-          CMTId: modelId
-        })
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_API}/api/models/delete`,
+        {
+          method: "DELETE",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            CMTId: modelId,
+          }),
+        }
+      );
       const currentData = await res.json();
-      if(currentData) {
+      if (currentData) {
         setDeletedDataMsg(currentData);
         toast.success(currentData.msg, {
           position: "top-right",
@@ -58,40 +62,52 @@ const SingleModel = () => {
           autoClose: 1500,
         });
       }
-    } catch(err) {
-      console.log(err.message)
+    } catch (err) {
+      console.log(err.message);
     }
-  }
+  };
 
   const editHandler = (modelValue) => {
     console.log(modelValue);
-    dispatch(addModelFields({
-      CMTName: modelValue.name,
-      desc: modelValue.desc,
-      CMTId: modelValue._id,
-      edit: true,
-      img: modelValue.img,
-      newDataNotify: Math.random() * 100,
-    }))
-  }
+    dispatch(
+      addModelFields({
+        CMTName: modelValue.name,
+        desc: modelValue.desc,
+        CMTId: modelValue._id,
+        edit: true,
+        img: modelValue.img,
+        newDataNotify: Math.random() * 100,
+      })
+    );
+  };
 
-
-  
-  useEffect(()=> {
+  useEffect(() => {
     getModelsData();
-  }, [communityId, newDataNotify, deletedDataMsg])
-
+  }, [communityId, newDataNotify, deletedDataMsg]);
 
   return (
     <div className="row mb30 p10 gap-3">
-      {modelsData.map((element, index)=> (
-        <div className={`ps-widget ${classes.boxBg} ${classes.modelGridBox} bdrs12 default-box-shadow2 p10`} key={index}>
+      {modelsData.map((element, index) => (
+        <div
+          className={`ps-widget ${classes.boxBg} ${classes.modelGridBox} bdrs12 default-box-shadow2 p10`}
+          key={index}
+        >
           <div className="title fz17 mb10 d-flex justify-content-end gap-3 align-items-center">
-            <BsFillPencilFill color="green" size={16} cursor="pointer" onClick={(e) => editHandler(element)}/>
-            <MdDeleteForever color="red" size={20} cursor="pointer" onClick={(e)=> {
+            <BsFillPencilFill
+              color="green"
+              size={16}
+              cursor="pointer"
+              onClick={(e) => editHandler(element)}
+            />
+            <MdDeleteForever
+              color="red"
+              size={20}
+              cursor="pointer"
+              onClick={(e) => {
                 e.preventDefault();
-                deleteModel(element?._id)
-              }}/>
+                deleteModel(element?._id);
+              }}
+            />
           </div>
           <div className="row">
             <div className="agent-single d-sm-flex pb0">
@@ -114,9 +130,8 @@ const SingleModel = () => {
           </div>
         </div>
       ))}
-      <ToastContainer containerId="containerB"/>
     </div>
   );
-}
+};
 
 export default SingleModel;
