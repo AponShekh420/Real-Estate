@@ -1,12 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { addCommunityFieldValue } from "@/redux/communitySlice";
+import { useEffect, useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import AmenitiesHanlder from "./AmenitiesHanlder";
-import { useDispatch, useSelector } from "react-redux";
-import { addCommunityFieldValue } from "@/redux/communitySlice";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import DeleteAmenity from "./DeleteAmenity";
 
 const Amenities = () => {
@@ -46,15 +44,17 @@ const Amenities = () => {
 
   const fetchAmenities = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/amenity/getall`, {credentials: "include"});
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_API}/api/amenity/getall`,
+        { credentials: "include" }
+      );
       const { data } = await res.json();
-      
+
       // Sort amenities alphabetically by name
       const sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
 
-
-      const unpopular = sortedData.filter(amenity => !amenity.popular);
-      const popular = sortedData.filter(amenity => amenity.popular);
+      const unpopular = sortedData.filter((amenity) => !amenity.popular);
+      const popular = sortedData.filter((amenity) => amenity.popular);
 
       setUnpopularAmenities(transformData(unpopular));
       setPopularAmenities(transformData(popular));
@@ -101,7 +101,12 @@ const Amenities = () => {
       // Add all unpopular amenities to Redux state
       dispatch(
         addCommunityFieldValue({
-          amenities: [...amenities, ...allAmenities.filter((amenity) => !amenities.some((a) => a._id === amenity._id))],
+          amenities: [
+            ...amenities,
+            ...allAmenities.filter(
+              (amenity) => !amenities.some((a) => a._id === amenity._id)
+            ),
+          ],
         })
       );
     } else {
@@ -126,7 +131,12 @@ const Amenities = () => {
       // Add all popular amenities to Redux state
       dispatch(
         addCommunityFieldValue({
-          amenities: [...amenities, ...allPopularAmenities.filter((amenity) => !amenities.some((a) => a._id === amenity._id))],
+          amenities: [
+            ...amenities,
+            ...allPopularAmenities.filter(
+              (amenity) => !amenities.some((a) => a._id === amenity._id)
+            ),
+          ],
         })
       );
     } else {
@@ -167,18 +177,38 @@ const Amenities = () => {
   return (
     <div className="row">
       {/* Unpopular Amenities Section */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <label>
-          <input type="checkbox" checked={allChecked} onChange={handleAllCheck} /> All Unpopular
+          <input
+            type="checkbox"
+            checked={allChecked}
+            onChange={handleAllCheck}
+          />{" "}
+          All Unpopular
         </label>
       </div>
-      <div style={{ display: "flex", justifyContent: "start" }} className="gap-sm-3 gap-lg-3 gap-0 d-sm-flex d-block">
+      <div
+        style={{ display: "flex", justifyContent: "start" }}
+        className="gap-sm-3 gap-lg-3 gap-0 d-sm-flex d-block"
+      >
         {Object.keys(unpopularAmenities).map((columnKey, index) => (
           <div key={index} className="col-sm-5 col-lg-3 col-xxl-2 col-12">
             <div className="checkbox-style1">
               {unpopularAmenities[columnKey].map((amenity, amenityIndex) => (
-                <div className="d-flex justify-content-between align-items-center mb10" key={amenityIndex}>
-                  <label className="custom_checkbox d-flex align-items-center" style={{ lineHeight: "20px" }}>
+                <div
+                  className="d-flex justify-content-between align-items-center mb10"
+                  key={amenityIndex}
+                >
+                  <label
+                    className="custom_checkbox d-flex align-items-center"
+                    style={{ lineHeight: "20px" }}
+                  >
                     {amenity?.name}
                     <input
                       className="p-0 m-0"
@@ -189,12 +219,38 @@ const Amenities = () => {
                     <span className="checkmark" style={{ top: 3 }} />
                   </label>
                   <div className="d-flex align-items-center gap-2">
-                    <a style={{ border: "none", color: "red", padding: "0px", fontSize: "20px", cursor: "pointer" }} data-tooltip-id={`edit-${columnKey}`}>
-                      <FaPencilAlt onClick={() => editHanlder(amenity)} size={12} color="green" cursor="pointer" />
+                    <a
+                      style={{
+                        border: "none",
+                        color: "red",
+                        padding: "0px",
+                        fontSize: "20px",
+                        cursor: "pointer",
+                      }}
+                      data-tooltip-id={`edit-${columnKey}`}
+                    >
+                      <FaPencilAlt
+                        onClick={() => editHanlder(amenity)}
+                        size={12}
+                        color="green"
+                        cursor="pointer"
+                      />
                     </a>
-                    <DeleteAmenity amenity={amenity} columnKey={columnKey} setNotify={setNotify} />
-                    <ReactTooltip id={`delete-${columnKey}`} place="top" content="Delete" />
-                    <ReactTooltip id={`edit-${columnKey}`} place="top" content="Edit" />
+                    <DeleteAmenity
+                      amenity={amenity}
+                      columnKey={columnKey}
+                      setNotify={setNotify}
+                    />
+                    <ReactTooltip
+                      id={`delete-${columnKey}`}
+                      place="top"
+                      content="Delete"
+                    />
+                    <ReactTooltip
+                      id={`edit-${columnKey}`}
+                      place="top"
+                      content="Edit"
+                    />
                   </div>
                 </div>
               ))}
@@ -204,20 +260,40 @@ const Amenities = () => {
       </div>
 
       {/* Divider */}
-      <div style={{ margin: "20px 0", borderTop: "1px solid black", position: "relative" }}>
+      <div
+        style={{
+          margin: "20px 0",
+          borderTop: "1px solid black",
+          position: "relative",
+        }}
+      >
         <label>
-          <input type="checkbox" checked={allPopularChecked} onChange={handleAllPopularCheck} /> All Popular
+          <input
+            type="checkbox"
+            checked={allPopularChecked}
+            onChange={handleAllPopularCheck}
+          />{" "}
+          All Popular
         </label>
       </div>
 
       {/* Popular Amenities Section */}
-      <div style={{ display: "flex", justifyContent: "start" }} className="gap-sm-3 gap-lg-3 gap-0 d-sm-flex d-block">
+      <div
+        style={{ display: "flex", justifyContent: "start" }}
+        className="gap-sm-3 gap-lg-3 gap-0 d-sm-flex d-block"
+      >
         {Object.keys(popularAmenities).map((columnKey, index) => (
           <div key={index} className="col-sm-5 col-lg-3 col-xxl-2 col-12">
             <div className="checkbox-style1">
               {popularAmenities[columnKey].map((amenity, amenityIndex) => (
-                <div className="d-flex justify-content-between align-items-center mb10" key={amenityIndex}>
-                  <label className="custom_checkbox d-flex align-items-center" style={{ lineHeight: "20px" }}>
+                <div
+                  className="d-flex justify-content-between align-items-center mb10"
+                  key={amenityIndex}
+                >
+                  <label
+                    className="custom_checkbox d-flex align-items-center"
+                    style={{ lineHeight: "20px" }}
+                  >
                     {amenity?.name}
                     <input
                       className="p-0 m-0"
@@ -228,12 +304,38 @@ const Amenities = () => {
                     <span className="checkmark" style={{ top: 3 }} />
                   </label>
                   <div className="d-flex align-items-center gap-2">
-                    <a style={{ border: "none", color: "red", padding: "0px", fontSize: "20px", cursor: "pointer" }} data-tooltip-id={`edit-${columnKey}`}>
-                      <FaPencilAlt onClick={() => editHanlder(amenity)} size={12} color="green" cursor="pointer" />
+                    <a
+                      style={{
+                        border: "none",
+                        color: "red",
+                        padding: "0px",
+                        fontSize: "20px",
+                        cursor: "pointer",
+                      }}
+                      data-tooltip-id={`edit-${columnKey}`}
+                    >
+                      <FaPencilAlt
+                        onClick={() => editHanlder(amenity)}
+                        size={12}
+                        color="green"
+                        cursor="pointer"
+                      />
                     </a>
-                    <DeleteAmenity amenity={amenity} columnKey={columnKey} setNotify={setNotify} />
-                    <ReactTooltip id={`delete-${columnKey}`} place="top" content="Delete" />
-                    <ReactTooltip id={`edit-${columnKey}`} place="top" content="Edit" />
+                    <DeleteAmenity
+                      amenity={amenity}
+                      columnKey={columnKey}
+                      setNotify={setNotify}
+                    />
+                    <ReactTooltip
+                      id={`delete-${columnKey}`}
+                      place="top"
+                      content="Delete"
+                    />
+                    <ReactTooltip
+                      id={`edit-${columnKey}`}
+                      place="top"
+                      content="Edit"
+                    />
                   </div>
                 </div>
               ))}
@@ -252,7 +354,6 @@ const Amenities = () => {
         edit={edit}
         setNotify={setNotify}
       />
-      <ToastContainer />
     </div>
   );
 };

@@ -1,12 +1,19 @@
 "use client";
+import { formats, modules } from "@/components/common/quillEditorConfig";
+import "@/components/common/styles/quillEditor.css";
 import { addCommunityFieldValue } from "@/redux/communitySlice";
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
 import { useDispatch, useSelector } from "react-redux";
-import Select from 'react-select'
+import Select from "react-select";
+// Dynamically import React Quill with SSR disabled
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 const PropertyDescription = () => {
-  const {errors, title, homeTypes, active, maxPrice, minPrice, description} = useSelector((state)=> state.community)
+  const { errors, title, homeTypes, active, maxPrice, minPrice, description } =
+    useSelector((state) => state.community);
   const dispatch = useDispatch();
 
-  const homeTypeOptions= [
+  const homeTypeOptions = [
     { value: "Single-Family", label: "Single-Family" },
     { value: "Condos", label: "Condos" },
     { value: "Manufactured", label: "Manufactured" },
@@ -21,8 +28,6 @@ const PropertyDescription = () => {
     { value: "Sold", label: "Sold" },
     { value: "Buy", label: "Buy" },
   ];
-
- 
 
   const customStyles = {
     option: (styles, { isFocused, isSelected, isHovered }) => {
@@ -39,7 +44,6 @@ const PropertyDescription = () => {
     },
   };
 
-
   return (
     <div className="form-style1">
       <div className="row">
@@ -50,10 +54,12 @@ const PropertyDescription = () => {
               type="text"
               className="form-control"
               placeholder="Type your community title"
-              onChange={(e)=> {
-                dispatch(addCommunityFieldValue({
-                  title: e.target.value
-                }))
+              onChange={(e) => {
+                dispatch(
+                  addCommunityFieldValue({
+                    title: e.target.value,
+                  })
+                );
               }}
               value={title}
             />
@@ -61,7 +67,6 @@ const PropertyDescription = () => {
           </div>
         </div>
         {/* End .col-12 */}
-
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
@@ -78,12 +83,17 @@ const PropertyDescription = () => {
                 className="select-custom pl-0"
                 classNamePrefix="select"
                 isMulti
-                onChange={(e)=> {
-                  dispatch(addCommunityFieldValue({
-                    homeTypes: e.map((eachElement)=> eachElement.value)
-                  }))
+                onChange={(e) => {
+                  dispatch(
+                    addCommunityFieldValue({
+                      homeTypes: e.map((eachElement) => eachElement.value),
+                    })
+                  );
                 }}
-                value={homeTypes.map(eachElement => ({value: eachElement, label: eachElement}))}
+                value={homeTypes.map((eachElement) => ({
+                  value: eachElement,
+                  label: eachElement,
+                }))}
               />
               <p className="text-danger">{errors?.homeTypes?.msg}</p>
             </div>
@@ -106,18 +116,22 @@ const PropertyDescription = () => {
                 styles={customStyles}
                 className="select-custom pl-0"
                 classNamePrefix="select"
-                onChange={(e)=> {
-                  dispatch(addCommunityFieldValue({
-                    active: e.value === "Pending" ? false : true
-                  }))
+                onChange={(e) => {
+                  dispatch(
+                    addCommunityFieldValue({
+                      active: e.value === "Pending" ? false : true,
+                    })
+                  );
                 }}
-                value={{value: active ? "Active" : "Pending", label: active ? "Active" : "Pending"}}
+                value={{
+                  value: active ? "Active" : "Pending",
+                  label: active ? "Active" : "Pending",
+                }}
               />
             </div>
           </div>
         </div>
         {/* End .col-6 */}
-
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb30">
@@ -128,10 +142,12 @@ const PropertyDescription = () => {
               type="number"
               className="form-control"
               placeholder="Number"
-              onChange={(e)=> {
-                dispatch(addCommunityFieldValue({
-                  minPrice: e.target.value
-                }))
+              onChange={(e) => {
+                dispatch(
+                  addCommunityFieldValue({
+                    minPrice: e.target.value,
+                  })
+                );
               }}
               value={minPrice}
             />
@@ -139,7 +155,7 @@ const PropertyDescription = () => {
           </div>
         </div>
         {/* End .col-6 */}
-        
+
         <div className="col-sm-6 col-xl-4">
           <div className="mb30">
             <label className="heading-color ff-heading fw600 mb10">
@@ -149,34 +165,43 @@ const PropertyDescription = () => {
               type="number"
               className="form-control"
               placeholder="Number"
-              onChange={(e)=> {
-                dispatch(addCommunityFieldValue({
-                  maxPrice: e.target.value
-                }))
+              onChange={(e) => {
+                dispatch(
+                  addCommunityFieldValue({
+                    maxPrice: e.target.value,
+                  })
+                );
               }}
               value={maxPrice}
             />
             <p className="text-danger">{errors?.maxPrice?.msg}</p>
           </div>
         </div>
-        {/* End .col-6 */}
+        {/* End .col-7 */}
 
         <div className="col-sm-6 col-xl-12">
           <div className="mb30">
             <label className="heading-color ff-heading fw600 mb10">
               Description
             </label>
-            <textarea
-              onChange={(e)=> dispatch(addCommunityFieldValue({
-                description: e.target.value
-              }))}
-              type="text"
-              className={`form-control`}
-              placeholder="Write Description"
-              value={description}
-              style={{height: "300px"}}
-            >
-            </textarea>
+            <div className="text-editor">
+              <ReactQuill
+                theme="snow"
+                value={description}
+                onChange={(e) =>
+                  dispatch(
+                    addCommunityFieldValue({
+                      description: e,
+                    })
+                  )
+                }
+                placeholder={"Write Description"}
+                modules={modules}
+                formats={formats}
+              />
+              <p className="text-danger">{errors?.desc?.msg}</p>
+            </div>
+            {/* End .col-7 */}
           </div>
         </div>
         {/* End .row */}

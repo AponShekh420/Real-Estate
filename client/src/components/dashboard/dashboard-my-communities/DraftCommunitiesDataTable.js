@@ -1,10 +1,10 @@
 "use client";
 import CommunityMinMaxPrice from "@/components/common/CommunityMinMaxPrice";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Moment from "react-moment";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import DeleteCommunity from "./DeleteCommunity";
+import DeleteDraftCommunity from "./DeleteDraftCommunity";
 
 const getStatusStyle = (active) => {
   switch (active) {
@@ -17,8 +17,15 @@ const getStatusStyle = (active) => {
   }
 };
 
-const CommunitiesDataTable = ({ communitiesData, setDeleteData }) => {
+const DraftCommunitiesDataTable = ({ communitiesData, setDraftDeleteData }) => {
+  const router = useRouter();
   const { data } = communitiesData;
+  const handleEdit = (communityId) => {
+    if (communityId) {
+      localStorage.setItem("draftCommunityId", communityId);
+      router.push("/dashboard/add-community");
+    }
+  };
 
   return (
     <table className="table-style3 table at-savesearch">
@@ -26,7 +33,6 @@ const CommunitiesDataTable = ({ communitiesData, setDeleteData }) => {
         <tr>
           <th scope="col">Community</th>
           <th scope="col">Added</th>
-          <th scope="col">Edited</th>
           <th scope="col">Status</th>
           <th scope="col">Contact</th>
           <th scope="col">Action</th>
@@ -44,16 +50,15 @@ const CommunitiesDataTable = ({ communitiesData, setDeleteData }) => {
                     className="w-100"
                     src={
                       community?.thumbnail ||
-                      community?.imgs[community?.imgs?.length - 1]
+                      community?.imgs[community?.imgs?.length - 1] ||
+                      "/images/blog/blog-5.jpg"
                     }
                     alt="community"
                   />
                 </div>
                 <div className="list-content py-0 p-0 mt-2 mt-xxl-0 ps-xxl-4">
                   <div className="h6 list-title">
-                    <Link href={`/community/${community?.slug}`}>
-                      {community?.title}
-                    </Link>
+                    <span>{community?.title}</span>
                   </div>
                   <p className="list-text mb-0 text-capitalize">
                     {community?.city
@@ -74,20 +79,6 @@ const CommunitiesDataTable = ({ communitiesData, setDeleteData }) => {
               <p className="text-capitalize">{`${community?.createdby?.firstName}  ${community?.createdby?.lastName}`}</p>
             </td>
             <td className="vam">
-              {community?.createdAt < community?.updatedAt ? (
-                <div>
-                  <Moment format="D MMM YYYY">{community?.updatedAt}</Moment>
-                  {community?.updatedby ? (
-                    <p className="text-capitalize">{`${community?.updatedby?.firstName}  ${community?.updatedby?.lastName}`}</p>
-                  ) : (
-                    <p>Not updated yet</p>
-                  )}
-                </div>
-              ) : (
-                <p>Not Edited</p>
-              )}
-            </td>
-            <td className="vam">
               <span className={getStatusStyle(community?.active)}>
                 {community?.active ? "Active" : "panding"}
               </span>
@@ -105,27 +96,24 @@ const CommunitiesDataTable = ({ communitiesData, setDeleteData }) => {
             </td>
             <td className="vam">
               <div className="d-flex">
-                <Link href={`/dashboard/edit-community/${community?.slug}`}>
-                  <button
-                    className="icon btn btn-primary p-1"
-                    style={{ border: "none" }}
-                    data-tooltip-id={`edit-${community?.slug}`}
-                  >
-                    <span
-                      className="fas fa-pen fa"
-                      style={{ color: "green" }}
-                    />
-                  </button>
-                </Link>
+                <button
+                  className="icon btn btn-primary p-1"
+                  style={{ border: "none" }}
+                  data-tooltip-id={`edit-${community?.slug}`}
+                  onClick={() => handleEdit(community?._id)}
+                >
+                  <span className="fas fa-pen fa" style={{ color: "green" }} />
+                </button>
+
                 <ReactTooltip
                   id={`edit-${community?.slug}`}
                   place="top"
                   content="Edit"
                 />
 
-                <DeleteCommunity
+                <DeleteDraftCommunity
                   community={community}
-                  setDeleteData={setDeleteData}
+                  setDraftDeleteData={setDraftDeleteData}
                 />
               </div>
             </td>
@@ -136,4 +124,4 @@ const CommunitiesDataTable = ({ communitiesData, setDeleteData }) => {
   );
 };
 
-export default CommunitiesDataTable;
+export default DraftCommunitiesDataTable;

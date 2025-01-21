@@ -1,0 +1,37 @@
+.error-nav {
+  color: red !important;
+  border-bottom-color: red !important;
+  font-weight: 700;
+}
+.error-nav:hover: {
+  color: black !important;
+  border-bottom-color: black !important;
+  font-weight: 700;
+}
+.fadeIn {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+.fadeOut {
+  opacity: 1;
+  animation: fadeOut 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
