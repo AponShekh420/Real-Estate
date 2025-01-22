@@ -1,5 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
-
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   communityId: "0",
@@ -26,6 +25,7 @@ const initialState = {
   errors: {},
   zip: "",
   amenities: [],
+  builders: [],
   thumbnail: "",
   existingImages: [],
   newImages: [],
@@ -34,8 +34,25 @@ const initialState = {
   metaDesc: "",
   metaSlug: "",
   map: "",
-}
-
+  //contact not required
+  name: "",
+  telephone: "",
+  email: "",
+  notes: "",
+  //closet section
+  hospital: {
+    name: "",
+    distance: "",
+  },
+  airport: {
+    name: "",
+    distance: "",
+  },
+  militaryBase: {
+    name: "",
+    distance: "",
+  },
+};
 
 const communitySlice = createSlice({
   name: "community",
@@ -44,17 +61,16 @@ const communitySlice = createSlice({
     addCommunityFieldValue: (state, action) => {
       return {
         ...state,
-        ...action.payload
-      }
+        ...action.payload,
+      };
     },
     removeAllCommunityFieldValue: (state) => {
-      return initialState
-    }
-  }
+      return initialState;
+    },
+  },
 });
 
-
-export const {addCommunityFieldValue, removeAllCommunityFieldValue} = communitySlice.actions;
-
+export const { addCommunityFieldValue, removeAllCommunityFieldValue } =
+  communitySlice.actions;
 
 export default communitySlice.reducer;

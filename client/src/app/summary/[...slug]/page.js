@@ -1,48 +1,40 @@
 import DefaultHeader from "@/components/common/DefaultHeader";
+import StringToDomComponent from "@/components/common/StringToDomComponent";
+import AdvanceFilterModal from "@/components/common/advance-filter";
 import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
-
-import React from "react";
-import PropertyFiltering from "@/components/summary/PropertyFiltering";
-import { notFound } from "next/navigation";
-import getLocationData from "@/lib/getLocationData";
-import ReadMore from "@/components/common/ReadMore";
-import store from "@/redux/store";
-import { removeCommunityFilterValues } from "@/redux/communityFilterSlice";
-import Breadcumb from "@/components/summary/Breadcumb";
-import ListingMap from "@/components/summary/ListingMap";
-import TopFilterBar2 from "@/components/summary/TopFilterBar2";
-import AdvanceFilterModal from "@/components/common/advance-filter";
-import StringToDomComponent from "@/components/common/StringToDomComponent";
 import "@/components/common/quillEditorTextStyle.css";
+import Breadcumb from "@/components/summary/Breadcumb";
+import PropertyFiltering from "@/components/summary/PropertyFiltering";
+import TopFilterBar2 from "@/components/summary/TopFilterBar2";
 import TopTitle from "@/components/summary/TopTitle";
-
+import getLocationData from "@/lib/getLocationData";
+import { removeCommunityFilterValues } from "@/redux/communityFilterSlice";
+import store from "@/redux/store";
+import { notFound } from "next/navigation";
 
 export const metadata = {
   title: "55 home || summary",
 };
 
-const SummaryPage = async ({params}) => {
-  const {slug} = params;
+const SummaryPage = async ({ params }) => {
+  const { slug } = params;
 
   // that would be redirect on notFound page if the slug params are more then 3, like state/city/area/notfound??
-  if(slug?.length > 3 && slug !== undefined) {
+  if (slug?.length > 3 && slug !== undefined) {
     notFound();
   }
 
   // get location data like description, name etc from api
-  const res = await getLocationData(params)
+  const res = await getLocationData(params);
   let desc = res?.data?.desc;
 
-
   // has add the data on redux after fetching from backend
-  if(slug !==undefined && !res?.data) {
+  if (slug !== undefined && !res?.data) {
     // if the data has not founded, that's mean the route are wrong, so redirect on not found page
-    store.dispatch(removeCommunityFilterValues())
+    store.dispatch(removeCommunityFilterValues());
     notFound();
   }
-
-
 
   return (
     <>
@@ -64,7 +56,7 @@ const SummaryPage = async ({params}) => {
             aria-labelledby="advanceSeachModalLabel"
             aria-hidden="true"
           >
-            <AdvanceFilterModal/>
+            <AdvanceFilterModal />
           </div>
         </div>
         {/* <!-- Advance Feature Modal End --> */}
@@ -85,15 +77,14 @@ const SummaryPage = async ({params}) => {
       </section>
       {/* End Advance Search */}
 
-
       {/* Breadcumb Sections */}
       <section className="breadcumb-section bgc-f7">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
               <div className="breadcumb-style1">
-                <TopTitle title={res?.data?.name}/>
-                <Breadcumb/>
+                <TopTitle title={res?.data?.name} />
+                <Breadcumb />
                 <div className="quillEditorTextHandler mt25">
                   <StringToDomComponent htmlString={res?.data?.desc || ""} />
                 </div>
@@ -115,7 +106,7 @@ const SummaryPage = async ({params}) => {
       {/* End Breadcumb Sections */}
 
       {/* Property Filtering */}
-      <PropertyFiltering communityFilter={store.getState().communityFilter}/>
+      <PropertyFiltering communityFilter={store.getState().communityFilter} />
       {/* Property Filtering */}
 
       {/* Start Our Footer */}

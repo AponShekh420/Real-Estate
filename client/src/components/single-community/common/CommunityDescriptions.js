@@ -1,11 +1,10 @@
-import React from "react";
-
-const CommunityDescriptions = ({data}) => {
+const CommunityDescriptions = ({ data }) => {
   return (
     <>
-      <p className="text mb10">
-        {data?.description?.slice(0, 300)}
-      </p>
+      <div
+        className="text mb10"
+        dangerouslySetInnerHTML={{ __html: data?.description?.slice(0, 300) }}
+      ></div>
       <div className="agent-single-accordion">
         <div className="accordion accordion-flush" id="accordionFlushExample">
           <div className="accordion-item">
@@ -17,9 +16,10 @@ const CommunityDescriptions = ({data}) => {
               style={{}}
             >
               <div className="accordion-body p-0">
-                <p className="text">
-                  {data?.description}
-                </p>
+                <div
+                  dangerouslySetInnerHTML={{ __html: data?.description }}
+                  className="text"
+                ></div>
               </div>
             </div>
             {data?.description?.length > 300 ? (

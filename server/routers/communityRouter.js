@@ -14,51 +14,71 @@ const checkCommunityValidation = require("../middleware/checkCommunityValidation
 const getCommunitiesByFilter = require("../controllers/communityController/getCommunitiesByFilter");
 const getCommunitiesForMap = require("../controllers/communityController/getCommunitiesForMap");
 
-
 const useCommunityValidationResult = require("../middleware/useCommunityValidationResult");
-
-
 
 // auth checker
 const authCheck = require("../middleware/common/users/authCheck");
 const adminAuthCheck = require("../middleware/common/users/adminAuthCheck");
 const uploadCommunityImages = require("../middleware/uploadCommunityImgs");
-
-
+const {
+  getDraftCommunities,
+  deleteDraftCommunity,
+  addDraftCommunity,
+  getDraftCommunityById,
+} = require("../controllers/communityController/draftCommunity");
+const uploadDraftCommunityImages = require("../middleware/uploadDraftCommunity");
 
 // callback function of configure
 const router = express.Router();
 
-
-
-router.get('/single-community/:slug', getSingleCommunity);
-
+router.get("/single-community/:slug", getSingleCommunity);
 
 // route controller
-router.post('/add', authCheck, adminAuthCheck, uploadCommunityImages, checkCommunityValidation, useCommunityValidationResult, addCommunity);
-router.put('/update', authCheck, adminAuthCheck, uploadCommunityImages, checkCommunityValidation, useCommunityValidationResult, updateCommuity);
-router.delete('/delete', authCheck, adminAuthCheck, deleteCommunity);
-
+router.post(
+  "/add",
+  authCheck,
+  adminAuthCheck,
+  uploadCommunityImages,
+  checkCommunityValidation,
+  useCommunityValidationResult,
+  addCommunity
+);
+router.put(
+  "/update",
+  authCheck,
+  adminAuthCheck,
+  uploadCommunityImages,
+  checkCommunityValidation,
+  useCommunityValidationResult,
+  updateCommuity
+);
+router.delete("/delete", authCheck, adminAuthCheck, deleteCommunity);
 
 // community active and deactive
-router.put('/deactive', authCheck, adminAuthCheck, deactiveCommunity);
-router.put('/active', authCheck, adminAuthCheck, activeCommunity);
-
+router.put("/deactive", authCheck, adminAuthCheck, deactiveCommunity);
+router.put("/active", authCheck, adminAuthCheck, activeCommunity);
 
 // community image uploading and deleting
-router.post('/upload', authCheck, adminAuthCheck, uploadCommunityImages);
-router.delete('/imgdelete', authCheck, adminAuthCheck, communityImageDelete);
-
-
+router.post("/upload", authCheck, adminAuthCheck, uploadCommunityImages);
+router.delete("/imgdelete", authCheck, adminAuthCheck, communityImageDelete);
 
 // get the communities by area/city/state/title
-router.post('/get-communities', getCommunities)
+router.post("/get-communities", getCommunities);
 
+// get data for display on frontend page
+router.post("/get-by-filter", getCommunitiesByFilter);
+router.get("/get-for-map", getCommunitiesForMap);
 
-
-// get data for display on frontend page 
-router.post('/get-by-filter', getCommunitiesByFilter);
-router.get('/get-for-map', getCommunitiesForMap);
-
+//community draft controler
+router.get("/draft/:id", authCheck, adminAuthCheck, getDraftCommunityById);
+router.post("/draft", authCheck, adminAuthCheck, getDraftCommunities);
+router.post(
+  "/draft/create",
+  authCheck,
+  adminAuthCheck,
+  uploadDraftCommunityImages,
+  addDraftCommunity
+);
+router.delete("/draft/:id", authCheck, adminAuthCheck, deleteDraftCommunity);
 
 module.exports = router;

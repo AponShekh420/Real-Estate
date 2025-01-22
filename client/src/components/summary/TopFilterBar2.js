@@ -1,32 +1,27 @@
-'use client'
+"use client";
 
-import React from "react";
-import PropertyType from "./PropertyType";
-import { useDispatch, useSelector } from "react-redux";
-import { addCommunityFilterValue } from "@/redux/communityFilterSlice";
 import getCommunities from "@/lib/getCommunities";
-
-
+import { addCommunityFilterValue } from "@/redux/communityFilterSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 let searchIntervel;
-const TopFilterBar2 = ({filterFunctions} ) => {
+const TopFilterBar2 = ({ filterFunctions }) => {
   // redux action
   const dispatch = useDispatch();
-  const {titleSearch}= useSelector(state => state.communityFilter)
-
+  const { titleSearch } = useSelector((state) => state.communityFilter);
 
   const searchHandler = (e) => {
-    clearInterval(searchIntervel)
-    dispatch(addCommunityFilterValue({
-      titleSearch: e.target.value,
-    }))
+    clearInterval(searchIntervel);
+    dispatch(
+      addCommunityFilterValue({
+        titleSearch: e.target.value,
+      })
+    );
 
-    searchIntervel = setTimeout(()=> {
-      getCommunities()
-    }, 1000)
-  }
-
-
+    searchIntervel = setTimeout(() => {
+      getCommunities();
+    }, 1000);
+  };
 
   return (
     <>
@@ -35,16 +30,13 @@ const TopFilterBar2 = ({filterFunctions} ) => {
           type="text"
           className="form-control search-field"
           placeholder="Enter an title, state, area and city etc."
-          onChange={(e)=> searchHandler(e)}
+          onChange={(e) => searchHandler(e)}
           value={titleSearch}
         />
       </li>
-      
+
       {/* End li Listing Status */}
 
-      <li className="list-inline-item position-relative">
-        <PropertyType/>
-      </li>
       {/* End li Property Type */}
 
       <li className="list-inline-item">
@@ -55,7 +47,7 @@ const TopFilterBar2 = ({filterFunctions} ) => {
           data-bs-toggle="modal"
           data-bs-target="#advanceSeachModal"
         >
-          <i className="flaticon-settings me-2" /> More Filter
+          <i className="flaticon-settings me-2" /> Advance Filter
         </button>
       </li>
     </>
