@@ -27,7 +27,6 @@ const getReviews = async (req, res) => {
       })
       .populate("community");
 
-    console.log(data);
     if (data && data.length > 0) {
       res.status(200).json({
         msg: "You got all reviews!",

@@ -51,7 +51,6 @@ const Container = () => {
         }
       );
       const currentData = await res.json();
-      console.log(currentData);
       setLoading(false);
       if (currentData.data) {
         setTotalPages(
@@ -87,7 +86,6 @@ const Container = () => {
         }
       );
       const currentData = await res.json();
-      console.log(currentData);
       setLoading(false);
       if (currentData.data) {
         setTotalDraftPages(

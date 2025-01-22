@@ -65,6 +65,7 @@ const AddPropertyTabContent = ({
       e
     );
     try {
+      setIsDraft(false);
       dispatch(addCommunityFieldValue({ loading: true }));
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_API}/api/community/add`,
@@ -317,7 +318,6 @@ const AddPropertyTabContent = ({
     [community]
   );
   useEffect(() => {
-    console.log(community);
     const draftCommunityId = localStorage.getItem("draftCommunityId");
     debouncedSaveDraft(draftCommunityId);
     // Cleanup debounce on unmount
@@ -505,7 +505,7 @@ const AddPropertyTabContent = ({
           </div>
         </div>
         <div
-          className="tab-pane fade show active"
+          className="tab-pane fade"
           id="nav-item2"
           role="tabpanel"
           aria-labelledby="nav-item2-tab"

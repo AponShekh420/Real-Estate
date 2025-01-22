@@ -1,18 +1,23 @@
 "use client";
 import Image from "next/image";
 import "photoswipe/dist/photoswipe.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Gallery, Item } from "react-photoswipe-gallery";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import "swiper/swiper-bundle.min.css";
 const PropertyGallery = ({ id, data }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [isMounted, setIsMounted] = useState(false);
+  const { imgs: images, thumbnail } = data ? data : { imgs: [], thumbnail: "" };
 
-  const { imgs: images, thumbnail } = data;
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-  console.log("thumbnail:", thumbnail);
-
+  if (!isMounted) {
+    return null;
+  }
   return (
     <>
       <div className="ps-v6-slider nav_none mt30 mb30">

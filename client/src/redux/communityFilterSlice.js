@@ -1,5 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
-
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   titleSearch: "",
@@ -18,9 +17,14 @@ const initialState = {
   ageRestrictions: "Any",
   gated: "Any",
   price: [0, 1000000000],
-  sorting: "Default"
-}
-
+  sorting: "Default",
+  //added by shipon
+  isNewContraction: "No",
+  closestHospital: null,
+  closestAirport: null,
+  closestMilitaryBase: null,
+  builder: "",
+};
 
 const communityFilter = createSlice({
   name: "communityFilter",
@@ -29,17 +33,16 @@ const communityFilter = createSlice({
     addCommunityFilterValue: (state, action) => {
       return {
         ...state,
-        ...action.payload
-      }
+        ...action.payload,
+      };
     },
     removeCommunityFilterValues: (state) => {
-      return initialState
-    }
-  }
+      return initialState;
+    },
+  },
 });
 
-
-export const {addCommunityFilterValue, removeCommunityFilterValues} = communityFilter.actions;
-
+export const { addCommunityFilterValue, removeCommunityFilterValues } =
+  communityFilter.actions;
 
 export default communityFilter.reducer;
