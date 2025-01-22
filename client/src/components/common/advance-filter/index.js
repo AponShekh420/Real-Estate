@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Amenities from "./Amenities";
 import PriceRange from "./PriceRange";
+import PropertyType from "./PropertyType";
 import SelectMultiField from "./SelectMulitField";
 
 const customStyles = {
@@ -24,12 +25,6 @@ const customStyles = {
     };
   },
 };
-const options = [
-  { value: "Single-Family", label: "Single-Family" },
-  { value: "Condos", label: "Condos" },
-  { value: "Manufactured", label: "Manufactured" },
-  { value: "Attached", label: "Attached" },
-];
 
 const AdvanceFilterModal = () => {
   // redux
@@ -42,8 +37,14 @@ const AdvanceFilterModal = () => {
     gated: currentGated,
     ageRestrictions: currentAgeRestrictions,
     amenities: currentAmenities,
+    isNewContraction: currentIsNewContraction,
+    closestHospital: currentClosestHospital,
+    closestAirport: currentClosestAirport,
+    closestMilitaryBase: currentClosestMilitaryBase,
+    builder: currentBuilder,
     homeTypes,
   } = useSelector((state) => state.communityFilter);
+  const community = useSelector((state) => state.communityFilter);
   const dispatch = useDispatch();
 
   // react state
@@ -56,8 +57,23 @@ const AdvanceFilterModal = () => {
   const [ageRestrictions, setAgeRestrictions] = useState(
     currentAgeRestrictions || "Any"
   );
-  const [currentHomeTypes, setCurrentHomeTypes] = useState([...homeTypes]);
   const [price, setPrice] = useState(currentPrice || [0, 1000000000]);
+
+  //added by shipon
+  const [currentHomeTypes, setCurrentHomeTypes] = useState([...homeTypes]);
+  const [isNewContraction, setIsNewContraction] = useState(
+    currentIsNewContraction || "No"
+  );
+  const [closestHospital, setClosestHospital] = useState(
+    currentClosestHospital || null
+  );
+  const [closestAirport, setClosestAirport] = useState(
+    currentClosestAirport || null
+  );
+  const [closestMilitaryBase, setClosestMilitaryBase] = useState(
+    currentClosestMilitaryBase || null
+  );
+  const [builder, setBuilder] = useState(currentBuilder || "");
 
   // redirect route
   const router = useRouter();
@@ -73,32 +89,18 @@ const AdvanceFilterModal = () => {
         ageRestrictions,
         amenities,
         price,
+        homeTypes: currentHomeTypes,
+        isNewContraction,
+        closestHospital,
+        closestAirport,
+        closestMilitaryBase,
+        builder,
       })
     );
     router.push(
       `/summary${state ? `/${state?.slug}` : ""}${
         area ? `/${area?.slug}` : ""
       }${city ? `/${city?.slug}` : ""}`
-    );
-  };
-  //property filter
-  const handlepropertyTypes = (elm) => {
-    if (elm == "All") {
-      setCurrentHomeTypes([]);
-    } else {
-      setCurrentHomeTypes(
-        currentHomeTypes.includes(elm)
-          ? [...currentHomeTypes.filter((el) => el != elm)]
-          : [...currentHomeTypes, elm]
-      );
-    }
-  };
-
-  const typeHandler = () => {
-    dispatch(
-      addCommunityFilterValue({
-        homeTypes: currentHomeTypes,
-      })
     );
   };
 
@@ -111,6 +113,13 @@ const AdvanceFilterModal = () => {
     setAgeRestrictions("Any");
     setPrice([0, 1000000000]);
     setAmenities([]);
+    //added by shipon
+    setCurrentHomeTypes([]);
+    setIsNewContraction("No");
+    setClosestHospital(null);
+    setClosestAirport(null);
+    setClosestMilitaryBase(null);
+    setBuilder("");
     dispatch(removeCommunityFilterValues());
   };
 
@@ -180,11 +189,25 @@ const AdvanceFilterModal = () => {
               setGated={setGated}
               ageRestrictions={ageRestrictions}
               setAgeRestrictions={setAgeRestrictions}
+              isNewContraction={isNewContraction}
+              setIsNewContraction={setIsNewContraction}
+              closestHospital={closestHospital}
+              setClosestHospital={setClosestHospital}
+              closestAirport={closestAirport}
+              setClosestAirport={setClosestAirport}
+              closestMilitaryBase={closestMilitaryBase}
+              setClosestMilitaryBase={setClosestMilitaryBase}
+              builder={builder}
+              setBuilder={setBuilder}
             />
             {/* End .col-md-6 */}
           </div>
           {/* End .row */}
-
+          {/* added by shipon */}
+          <PropertyType
+            currentHomeTypes={currentHomeTypes}
+            setCurrentHomeTypes={setCurrentHomeTypes}
+          />
           <div className="row">
             <div className="col-lg-12">
               <div className="widget-wrapper mb0">
@@ -192,35 +215,6 @@ const AdvanceFilterModal = () => {
               </div>
             </div>
             <Amenities amenities={amenities} setAmenities={setAmenities} />
-          </div>
-          <div className="row">
-            <div className="widget-wrapper bdrb1 pb25 mb0 pl20">
-              <h6 className="list-title">Property Type</h6>
-              <div className="checkbox-style1">
-                <label className="custom_checkbox">
-                  All
-                  <input
-                    type="checkbox"
-                    checked={currentHomeTypes.length < 1}
-                    onChange={(e) => setCurrentHomeTypes([])}
-                  />
-                  <span className="checkmark" />
-                </label>
-                {options.map((option, index) => (
-                  <label className="custom_checkbox" key={index}>
-                    {option.label}
-                    <input
-                      type="checkbox"
-                      checked={currentHomeTypes.includes(option.label)}
-                      onChange={(e) => {
-                        handlepropertyTypes(option.label);
-                      }}
-                    />
-                    <span className="checkmark" />
-                  </label>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
         {/* End modal body */}

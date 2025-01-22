@@ -3,7 +3,6 @@
 import getCommunities from "@/lib/getCommunities";
 import { addCommunityFilterValue } from "@/redux/communityFilterSlice";
 import { useDispatch, useSelector } from "react-redux";
-import PropertyType from "./PropertyType";
 
 let searchIntervel;
 const TopFilterBar2 = ({ filterFunctions }) => {
@@ -38,9 +37,6 @@ const TopFilterBar2 = ({ filterFunctions }) => {
 
       {/* End li Listing Status */}
 
-      <li className="list-inline-item position-relative">
-        <PropertyType />
-      </li>
       {/* End li Property Type */}
 
       <li className="list-inline-item">
@@ -51,7 +47,7 @@ const TopFilterBar2 = ({ filterFunctions }) => {
           data-bs-toggle="modal"
           data-bs-target="#advanceSeachModal"
         >
-          <i className="flaticon-settings me-2" /> More Filter
+          <i className="flaticon-settings me-2" /> Advance Filter
         </button>
       </li>
     </>
