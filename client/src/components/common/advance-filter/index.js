@@ -65,13 +65,13 @@ const AdvanceFilterModal = () => {
     currentIsNewContraction || "No"
   );
   const [closestHospital, setClosestHospital] = useState(
-    currentClosestHospital || null
+    currentClosestHospital || "Any"
   );
   const [closestAirport, setClosestAirport] = useState(
-    currentClosestAirport || null
+    currentClosestAirport || "Any"
   );
   const [closestMilitaryBase, setClosestMilitaryBase] = useState(
-    currentClosestMilitaryBase || null
+    currentClosestMilitaryBase || "Any"
   );
   const [builder, setBuilder] = useState(currentBuilder || "");
 

@@ -20,9 +20,9 @@ const initialState = {
   sorting: "Default",
   //added by shipon
   isNewContraction: "No",
-  closestHospital: null,
-  closestAirport: null,
-  closestMilitaryBase: null,
+  closestHospital: "Any",
+  closestAirport: "Any",
+  closestMilitaryBase: "Any",
   builder: "",
 };
 

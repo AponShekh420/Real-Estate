@@ -43,13 +43,13 @@ const getCommunitiesByFilter = async (req, res) => {
   price ? (dataQueryObj.maxPrice = { $gte: price[0], $lte: price[1] }) : null;
 
   //closest section
-  if (closestHospital) {
+  if (closestHospital && closestHospital !== "Any") {
     dataQueryObj["hospital.distance"] = { $lte: closestHospital };
   }
-  if (closestAirport) {
+  if (closestAirport && closestAirport !== "Any") {
     dataQueryObj["airport.distance"] = { $lte: closestAirport };
   }
-  if (closestMilitaryBase) {
+  if (closestMilitaryBase && closestMilitaryBase !== "Any") {
     dataQueryObj["militaryBase.distance"] = { $lte: closestMilitaryBase };
   }
   //constraction filter if buildend date is empty or not exist
