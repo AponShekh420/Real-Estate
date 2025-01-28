@@ -1,8 +1,13 @@
+"use client";
+
+import { useState } from "react";
+
 const CommunityDescriptions = ({ data }) => {
+  const [showMore, setShowMore] = useState(false);
   return (
     <>
       <div
-        className="text mb10"
+        className={`text mb10 ${showMore ? "d-none " : ""}`}
         dangerouslySetInnerHTML={{ __html: data?.description?.slice(0, 300) }}
       ></div>
       <div className="agent-single-accordion">
@@ -25,6 +30,7 @@ const CommunityDescriptions = ({ data }) => {
             {data?.description?.length > 300 ? (
               <h2 className="accordion-header" id="flush-headingOne">
                 <button
+                  onClick={() => setShowMore((prev) => !prev)}
                   className="accordion-button p-0 collapsed"
                   type="button"
                   data-bs-toggle="collapse"

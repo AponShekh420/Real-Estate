@@ -110,8 +110,7 @@ const Builders = () => {
     <div className="row">
       <div
         style={{
-          margin: "20px 0",
-          borderTop: "1px solid black",
+          margin: "-5px  0 12px 0",
           position: "relative",
         }}
       >
@@ -125,7 +124,7 @@ const Builders = () => {
         </label>
       </div>
 
-      {/* Popular Amenities Section */}
+      {/* Popular builder Section */}
       <div
         style={{ display: "flex", justifyContent: "start" }}
         className="gap-sm-3 gap-lg-3 gap-0 d-sm-flex d-block"
