@@ -266,7 +266,9 @@ const SelectMultiField = ({
               placeholder="please select"
               value={{
                 value: closestAirport,
-                label: ` ${closestAirport} ${closestAirport ? "Miles" : ""}`,
+                label: ` ${closestAirport} ${
+                  closestAirport && closestAirport !== "Any" ? "Miles" : ""
+                }`,
               }}
             />
           </div>
@@ -296,7 +298,9 @@ const SelectMultiField = ({
               placeholder="please select"
               value={{
                 value: closestHospital,
-                label: ` ${closestHospital} ${closestHospital ? "Miles" : ""}`,
+                label: ` ${closestHospital} ${
+                  closestHospital && closestHospital !== "Any" ? "Miles" : ""
+                }`,
               }}
             />
           </div>
@@ -328,7 +332,9 @@ const SelectMultiField = ({
               value={{
                 value: closestMilitaryBase,
                 label: ` ${closestMilitaryBase} ${
-                  closestMilitaryBase ? "Miles" : ""
+                  closestMilitaryBase && closestMilitaryBase !== "Any"
+                    ? "Miles"
+                    : ""
                 }`,
               }}
             />
