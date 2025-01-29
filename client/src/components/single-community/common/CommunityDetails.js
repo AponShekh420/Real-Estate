@@ -50,19 +50,19 @@ const CommunityDetails = ({ data }) => {
     militaryBase: { name: "db", distance: 1022 },
   };
 
-  if (data?.hospital) {
+  if (data?.hospital && data?.hospital?.name) {
     columns[0].push({
       label: "Closest Hospital",
       value: `${data.hospital.name} (${data.hospital.distance} miles)`,
     });
   }
-  if (data?.airport) {
+  if (data?.airport && data?.airport?.name) {
     columns[0].push({
       label: "Closest International Airport",
       value: `${data.airport.name} (${data.airport.distance} miles)`,
     });
   }
-  if (data?.militaryBase) {
+  if (data?.militaryBase && data?.militaryBase?.name) {
     columns[0].push({
       label: "Closest Military Base",
       value: `${data.militaryBase.name} (${data.militaryBase.distance} miles)`,

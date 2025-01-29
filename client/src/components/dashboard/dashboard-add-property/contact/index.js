@@ -2,7 +2,7 @@
 import { addCommunityFieldValue } from "@/redux/communitySlice";
 import { useDispatch, useSelector } from "react-redux";
 const Contact = () => {
-  const { name, telephone, email, notes } = useSelector(
+  const { name, telephone, email, notes, errors } = useSelector(
     (state) => state.community
   );
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const Contact = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Type your name"
+              placeholder="Name of person contacted"
               onChange={(e) => {
                 dispatch(
                   addCommunityFieldValue({
@@ -49,8 +49,18 @@ const Contact = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Type your phone number"
+              placeholder="Contacted phone number"
               onChange={(e) => {
+                let value = e.target.value.replace(/\D/g, "");
+                let formattedValue = "";
+
+                if (value.length > 0)
+                  formattedValue += `(${value.substring(0, 3)}`;
+                if (value.length > 3)
+                  formattedValue += `) ${value.substring(3, 6)}`;
+                if (value.length > 6)
+                  formattedValue += ` ${value.substring(6, 10)}`;
+                e.target.value = formattedValue;
                 dispatch(
                   addCommunityFieldValue({
                     telephone: e.target.value,
@@ -58,7 +68,8 @@ const Contact = () => {
                 );
               }}
               value={telephone}
-            />
+            />{" "}
+            <p className="text-danger">{errors?.telephone?.msg}</p>
           </div>
         </div>
         <div className="col-sm-6">
@@ -67,7 +78,7 @@ const Contact = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Type your email"
+              placeholder="Contacted email address"
               onChange={(e) => {
                 dispatch(
                   addCommunityFieldValue({
@@ -77,7 +88,8 @@ const Contact = () => {
               }}
               value={email}
             />
-          </div>
+          </div>{" "}
+          <p className="text-danger">{errors?.email?.msg}</p>
         </div>
         {/* End .col-12 */}
 

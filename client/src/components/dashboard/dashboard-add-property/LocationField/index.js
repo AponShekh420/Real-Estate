@@ -20,13 +20,28 @@ const LocationField = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Your Name"
+              placeholder="Street Address"
               onChange={(e) => {
                 dispatch(addCommunityFieldValue({ address: e.target.value }));
               }}
               value={address}
             />
             <p className="text-danger">{errors?.address?.msg}</p>
+          </div>
+        </div>
+        <div className="col-sm-6 col-xl-4">
+          <div className="mb20">
+            <label className="heading-color ff-heading fw600 mb10">City</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="City"
+              onChange={(e) => {
+                dispatch(addCommunityFieldValue({ map: e.target.value }));
+              }}
+              value={map}
+            />
+            <p className="text-danger">{errors?.map?.msg}</p>
           </div>
         </div>
         {/* End col-12 */}
@@ -37,29 +52,16 @@ const LocationField = () => {
             <input
               type="text"
               className="form-control"
+              placeholder="Zip Code"
               onChange={(e) => {
                 dispatch(addCommunityFieldValue({ zip: e.target.value }));
               }}
               value={zip}
             />
+            <p className="text-danger">{errors?.zip?.msg}</p>
           </div>
         </div>
 
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">City</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter the city, state, or area to locate the map."
-              onChange={(e) => {
-                dispatch(addCommunityFieldValue({ map: e.target.value }));
-              }}
-              value={map}
-            />
-            <p className="text-danger">{errors?.map?.msg}</p>
-          </div>
-        </div>
         {/* End col-12 */}
         <ClosestSection />
         <div className="col-sm-12">

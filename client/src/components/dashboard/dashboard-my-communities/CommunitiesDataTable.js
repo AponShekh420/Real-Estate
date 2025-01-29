@@ -89,7 +89,7 @@ const CommunitiesDataTable = ({ communitiesData, setDeleteData }) => {
                   <p className="text-capitalize">{`${community?.updatedby?.firstName}  ${community?.updatedby?.lastName}`}</p>{" "}
                 </div>
               ) : (
-                <p>Not Edited yet</p>
+                <p></p>
               )}
             </td>
             <td className="vam">
@@ -105,7 +105,7 @@ const CommunitiesDataTable = ({ communitiesData, setDeleteData }) => {
                   <p>{community?.email}</p>
                 </div>
               ) : (
-                <p>Not Provided</p>
+                <p></p>
               )}
             </td>
             <td className="vam">

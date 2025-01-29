@@ -34,7 +34,17 @@ const override = {
 const descriptionFields = ["title", "homeTypes", "maxPrice", "minPrice"];
 const mediaFields = ["imgs"];
 const detailFields = ["phone", "builtStart"];
-const locationFields = ["address", "airport", "hospital", "militaryBase"];
+const locationFields = [
+  "address",
+  "airport",
+  "hospital",
+  "militaryBase",
+  "zip",
+  "map",
+  "stateId",
+  "AreaId",
+];
+const contactFields = ["email", "telephone"];
 
 const AddPropertyTabContent = ({
   submitBtn,
@@ -363,7 +373,11 @@ const AddPropertyTabContent = ({
             1. Description
           </button>
           <button
-            className="nav-link fw600"
+            className={`nav-link fw600  ${
+              fieldsErrors?.some((builder) =>
+                contactFields.includes(builder)
+              ) && "error-nav"
+            }`}
             id="nav-item2-tab"
             data-bs-toggle="tab"
             data-bs-target="#nav-item2"
@@ -418,7 +432,7 @@ const AddPropertyTabContent = ({
             aria-controls="nav-item5"
             aria-selected="false"
           >
-            5. Detail
+            5. Details
           </button>
           <button
             className="nav-link fw600"

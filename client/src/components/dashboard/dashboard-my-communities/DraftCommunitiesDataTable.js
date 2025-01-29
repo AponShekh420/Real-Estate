@@ -91,7 +91,7 @@ const DraftCommunitiesDataTable = ({ communitiesData, setDraftDeleteData }) => {
                   <p>{community?.email}</p>
                 </div>
               ) : (
-                <p>Not Provided</p>
+                <p></p>
               )}
             </td>
             <td className="vam">
