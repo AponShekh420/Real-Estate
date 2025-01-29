@@ -38,7 +38,7 @@ export default function ClosestSection() {
             <input
               type="number"
               className="form-control"
-              placeholder="Hospital distance"
+              placeholder="Distance(Miles)"
               onChange={(e) => {
                 dispatch(
                   addCommunityFieldValue({
@@ -80,7 +80,7 @@ export default function ClosestSection() {
             <input
               type="number"
               className="form-control"
-              placeholder="Airport distance"
+              placeholder="Distance(Miles)"
               onChange={(e) => {
                 dispatch(
                   addCommunityFieldValue({
@@ -122,7 +122,7 @@ export default function ClosestSection() {
             <input
               type="number"
               className="form-control"
-              placeholder="Military base distance"
+              placeholder="Distance(Miles)"
               onChange={(e) => {
                 dispatch(
                   addCommunityFieldValue({
