@@ -103,7 +103,7 @@ const updateCommuity = async (req, res) => {
       minPrice,
       maxPrice,
       active,
-      homeTypes,
+      homeTypes: homeTypes === undefined ? [] : homeTypes,
       imgs: imgs,
       builtEnd: builtEnd || "Present",
       builtStart,

@@ -33,7 +33,7 @@ export default function ClosestSection() {
           </div>
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Distance
+              Distance (Miles)
             </label>
             <input
               type="number"
@@ -75,7 +75,7 @@ export default function ClosestSection() {
           </div>
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Distance
+              Distance (Miles)
             </label>
             <input
               type="number"
@@ -117,7 +117,7 @@ export default function ClosestSection() {
           </div>
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Distance
+              Distance (Miles)
             </label>
             <input
               type="number"

@@ -17,6 +17,10 @@ const customStyles = {
         : undefined,
     };
   },
+  placeholder: (defaultStyles) => ({
+    ...defaultStyles,
+    color: "red",
+  }),
 };
 
 const SelectMultiField = () => {
@@ -83,16 +87,32 @@ const SelectMultiField = () => {
             <Select
               styles={customStyles}
               className="select-custom pl-0"
+              placeholder="select"
               classNamePrefix="select"
               required
               // isMulti
-              options={stateOptions?.map((item) => ({
-                value: item,
-                label: `${item.name} (${item.active ? "Active" : "Deactive"})`,
-              }))}
+              options={[
+                { value: null, label: "Select" },
+                ...stateOptions?.map((item) => ({
+                  value: item,
+                  label: `${item.name} (${
+                    item.active ? "Active" : "Deactive"
+                  })`,
+                })),
+              ]}
               onChange={(e) => {
-                areaHanlder(e);
-                dispatch(addCommunityFieldValue({ stateId: e.value }));
+                if (e.value === null) {
+                  dispatch(
+                    addCommunityFieldValue({
+                      stateId: e.value,
+                      areaId: e.value,
+                      cityId: e.value,
+                    })
+                  );
+                } else {
+                  areaHanlder(e);
+                  dispatch(addCommunityFieldValue({ stateId: e.value }));
+                }
               }}
               value={{ value: stateId?.name, label: stateId?.name }}
             />
@@ -110,13 +130,24 @@ const SelectMultiField = () => {
               classNamePrefix="select"
               required
               // isMulti
-              options={areaOptions?.map((item) => ({
-                value: item,
-                label: `${item.name} (${item.active ? "Active" : "Deactive"})`,
-              }))}
+              options={[
+                { value: null, label: "Select" },
+                ...areaOptions?.map((item) => ({
+                  value: item,
+                  label: `${item.name} (${
+                    item.active ? "Active" : "Deactive"
+                  })`,
+                })),
+              ]}
               onChange={(e) => {
-                cityHandler(e);
-                dispatch(addCommunityFieldValue({ areaId: e.value }));
+                if (e.value === null) {
+                  dispatch(
+                    addCommunityFieldValue({ areaId: e.value, cityId: e.value })
+                  );
+                } else {
+                  cityHandler(e);
+                  dispatch(addCommunityFieldValue({ areaId: e.value }));
+                }
               }}
               placeholder="please select"
               value={{ value: areaId?.name, label: areaId?.name }}
@@ -137,10 +168,15 @@ const SelectMultiField = () => {
               classNamePrefix="select"
               required
               // isMulti
-              options={cityOptions?.map((item) => ({
-                value: item,
-                label: `${item.name} (${item.active ? "Active" : "Deactive"})`,
-              }))}
+              options={[
+                { value: null, label: "Select" },
+                ...cityOptions?.map((item) => ({
+                  value: item,
+                  label: `${item.name} (${
+                    item.active ? "Active" : "Deactive"
+                  })`,
+                })),
+              ]}
               onChange={(e) =>
                 dispatch(addCommunityFieldValue({ cityId: e.value }))
               }
