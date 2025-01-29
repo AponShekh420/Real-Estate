@@ -28,13 +28,15 @@ const CommunityDetails = ({ data }) => {
               }`
             : "New Construction",
       },
-      {
-        label: "Home Types",
-        value: data?.homeTypes?.join(", "),
-      },
     ],
   ];
 
+  if (data?.homeTypes?.length > 0) {
+    columns[0].push({
+      label: "Home Types",
+      value: data?.homeTypes?.join(", "),
+    });
+  }
   if (data?.builders?.length > 0) {
     columns[0].push({
       label: "builder",

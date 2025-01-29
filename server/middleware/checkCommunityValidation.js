@@ -13,6 +13,10 @@ const checkCommunityValidation = [
     .isLength({ min: 3 })
     .withMessage("Must be a valid address")
     .trim(),
+  check("builtEnd")
+    .isLength({ min: 3 })
+    .withMessage("Built End is Required")
+    .trim(),
   check("stateId")
     .isLength({ min: 10 })
     .withMessage("State selection is required")
@@ -23,16 +27,16 @@ const checkCommunityValidation = [
       return true;
     })
     .trim(),
-  check("areaId")
-    .isLength({ min: 10 })
-    .withMessage("Area selection is required")
-    .custom((value) => {
-      if (value === undefined || value === null) {
-        throw new Error("Area cannot be empty");
-      }
-      return true;
-    })
-    .trim(),
+  // check("areaId")
+  //   .isLength({ min: 10 })
+  //   .withMessage("Area selection is required")
+  //   .custom((value) => {
+  //     if (value === undefined || value === null) {
+  //       throw new Error("Area cannot be empty");
+  //     }
+  //     return true;
+  //   })
+  //   .trim(),
   check("map").isLength({ min: 1 }).withMessage("Must be a valid city").trim(),
   check("zip")
     .isLength({ min: 1 })

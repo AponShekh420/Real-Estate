@@ -33,7 +33,7 @@ const override = {
 };
 const descriptionFields = ["title", "homeTypes", "maxPrice", "minPrice"];
 const mediaFields = ["imgs"];
-const detailFields = ["phone", "builtStart"];
+const detailFields = ["phone", "builtStart", "builtEnd"];
 const locationFields = [
   "address",
   "airport",
@@ -274,7 +274,10 @@ const AddPropertyTabContent = ({
       !community.builtStart &&
       !community.zip &&
       !community.description &&
-      !community.thumbnail
+      !community.thumbnail &&
+      !community.stateId &&
+      !community.map &&
+      !community.zip
     ) {
       return null;
     }

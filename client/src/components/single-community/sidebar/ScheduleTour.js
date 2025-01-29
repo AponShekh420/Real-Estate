@@ -1,11 +1,10 @@
-"use client"
+"use client";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
 
-const ScheduleTour = ({data}) => {
-  const {title} = data;
+const ScheduleTour = ({ data }) => {
+  const { title } = data;
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -16,34 +15,36 @@ const ScheduleTour = ({data}) => {
   const [errors, setErrors] = useState({});
   const [successMsg, setSuccessMsg] = useState("");
 
-
   const submitHandler = async (event) => {
     event.preventDefault();
     setErrors({});
     setSuccessMsg("");
     try {
       setLoading(true);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/email/more-info/send`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name,
-          phone,
-          email,
-          message,
-          communityTitle: data?.title,
-          communityUrl: data?.slug,
-          communityId: data?._id,
-          receiveInformation,
-          subscribe,
-        })
-      })
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_API}/api/email/more-info/send`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            phone,
+            email,
+            message,
+            communityTitle: data?.title,
+            communityUrl: data?.slug,
+            communityId: data?._id,
+            receiveInformation,
+            subscribe,
+          }),
+        }
+      );
       const resData = await res.json();
       setLoading(false);
-      if(resData?.msg) {
+      if (resData?.msg) {
         setSuccessMsg(resData.msg);
         setName("");
         setEmail("");
@@ -53,17 +54,14 @@ const ScheduleTour = ({data}) => {
       } else {
         setErrors(resData.errors);
       }
-    } catch(err) {
-      console.log(err.message)
+    } catch (err) {
+      console.log(err.message);
     }
-  }
-  
+  };
 
-  useEffect(()=> {
-    setMessage(`I’d like additional information about ${title}`)
-  }, [title])
-
-
+  useEffect(() => {
+    setMessage(`I’d like additional information about ${title}`);
+  }, [title]);
 
   return (
     <div className="ps-navtab">
@@ -96,7 +94,19 @@ const ScheduleTour = ({data}) => {
                   type="text"
                   className="form-control"
                   placeholder="Phone"
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) => {
+                    let value = e.target.value.replace(/\D/g, "");
+                    let formattedValue = "";
+
+                    if (value.length > 0)
+                      formattedValue += `(${value.substring(0, 3)}`;
+                    if (value.length > 3)
+                      formattedValue += `) ${value.substring(3, 6)}`;
+                    if (value.length > 6)
+                      formattedValue += ` ${value.substring(6, 10)}`;
+                    e.target.value = formattedValue;
+                    setPhone(e.target.value);
+                  }}
                   value={phone}
                 />
                 <p className="text-danger">{errors?.phone?.msg}</p>
@@ -136,15 +146,29 @@ const ScheduleTour = ({data}) => {
             <div className="col-md-12">
               <div className="mb10">
                 <div class="form-check mb10">
-                  <input class="form-check-input" type="checkbox" value={subscribe} id="flexCheckDefault" defaultChecked={subscribe} onChange={()=> setSubscribe(old => !old)}/>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value={subscribe}
+                    id="flexCheckDefault"
+                    defaultChecked={subscribe}
+                    onChange={() => setSubscribe((old) => !old)}
+                  />
                   <label class="form-check-label" for="flexCheckDefault">
                     Subscribe me to 55up.com updates and newsletters.
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value={receiveInformation} id="flexCheckChecked" onChange={() => setReceiveInformation(old => !old)}/>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value={receiveInformation}
+                    id="flexCheckChecked"
+                    onChange={() => setReceiveInformation((old) => !old)}
+                  />
                   <label class="form-check-label" for="flexCheckChecked">
-                    I’d also like to receive information about mortgage and financing options.
+                    I’d also like to receive information about mortgage and
+                    financing options.
                   </label>
                 </div>
               </div>
@@ -153,9 +177,19 @@ const ScheduleTour = ({data}) => {
 
             <div className="col-md-12">
               <div className="d-grid">
-                <button type="submit" className={`ud-btn btn-thm d-flex align-items-center justify-content-center ${loading ? "opacity-50": "opacity-100"}`} disabled={loading}>
+                <button
+                  type="submit"
+                  className={`ud-btn btn-thm d-flex align-items-center justify-content-center ${
+                    loading ? "opacity-50" : "opacity-100"
+                  }`}
+                  disabled={loading}
+                >
                   {!loading && "Submit Request"}
-                  {loading ? (<BeatLoader color="white" size={22} loading={loading} />) : (<i className="fal fa-arrow-right-long" />)}
+                  {loading ? (
+                    <BeatLoader color="white" size={22} loading={loading} />
+                  ) : (
+                    <i className="fal fa-arrow-right-long" />
+                  )}
                 </button>
               </div>
 
@@ -163,15 +197,28 @@ const ScheduleTour = ({data}) => {
                 {successMsg && (
                   <div className="alert alert-success text-center" role="alert">
                     {successMsg}
-                  </div>)}
+                  </div>
+                )}
                 {errors?.fail && (
-                <div className="alert alert-danger text-center" role="alert">
-                  {errors?.fail?.msg}
-                </div>)}
+                  <div className="alert alert-danger text-center" role="alert">
+                    {errors?.fail?.msg}
+                  </div>
+                )}
               </div>
               <div>
-                <small style={{color: "gray"}}>
-                  By requesting more information, you consent 55up.com, along with its affiliated real estate or mortgage professionals, may call, text, or email you as it relates to this request.  You can opt out at any time by emailing <a style={{color: "#EE4C34"}} href="mailto:optout@55up.com">optout@55up.com</a>.  By submitting this for you also acknowledge 55up.com’s <Link style={{color: "#EE4C34"}} href="/privacy-policy">Privacy Policy</Link>.
+                <small style={{ color: "gray" }}>
+                  By requesting more information, you consent 55up.com, along
+                  with its affiliated real estate or mortgage professionals, may
+                  call, text, or email you as it relates to this request. You
+                  can opt out at any time by emailing{" "}
+                  <a style={{ color: "#EE4C34" }} href="mailto:optout@55up.com">
+                    optout@55up.com
+                  </a>
+                  . By submitting this for you also acknowledge 55up.com’s{" "}
+                  <Link style={{ color: "#EE4C34" }} href="/privacy-policy">
+                    Privacy Policy
+                  </Link>
+                  .
                 </small>
               </div>
             </div>
