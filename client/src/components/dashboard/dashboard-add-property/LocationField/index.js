@@ -54,6 +54,8 @@ const LocationField = () => {
               className="form-control"
               placeholder="Zip Code"
               onChange={(e) => {
+                let value = e.target.value.replace(/\D/g, "");
+                e.target.value = value;
                 dispatch(addCommunityFieldValue({ zip: e.target.value }));
               }}
               value={zip}

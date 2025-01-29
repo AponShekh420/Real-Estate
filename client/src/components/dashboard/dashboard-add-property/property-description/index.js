@@ -84,11 +84,19 @@ const PropertyDescription = () => {
                 classNamePrefix="select"
                 isMulti
                 onChange={(e) => {
-                  dispatch(
-                    addCommunityFieldValue({
-                      homeTypes: e.map((eachElement) => eachElement.value),
-                    })
-                  );
+                  if (e.length > 0) {
+                    dispatch(
+                      addCommunityFieldValue({
+                        homeTypes: e.map((eachElement) => eachElement.value),
+                      })
+                    );
+                  } else {
+                    dispatch(
+                      addCommunityFieldValue({
+                        homeTypes: [],
+                      })
+                    );
+                  }
                 }}
                 value={homeTypes.map((eachElement) => ({
                   value: eachElement,

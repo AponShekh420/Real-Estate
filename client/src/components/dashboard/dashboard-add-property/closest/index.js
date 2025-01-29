@@ -33,12 +33,12 @@ export default function ClosestSection() {
           </div>
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Distance
+              Distance (Miles)
             </label>
             <input
               type="number"
               className="form-control"
-              placeholder="Distance(Miles)"
+              placeholder="Hospital distance"
               onChange={(e) => {
                 dispatch(
                   addCommunityFieldValue({
@@ -75,12 +75,12 @@ export default function ClosestSection() {
           </div>
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Distance
+              Distance (Miles)
             </label>
             <input
               type="number"
               className="form-control"
-              placeholder="Distance(Miles)"
+              placeholder="Airport distance"
               onChange={(e) => {
                 dispatch(
                   addCommunityFieldValue({
@@ -117,12 +117,12 @@ export default function ClosestSection() {
           </div>
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Distance
+              Distance (Miles)
             </label>
             <input
               type="number"
               className="form-control"
-              placeholder="Distance(Miles)"
+              placeholder="Military base distance"
               onChange={(e) => {
                 dispatch(
                   addCommunityFieldValue({
