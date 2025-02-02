@@ -83,6 +83,11 @@ const updateCommuity = async (req, res) => {
     }
 
     // Check if cityId is valid ObjectId or set to null
+
+    const stateIdValid =
+      stateId && mongoose.Types.ObjectId.isValid(stateId) ? stateId : null;
+    const areaIdValid =
+      areaId && mongoose.Types.ObjectId.isValid(areaId) ? areaId : null;
     const cityIdValid =
       cityId && mongoose.Types.ObjectId.isValid(cityId) ? cityId : null;
 
@@ -96,9 +101,9 @@ const updateCommuity = async (req, res) => {
       website,
       phone,
       address,
-      state: stateId,
+      state: stateIdValid,
       city: cityIdValid,
-      area: areaId,
+      area: areaIdValid,
       zip,
       minPrice,
       maxPrice,
@@ -193,11 +198,13 @@ const updateCommuity = async (req, res) => {
           });
 
           // push the community in new area community list
-          const areaUpdate = await AreaModel.findByIdAndUpdate(areaId, {
-            $push: {
-              community: community._id,
-            },
-          });
+          if (areaIdValid) {
+            const areaUpdate = await AreaModel.findByIdAndUpdate(areaId, {
+              $push: {
+                community: community._id,
+              },
+            });
+          }
         }
 
         // if everything is perfect then would get response

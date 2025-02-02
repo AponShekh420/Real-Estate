@@ -13,10 +13,10 @@ const checkCommunityValidation = [
     .isLength({ min: 3 })
     .withMessage("Must be a valid address")
     .trim(),
-  check("builtEnd")
-    .isLength({ min: 3 })
-    .withMessage("Built End is Required")
-    .trim(),
+  // check("builtEnd")
+  //   .isLength({ min: 3 })
+  //   .withMessage("Built End is Required")
+  //   .trim(),
   check("stateId")
     .isLength({ min: 10 })
     .withMessage("State selection is required")
