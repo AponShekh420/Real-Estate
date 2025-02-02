@@ -62,9 +62,9 @@ const DraftCommunitiesDataTable = ({ communitiesData, setDraftDeleteData }) => {
                   </div>
                   <p className="list-text mb-0 text-capitalize">
                     {community?.city
-                      ? `${community?.city?.name} City`
-                      : `${community?.area?.name}`}
-                    , {community?.state?.abbreviation}
+                      ? `${community?.city?.name} City,`
+                      : `${community?.area ? community?.area?.name + "," : ""}`}
+                    {community?.state?.abbreviation}
                   </p>
                   <div className="list-price">
                     <span>
