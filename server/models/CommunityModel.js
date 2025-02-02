@@ -89,7 +89,7 @@ const CommunitySchema = mongoose.Schema(
     },
     builtEnd: {
       type: String,
-      required: true,
+      required: false,
     },
     imgs: [
       {
