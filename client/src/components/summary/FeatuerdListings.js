@@ -107,15 +107,24 @@ const FeaturedListings = ({
                     </h6>
                     <p className="list-text">{listing.location}</p>
                     <div className="list-meta d-flex align-items-center flex-wrap gap-2">
-                      <span>
-                        <span className="fa-thin fa-person" />
-                        Age Restricted:{" "}
-                        {listing?.ageRestrictions ? "Yes" : "No"}
-                      </span>
-                      <span>
-                        <span className="fa-sharp fa-light fa-torii-gate" />
-                        Gated: {listing?.gated ? "Yes" : "No"}
-                      </span>
+                      {listing?.ageRestrictions === null ? (
+                        ""
+                      ) : (
+                        <span>
+                          <span className="fa-thin fa-person" />
+                          Age Restricted:{" "}
+                          {listing?.ageRestrictions ? "Yes" : "No"}
+                        </span>
+                      )}
+                      {listing?.gated == null ? (
+                        ""
+                      ) : (
+                        <span>
+                          <span className="fa-sharp fa-light fa-torii-gate" />
+                          Gated: {listing?.gated ? "Yes" : "No"}
+                        </span>
+                      )}
+
                       <span>
                         <span className="fa-light fa-calendar-days" />
                         Built:{" "}

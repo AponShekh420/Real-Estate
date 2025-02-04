@@ -63,6 +63,7 @@ const getCommunities = async () => {
       }
     );
     const dataRes = await res.json();
+
     if (dataRes.msg) {
       dispatch(
         addCommunityFilterValue({

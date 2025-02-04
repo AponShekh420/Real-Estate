@@ -105,6 +105,8 @@ const addDraftCommunity = async (req, res) => {
     updatedby,
     hospital,
     airport,
+    gated,
+    ageRestrictions,
     currentThumbnail,
     militaryBase,
     ...otherFields
@@ -163,6 +165,8 @@ const addDraftCommunity = async (req, res) => {
       hospital: JSON.parse(hospital),
       airport: JSON.parse(airport),
       militaryBase: JSON.parse(militaryBase),
+      gated: JSON.parse(gated),
+      ageRestrictions: JSON.parse(ageRestrictions),
     };
 
     if (draft) {

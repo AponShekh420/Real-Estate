@@ -20,8 +20,16 @@ const DraftCommunitySchema = mongoose.Schema(
     maxPrice: { type: Number, default: null },
     homeTypes: { type: [String], default: [] },
     communitySize: { type: String },
-    ageRestrictions: { type: Boolean, default: false },
-    gated: { type: Boolean, default: false },
+    ageRestrictions: {
+      type: mongoose.Schema.Types.Mixed,
+      enum: [true, false, null],
+      default: null,
+    },
+    gated: {
+      type: mongoose.Schema.Types.Mixed,
+      enum: [true, false, null],
+      default: null,
+    },
     builtStart: { type: String },
     builtEnd: { type: String },
     imgs: { type: [String], default: [] },
