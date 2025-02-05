@@ -76,12 +76,14 @@ const CommunitySchema = mongoose.Schema(
       required: true,
     },
     ageRestrictions: {
-      type: Boolean,
-      required: true,
+      type: mongoose.Schema.Types.Mixed,
+      enum: [true, false, null],
+      default: null,
     },
     gated: {
-      type: Boolean,
-      required: true,
+      type: mongoose.Schema.Types.Mixed,
+      enum: [true, false, null],
+      default: null,
     },
     builtStart: {
       type: String,

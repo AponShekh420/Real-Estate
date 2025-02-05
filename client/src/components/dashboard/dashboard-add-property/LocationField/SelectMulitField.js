@@ -1,5 +1,6 @@
 "use client";
 import { addCommunityFieldValue } from "@/redux/communitySlice";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
@@ -33,6 +34,9 @@ const SelectMultiField = () => {
   const [stateOptions, setStateOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
   const [areaOptions, setAreaOptions] = useState([]);
+  const pathname = usePathname();
+  const editPageValidation =
+    pathname.split("/")[2] === "edit-community" ? true : false;
 
   const areaHanlder = (currentState) => {
     dispatch(
@@ -78,6 +82,23 @@ const SelectMultiField = () => {
     fetchStateData();
   }, []);
 
+  //show area and city field when selected state just for edit page
+  useEffect(() => {
+    if (stateId) {
+      const areaOptionValues =
+        stateId.area.map((item) => item.active && item).length > 0
+          ? stateId.area.map((item) => item.active && item)
+          : [];
+      setAreaOptions(areaOptionValues[0] ? areaOptionValues : []);
+    }
+    if (areaId) {
+      const cityOptionValues =
+        areaId.city.map((item) => item.active && item).length > 0
+          ? areaId.city.map((item) => item.active && item)
+          : [];
+      setCityOptions(cityOptionValues[0] ? cityOptionValues : []);
+    }
+  }, [stateId, areaId]);
   return (
     <>
       <div className="col-sm-6 col-xl-4">
@@ -102,6 +123,8 @@ const SelectMultiField = () => {
               ]}
               onChange={(e) => {
                 if (e.value === null) {
+                  setAreaOptions([]);
+                  setCityOptions([]);
                   dispatch(
                     addCommunityFieldValue({
                       stateId: e.value,
@@ -114,7 +137,10 @@ const SelectMultiField = () => {
                   dispatch(addCommunityFieldValue({ stateId: e.value }));
                 }
               }}
-              value={{ value: stateId?.name, label: stateId?.name }}
+              value={{
+                value: stateId?.name,
+                label: stateId?.name ? stateId?.name : "Select",
+              }}
             />
             <p className="text-danger">{errors?.stateId?.msg}</p>
           </div>
@@ -141,6 +167,7 @@ const SelectMultiField = () => {
               ]}
               onChange={(e) => {
                 if (e.value === null) {
+                  setCityOptions([]);
                   dispatch(
                     addCommunityFieldValue({ areaId: e.value, cityId: e.value })
                   );
@@ -150,7 +177,10 @@ const SelectMultiField = () => {
                 }
               }}
               placeholder="please select"
-              value={{ value: areaId?.name, label: areaId?.name }}
+              value={{
+                value: areaId?.name,
+                label: areaId?.name ? areaId?.name : "Select",
+              }}
             />
             <p className="text-danger">{errors?.areaId?.msg}</p>
           </div>
@@ -180,7 +210,10 @@ const SelectMultiField = () => {
               onChange={(e) =>
                 dispatch(addCommunityFieldValue({ cityId: e.value }))
               }
-              value={{ value: cityId?.name, label: cityId?.name }}
+              value={{
+                value: cityId?.name,
+                label: cityId?.name ? cityId?.name : "Select",
+              }}
             />
             <p className="text-danger">{errors?.cityId?.msg}</p>
           </div>

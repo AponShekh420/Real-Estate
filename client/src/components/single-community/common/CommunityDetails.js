@@ -11,14 +11,7 @@ const CommunityDetails = ({ data }) => {
         label: "Size",
         value: `${data.communitySize}`,
       },
-      {
-        label: "Age Restrictions",
-        value: data.ageRestrictions ? "55+" : "N/A",
-      },
-      {
-        label: "Gated",
-        value: data.gated ? "Yes" : "No",
-      },
+
       {
         label: "Construction Dates",
         value:
@@ -30,7 +23,18 @@ const CommunityDetails = ({ data }) => {
       },
     ],
   ];
-
+  if (data?.ageRestrictions !== null) {
+    columns[0].push({
+      label: "Age Restrictions",
+      value: data.ageRestrictions ? "55+" : "N/A",
+    });
+  }
+  if (data?.gated !== null) {
+    columns[0].push({
+      label: "Gated",
+      value: data.gated ? "Yes" : "No",
+    });
+  }
   if (data?.homeTypes?.length > 0) {
     columns[0].push({
       label: "Home Types",

@@ -5,13 +5,17 @@ const getSingleCommunity = async (req, res) => {
   const { slug } = req.params;
   try {
     const singleCommunity = await CommunityModel.findOne({ slug })
-      .populate({ path: "state" })
+      .populate({
+        path: "state",
+        populate: { path: "area", populate: { path: "city" } },
+      })
       .populate({ path: "city" })
-      .populate({ path: "area" })
+      .populate({ path: "area", populate: { path: "city" } })
       .populate({ path: "amenities" })
       .populate({ path: "createdby" })
       .populate({ path: "updatedby" })
       .populate({ path: "builders" });
+
     if (singleCommunity) {
       res.status(200).json({
         msg: "Community has fetched successfully",
