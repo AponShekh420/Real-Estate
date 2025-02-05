@@ -1,24 +1,32 @@
-"use client"
+"use client";
 
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { addCommunityFieldValue } from "@/redux/communitySlice";
-import Select from 'react-select'
-
+import { useDispatch, useSelector } from "react-redux";
+import Select from "react-select";
 
 const ageRes = [
-  { value: "Yes", label: "Yes" },
-  { value: "No", label: "No" },
+  { value: null, label: "Select" },
+  { value: true, label: "Yes" },
+  { value: false, label: "No" },
 ];
 
 const gatedOption = [
-  { value: "Yes", label: "Yes" },
-  { value: "No", label: "No" },
+  { value: null, label: "Select" },
+  { value: true, label: "Yes" },
+  { value: false, label: "No" },
 ];
 
 const DetailsFiled = () => {
-
-  const {errors, ageRestrictions, gated, website, builtEnd, builtStart, communitySize, phone} = useSelector((state)=> state.community);
+  const {
+    errors,
+    ageRestrictions,
+    gated,
+    website,
+    builtEnd,
+    builtStart,
+    communitySize,
+    phone,
+  } = useSelector((state) => state.community);
   const dispatch = useDispatch();
 
   const customStyles = {
@@ -36,13 +44,9 @@ const DetailsFiled = () => {
     },
   };
 
-
-
-
   return (
     <div className="form-style1">
       <div className="row">
-
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
@@ -58,12 +62,19 @@ const DetailsFiled = () => {
                 styles={customStyles}
                 className="select-custom pl-0"
                 classNamePrefix="select"
-                onChange={(e)=> {
-                  dispatch(addCommunityFieldValue({
-                    ageRestrictions: e.value === "Yes" ? true : false
-                  }))
+                onChange={(e) => {
+                  dispatch(
+                    addCommunityFieldValue({ ageRestrictions: e.value })
+                  );
                 }}
-                value={{value: ageRestrictions ? "Yes" : "No", label: ageRestrictions ? "Yes" : "No"}}
+                value={{
+                  value: ageRestrictions,
+                  label: ageRestrictions
+                    ? "Yes"
+                    : ageRestrictions === null
+                    ? "Select"
+                    : "No",
+                }}
               />
             </div>
           </div>
@@ -72,9 +83,7 @@ const DetailsFiled = () => {
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
-              Gated
-            </label>
+            <label className="heading-color ff-heading fw600 mb10">Gated</label>
             <div className="location-area">
               <Select
                 id="afdasdfasd"
@@ -85,12 +94,17 @@ const DetailsFiled = () => {
                 styles={customStyles}
                 className="select-custom pl-0"
                 classNamePrefix="select"
-                onChange={(e)=> {
-                  dispatch(addCommunityFieldValue({
-                    gated: e.value === "Yes" ? true : false
-                  }))
+                onChange={(e) => {
+                  dispatch(
+                    addCommunityFieldValue({
+                      gated: e.value,
+                    })
+                  );
                 }}
-                value={{value: gated ? "Yes" : "No", label: gated ? "Yes" : "No"}}
+                value={{
+                  value: gated,
+                  label: gated ? "Yes" : gated === null ? "Select" : "No",
+                }}
               />
             </div>
           </div>
@@ -107,10 +121,12 @@ const DetailsFiled = () => {
               type="text"
               className="form-control"
               placeholder="https://placeholder.com"
-              onChange={(e)=> {
-                dispatch(addCommunityFieldValue({
-                  website: e.target.value
-                }))
+              onChange={(e) => {
+                dispatch(
+                  addCommunityFieldValue({
+                    website: e.target.value,
+                  })
+                );
               }}
               value={website}
             />
@@ -120,17 +136,17 @@ const DetailsFiled = () => {
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
-              Phone
-            </label>
+            <label className="heading-color ff-heading fw600 mb10">Phone</label>
             <input
               type="text"
               className="form-control"
               placeholder="Type your phone number"
-              onChange={(e)=> {
-                dispatch(addCommunityFieldValue({
-                  phone: e.target.value
-                }))
+              onChange={(e) => {
+                dispatch(
+                  addCommunityFieldValue({
+                    phone: e.target.value,
+                  })
+                );
               }}
               value={phone}
             />
@@ -141,15 +157,19 @@ const DetailsFiled = () => {
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">Community Size</label>
+            <label className="heading-color ff-heading fw600 mb10">
+              Community Size
+            </label>
             <input
               type="text"
               className="form-control"
               placeholder="Type the community size"
-              onChange={(e)=> {
-                dispatch(addCommunityFieldValue({
-                  communitySize: e.target.value
-                }))
+              onChange={(e) => {
+                dispatch(
+                  addCommunityFieldValue({
+                    communitySize: e.target.value,
+                  })
+                );
               }}
               value={communitySize}
             />
@@ -167,10 +187,12 @@ const DetailsFiled = () => {
               type="date"
               className="form-control"
               placeholder="Type the date"
-              onChange={(e)=> {
-                dispatch(addCommunityFieldValue({
-                  builtStart: e.target.value
-                }))
+              onChange={(e) => {
+                dispatch(
+                  addCommunityFieldValue({
+                    builtStart: e.target.value,
+                  })
+                );
               }}
               value={builtStart}
             />
@@ -188,10 +210,12 @@ const DetailsFiled = () => {
               type="date"
               className="form-control"
               placeholder="Type the date"
-              onChange={(e)=> {
-                dispatch(addCommunityFieldValue({
-                  builtEnd: e.target.value
-                }))
+              onChange={(e) => {
+                dispatch(
+                  addCommunityFieldValue({
+                    builtEnd: e.target.value,
+                  })
+                );
               }}
               value={builtEnd}
             />
