@@ -9,9 +9,12 @@ const getDraftCommunityById = async (req, res) => {
     const singleCommunity = await DraftCommunityModel.findOne({
       _id: validatedId,
     })
-      .populate({ path: "state" })
+      .populate({
+        path: "state",
+        populate: { path: "area", populate: { path: "city" } },
+      })
       .populate({ path: "city" })
-      .populate({ path: "area" })
+      .populate({ path: "area", populate: { path: "city" } })
       .populate({ path: "amenities" })
       .populate({ path: "builders" })
       .populate({ path: "createdby" })
