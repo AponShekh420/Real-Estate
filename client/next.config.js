@@ -4,27 +4,27 @@ const nextConfig = {
     // domains: ['assets-upload.nyc3.digitaloceanspaces.com'],
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '5000',
-        pathname: '/assets/**', // Adjust the path as necessary
+        protocol: "http",
+        hostname: "localhost",
+        port: "5000",
+        pathname: "/assets/**", // Adjust the path as necessary
       },
       {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com', // Corrected
-        pathname: '/**',
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com", // Corrected
+        pathname: "/**",
       },
       {
-        protocol: 'https',
-        hostname: 'assets-upload.nyc3.digitaloceanspaces.com',
-        pathname: '/**', // Wildcard pattern for all assets
+        protocol: "https",
+        hostname: "assets-upload.nyc3.digitaloceanspaces.com",
+        pathname: "/**", // Wildcard pattern for all assets
       },
     ],
   },
 
   experimental: {
     forceSwcTransforms: true,
-  }
+  },
 };
 
 module.exports = nextConfig;

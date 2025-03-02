@@ -17,12 +17,22 @@ const override = {
 const ModelMangement = () => {
   const [loading, setLoading] = useState(false);
   const [nameError, setNameError] = useState("");
-  const [descError, setDescError] = useState("");
 
   // redux state
   const { communityId } = useSelector((state) => state.community);
-  const { CMTName, desc, edit, CMTId, img, deletedImages, newImages } =
-    useSelector((state) => state.model);
+  const {
+    CMTName,
+    desc,
+    edit,
+    CMTId,
+    img,
+    deletedImages,
+    newImages,
+    squareFit,
+    bedrooms,
+    bathrooms,
+    garage,
+  } = useSelector((state) => state.model);
 
   // redux dispatch for action
   const dispatch = useDispatch();
@@ -35,14 +45,11 @@ const ModelMangement = () => {
       })
     );
     setNameError("");
-    setDescError("");
 
     if (!CMTName) {
       setNameError("A model name is required");
     }
-    if (!desc) {
-      setDescError("Please enter a model description");
-    }
+
     if (!img && newImages.length < 1) {
       dispatch(
         addModelFields({
@@ -55,7 +62,7 @@ const ModelMangement = () => {
       );
     }
 
-    if (!desc || !CMTName || (!img && newImages.length < 1)) {
+    if (!CMTName || (!img && newImages.length < 1)) {
       return;
     }
 
@@ -63,6 +70,10 @@ const ModelMangement = () => {
     formData.set("CMTName", CMTName);
     formData.set("desc", desc);
     formData.set("communityId", communityId);
+    formData.set("squareFit", squareFit);
+    formData.set("bedrooms", bedrooms);
+    formData.set("bathrooms", bathrooms);
+    formData.set("garage", garage);
     // Add new image if available
     if (newImages.length > 0) {
       formData.append("img", newImages[0]); // New image file
@@ -131,14 +142,11 @@ const ModelMangement = () => {
       })
     );
     setNameError("");
-    setDescError("");
 
     if (!CMTName) {
       setNameError("A model name is required");
     }
-    if (!desc) {
-      setDescError("Please enter a model description");
-    }
+
     if (!img && newImages.length < 1) {
       dispatch(
         addModelFields({
@@ -151,7 +159,7 @@ const ModelMangement = () => {
       );
     }
 
-    if (!desc || !CMTName || (!img && newImages.length < 1)) {
+    if (!CMTName || (!img && newImages.length < 1)) {
       return;
     }
 
@@ -159,6 +167,10 @@ const ModelMangement = () => {
     formData.set("CMTName", CMTName);
     formData.set("desc", desc);
     formData.set("CMTId", CMTId);
+    formData.set("squareFit", squareFit);
+    formData.set("bedrooms", bedrooms);
+    formData.set("bathrooms", bathrooms);
+    formData.set("garage", garage);
     // Add new image if available
     if (newImages.length > 0) {
       formData.append("img", newImages[0]); // New image file
@@ -175,7 +187,6 @@ const ModelMangement = () => {
     if (deletedImages.length > 0) {
       formData.append("deletedImage", JSON.stringify(deletedImages[0]));
     }
-
     const multipartDataWithFile = {
       method: "PUT",
       credentials: "include",
@@ -258,8 +269,90 @@ const ModelMangement = () => {
                   </p>
                 </div>
               </div>
+              <div className="col-sm-6 col-xl-12">
+                <div className="mb30">
+                  <label className="heading-color ff-heading fw600 mb10">
+                    Square Feet
+                  </label>
+                  <input
+                    onChange={(e) =>
+                      dispatch(
+                        addModelFields({
+                          squareFit: e.target.value.replace(/\D/g, ""),
+                        })
+                      )
+                    }
+                    type="text"
+                    className="form-control"
+                    placeholder="Square Feet"
+                    value={squareFit}
+                  />
+                </div>
+              </div>
             </div>
             <div className="row">
+              <div className="col-sm-6 col-xl-12">
+                <div className="mb30">
+                  <label className="heading-color ff-heading fw600 mb10">
+                    Bedrooms
+                  </label>
+                  <input
+                    onChange={(e) =>
+                      dispatch(
+                        addModelFields({
+                          bedrooms: e.target.value.replace(/\D/g, ""),
+                        })
+                      )
+                    }
+                    type="text"
+                    className="form-control"
+                    placeholder="Bedrooms"
+                    value={bedrooms}
+                  />
+                </div>
+              </div>
+              <div className="col-sm-6 col-xl-12">
+                <div className="mb30">
+                  <label className="heading-color ff-heading fw600 mb10">
+                    Bathrooms
+                  </label>
+                  <input
+                    onChange={(e) =>
+                      dispatch(
+                        addModelFields({
+                          bathrooms: e.target.value.replace(/\D/g, ""),
+                        })
+                      )
+                    }
+                    type="text"
+                    className="form-control"
+                    placeholder="Bathrooms "
+                    value={bathrooms}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-6 col-xl-12">
+                <div className="mb30">
+                  <label className="heading-color ff-heading fw600 mb10">
+                    Garage
+                  </label>
+                  <input
+                    onChange={(e) =>
+                      dispatch(
+                        addModelFields({
+                          garage: e.target.value.replace(/\D/g, ""),
+                        })
+                      )
+                    }
+                    type="text"
+                    className="form-control"
+                    placeholder="Garage "
+                    value={garage}
+                  />
+                </div>
+              </div>
               <div className="col-sm-6 col-xl-12">
                 <div className="mb30">
                   <label className="heading-color ff-heading fw600 mb10">
@@ -278,12 +371,10 @@ const ModelMangement = () => {
                     placeholder="Write Description For Model"
                     value={desc}
                   ></textarea>
-                  <p className={`${descError ? "text-danger" : null}`}>
-                    {descError}
-                  </p>
                 </div>
               </div>
             </div>
+
             {/* End .row */}
 
             <div className="row">

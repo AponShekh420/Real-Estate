@@ -68,7 +68,6 @@ const SingleModel = () => {
   };
 
   const editHandler = (modelValue) => {
-    console.log(modelValue);
     dispatch(
       addModelFields({
         CMTName: modelValue.name,
@@ -77,6 +76,10 @@ const SingleModel = () => {
         edit: true,
         img: modelValue.img,
         newDataNotify: Math.random() * 100,
+        squareFit: modelValue.squareFit,
+        bedrooms: modelValue.bedrooms,
+        bathrooms: modelValue.bathrooms,
+        garage: modelValue.garage,
       })
     );
   };

@@ -7,22 +7,53 @@ const CommunityDetails = ({ data }) => {
         label: "Price Range",
         value: `$${data.minPrice} - $${data.maxPrice}`,
       },
-      {
-        label: "Size",
-        value: `${data.communitySize}`,
-      },
-
-      {
-        label: "Construction Dates",
-        value:
-          data.builtEnd != "Present"
-            ? `${data.builtStart.split("-")[0]} - ${
-                data.builtEnd.split("-")[0]
-              }`
-            : "New Construction",
-      },
     ],
   ];
+  if (data.communitySize > 0) {
+    columns[0].push({
+      label: "Size",
+      value: `${data.communitySize} Homes`,
+    });
+  }
+  if (data?.builtStart && data?.builtEnd) {
+    columns[0].push({
+      label: "Construction Dates",
+      value: `${data.builtStart.split("-")[0]} - ${
+        data.builtEnd.split("-")[0]
+      }`,
+    });
+    columns[0].push({
+      label: "New Construction",
+      value: "No",
+    });
+  }
+  if (data?.builtStart && !data?.builtEnd) {
+    columns[0].push({
+      label: "Construction Dates",
+      value: `${data.builtStart.split("-")[0]} - current`,
+    });
+    columns[0].push({
+      label: "New Construction",
+      value: "Yes",
+    });
+  }
+  if (data?.builtEnd && !data?.builtStart) {
+    columns[0].push({
+      label: "Construction Dates",
+      value: `Completed ${data.builtEnd.split("-")[0]}`,
+    });
+    columns[0].push({
+      label: "New Construction",
+      value: "No",
+    });
+  }
+
+  if (data?.county) {
+    columns[0].push({
+      label: "County",
+      value: data.county,
+    });
+  }
   if (data?.ageRestrictions !== null) {
     columns[0].push({
       label: "Age Restrictions",
@@ -50,11 +81,6 @@ const CommunityDetails = ({ data }) => {
         .join(", ")}`,
     });
   }
-  const datas = {
-    airport: { name: "ss", distance: 113 },
-    hospital: { name: "ss", distance: 110 },
-    militaryBase: { name: "db", distance: 1022 },
-  };
 
   if (data?.hospital && data?.hospital?.name) {
     columns[0].push({
@@ -75,36 +101,25 @@ const CommunityDetails = ({ data }) => {
     });
   }
   return (
-    <div className="row mb35">
+    <div className="mb35">
       {columns.map((column, columnIndex) => (
-        <div key={columnIndex} className={`col-12`}>
-          {column.map((detail, index) =>
-            detail.label == "Price Range" ? (
-              <div key={index} className="d-flex justify-content-between bdrb1">
-                <div className="pd-list">
-                  <p className="fw600 mb0 py5 ff-heading dark-color">
+        <div key={columnIndex} className={`row `}>
+          {column.map((detail, index) => (
+            <div key={index} className={`col-12 col-md-6`}>
+              <div className="pd-list">
+                <p className=" mb0 py4 dark-color">
+                  <span className="fw500 ff-heading d-inline-block mr5">
                     {detail.label}:
-                  </p>
-                </div>
-                <div className="pd-list">
-                  <p className="text mb0 py5 text-end">
+                  </span>
+                  {detail.label == "Price Range" ? (
                     <CommunityMinMaxPrice data={data} />
-                  </p>
-                </div>
+                  ) : (
+                    <span>{detail.value}</span>
+                  )}
+                </p>
               </div>
-            ) : (
-              <div key={index} className="d-flex justify-content-between bdrb1">
-                <div className="pd-list">
-                  <p className="fw600 mb0 py5 ff-heading dark-color">
-                    {detail.label}:
-                  </p>
-                </div>
-                <div className="pd-list">
-                  <p className="text mb0 py5 text-end">{detail.value}</p>
-                </div>
-              </div>
-            )
-          )}
+            </div>
+          ))}
         </div>
       ))}
     </div>

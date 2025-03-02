@@ -22,6 +22,8 @@ const getCommunities = async () => {
     closestAirport,
     closestMilitaryBase,
     builder,
+    county,
+    communitySize,
   } = store.getState().communityFilter;
   const { dispatch } = store;
 
@@ -59,6 +61,8 @@ const getCommunities = async () => {
           closestAirport,
           closestMilitaryBase,
           builder,
+          county,
+          communitySize,
         }),
       }
     );

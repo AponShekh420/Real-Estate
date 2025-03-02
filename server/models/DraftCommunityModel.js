@@ -99,6 +99,12 @@ const DraftCommunitySchema = mongoose.Schema(
       },
       required: false,
     },
+    embedVideo: {
+      type: String,
+    },
+    county: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

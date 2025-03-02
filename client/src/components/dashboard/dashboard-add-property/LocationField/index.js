@@ -5,7 +5,9 @@ import Map from "./Map";
 import SelectMulitField from "./SelectMulitField";
 
 const LocationField = () => {
-  const { errors, address, zip, map } = useSelector((state) => state.community);
+  const { errors, address, zip, map, county } = useSelector(
+    (state) => state.community
+  );
   const dispatch = useDispatch();
 
   return (
@@ -61,6 +63,23 @@ const LocationField = () => {
               value={zip}
             />
             <p className="text-danger">{errors?.zip?.msg}</p>
+          </div>
+        </div>
+        <div className="col-sm-6 col-xl-4">
+          <div className="mb20">
+            <label className="heading-color ff-heading fw600 mb10">
+              County
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="County"
+              onChange={(e) => {
+                dispatch(addCommunityFieldValue({ county: e.target.value }));
+              }}
+              value={county}
+            />
+            <p className="text-danger">{errors?.county?.msg}</p>
           </div>
         </div>
 

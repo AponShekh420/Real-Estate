@@ -1,6 +1,4 @@
-
-import { createSlice } from "@reduxjs/toolkit"
-
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   CMTName: "",
@@ -13,8 +11,11 @@ const initialState = {
   deletedImages: [],
   newImages: [],
   img: "",
-}
-
+  squareFit: "",
+  bedrooms: "",
+  bathrooms: "",
+  garage: "",
+};
 
 const modelSlice = createSlice({
   name: "model",
@@ -23,17 +24,15 @@ const modelSlice = createSlice({
     addModelFields: (state, action) => {
       return {
         ...state,
-        ...action.payload
-      }
+        ...action.payload,
+      };
     },
     removeModelAllFields: (state) => {
-      return initialState
-    }
-  }
+      return initialState;
+    },
+  },
 });
 
-
-export const {addModelFields, removeModelAllFields} = modelSlice.actions;
-
+export const { addModelFields, removeModelAllFields } = modelSlice.actions;
 
 export default modelSlice.reducer;

@@ -43,8 +43,10 @@ const updateCommuity = async (req, res) => {
       hospital,
       militaryBase,
       airport,
+      embedVideo,
+      county,
     } = req.body;
-
+    console.log(minPrice);
     // Find the current community by ID
     const currentCommunity = await CommunityModel.findById(communityId);
     if (!currentCommunity) {
@@ -105,8 +107,8 @@ const updateCommuity = async (req, res) => {
       city: cityIdValid,
       area: areaIdValid,
       zip,
-      minPrice,
-      maxPrice,
+      minPrice: minPrice ? minPrice : 0,
+      maxPrice: maxPrice ? maxPrice : 0,
       active,
       homeTypes: homeTypes === undefined ? [] : homeTypes,
       imgs: imgs,
@@ -114,7 +116,7 @@ const updateCommuity = async (req, res) => {
       builtStart,
       gated: JSON.parse(gated),
       ageRestrictions: JSON.parse(ageRestrictions),
-      communitySize,
+      communitySize: Number(communitySize),
       description,
       amenities: JSON.parse(amenities),
       builders: JSON.parse(builders),
@@ -127,6 +129,8 @@ const updateCommuity = async (req, res) => {
       hospital: JSON.parse(hospital),
       militaryBase: JSON.parse(militaryBase),
       airport: JSON.parse(airport),
+      embedVideo,
+      county,
     })
       .populate("area")
       .populate("state")

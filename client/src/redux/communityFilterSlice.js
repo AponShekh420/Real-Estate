@@ -24,6 +24,8 @@ const initialState = {
   closestAirport: "Any",
   closestMilitaryBase: "Any",
   builder: "",
+  county: "",
+  communitySize: "",
 };
 
 const communityFilter = createSlice({

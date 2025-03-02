@@ -41,6 +41,8 @@ const addCommunity = async (req, res) => {
     militaryBase,
     email,
     notes,
+    embedVideo,
+    county,
   } = req.body;
 
   try {
@@ -87,8 +89,8 @@ const addCommunity = async (req, res) => {
       city: cityIdValid,
       area: areaIdValid,
       zip,
-      minPrice,
-      maxPrice,
+      minPrice: minPrice ? minPrice : 0,
+      maxPrice: maxPrice ? maxPrice : 0,
       active,
       homeTypes,
       imgs: imgs,
@@ -96,7 +98,7 @@ const addCommunity = async (req, res) => {
       builtStart,
       gated: JSON.parse(gated),
       ageRestrictions: JSON.parse(ageRestrictions),
-      communitySize,
+      communitySize: Number(communitySize),
       description,
       amenities: JSON.parse(amenities),
       builders: JSON.parse(builders),
@@ -109,6 +111,8 @@ const addCommunity = async (req, res) => {
       hospital: JSON.parse(hospital),
       airport: JSON.parse(airport),
       militaryBase: JSON.parse(militaryBase),
+      embedVideo,
+      county,
     });
 
     // check: the community has upload in database or not

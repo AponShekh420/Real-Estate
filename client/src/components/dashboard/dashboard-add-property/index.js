@@ -248,12 +248,12 @@ const AddPropertyTabContent = ({
     if (data) {
       dispatch(
         addCommunityFieldValue({
-          ...data,
           existingImages: data?.imgs,
           cityId: data.city,
           areaId: data.area,
           stateId: data.state,
           metaSlug: data.slug,
+          ...data,
         })
       );
     }
