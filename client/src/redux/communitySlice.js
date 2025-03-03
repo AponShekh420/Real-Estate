@@ -24,6 +24,8 @@ const initialState = {
   loading: true,
   errors: {},
   zip: "",
+  county: "",
+  embedVideo: "",
   amenities: [],
   builders: [],
   thumbnail: "",

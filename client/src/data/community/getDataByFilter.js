@@ -18,6 +18,8 @@ const getDataByFilter = (community) => {
     maxPrice,
     minPrice,
     zip,
+    county,
+    embedVideo,
     areaId,
     cityId,
     stateId,
@@ -67,6 +69,8 @@ const getDataByFilter = (community) => {
   formData.set("maxPrice", maxPrice);
   formData.set("minPrice", minPrice);
   formData.set("zip", zip);
+  formData.set("embedVideo", embedVideo);
+  formData.set("county", county);
   formData.set("description", description);
   formData.set("thumbnail", thumbnail);
   formData.set("communityId", communityId);

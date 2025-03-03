@@ -22,6 +22,8 @@ const getCommunitiesByFilter = async (req, res) => {
     closestAirport,
     closestMilitaryBase,
     builder,
+    county,
+    communitySize,
   } = req.body;
 
   // filter start
@@ -32,6 +34,9 @@ const getCommunitiesByFilter = async (req, res) => {
   titleSearch
     ? (dataQueryObj.title = { $regex: titleSearch || "", $options: "i" })
     : null;
+  county
+    ? (dataQueryObj.county = { $regex: county || "", $options: "i" })
+    : null;
   homeTypes?.length > 0 ? (dataQueryObj.homeTypes = { $in: homeTypes }) : null;
   amenities?.length > 0
     ? (dataQueryObj.amenities = {
@@ -41,6 +46,22 @@ const getCommunitiesByFilter = async (req, res) => {
 
   price ? (dataQueryObj.minPrice = { $gte: price[0], $lte: price[1] }) : null;
   price ? (dataQueryObj.maxPrice = { $gte: price[0], $lte: price[1] }) : null;
+
+  if (communitySize) {
+    const splitSize = communitySize.split("-");
+    const [minSize, maxSize] = splitSize;
+    console.log(minSize, maxSize);
+    if (splitSize.includes("under")) {
+      dataQueryObj.communitySize = { $lte: Number(maxSize) };
+    } else if (splitSize.includes("plus")) {
+      dataQueryObj.communitySize = { $gte: Number(minSize) };
+    } else {
+      dataQueryObj.communitySize = {
+        $gte: Number(minSize),
+        $lte: Number(maxSize),
+      };
+    }
+  }
 
   //closest section
   if (closestHospital && closestHospital !== "Any") {

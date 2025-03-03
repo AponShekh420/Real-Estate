@@ -3,7 +3,6 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 
 const LoginSignupModal = () => {
-
   const signInBtn = useRef(null);
   const modalCloseBtn = useRef(null);
 
@@ -11,7 +10,7 @@ const LoginSignupModal = () => {
     <div className="modal-content">
       <div className="modal-header">
         <h5 className="modal-title" id="exampleModalToggleLabel">
-          Welcome to Realton
+          Welcome to 55&up.com
         </h5>
         <button
           type="button"
@@ -64,7 +63,7 @@ const LoginSignupModal = () => {
                 role="tabpanel"
                 aria-labelledby="nav-home-tab"
               >
-                <SignIn modalCloseBtn={modalCloseBtn}/>
+                <SignIn modalCloseBtn={modalCloseBtn} />
               </div>
               {/* End signin content */}
 
@@ -74,7 +73,10 @@ const LoginSignupModal = () => {
                 role="tabpanel"
                 aria-labelledby="nav-profile-tab"
               >
-                <SignUp signInTabBtn={signInBtn} modalCloseBtn={modalCloseBtn}/>
+                <SignUp
+                  signInTabBtn={signInBtn}
+                  modalCloseBtn={modalCloseBtn}
+                />
               </div>
               {/* End signup content */}
             </div>

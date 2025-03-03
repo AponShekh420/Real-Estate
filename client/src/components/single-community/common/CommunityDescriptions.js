@@ -1,16 +1,15 @@
 "use client";
 
-import { useState } from "react";
-
 const CommunityDescriptions = ({ data }) => {
-  const [showMore, setShowMore] = useState(false);
   return (
-    <>
+    <div>
       <div
-        className={`text mb10 ${showMore ? "d-none " : ""}`}
-        dangerouslySetInnerHTML={{ __html: data?.description?.slice(0, 300) }}
-      ></div>
-      <div className="agent-single-accordion">
+        className={`text mb10 `}
+        dangerouslySetInnerHTML={{
+          __html: data?.description,
+        }}
+      />
+      {/* <div className="agent-single-accordion">
         <div className="accordion accordion-flush" id="accordionFlushExample">
           <div className="accordion-item">
             <div
@@ -44,8 +43,8 @@ const CommunityDescriptions = ({ data }) => {
             ) : null}
           </div>
         </div>
-      </div>
-    </>
+      </div> */}
+    </div>
   );
 };
 

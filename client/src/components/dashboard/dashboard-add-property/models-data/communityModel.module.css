@@ -19,24 +19,23 @@
   background-color: red !important;
 }
 
-
 @media (min-width: 576px) {
   .modelGridBox {
-      flex: 0 0 auto;
-      width: 100%;
+    flex: 0 0 auto;
+    width: 100%;
   }
 }
 
 @media (min-width: 768px) {
   .modelGridBox {
-      flex: 0 0 auto;
-      width: 48.44%;
+    flex: 0 0 auto;
+    width: 48.44%;
   }
 }
 
 @media (min-width: 1400px) {
-  .modelGridBox{
-      flex: 0 0 auto;
-      width: 32%;
+  .modelGridBox {
+    flex: 0 0 auto;
+    width: 32%;
   }
 }

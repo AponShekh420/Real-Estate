@@ -38,6 +38,14 @@ const ConstractionOptions = [
   { label: "No", value: "No" },
   { label: "Yes", value: "Yes" },
 ];
+const sizeOptions = [
+  { label: "Select", value: "" },
+  { label: "under 200", value: "under-200" },
+  { label: "201-500", value: "201-500" },
+  { label: "501-2,000", value: "501-2000" },
+  { label: "2,001-5,000", value: "2001-5000" },
+  { label: "5000+", value: "5000-plus" },
+];
 
 const SelectMultiField = ({
   area,
@@ -60,6 +68,8 @@ const SelectMultiField = ({
   setIsNewContraction,
   setAgeRestrictions,
   setGated,
+  communitySize,
+  setCommunitySize,
 }) => {
   // options
   const [stateOptions, setStateOptions] = useState([]);
@@ -154,6 +164,36 @@ const SelectMultiField = ({
                 setState(e.value);
               }}
               value={{ value: state?.name, label: state?.name }}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="col-sm-6">
+        <div className="widget-wrapper">
+          <h6 className="list-title">Size</h6>
+          <div className="d-flex">
+            <Select
+              instanceId="asdfasdfasde"
+              name="city"
+              id="asdfasdfasde"
+              styles={customStyles}
+              className="select-custom"
+              classNamePrefix="select"
+              // isMulti
+              options={sizeOptions?.map((item) => ({
+                value: item.value,
+                label: item.label,
+              }))}
+              onChange={(e) => {
+                setCommunitySize(e.value);
+              }}
+              placeholder="please select"
+              value={{
+                value: communitySize,
+                label: communitySize
+                  ? communitySize.replace("-plus", "+")
+                  : "Select",
+              }}
             />
           </div>
         </div>
