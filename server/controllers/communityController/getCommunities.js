@@ -20,6 +20,14 @@ const getCommunities = async (req, res) => {
     sortOptions = {
       createdAt: 1,
     };
+  } else if (sortby == "data_health_asc") {
+    sortOptions = {
+      health: 1,
+    };
+  } else if (sortby == "data_health_desc") {
+    sortOptions = {
+      health: -1,
+    };
   } else {
     sortOptions = {
       createdAt: -1,

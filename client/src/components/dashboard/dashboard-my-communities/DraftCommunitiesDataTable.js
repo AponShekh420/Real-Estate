@@ -27,12 +27,32 @@ const DraftCommunitiesDataTable = ({ communitiesData, setDraftDeleteData }) => {
     }
   };
 
+  const bgLayerColor = (health) => {
+    if (health >= 90) {
+      return "#C5DEB6";
+    } else if (health >= 70) {
+      return "#FFF3A8";
+    } else {
+      return "#F8CBAC";
+    }
+  };
+  const progressLayerColor = (health) => {
+    if (health >= 90) {
+      return "#6FB143";
+    } else if (health >= 70) {
+      return "#ffdc17";
+    } else {
+      return "#FF0000";
+    }
+  };
+
   return (
     <table className="table-style3 table at-savesearch">
       <thead className="t-head">
         <tr>
           <th scope="col">Community</th>
           <th scope="col">Added</th>
+          <th scope="col">Data Health</th>
           <th scope="col">Status</th>
           <th scope="col">Contact</th>
           <th scope="col">Action</th>
@@ -77,6 +97,41 @@ const DraftCommunitiesDataTable = ({ communitiesData, setDraftDeleteData }) => {
             <td className="vam">
               <Moment format="D MMM YYYY">{community?.createdAt}</Moment>
               <p className="text-capitalize">{`${community?.createdby?.firstName}  ${community?.createdby?.lastName}`}</p>
+            </td>
+            <td className="vam">
+              <div
+                style={{
+                  backgroundColor: bgLayerColor(community?.health),
+                  height: 28,
+                  padding: 0,
+                  minWidth: "10rem",
+                  position: "relative",
+                }}
+              >
+                {community?.health <= 0 ? (
+                  <span
+                    style={{ paddingLeft: 10 }}
+                    className="d-flex align-items-center h-100 text-white"
+                  >
+                    0%
+                  </span>
+                ) : (
+                  <div
+                    style={{
+                      position: "absolute",
+                      padding: "0 15px",
+                      width:
+                        community?.health > 4 ? community?.health : 7 + "%",
+                      height: "100%",
+                      backgroundColor: progressLayerColor(community?.health),
+                    }}
+                  >
+                    <span className="d-flex justify-content-center align-items-center h-100 text-white">
+                      {community?.health}%
+                    </span>
+                  </div>
+                )}
+              </div>
             </td>
             <td className="vam">
               <span className={getStatusStyle(community?.active)}>

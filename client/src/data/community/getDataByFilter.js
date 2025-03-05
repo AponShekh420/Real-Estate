@@ -45,6 +45,7 @@ const getDataByFilter = (community) => {
     airport,
     hospital,
     militaryBase,
+    pictureDone,
   } = community;
 
   const formData = new FormData();
@@ -85,6 +86,7 @@ const getDataByFilter = (community) => {
   formData.set("telephone", telephone);
   formData.set("email", email);
   formData.set("notes", notes);
+  formData.set("pictureDone", pictureDone);
   // Append new images to FormData
   newImages?.forEach((image) => {
     formData.append("newImages", image); // Send only new images

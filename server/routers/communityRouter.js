@@ -27,6 +27,7 @@ const {
   getDraftCommunityById,
 } = require("../controllers/communityController/draftCommunity");
 const uploadDraftCommunityImages = require("../middleware/uploadDraftCommunity");
+const { checkCommunityHealth } = require("../middleware/checkCommunityHealth");
 
 // callback function of configure
 const router = express.Router();
@@ -41,6 +42,7 @@ router.post(
   uploadCommunityImages,
   checkCommunityValidation,
   useCommunityValidationResult,
+  checkCommunityHealth,
   addCommunity
 );
 router.put(
@@ -50,6 +52,7 @@ router.put(
   uploadCommunityImages,
   checkCommunityValidation,
   useCommunityValidationResult,
+  checkCommunityHealth,
   updateCommuity
 );
 router.delete("/delete", authCheck, adminAuthCheck, deleteCommunity);
@@ -77,6 +80,7 @@ router.post(
   authCheck,
   adminAuthCheck,
   uploadDraftCommunityImages,
+  checkCommunityHealth,
   addDraftCommunity
 );
 router.delete("/draft/:id", authCheck, adminAuthCheck, deleteDraftCommunity);

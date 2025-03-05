@@ -1,18 +1,11 @@
 "use client";
 
 import { truncateHTML } from "@/components/common/TruncateHTML";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 const initialWord = 150;
 
 function StringToDomComponent({ htmlString }) {
   const [word, setWord] = useState(initialWord);
-  const path = usePathname();
-  const pathArray = path.split("/");
-
-  if (pathArray.length <= 3) {
-    return null;
-  }
   const { htmlText, wordCount } = truncateHTML(htmlString, word);
   return (
     <div>

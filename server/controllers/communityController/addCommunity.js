@@ -43,6 +43,7 @@ const addCommunity = async (req, res) => {
     notes,
     embedVideo,
     county,
+    pictureDone,
   } = req.body;
 
   try {
@@ -113,6 +114,8 @@ const addCommunity = async (req, res) => {
       militaryBase: JSON.parse(militaryBase),
       embedVideo,
       county,
+      pictureDone: JSON.parse(pictureDone),
+      health: req.healthValue,
     });
 
     // check: the community has upload in database or not

@@ -45,6 +45,7 @@ const updateCommuity = async (req, res) => {
       airport,
       embedVideo,
       county,
+      pictureDone,
     } = req.body;
     console.log(minPrice);
     // Find the current community by ID
@@ -131,6 +132,8 @@ const updateCommuity = async (req, res) => {
       airport: JSON.parse(airport),
       embedVideo,
       county,
+      pictureDone: JSON.parse(pictureDone),
+      health: req.healthValue,
     })
       .populate("area")
       .populate("state")

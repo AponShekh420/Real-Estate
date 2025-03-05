@@ -116,6 +116,15 @@ const getCommunitiesByFilter = async (req, res) => {
   } else {
     sortCriteria = { createdAt: -1 }; // Default case, no sorting
   }
+
+  //for comminity size sorting
+  if (sorting === "# of Homes Low to High") {
+    sortCriteria = { communitySize: 1 }; // Ascending order
+  } else if (sorting === "# of Homes High to Low") {
+    sortCriteria = { communitySize: -1 }; // Descending order
+  } else {
+    sortCriteria = { createdAt: -1 }; // Default case, no sorting
+  }
   // filter end
 
   try {
