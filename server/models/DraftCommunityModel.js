@@ -105,6 +105,14 @@ const DraftCommunitySchema = mongoose.Schema(
     county: {
       type: String,
     },
+    pictureDone: {
+      type: Boolean,
+      default: true,
+    },
+    health: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

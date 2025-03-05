@@ -173,7 +173,7 @@ const DetailsFiled = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Type the community size"
+              placeholder="# Of Homes"
               onChange={(e) => {
                 dispatch(
                   addCommunityFieldValue({

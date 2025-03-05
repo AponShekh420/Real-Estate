@@ -29,6 +29,7 @@ const initialState = {
   amenities: [],
   builders: [],
   thumbnail: "",
+  pictureDone: false,
   existingImages: [],
   newImages: [],
   deletedImages: [],

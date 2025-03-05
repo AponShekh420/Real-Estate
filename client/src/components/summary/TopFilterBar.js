@@ -38,7 +38,9 @@ const TopFilterBar = () => {
               }
             >
               <option>Default</option>
-              <option># of Homes Low to High,</option>
+              <option>Lowest Price</option>
+              <option>Highest Price</option>
+              <option># of Homes Low to High</option>
               <option># of Homes High to Low</option>
             </select>
           </div>
