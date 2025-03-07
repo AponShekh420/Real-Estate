@@ -121,7 +121,9 @@ const DraftCommunitiesDataTable = ({ communitiesData, setDraftDeleteData }) => {
                       position: "absolute",
                       padding: "0 15px",
                       width:
-                        community?.health > 4 ? community?.health : 7 + "%",
+                        community?.health > 4
+                          ? community?.health + "%"
+                          : 7 + "%",
                       height: "100%",
                       backgroundColor: progressLayerColor(community?.health),
                     }}

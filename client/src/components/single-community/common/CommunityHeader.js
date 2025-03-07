@@ -20,7 +20,7 @@ const PropertyHeader = ({ data }) => {
                 <Link
                   href={`/summary/${data?.state?.slug}/${data?.area?.slug}`}
                 >
-                  {data?.area ? data?.area?.name + "," : ""}`{" "}
+                  {data?.area ? data?.area?.name + "," : ""}{" "}
                 </Link>
               )}
               <Link href={`/summary/${data?.state?.slug}`}>

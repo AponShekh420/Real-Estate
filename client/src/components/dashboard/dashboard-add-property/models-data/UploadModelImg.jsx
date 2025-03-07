@@ -55,7 +55,6 @@ const UploadModelImg = () => {
     // Display the uploaded image
     const reader = new FileReader();
     reader.onload = (e) => {
-      console.log(e.target.result);
       setUploadedImg(e.target.result); // Update local state to display the new image
     };
     reader.readAsDataURL(newFile);
@@ -110,7 +109,7 @@ const UploadModelImg = () => {
             </div>
           </label>
           <p className={`text ${errors?.img?.msg ? "text-danger" : null}`}>
-            {errors?.img?.msg || "Photos must be JPEG, JPG or PNG format"}
+            {errors?.img?.msg || "Photos must be JPEG, JPG ,PNG or PDF format"}
           </p>
         </div>
       </div>

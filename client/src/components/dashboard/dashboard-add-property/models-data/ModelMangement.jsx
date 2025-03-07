@@ -17,6 +17,7 @@ const override = {
 const ModelMangement = () => {
   const [loading, setLoading] = useState(false);
   const [nameError, setNameError] = useState("");
+  const [garageError, setGarageError] = useState("");
 
   // redux state
   const { communityId } = useSelector((state) => state.community);
@@ -306,7 +307,7 @@ const ModelMangement = () => {
                     }
                     type="text"
                     className="form-control"
-                    placeholder="Bedrooms"
+                    placeholder="# of Bedrooms"
                     value={bedrooms}
                   />
                 </div>
@@ -326,7 +327,7 @@ const ModelMangement = () => {
                     }
                     type="text"
                     className="form-control"
-                    placeholder="Bathrooms "
+                    placeholder="# of Bathrooms "
                     value={bathrooms}
                   />
                 </div>
@@ -339,18 +340,26 @@ const ModelMangement = () => {
                     Garage
                   </label>
                   <input
-                    onChange={(e) =>
+                    onChange={(e) => {
+                      let garageValue = e.target.value;
+                      if (garageValue.length === 1 && garageValue == 0) {
+                        garageValue = "";
+                        setGarageError("0 is not allowed!");
+                        return true;
+                      }
+                      setGarageError("");
                       dispatch(
                         addModelFields({
                           garage: e.target.value.replace(/\D/g, ""),
                         })
-                      )
-                    }
+                      );
+                    }}
                     type="text"
                     className="form-control"
-                    placeholder="Garage "
+                    placeholder="# of Car Garage "
                     value={garage}
                   />
+                  <p className="text-danger pl5">{garageError}</p>
                 </div>
               </div>
               <div className="col-sm-6 col-xl-12">
