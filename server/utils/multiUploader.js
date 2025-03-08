@@ -63,6 +63,9 @@ const uploader = (subFolder, fileType, fileSize, err_msg) => {
   const upload = multer({
     storage: multerS3({
       s3: s3,
+      contentType: (req, file, cb) => {
+        cb(null, file.mimetype);
+      },
       bucket: "assets-upload", // Use the correct bucket name without a slash
       acl: "public-read", // Permissions for the uploaded file
       key: (req, file, cb) => {

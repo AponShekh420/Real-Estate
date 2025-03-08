@@ -84,7 +84,7 @@ const CommunitiesDataTable = ({ communitiesData, setDeleteData }) => {
                   </div>
                   <p className="list-text mb-0 text-capitalize">
                     {community?.city
-                      ? `${community?.city?.name} City,`
+                      ? `${community?.city?.name} City, `
                       : `${community?.area ? community?.area?.name + "," : ""}`}
                     {community?.state?.abbreviation}
                   </p>
@@ -134,7 +134,9 @@ const CommunitiesDataTable = ({ communitiesData, setDeleteData }) => {
                       position: "absolute",
                       padding: "0 15px",
                       width:
-                        community?.health > 4 ? community?.health : 7 + "%",
+                        community?.health > 4
+                          ? community?.health + "%"
+                          : 7 + "%",
                       height: "100%",
                       backgroundColor: progressLayerColor(community?.health),
                     }}

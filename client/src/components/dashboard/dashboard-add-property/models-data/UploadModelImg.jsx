@@ -1,5 +1,6 @@
 "use client";
 import { addModelFields } from "@/redux/modelSlice";
+import { checkFileExtByUrl } from "@/utilis/checkFileExtByUrl";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -55,7 +56,6 @@ const UploadModelImg = () => {
     // Display the uploaded image
     const reader = new FileReader();
     reader.onload = (e) => {
-      console.log(e.target.result);
       setUploadedImg(e.target.result); // Update local state to display the new image
     };
     reader.readAsDataURL(newFile);
@@ -70,7 +70,9 @@ const UploadModelImg = () => {
     <>
       <div className="profile-box position-relative d-md-flex align-items-end mb50">
         <div className="profile-img new position-relative overflow-hidden bdrs12 mb20-sm">
-          {uploadedImg && fileType === "application/pdf" ? (
+          {uploadedImg &&
+          (checkFileExtByUrl(uploadedImg) === "pdf" ||
+            fileType === "application/pdf") ? (
             <iframe src={uploadedImg} width="800" height="600"></iframe>
           ) : (
             <Image
@@ -110,7 +112,7 @@ const UploadModelImg = () => {
             </div>
           </label>
           <p className={`text ${errors?.img?.msg ? "text-danger" : null}`}>
-            {errors?.img?.msg || "Photos must be JPEG, JPG or PNG format"}
+            {errors?.img?.msg || "Photos must be JPEG, JPG ,PNG or PDF format"}
           </p>
         </div>
       </div>

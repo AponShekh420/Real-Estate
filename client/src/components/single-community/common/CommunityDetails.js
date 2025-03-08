@@ -57,7 +57,7 @@ const CommunityDetails = ({ data }) => {
   if (data?.ageRestrictions !== null) {
     columns[0].push({
       label: "Age Restrictions",
-      value: data.ageRestrictions ? "55+" : "N/A",
+      value: data.ageRestrictions ? "55+No" : "N/A",
     });
   }
   if (data?.gated !== null) {

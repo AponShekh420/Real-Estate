@@ -8,6 +8,7 @@ const TopFilterBar = () => {
     currentPage,
     totalPages,
     data: communitiesData,
+    sorting,
   } = useSelector((state) => state.communityFilter);
   const dispatch = useDispatch();
 
@@ -28,6 +29,7 @@ const TopFilterBar = () => {
           <div className="pcs_dropdown pr10 d-flex align-items-center bdr1 px10">
             <span style={{ minWidth: "60px" }}>Sort by</span>
             <select
+              value={sorting}
               className="form-select"
               onChange={(e) =>
                 dispatch(
@@ -37,7 +39,6 @@ const TopFilterBar = () => {
                 )
               }
             >
-              <option>Default</option>
               <option>Lowest Price</option>
               <option>Highest Price</option>
               <option># of Homes Low to High</option>

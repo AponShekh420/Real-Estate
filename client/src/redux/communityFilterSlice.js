@@ -17,7 +17,7 @@ const initialState = {
   ageRestrictions: "Any",
   gated: "Any",
   price: [0, 1000000000],
-  sorting: "Default",
+  sorting: "# of Homes High to Low",
   //added by shipon
   isNewContraction: "No",
   closestHospital: "Any",
