@@ -1,14 +1,14 @@
 "use client";
 import ScrollToTop from "@/components/common/ScrollTop";
+import store from "@/redux/store";
 import Aos from "aos";
-import "../../node_modules/react-modal-video/scss/modal-video.scss";
 import "aos/dist/aos.css";
-import "../../public/scss/main.scss";
-import "rc-slider/assets/index.css";
 import { DM_Sans, Poppins } from "next/font/google";
+import "rc-slider/assets/index.css";
 import { useEffect } from "react";
 import { Provider } from "react-redux";
-import store from "@/redux/store";
+import "../../node_modules/react-modal-video/scss/modal-video.scss";
+import "../../public/scss/main.scss";
 import Wrapper from "./layout-wrapper/wrapper";
 
 if (typeof window !== "undefined") {
@@ -45,9 +45,7 @@ export default function RootLayout({ children }) {
       >
         <Provider store={store}>
           <div className="wrapper ovh">
-            <Wrapper>
-              {children}
-            </Wrapper>
+            <Wrapper>{children}</Wrapper>
           </div>
         </Provider>
         <ScrollToTop />

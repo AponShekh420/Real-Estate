@@ -1,0 +1,73 @@
+.link {
+  border: none;
+  border-bottom: 2px solid rgb(62, 62, 63);
+  margin-top: -14px;
+}
+.link:hover {
+  border-bottom: 2px solid #eb6753;
+  color: #eb6753;
+}
+.property-text {
+  font-size: 14px;
+}
+.desc-text {
+  font-size: 12.5px;
+  padding: 4px 15px;
+}
+
+.pdfContainer {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 7px;
+  background: #f1f1f1;
+}
+
+.pdfContainer .react-pdf__Page {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+.pdf_container {
+  transform: translate(63px, -1px);
+}
+
+@media screen and (min-width: 375px) {
+  .pdf_container {
+    transform: translate(83px, -1px);
+  }
+}
+@media screen and (min-width: 425px) {
+  .pdf_container {
+    transform: translate(113px, -1px);
+  }
+}
+@media screen and (min-width: 500px) {
+  .pdf_container {
+    transform: translate(150px, -1px);
+  }
+}
+@media screen and (min-width: 550px) {
+  .pdf_container {
+    transform: translate(170px, -1px);
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .pdf_container {
+    transform: translate(43px, -1px);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .pdf_container {
+    transform: translate(15px, -1px);
+  }
+}
+@media screen and (min-width: 1400px) {
+  .pdf_container {
+    transform: translate(23px, -1px);
+  }
+}

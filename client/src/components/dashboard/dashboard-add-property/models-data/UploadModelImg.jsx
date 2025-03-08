@@ -1,5 +1,6 @@
 "use client";
 import { addModelFields } from "@/redux/modelSlice";
+import { checkFileExtByUrl } from "@/utilis/checkFileExtByUrl";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -69,7 +70,9 @@ const UploadModelImg = () => {
     <>
       <div className="profile-box position-relative d-md-flex align-items-end mb50">
         <div className="profile-img new position-relative overflow-hidden bdrs12 mb20-sm">
-          {uploadedImg && fileType === "application/pdf" ? (
+          {uploadedImg &&
+          (checkFileExtByUrl(uploadedImg) === "pdf" ||
+            fileType === "application/pdf") ? (
             <iframe src={uploadedImg} width="800" height="600"></iframe>
           ) : (
             <Image
