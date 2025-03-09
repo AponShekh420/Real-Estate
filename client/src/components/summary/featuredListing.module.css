@@ -1,0 +1,7 @@
+.embedvideo {
+  height: 230px !important;
+}
+.embedvideo iframe {
+  object-fit: cover;
+  height: 230px;
+}

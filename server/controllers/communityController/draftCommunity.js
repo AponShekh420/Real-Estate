@@ -56,6 +56,14 @@ const getDraftCommunities = async (req, res) => {
     sortOptions = {
       updatedAt: -1,
     };
+  } else if (sortby == "data_health_asc") {
+    sortOptions = {
+      health: 1,
+    };
+  } else if (sortby == "data_health_desc") {
+    sortOptions = {
+      health: -1,
+    };
   } else {
     sortOptions = {
       createdAt: -1,
@@ -112,6 +120,7 @@ const addDraftCommunity = async (req, res) => {
     ageRestrictions,
     currentThumbnail,
     militaryBase,
+    pictureDone,
     ...otherFields
   } = req.body;
 
@@ -170,6 +179,8 @@ const addDraftCommunity = async (req, res) => {
       militaryBase: JSON.parse(militaryBase),
       gated: JSON.parse(gated),
       ageRestrictions: JSON.parse(ageRestrictions),
+      pictureDone: JSON.parse(pictureDone),
+      health: req.healthValue,
     };
 
     if (draft) {

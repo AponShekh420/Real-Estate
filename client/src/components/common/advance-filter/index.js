@@ -43,6 +43,8 @@ const AdvanceFilterModal = () => {
     closestMilitaryBase: currentClosestMilitaryBase,
     builder: currentBuilder,
     homeTypes,
+    county: currentCountySearch,
+    communitySize: currentCommunitySize,
   } = useSelector((state) => state.communityFilter);
   const community = useSelector((state) => state.communityFilter);
   const dispatch = useDispatch();
@@ -50,6 +52,7 @@ const AdvanceFilterModal = () => {
   // react state
   const [amenities, setAmenities] = useState([...currentAmenities]);
   const [titleSearch, setTitleSearch] = useState(currentTitleSearch || "");
+  const [countySearch, setCountySearch] = useState(currentCountySearch || "");
   const [city, setCity] = useState(currentCity || "");
   const [area, setArea] = useState(currentArea || "");
   const [state, setState] = useState(currentState || "");
@@ -74,6 +77,9 @@ const AdvanceFilterModal = () => {
     currentClosestMilitaryBase || "Any"
   );
   const [builder, setBuilder] = useState(currentBuilder || "");
+  const [communitySize, setCommunitySize] = useState(
+    currentCommunitySize || ""
+  );
 
   // redirect route
   const router = useRouter();
@@ -95,6 +101,8 @@ const AdvanceFilterModal = () => {
         closestAirport,
         closestMilitaryBase,
         builder,
+        county: countySearch,
+        communitySize,
       })
     );
     router.push(
@@ -120,6 +128,8 @@ const AdvanceFilterModal = () => {
     setClosestAirport(null);
     setClosestMilitaryBase(null);
     setBuilder("");
+    setCountySearch("");
+    setCommunitySize("");
     dispatch(removeCommunityFilterValues());
   };
 
@@ -175,6 +185,20 @@ const AdvanceFilterModal = () => {
               </div>
             </div>
           </div>
+          <div className="col-12">
+            <div className="widget-wrapper">
+              <h6 className="list-title">County</h6>
+              <div className="form-style2">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Write your County name"
+                  onChange={(e) => setCountySearch(e.target.value)}
+                  value={countySearch}
+                />
+              </div>
+            </div>
+          </div>
           {/* End .col-6 */}
 
           <div className="row">
@@ -199,6 +223,8 @@ const AdvanceFilterModal = () => {
               setClosestMilitaryBase={setClosestMilitaryBase}
               builder={builder}
               setBuilder={setBuilder}
+              communitySize={communitySize}
+              setCommunitySize={setCommunitySize}
             />
             {/* End .col-md-6 */}
           </div>

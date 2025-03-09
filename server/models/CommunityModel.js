@@ -155,6 +155,20 @@ const CommunitySchema = mongoose.Schema(
         distance: Number,
       },
     },
+    embedVideo: {
+      type: String,
+    },
+    county: {
+      type: String,
+    },
+    pictureDone: {
+      type: Boolean,
+      default: true,
+    },
+    health: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

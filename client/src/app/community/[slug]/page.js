@@ -8,6 +8,7 @@ import ReviewBoxForm from "@/components/single-community/common/ReviewBoxForm";
 import AllReviews from "@/components/single-community/common/reviews";
 import ScheduleTour from "@/components/single-community/sidebar/ScheduleTour";
 import PropertyGallery from "@/components/single-community/single-v8/PropertyGallery";
+import { getSession } from "@/lib/authLib";
 import getSingleCommunity from "@/lib/getSingleCommunity";
 import { notFound } from "next/navigation";
 
@@ -52,7 +53,7 @@ export const generateMetadata = async ({ params }) => {
 
 const SingleCommunity = async ({ params }) => {
   const { slug } = params;
-
+  const userSession = await getSession();
   // get single community data from api
   const res = await getSingleCommunity(slug);
   // if the data has not founded, that's mean the route are wrong, so redirect on not found page
@@ -93,13 +94,15 @@ const SingleCommunity = async ({ params }) => {
               <AllReviews data={res} />
 
               {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Leave A Review</h4>
-                <div className="row">
-                  <ReviewBoxForm data={res} />
+              {userSession && (
+                <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
+                  <h4 className="title fz17 mb30">Leave A Review</h4>
+                  <div className="row">
+                    <ReviewBoxForm data={res} />
+                  </div>
                 </div>
-              </div>
+              )}
+
               {/* End .ps-widget */}
             </div>
             {/* End .col-8 */}

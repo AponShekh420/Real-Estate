@@ -1,6 +1,7 @@
 "use client";
 
 import { addModelFields } from "@/redux/modelSlice";
+import { checkFileExtByUrl } from "@/utilis/checkFileExtByUrl";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { BsFillPencilFill } from "react-icons/bs";
@@ -68,7 +69,6 @@ const SingleModel = () => {
   };
 
   const editHandler = (modelValue) => {
-    console.log(modelValue);
     dispatch(
       addModelFields({
         CMTName: modelValue.name,
@@ -77,6 +77,10 @@ const SingleModel = () => {
         edit: true,
         img: modelValue.img,
         newDataNotify: Math.random() * 100,
+        squareFit: modelValue.squareFit,
+        bedrooms: modelValue.bedrooms,
+        bathrooms: modelValue.bathrooms,
+        garage: modelValue.garage,
       })
     );
   };
@@ -112,13 +116,32 @@ const SingleModel = () => {
           <div className="row">
             <div className="agent-single d-sm-flex pb0">
               <div className="single-img mb30-sm">
-                <Image
-                  width={70}
-                  height={70}
-                  className="w70"
-                  src={element?.img}
-                  alt="agent"
-                />
+                {checkFileExtByUrl(element?.img) === "pdf" ? (
+                  <div
+                    style={{
+                      width: "80px",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <iframe
+                      src={element?.img}
+                      width="120px"
+                      height="90px"
+                      style={{
+                        width: "200px",
+                        transform: "translate(-24px, -14px)",
+                      }}
+                    ></iframe>
+                  </div>
+                ) : (
+                  <Image
+                    width={70}
+                    height={70}
+                    className="w70"
+                    src={element?.img}
+                    alt="agent"
+                  />
+                )}
               </div>
               <div className="single-contant ml30 ml0-xs">
                 <h6 className="title mb-1">{element?.name}</h6>

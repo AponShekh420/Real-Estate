@@ -106,12 +106,12 @@ const CommunityByStates = () => {
                           {state.name} ({getTotalCount(state?.community)})
                         </span>
                       </h6>
-                      <p
+                      {/* <p
                         className="fz15 fw400 dark-color mb-0"
                         style={{ fontSize: "16px" }}
                       >
                         {sanitizeHtml(state?.desc).slice(0, 40)}...
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                 </div>

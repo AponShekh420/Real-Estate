@@ -1,48 +1,57 @@
 "use client";
-import { Tooltip as ReactTooltip } from "react-tooltip";
-import React, { useState, useRef, useEffect } from "react";
-import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
 import { addModelFields } from "@/redux/modelSlice";
+import { checkFileExtByUrl } from "@/utilis/checkFileExtByUrl";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 const UploadModelImg = () => {
-  // redux 
-  const { img, deletedImages, newImages, errors, newDataNotify } = useSelector(state => state?.model);
+  // redux
+  const { img, deletedImages, newImages, errors, newDataNotify } = useSelector(
+    (state) => state?.model
+  );
   const dispatch = useDispatch();
 
   // Initial image from the server (could be a URL or image path)
-  const [uploadedImg, setUploadedImg] = useState(img || ''); // For displaying the current image
+  const [uploadedImg, setUploadedImg] = useState(img || ""); // For displaying the current image
+  const [fileType, setFileType] = useState(""); // For displaying the current image
 
   // Handle image deletion
   const handleDeleteImg = (e) => {
     e.preventDefault();
     const deletedImg = img; // Save the current image to deletedImages
 
-    dispatch(addModelFields({
-      deletedImages: [...deletedImages, deletedImg],
-      img: '',  // Clear the current img in Redux state
-    }));
+    dispatch(
+      addModelFields({
+        deletedImages: [...deletedImages, deletedImg],
+        img: "", // Clear the current img in Redux state
+      })
+    );
 
     // Remove from local state
-    setUploadedImg('');
+    setUploadedImg("");
   };
 
   // Handle new image addition or update
   const handleAddNewImg = (file) => {
-
     // deleting the existing one first
     const deletedImg = img; // Save the current image to deletedImages
 
-    dispatch(addModelFields({
-      deletedImages: [...deletedImages, deletedImg],
-      img: '',  // Clear the current img in Redux state
-    }));
+    dispatch(
+      addModelFields({
+        deletedImages: [...deletedImages, deletedImg],
+        img: "", // Clear the current img in Redux state
+      })
+    );
 
-
-    const newFile = file[0]; // Get the first file (single file)
-    dispatch(addModelFields({
-      newImages: [newFile],  // Store new image in Redux
-    }));
+    const newFile = file[0];
+    // Get the first file (single file)
+    dispatch(
+      addModelFields({
+        newImages: [newFile], // Store new image in Redux
+      })
+    );
 
     // Display the uploaded image
     const reader = new FileReader();
@@ -50,24 +59,30 @@ const UploadModelImg = () => {
       setUploadedImg(e.target.result); // Update local state to display the new image
     };
     reader.readAsDataURL(newFile);
+    setFileType(newFile.type);
   };
 
-
-  useEffect(()=> {
-    setUploadedImg(img)
-  }, [newDataNotify])
+  useEffect(() => {
+    setUploadedImg(img);
+  }, [newDataNotify]);
 
   return (
     <>
       <div className="profile-box position-relative d-md-flex align-items-end mb50">
         <div className="profile-img new position-relative overflow-hidden bdrs12 mb20-sm">
-          <Image
-            width={240}
-            height={220}
-            className="w-100 cover h-100"
-            src={uploadedImg  || "/images/listings/profile-1.jpg"}
-            alt="profile avatar"
-          />
+          {uploadedImg &&
+          (checkFileExtByUrl(uploadedImg) === "pdf" ||
+            fileType === "application/pdf") ? (
+            <iframe src={uploadedImg} width="800" height="600"></iframe>
+          ) : (
+            <Image
+              width={240}
+              height={220}
+              className="w-100 cover h-100 "
+              src={uploadedImg || "/images/listings/profile-1.jpg"}
+              alt="profile avatar"
+            />
+          )}
 
           <button
             className="tag-del"
@@ -87,7 +102,7 @@ const UploadModelImg = () => {
             <input
               name="img"
               type="file"
-              accept="image/jpeg,image/png"
+              accept="image/jpeg,image/png,application/pdf"
               onChange={(e) => handleAddNewImg(e.target.files)}
               style={{ display: "none" }}
             />
@@ -96,8 +111,8 @@ const UploadModelImg = () => {
               <i className="fal fa-arrow-right-long" />
             </div>
           </label>
-          <p className={`text ${errors?.img?.msg ? "text-danger": null}`}>
-            {errors?.img?.msg || "Photos must be JPEG, JPG or PNG format"}
+          <p className={`text ${errors?.img?.msg ? "text-danger" : null}`}>
+            {errors?.img?.msg || "Photos must be JPEG, JPG ,PNG or PDF format"}
           </p>
         </div>
       </div>

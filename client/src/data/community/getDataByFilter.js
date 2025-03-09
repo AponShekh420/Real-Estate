@@ -18,6 +18,8 @@ const getDataByFilter = (community) => {
     maxPrice,
     minPrice,
     zip,
+    county,
+    embedVideo,
     areaId,
     cityId,
     stateId,
@@ -43,6 +45,7 @@ const getDataByFilter = (community) => {
     airport,
     hospital,
     militaryBase,
+    pictureDone,
   } = community;
 
   const formData = new FormData();
@@ -63,10 +66,12 @@ const getDataByFilter = (community) => {
 
   formData.set("gated", gated);
   formData.set("ageRestrictions", ageRestrictions);
-  formData.set("communitySize", communitySize);
+  formData.set("communitySize", communitySize ? communitySize : 0);
   formData.set("maxPrice", maxPrice);
   formData.set("minPrice", minPrice);
   formData.set("zip", zip);
+  formData.set("embedVideo", embedVideo);
+  formData.set("county", county);
   formData.set("description", description);
   formData.set("thumbnail", thumbnail);
   formData.set("communityId", communityId);
@@ -81,6 +86,7 @@ const getDataByFilter = (community) => {
   formData.set("telephone", telephone);
   formData.set("email", email);
   formData.set("notes", notes);
+  formData.set("pictureDone", pictureDone);
   // Append new images to FormData
   newImages?.forEach((image) => {
     formData.append("newImages", image); // Send only new images

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CommunityMinMaxPrice from "../common/CommunityMinMaxPrice";
 import CommunitiesListLoader from "./CommunitiesListLoader";
 import Wishlist from "./Wishlist";
+import styles from "./featuredListing.module.css";
 
 const override = {
   display: "block",
@@ -83,20 +84,31 @@ const FeaturedListings = ({
             <div className={"listing-style1"}>
               <div className="list-thumb">
                 <Link href={`/community/${listing.slug}`}>
-                  <Image
-                    width={382}
-                    height={248}
-                    style={{ height: "230px" }}
-                    className="w-100  cover"
-                    src={
-                      listing?.thumbnail ||
-                      listing?.imgs[listing?.imgs?.length - 1]
-                    }
-                    alt="listings"
-                  />
-                  <div className="list-price">
-                    <CommunityMinMaxPrice data={listing} />
-                  </div>
+                  {listing?.embedVideo ? (
+                    <div
+                      className={`w-100  cover ${styles.embedvideo}`}
+                      dangerouslySetInnerHTML={{ __html: listing?.embedVideo }}
+                    />
+                  ) : (
+                    <Image
+                      width={382}
+                      height={248}
+                      style={{ height: "230px" }}
+                      className="w-100  cover"
+                      src={
+                        listing?.thumbnail ||
+                        listing?.imgs[listing?.imgs?.length - 1]
+                      }
+                      alt="listings"
+                    />
+                  )}
+                  {listing.minPrice || listing.maxPrice ? (
+                    <div className="list-price">
+                      <CommunityMinMaxPrice data={listing} />
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </Link>
               </div>
               <div className="list-content">

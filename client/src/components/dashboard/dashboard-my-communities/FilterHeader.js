@@ -49,6 +49,8 @@ const FilterHeader = ({
             <option value={"date_added_desc"}>Date Added DESC</option>
             <option value={"date_edited_asc"}>Date Edited ASC</option>
             <option value={"date_edited_desc"}>Date Edited DESC</option>
+            <option value={"data_health_asc"}>Data Health ASC</option>
+            <option value={"data_health_desc"}>Data Health DESC</option>
           </select>
         </div>
       </div>
