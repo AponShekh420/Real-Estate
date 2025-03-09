@@ -57,8 +57,8 @@ const PropertyGallery = ({ id, data }) => {
               {embedVideo && (
                 <SwiperSlide>
                   <Item
-                    original={embedVideo}
-                    thumbnail={embedVideo}
+                    original={thumbnail}
+                    thumbnail={thumbnail}
                     width={1206}
                     height={550}
                   >
@@ -70,12 +70,6 @@ const PropertyGallery = ({ id, data }) => {
                       />
                     )}
                   </Item>
-
-                  {images.length > 1 ? (
-                    <button className="all-tag popup-img border-0 pe-none">
-                      See All {images.length} Photos
-                    </button>
-                  ) : null}
                 </SwiperSlide>
               )}
               {thumbnail && (
