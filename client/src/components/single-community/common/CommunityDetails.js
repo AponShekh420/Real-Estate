@@ -1,14 +1,13 @@
 import CommunityMinMaxPrice from "@/components/common/CommunityMinMaxPrice";
 
 const CommunityDetails = ({ data }) => {
-  const columns = [
-    [
-      {
-        label: "Price Range",
-        value: `$${data.minPrice} - $${data.maxPrice}`,
-      },
-    ],
-  ];
+  const columns = [[]];
+  if (data.minPrice || data.maxPrice) {
+    columns[0].push({
+      label: "Price Range",
+      value: `$${data.minPrice} - $${data.maxPrice}`,
+    });
+  }
   if (data.communitySize > 0) {
     columns[0].push({
       label: "Size",
@@ -30,7 +29,7 @@ const CommunityDetails = ({ data }) => {
   if (data?.builtStart && !data?.builtEnd) {
     columns[0].push({
       label: "Construction Dates",
-      value: `${data.builtStart.split("-")[0]} - current`,
+      value: `${data.builtStart.split("-")[0]} - Current`,
     });
     columns[0].push({
       label: "New Construction",
@@ -57,7 +56,7 @@ const CommunityDetails = ({ data }) => {
   if (data?.ageRestrictions !== null) {
     columns[0].push({
       label: "Age Restrictions",
-      value: data.ageRestrictions ? "55+No" : "N/A",
+      value: data.ageRestrictions ? "55+" : "No",
     });
   }
   if (data?.gated !== null) {
@@ -75,23 +74,20 @@ const CommunityDetails = ({ data }) => {
   if (data?.builders?.length > 0) {
     columns[0].push({
       label: "builder",
-      value: `${data.builders
-        ?.slice(0, 2)
-        .map((builder) => builder.name)
-        .join(", ")}`,
+      value: `${data.builders?.map((builder) => builder.name).join(", ")}`,
     });
   }
 
-  if (data?.hospital && data?.hospital?.name) {
-    columns[0].push({
-      label: "Closest Hospital",
-      value: `${data.hospital.name} (${data.hospital.distance} miles)`,
-    });
-  }
   if (data?.airport && data?.airport?.name) {
     columns[0].push({
       label: "Closest International Airport",
       value: `${data.airport.name} (${data.airport.distance} miles)`,
+    });
+  }
+  if (data?.hospital && data?.hospital?.name) {
+    columns[0].push({
+      label: "Closest Hospital",
+      value: `${data.hospital.name} (${data.hospital.distance} miles)`,
     });
   }
   if (data?.militaryBase && data?.militaryBase?.name) {

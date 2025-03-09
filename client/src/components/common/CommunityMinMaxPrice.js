@@ -21,7 +21,7 @@ const CommunityMinMaxPrice = ({ data }) => {
   if (!data.minPrice && data.maxPrice) {
     return (
       <>
-        {currency(data?.minPrice, { fromCents: true, precision: 0 }).format()}{" "}
+        {currency(data?.maxPrice, { fromCents: true, precision: 0 }).format()}{" "}
         and under
       </>
     );
