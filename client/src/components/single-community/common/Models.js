@@ -68,12 +68,12 @@ const Models = ({ modelsData }) => {
                 </div>
                 <div className="single-contant text-center">
                   <h5
-                    style={{ color: "#185283", fontSize: "0.9rem" }}
-                    className=" mt-2 mb-1 text-capitalize"
+                    style={{ color: "#185283", fontSize: "0.8rem" }}
+                    className=" text-capitalize title-text"
                   >
                     {element?.name}
                   </h5>
-                  <div className="agent-meta">
+                  <div className="agent-meta content-wrapper">
                     {element?.bedrooms ? (
                       <span className="py-0 d-block property-text">
                         {element?.bedrooms} Bedroom
@@ -102,21 +102,19 @@ const Models = ({ modelsData }) => {
                     ) : (
                       ""
                     )}
+                    <p className="desc-text">{element?.desc}</p>
                   </div>
-                  <p className="desc-text">{element?.desc}</p>
                 </div>
 
                 <button
                   style={{
                     width: "fit-content",
-                    fontSize: "12px",
+                    fontSize: "10px",
                   }}
                   className={`text-uppercase fw-bold  mx-auto d-block link `}
                   onClick={() => handleDownload(element?.img)}
                 >
-                  {checkFileExtByUrl(element?.img) === "pdf"
-                    ? "Download pdf"
-                    : "Download image"}
+                  Download Floor Plan
                 </button>
               </div>
             </div>

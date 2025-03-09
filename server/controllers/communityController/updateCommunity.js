@@ -113,7 +113,7 @@ const updateCommuity = async (req, res) => {
       active,
       homeTypes: homeTypes === undefined ? [] : homeTypes,
       imgs: imgs,
-      builtEnd: builtEnd || "Present",
+      builtEnd: builtEnd,
       builtStart,
       gated: JSON.parse(gated),
       ageRestrictions: JSON.parse(ageRestrictions),

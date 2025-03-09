@@ -3,4 +3,5 @@
 }
 .embedvideo iframe {
   object-fit: cover;
+  height: 230px;
 }

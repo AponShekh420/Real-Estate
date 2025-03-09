@@ -102,10 +102,13 @@ const FeaturedListings = ({
                       alt="listings"
                     />
                   )}
-
-                  <div className="list-price">
-                    <CommunityMinMaxPrice data={listing} />
-                  </div>
+                  {listing.minPrice || listing.maxPrice ? (
+                    <div className="list-price">
+                      <CommunityMinMaxPrice data={listing} />
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </Link>
               </div>
               <div className="list-content">

@@ -95,7 +95,7 @@ const addCommunity = async (req, res) => {
       active,
       homeTypes,
       imgs: imgs,
-      builtEnd: builtEnd || "Present",
+      builtEnd: builtEnd,
       builtStart,
       gated: JSON.parse(gated),
       ageRestrictions: JSON.parse(ageRestrictions),

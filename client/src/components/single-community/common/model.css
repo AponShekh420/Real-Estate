@@ -1,20 +1,28 @@
 .link {
   border: none;
   border-bottom: 2px solid rgb(62, 62, 63);
-  margin-top: -14px;
+  margin-top: 0px;
 }
 .link:hover {
   border-bottom: 2px solid #eb6753;
   color: #eb6753;
 }
+.title-text {
+  margin: -21px 0 4px 0;
+}
 .property-text {
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 22px;
 }
 .desc-text {
-  font-size: 12.5px;
-  padding: 4px 15px;
+  font-size: 13px;
+  padding: 4px 0px;
+  line-height: 20px;
+  margin: 4px 0;
 }
-
+.content-wrapper {
+  padding: 0 10px;
+}
 .pdfContainer {
   position: relative;
   width: 100%;
@@ -58,6 +66,11 @@
 @media screen and (min-width: 576px) {
   .pdf_container {
     transform: translate(43px, -1px);
+  }
+}
+@media screen and (min-width: 768px) {
+  .title-text {
+    margin: 10px 0 4px 0;
   }
 }
 

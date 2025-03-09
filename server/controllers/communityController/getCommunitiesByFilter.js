@@ -113,12 +113,7 @@ const getCommunitiesByFilter = async (req, res) => {
     sortCriteria = { minPrice: 1 }; // Ascending order
   } else if (sorting === "Highest Price") {
     sortCriteria = { maxPrice: -1 }; // Descending order
-  } else {
-    sortCriteria = { createdAt: -1 }; // Default case, no sorting
-  }
-
-  //for comminity size sorting
-  if (sorting === "# of Homes Low to High") {
+  } else if (sorting === "# of Homes Low to High") {
     sortCriteria = { communitySize: 1 }; // Ascending order
   } else if (sorting === "# of Homes High to Low") {
     sortCriteria = { communitySize: -1 }; // Descending order
