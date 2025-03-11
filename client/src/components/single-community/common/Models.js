@@ -52,7 +52,8 @@ const Models = ({ modelsData }) => {
                         height="120px"
                         style={{
                           width: "200px",
-                          transform: "translate(-24px, -1px)",
+                          transform: "translate(-33px, -10px)",
+                          // transform: "translate(-24px, -1px)", old style
                         }}
                       ></iframe>
                     </div>
