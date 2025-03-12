@@ -72,8 +72,8 @@ const CommunitySchema = mongoose.Schema(
       },
     ],
     communitySize: {
-      type: String,
-      required: true,
+      type: Number,
+      default: null,
     },
     ageRestrictions: {
       type: mongoose.Schema.Types.Mixed,

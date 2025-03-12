@@ -47,10 +47,10 @@ const checkCommunityValidation = [
   //   .withMessage("Must be select a city")
   //   .trim(),
 
-  check("communitySize")
-    .isLength({ min: 1 })
-    .withMessage("Must be a number of community size")
-    .trim(),
+  // check("communitySize")
+  //   .isLength({ min: 1 })
+  //   .withMessage("Must be a number of community size")
+  //   .trim(),
   check("imgs")
     .custom((item) => item.length > 0)
     .withMessage("Must be upload a Image")

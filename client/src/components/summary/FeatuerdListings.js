@@ -74,6 +74,35 @@ const FeaturedListings = ({
     builder,
   ]);
 
+  const builtChecker = (cdata) => {
+    if (cdata?.builtStart && cdata?.builtEnd) {
+      return (
+        <span>
+          <span className="fa-light fa-calendar-days" />
+          Built:{" "}
+          {`${cdata.builtStart.split("-")[0]} - ${
+            cdata.builtEnd.split("-")[0]
+          }`}
+        </span>
+      );
+    } else if (cdata?.builtStart && !cdata?.builtEnd) {
+      return (
+        <span>
+          <span className="fa-light fa-calendar-days" />
+          Built: {`${cdata.builtStart.split("-")[0]} - Current`}
+        </span>
+      );
+    } else if (cdata?.builtEnd && !cdata?.builtStart) {
+      return (
+        <span>
+          <span className="fa-light fa-calendar-days" />
+          Built: {`Completed ${cdata.builtEnd.split("-")[0]}`}
+        </span>
+      );
+    } else {
+      return "";
+    }
+  };
   return (
     <>
       {loading ? (
@@ -137,19 +166,16 @@ const FeaturedListings = ({
                         </span>
                       )}
 
-                      <span>
-                        <span className="fa-light fa-calendar-days" />
-                        Built:{" "}
-                        {listing.builtEnd != "Present"
-                          ? `${listing.builtStart.split("-")[0]} - ${
-                              listing.builtEnd.split("-")[0]
-                            }`
-                          : "New Construction"}
-                      </span>
-                      <span>
-                        <span className="fa-light fa-sitemap" />
-                        Size: {listing?.communitySize}
-                      </span>
+                      {builtChecker(listing)}
+
+                      {listing?.communitySize ? (
+                        <span>
+                          <span className="fa-light fa-sitemap" />
+                          Size: {listing?.communitySize}
+                        </span>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <hr className="mt-2 mb-2" />
                   </>

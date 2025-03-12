@@ -88,11 +88,15 @@ const CommunitiesDataTable = ({ communitiesData, setDeleteData }) => {
                       : `${community?.area ? community?.area?.name + "," : ""}`}
                     {community?.state?.abbreviation}
                   </p>
-                  <div className="list-price">
-                    <span>
-                      Price: <CommunityMinMaxPrice data={community} />
-                    </span>
-                  </div>
+                  {community.minPrice || community.maxPrice ? (
+                    <div className="list-price">
+                      <span>
+                        Price: <CommunityMinMaxPrice data={community} />
+                      </span>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             </th>
