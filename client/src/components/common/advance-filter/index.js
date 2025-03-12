@@ -1,4 +1,5 @@
 "use client";
+import getCommunities from "@/lib/getCommunities";
 import {
   addCommunityFilterValue,
   removeCommunityFilterValues,
@@ -46,6 +47,7 @@ const AdvanceFilterModal = () => {
     county: currentCountySearch,
     communitySize: currentCommunitySize,
   } = useSelector((state) => state.communityFilter);
+
   const community = useSelector((state) => state.communityFilter);
   const dispatch = useDispatch();
 
@@ -80,11 +82,33 @@ const AdvanceFilterModal = () => {
   const [communitySize, setCommunitySize] = useState(
     currentCommunitySize || ""
   );
-
+  const [stateError, setStateError] = useState(false);
   // redirect route
   const router = useRouter();
-
-  const submitHanlder = () => {
+  const resetAdvanceSearch = () => {
+    setTitleSearch("");
+    setCity("");
+    setArea("");
+    setState("");
+    setGated("Any");
+    setAgeRestrictions("Any");
+    setPrice([0, 1000000000]);
+    setAmenities([]);
+    //added by shipon
+    setCurrentHomeTypes([]);
+    setIsNewContraction("No");
+    setClosestHospital(null);
+    setClosestAirport(null);
+    setClosestMilitaryBase(null);
+    setBuilder("");
+    setCountySearch("");
+    setCommunitySize("");
+    dispatch(removeCommunityFilterValues());
+  };
+  const submitHanlder = async () => {
+    if (stateError) {
+      return true;
+    }
     dispatch(
       addCommunityFilterValue({
         titleSearch,
@@ -105,32 +129,13 @@ const AdvanceFilterModal = () => {
         communitySize,
       })
     );
-    router.push(
-      `/summary${state ? `/${state?.slug}` : ""}${
-        area ? `/${area?.slug}` : ""
-      }${city ? `/${city?.slug}` : ""}`
-    );
-  };
-
-  const resetAdvanceSearch = () => {
-    setTitleSearch("");
-    setCity("");
-    setArea("");
-    setState("");
-    setGated("Any");
-    setAgeRestrictions("Any");
-    setPrice([0, 1000000000]);
-    setAmenities([]);
-    //added by shipon
-    setCurrentHomeTypes([]);
-    setIsNewContraction("No");
-    setClosestHospital(null);
-    setClosestAirport(null);
-    setClosestMilitaryBase(null);
-    setBuilder("");
-    setCountySearch("");
-    setCommunitySize("");
-    dispatch(removeCommunityFilterValues());
+    await getCommunities();
+    //  router.push(
+    //   `/summary${state ? `/${state?.slug}` : ""}${
+    //     area ? `/${area?.slug}` : ""
+    //   }${city ? `/${city?.slug}` : ""}`
+    // );
+    router.push(`/summary/${state ? state?.slug : ""}`);
   };
 
   useEffect(() => {
@@ -225,6 +230,8 @@ const AdvanceFilterModal = () => {
               setBuilder={setBuilder}
               communitySize={communitySize}
               setCommunitySize={setCommunitySize}
+              stateError={stateError}
+              setStateError={setStateError}
             />
             {/* End .col-md-6 */}
           </div>

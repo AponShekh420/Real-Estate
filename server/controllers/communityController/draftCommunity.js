@@ -121,9 +121,9 @@ const addDraftCommunity = async (req, res) => {
     currentThumbnail,
     militaryBase,
     pictureDone,
+    communitySize,
     ...otherFields
   } = req.body;
-
   try {
     const validatedDraftId = mongoose.Types.ObjectId.isValid(draftId)
       ? draftId
@@ -181,6 +181,7 @@ const addDraftCommunity = async (req, res) => {
       ageRestrictions: JSON.parse(ageRestrictions),
       pictureDone: JSON.parse(pictureDone),
       health: req.healthValue,
+      communitySize: communitySize !== "null" ? Number(communitySize) : null,
     };
 
     if (draft) {

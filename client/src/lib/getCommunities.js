@@ -2,7 +2,7 @@ import { addCommunityFilterValue } from "@/redux/communityFilterSlice";
 
 const { default: store } = require("@/redux/store");
 
-const getCommunities = async () => {
+export const getCommunities = async () => {
   const {
     titleSearch,
     state,

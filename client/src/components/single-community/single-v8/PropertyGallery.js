@@ -22,7 +22,9 @@ const PropertyGallery = ({ id, data }) => {
       iframe.style.pointerEvents = "auto"; // Enable video interaction
     });
   };
-
+  const controlLayout = () => {
+    return embedVideo ? images.length + 1 : images.length;
+  };
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -169,14 +171,26 @@ const PropertyGallery = ({ id, data }) => {
         <div className="row">
           <div
             className={`${
-              images.length < 4 ? "col-lg-5 col-md-6" : "col-lg-8 col-md-9"
+              controlLayout() < 4
+                ? controlLayout() < 3
+                  ? controlLayout() < 2
+                    ? "col-lg-3 col-md-4"
+                    : "col-lg-5 col-md-6"
+                  : "col-lg-7 col-md-8"
+                : "col-lg-8 col-md-9"
             }`}
           >
             <Swiper
               onSwiper={setThumbsSwiper}
               loop={true}
               spaceBetween={10}
-              slidesPerView={images.length < 4 ? images.length : 4}
+              slidesPerView={
+                images.length < 4
+                  ? embedVideo
+                    ? images.length + 1
+                    : images.length
+                  : 4
+              }
               freeMode={true}
               watchSlidesProgress={true}
               modules={[FreeMode, Navigation, Thumbs]}
@@ -197,10 +211,11 @@ const PropertyGallery = ({ id, data }) => {
                     width={83}
                     src={thumbnail}
                     alt="image"
-                    className="w-100 bdrs12 cover pointer"
+                    className="w-100  bdrs12 cover pointer"
                   />
                 </SwiperSlide>
               )}
+
               {images.map(
                 (item, i) =>
                   item != thumbnail && (
