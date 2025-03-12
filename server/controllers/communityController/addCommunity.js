@@ -99,7 +99,7 @@ const addCommunity = async (req, res) => {
       builtStart,
       gated: JSON.parse(gated),
       ageRestrictions: JSON.parse(ageRestrictions),
-      communitySize: Number(communitySize),
+      communitySize: communitySize !== "null" ? communitySize : null,
       description,
       amenities: JSON.parse(amenities),
       builders: JSON.parse(builders),

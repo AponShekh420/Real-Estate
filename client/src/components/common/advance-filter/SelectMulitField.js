@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Select from "react-select";
+import "./state.css";
 
 const customStyles = {
   option: (styles, { isFocused, isSelected, isHovered }) => {
@@ -70,6 +71,8 @@ const SelectMultiField = ({
   setGated,
   communitySize,
   setCommunitySize,
+  stateError,
+  setStateError,
 }) => {
   // options
   const [stateOptions, setStateOptions] = useState([]);
@@ -140,12 +143,19 @@ const SelectMultiField = ({
     fetchStateData();
   }, []);
 
+  useEffect(() => {
+    if (!state) {
+      setStateError(true);
+    } else {
+      setStateError(false);
+    }
+  }, [state]);
   return (
     <>
       <div className="col-sm-6">
         <div className="widget-wrapper">
           <h6 className="list-title">State</h6>
-          <div className="d-flex">
+          <div className={`d-flex ${stateError ? "stateId" : ""}`}>
             <Select
               id="asdiuofjasido"
               instanceId="asdiuofjasido"
@@ -166,11 +176,16 @@ const SelectMultiField = ({
               value={{ value: state?.name, label: state?.name }}
             />
           </div>
+          {stateError ? (
+            <p className="text-danger ml5">State is required!</p>
+          ) : (
+            ""
+          )}
         </div>
       </div>
       <div className="col-sm-6">
         <div className="widget-wrapper">
-          <h6 className="list-title">Size</h6>
+          <h6 className="list-title">Size (# of Homes)</h6>
           <div className="d-flex">
             <Select
               instanceId="asdfasdfasde"

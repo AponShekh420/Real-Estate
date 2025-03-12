@@ -66,7 +66,7 @@ const getDataByFilter = (community) => {
 
   formData.set("gated", gated);
   formData.set("ageRestrictions", ageRestrictions);
-  formData.set("communitySize", communitySize ? communitySize : 0);
+  formData.set("communitySize", communitySize);
   formData.set("maxPrice", maxPrice);
   formData.set("minPrice", minPrice);
   formData.set("zip", zip);

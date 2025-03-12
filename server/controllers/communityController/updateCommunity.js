@@ -47,7 +47,7 @@ const updateCommuity = async (req, res) => {
       county,
       pictureDone,
     } = req.body;
-    console.log(minPrice);
+
     // Find the current community by ID
     const currentCommunity = await CommunityModel.findById(communityId);
     if (!currentCommunity) {
@@ -117,7 +117,7 @@ const updateCommuity = async (req, res) => {
       builtStart,
       gated: JSON.parse(gated),
       ageRestrictions: JSON.parse(ageRestrictions),
-      communitySize: Number(communitySize),
+      communitySize: communitySize !== "null" ? communitySize : null,
       description,
       amenities: JSON.parse(amenities),
       builders: JSON.parse(builders),

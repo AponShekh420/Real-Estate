@@ -8,10 +8,22 @@ const CommunityDetails = ({ data }) => {
       value: `$${data.minPrice} - $${data.maxPrice}`,
     });
   }
+  if (data?.gated !== null) {
+    columns[0].push({
+      label: "Gated",
+      value: data.gated ? "Yes" : "No",
+    });
+  }
   if (data.communitySize > 0) {
     columns[0].push({
       label: "Size",
       value: `${data.communitySize} Homes`,
+    });
+  }
+  if (data?.ageRestrictions !== null) {
+    columns[0].push({
+      label: "Age Restrictions",
+      value: data.ageRestrictions ? "55+" : "No",
     });
   }
   if (data?.builtStart && data?.builtEnd) {
@@ -21,29 +33,17 @@ const CommunityDetails = ({ data }) => {
         data.builtEnd.split("-")[0]
       }`,
     });
-    columns[0].push({
-      label: "New Construction",
-      value: "No",
-    });
   }
   if (data?.builtStart && !data?.builtEnd) {
     columns[0].push({
       label: "Construction Dates",
       value: `${data.builtStart.split("-")[0]} - Current`,
     });
-    columns[0].push({
-      label: "New Construction",
-      value: "Yes",
-    });
   }
   if (data?.builtEnd && !data?.builtStart) {
     columns[0].push({
       label: "Construction Dates",
       value: `Completed ${data.builtEnd.split("-")[0]}`,
-    });
-    columns[0].push({
-      label: "New Construction",
-      value: "No",
     });
   }
 
@@ -53,27 +53,22 @@ const CommunityDetails = ({ data }) => {
       value: data.county,
     });
   }
-  if (data?.ageRestrictions !== null) {
-    columns[0].push({
-      label: "Age Restrictions",
-      value: data.ageRestrictions ? "55+" : "No",
-    });
-  }
-  if (data?.gated !== null) {
-    columns[0].push({
-      label: "Gated",
-      value: data.gated ? "Yes" : "No",
-    });
-  }
+
   if (data?.homeTypes?.length > 0) {
     columns[0].push({
       label: "Home Types",
       value: data?.homeTypes?.join(", "),
     });
   }
+  if (data?.hospital && data?.hospital?.name) {
+    columns[0].push({
+      label: "Closest Hospital",
+      value: `${data.hospital.name} (${data.hospital.distance} miles)`,
+    });
+  }
   if (data?.builders?.length > 0) {
     columns[0].push({
-      label: "builder",
+      label: "Builder",
       value: `${data.builders?.map((builder) => builder.name).join(", ")}`,
     });
   }
@@ -84,10 +79,23 @@ const CommunityDetails = ({ data }) => {
       value: `${data.airport.name} (${data.airport.distance} miles)`,
     });
   }
-  if (data?.hospital && data?.hospital?.name) {
+
+  if (data?.builtStart && data?.builtEnd) {
     columns[0].push({
-      label: "Closest Hospital",
-      value: `${data.hospital.name} (${data.hospital.distance} miles)`,
+      label: "New Construction",
+      value: "No",
+    });
+  }
+  if (data?.builtStart && !data?.builtEnd) {
+    columns[0].push({
+      label: "New Construction",
+      value: "Yes",
+    });
+  }
+  if (data?.builtEnd && !data?.builtStart) {
+    columns[0].push({
+      label: "New Construction",
+      value: "No",
     });
   }
   if (data?.militaryBase && data?.militaryBase?.name) {
