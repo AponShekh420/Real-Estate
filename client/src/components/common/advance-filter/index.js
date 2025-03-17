@@ -106,9 +106,9 @@ const AdvanceFilterModal = () => {
     dispatch(removeCommunityFilterValues());
   };
   const submitHanlder = async () => {
-    if (stateError) {
-      return true;
-    }
+    // if (stateError) {
+    //   return true;
+    // }
     dispatch(
       addCommunityFilterValue({
         titleSearch,
