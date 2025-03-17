@@ -177,7 +177,7 @@ const DetailsFiled = () => {
               onChange={(e) => {
                 dispatch(
                   addCommunityFieldValue({
-                    communitySize: e.target.value.replace(/\D/g, null),
+                    communitySize: e.target.value.replace(/\D/g, ""),
                   })
                 );
               }}
