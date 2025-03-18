@@ -4,7 +4,7 @@ import {
   addCommunityFilterValue,
   removeCommunityFilterValues,
 } from "@/redux/communityFilterSlice";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Amenities from "./Amenities";
@@ -50,6 +50,7 @@ const AdvanceFilterModal = () => {
 
   const community = useSelector((state) => state.communityFilter);
   const dispatch = useDispatch();
+  const pathname = usePathname();
 
   // react state
   const [amenities, setAmenities] = useState([...currentAmenities]);
@@ -106,9 +107,9 @@ const AdvanceFilterModal = () => {
     dispatch(removeCommunityFilterValues());
   };
   const submitHanlder = async () => {
-    // if (stateError) {
-    //   return true;
-    // }
+    if (stateError) {
+      return true;
+    }
     dispatch(
       addCommunityFilterValue({
         titleSearch,
@@ -143,6 +144,11 @@ const AdvanceFilterModal = () => {
     setCity(currentCity);
   }, [currentState, currentCity]);
 
+  useEffect(() => {
+    if (!pathname.includes("summary")) {
+      resetAdvanceSearch();
+    }
+  }, [pathname]);
   return (
     <div className="modal-dialog modal-dialog-centered modal-lg">
       <div className="modal-content">
