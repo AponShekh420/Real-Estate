@@ -7810,6 +7810,10 @@ li.mm-listitem:focus {
     position: relative;
     z-index: 2;
 }
+
+.advance-search-tab-result {
+    padding: 0px !important;
+}
 .advance-search-tab .nav.nav-tabs {
     background-color: #ffffff;
     border-bottom: 1px solid #dddddd;
@@ -9489,6 +9493,14 @@ input:focus-visible {
         top: 35px;
     }
 }
+
+@media (max-width: 1000.98px) {
+    .mobile-filter-btn-results-page {
+        top: 20px !important;
+    }
+}
+
+
 .mobile-filter-btn.map-page {
     border-radius: 12px;
     height: 55px;
@@ -9686,6 +9698,9 @@ input:focus-visible {
 }
 .dropdown-lists .dropdown-toggle:after {
     display: none;
+}
+.result-advance-filter {
+    width: fit-content !important;
 }
 .dropdown-lists .open-btn {
     background-color: #ffffff;

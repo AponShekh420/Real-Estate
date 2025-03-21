@@ -9,6 +9,7 @@ import userSlice from './userSlice'
 import blogSlice from './blogSlice'
 import communityFilterSlice from './communityFilterSlice'
 import blogFilterSlice from './blogFilterSlice'
+import resultFilterSlice from './resultFilterSlice'
 
 
 const store = configureStore({
@@ -23,6 +24,7 @@ const store = configureStore({
     blog: blogSlice,
     communityFilter: communityFilterSlice,
     blogFilter: blogFilterSlice,
+    resultsFilter: resultFilterSlice
   }
 })
 
