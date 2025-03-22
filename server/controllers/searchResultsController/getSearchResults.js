@@ -11,7 +11,7 @@ const BlogModel = require("../../models/BlogModel")
 // This controller will give us communities data by filter
 const getSearchResults = async (req, res) => {
 
-  const {search, filterData} = req.body;
+  const {search, filterData, limitStart, limitEnd} = req.body;
 
   try {
     const communities = await CommunityModel.find({
@@ -101,7 +101,8 @@ const getSearchResults = async (req, res) => {
     if(data) {
       res.status(200).json({
         msg: "The data has been received successfully",
-        data: data
+        data: data.slice(limitStart, limitEnd),
+        lotalNumberOfData: data.length
       })
     } else {
       res.status(404).json({

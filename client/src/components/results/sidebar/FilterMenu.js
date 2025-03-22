@@ -28,7 +28,10 @@ export default function FilterMenu({
       addResultsFilterValue({
         currentFilterType: currentFilterType.includes(elm)
         ? [...currentFilterType.filter((el) => el != elm)]
-        : [...currentFilterType, elm]
+        : [...currentFilterType, elm],
+        totalPages: 1,
+        currentPage: 1,
+        lotalNumberOfData: 0,
       })
     );
   };

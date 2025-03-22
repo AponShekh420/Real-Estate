@@ -114,8 +114,13 @@ const page = () => {
               </div>
               {/* End .row */}
 
-              <div className="row">
-                <Pagination />
+              <div className="row mt20">
+                <Pagination 
+                  // currentPage={currentPage}
+                  // setCurrentPage={setCurrentPage}
+                  // totalPages={totalPages}
+                  // data={communitiesData}
+                />
               </div>
               {/* End .row */}
             </div>

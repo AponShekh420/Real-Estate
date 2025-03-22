@@ -8,11 +8,12 @@ const initialState = {
   // blog: "",
   // communities: "",
   currentFilterType: [],
-  loading: true,
+  loading: false,
   errors: {},
   data: [],
   totalPages: 1,
   currentPage: 1,
+  lotalNumberOfData: 0,
 };
 
 const resultsFilter = createSlice({

@@ -5,23 +5,46 @@ import Link from "next/link";
 import { addCommunityFilterValue } from "@/redux/communityFilterSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { addResultsFilterValue, removeResultsFilterValues } from "@/redux/resultFilterSlice";
+import { MoonLoader } from "react-spinners";
 
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "#EB6753",
+};
 
 let searchIntervel;
 
 const SearchBar = () => {
   const router = useRouter();
   const [suggestion, setSuggestion] = useState(true);
-  const {data, currentFilterType, titleSearch} = useSelector(state => state.resultsFilter)
+  const {data, currentFilterType, titleSearch, loading, currentPage} = useSelector(state => state.resultsFilter)
   
   const dispatch = useDispatch();
 
 
   const searchResult = async (e) => {
     e && e?.preventDefault();
+    e && dispatch(addResultsFilterValue({
+        data: [],
+        totalPages: 1,
+        currentPage: 1,
+        lotalNumberOfData: 0,
+        resultsTitle: titleSearch,
+      }))
     if(titleSearch == "" || !titleSearch) {
+      dispatch(addResultsFilterValue({
+        data: [],
+        totalPages: 1,
+        currentPage: 1,
+        lotalNumberOfData: 0,
+      }))
       return;
     }
+    dispatch(addResultsFilterValue({
+      loading: true,
+    }))
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/suggestion/results`, {
         method: "POST",
@@ -32,13 +55,22 @@ const SearchBar = () => {
         },
         body: JSON.stringify({
           search: titleSearch,
-          filterData: currentFilterType.length < 1 ? ["State", "Area", "City", "Blog", "Communities"] : currentFilterType
+          filterData: currentFilterType.length < 1 ? ["State", "Area", "City", "Blog", "Communities"] : currentFilterType,
+          limitStart: (currentPage - 1) * 20,
+          limitEnd: currentPage * 20,
         })
       });
       const resData = await res.json();
-      console.log("searchData", resData)
-      if(resData?.data) {
-        dispatch(addResultsFilterValue(resData))
+      dispatch(addResultsFilterValue({
+        loading: false
+      }))
+      if(resData) {
+        dispatch(addResultsFilterValue({
+          ...resData,
+          totalPages: Math.ceil(resData.lotalNumberOfData / 20) <= 1
+          ? 1
+          : Math.ceil(resData.lotalNumberOfData / 20)
+        }))
         // setData(resData?.data)
       }
     } catch(err) {
@@ -48,7 +80,7 @@ const SearchBar = () => {
 
   useEffect(()=> {
     searchResult()
-  }, [currentFilterType])
+  }, [currentFilterType, currentPage])
 
   return (
     <>
@@ -109,115 +141,99 @@ const SearchBar = () => {
         </div>
       </div>
 
+      {loading ? (
+        <div
+        className="w-100 d-flex justify-content-center align-items-center text-white"
+        style={{ height: "300px"}}
+        >
+          <MoonLoader
+            color="#EB6753"
+            loading={loading}
+            cssOverride={override}
+            size={40}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      ) : data.length > 0 ? (
+        <ul className={`w100 ${suggestion ? "d-block" : "d-none"} mt15`}>
+          {
+            data.map((item, index) => {
+              // console.log("typeCheking:", item.type)
+              if(item?.type == 'community') {
+                // console.log("item", item)
+                return (
+                  <Link href={`/community/${item?.slug}`} key={item?.slug} passHref>
+                    <li className="bdrt1 dropdown-item" tabIndex={-1}>
+                      <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-cente">
+                        <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{item?.title}, {item?.state?.name}</p>
+                        <p className="mb-0">Community</p>
+                      </div>
+                    </li>
+                  </Link>
+                )
 
-      {/* data list */}
-      <ul className={`w100 ${suggestion ? "d-block" : "d-none"} mt15`}>
-
-
-      {
-        data.map((item, index) => {
-          // console.log("typeCheking:", item.type)
-          if(item?.type == 'community') {
-            // console.log("item", item)
-            return (
-              <Link href={`/community/${item?.slug}`} key={item?.slug} passHref>
-                <li className="bdrt1 dropdown-item" tabIndex={-1}>
-                  <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-cente">
-                    <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{item?.title}, {item?.state?.name}</p>
-                    <p className="mb-0">Community</p>
-                  </div>
-                </li>
-              </Link>
-            )
-
-          } else if(item?.type == 'blog') {
-            return (
-              <Link href={`/blog/${item?.slug}`} key={item?.slug} passHref>
-                <li className="bdrt1 dropdown-item" tabIndex={-1}>
-                  <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-center">
-                    <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{item?.title}</p>
-                    <p className="mb-0">Blog</p>
-                  </div>
-                </li>
-              </Link>
-            )
-          } else if(item?.type == 'city') {
-            return (
-              <Link href={`/summary/${item?.state?.slug}/${item?.area.slug}/${item?.slug}`} key={item?.slug} passHref>
-                <li className="bdrt1 dropdown-item" tabIndex={-1}>
-                  <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-center">
-                    <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{item?.name}, {item?.state?.abbreviation}</p>
-                    <p className="mb-0">City</p>
-                  </div>
-                </li>
-              </Link>
-            )
-          } else if(item?.type == 'area') {
-            return (
-              <Link href={`/summary/${item?.state?.slug}/${item?.slug}`} key={item?.slug} passHref>
-                <li className="bdrt1 dropdown-item" tabIndex={-1}>
-                  <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-center">
-                    <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{item?.name}, {item?.state?.abbreviation}</p>
-                    <p className="mb-0">Area</p>
-                  </div>
-                </li>
-              </Link>
-            )
-          } else if(item?.type == 'state') {
-            console.log("why it got", item)
-            return (
-              <Link href={`/summary/${item?.slug}`} key={item?.slug} passHref>
-                <li className="bdrt1 dropdown-item" tabIndex={-1}>
-                  <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-center">
-                    <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{item?.name}</p>
-                    <p className="mb-0">State</p>
-                  </div>
-                </li>
-              </Link>
-            )
-          } else {
-            return;
+              } else if(item?.type == 'blog') {
+                return (
+                  <Link href={`/blog/${item?.slug}`} key={item?.slug} passHref>
+                    <li className="bdrt1 dropdown-item" tabIndex={-1}>
+                      <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-center">
+                        <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{item?.title}</p>
+                        <p className="mb-0">Blog</p>
+                      </div>
+                    </li>
+                  </Link>
+                )
+              } else if(item?.type == 'city') {
+                return (
+                  <Link href={`/summary/${item?.state?.slug}/${item?.area.slug}/${item?.slug}`} key={item?.slug} passHref>
+                    <li className="bdrt1 dropdown-item" tabIndex={-1}>
+                      <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-center">
+                        <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{item?.name}, {item?.state?.abbreviation}</p>
+                        <p className="mb-0">City</p>
+                      </div>
+                    </li>
+                  </Link>
+                )
+              } else if(item?.type == 'area') {
+                return (
+                  <Link href={`/summary/${item?.state?.slug}/${item?.slug}`} key={item?.slug} passHref>
+                    <li className="bdrt1 dropdown-item" tabIndex={-1}>
+                      <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-center">
+                        <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{item?.name}, {item?.state?.abbreviation}</p>
+                        <p className="mb-0">Area</p>
+                      </div>
+                    </li>
+                  </Link>
+                )
+              } else if(item?.type == 'state') {
+                console.log("why it got", item)
+                return (
+                  <Link href={`/summary/${item?.slug}`} key={item?.slug} passHref>
+                    <li className="bdrt1 dropdown-item" tabIndex={-1}>
+                      <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-center">
+                        <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{item?.name}</p>
+                        <p className="mb-0">State</p>
+                      </div>
+                    </li>
+                  </Link>
+                )
+              } else {
+                return;
+              }
+              
+            })
           }
-          
-        })
-      }
-
-
-
-
-
-
-        {/* {(currentFilterType.length < 1 || currentFilterType.includes("Communities")) && (
-          data?.communities?.map((community) => (
-            
-          ))
-        )}
-
-        {(currentFilterType.length < 1 || currentFilterType.includes("State")) && (
-          data?.states?.map((state) => (
-            
-          ))
-        )}
-
-        
-        {(currentFilterType.length < 1 || currentFilterType.includes("Area")) && (
-          data?.areas?.map((area) => (
-            
-          )))
-        }
-
-        {(currentFilterType.length < 1 || currentFilterType.includes("City")) && (
-          data?.cities?.map((city) => (
-            
-          )))
-        }
-
-        {(currentFilterType.length < 1 || currentFilterType.includes("Blog")) && (
-          data?.blogs?.map((blog) => (
-            
-          )))
-        } */}
-      </ul>
+        </ul> ) : (
+        <div className="h-100 w-100 d-flex justify-content-center align-items-center">
+          <h1
+            style={{ height: "300px" }}
+            className="d-flex align-items-center justify-content-center"
+          >
+            No Data Found
+          </h1>
+        </div>
+      )}
     </>
   );
 };

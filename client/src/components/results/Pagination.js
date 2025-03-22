@@ -1,11 +1,12 @@
 "use client";
 import { addCommunityFilterValue } from "@/redux/communityFilterSlice";
+import { addResultsFilterValue } from "@/redux/resultFilterSlice";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Pagination = () => {
 
-  const {data: resultsData, totalPages, currentPage} = useSelector(state => state.resultsFilter);
+  const {data: resultsData, totalPages, currentPage, lotalNumberOfData} = useSelector(state => state.resultsFilter);
   const dispatch = useDispatch();
 
   // const {communities, blogs, states, areas} = resultsData;
@@ -16,7 +17,7 @@ const Pagination = () => {
 
 
   const handlePageClick = (page) => {
-    dispatch(addCommunityFilterValue({
+    dispatch(addResultsFilterValue({
       currentPage: page,
     }))
   };
@@ -74,7 +75,7 @@ const Pagination = () => {
         </li>
       </ul>
       <p className="mt10 pagination_page_count text-center">
-        {currentPage}-{totalPages} of {resultsData.length} Search Results
+        {currentPage}-{totalPages} of {lotalNumberOfData} Search Results
       </p>
     </div>
   );
