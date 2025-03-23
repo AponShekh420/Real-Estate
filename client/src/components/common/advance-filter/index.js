@@ -265,10 +265,11 @@ const AdvanceFilterModal = () => {
           </button>
           <div className="btn-area">
             <button
-              data-bs-dismiss="modal"
-              type="submit"
+              data-bs-dismiss={`${stateError ? "" : "modal"}`}
+              type={`${stateError ? "" : "submit"}`}
               className="ud-btn btn-thm"
-              onClick={submitHanlder}
+              onClick={stateError ? ()=> {}: submitHanlder}
+              style={{cursor: stateError? "not-allowed": "pointer"}}
             >
               <span className="flaticon-search align-text-top pr10" />
               Search

@@ -3272,11 +3272,16 @@ li {
     line-height: 55px;
     padding: 0;
     text-align: center;
-    width: 55px;
+    min-width: 55px !important;
 }
 .advance-content-style1.at-home8 .dropdown-menu li:first-child {
     display: none;
 }
+
+// .resultsMenu .advance-search-btn {
+//     padding-right: 10px;
+// }
+
 
 .advance-content-style1 .form-control,
 .advance-content-style3 .form-control {
@@ -10581,5 +10586,21 @@ input:focus-visible {
         color: #EB6753;
         font-size: large;
         text-align: center;
+    }
+}
+
+.resultsSearchCustomRow {
+    display: flex;
+}
+.resultsSearchBar {
+    width: 100% !important;
+}
+.resultsSearchBar .advance-search-field {
+    width: 100% !important;
+}
+
+@media (min-width: 992px) {
+    .resultsSearchCustomRow {
+        gap: 10px;
     }
 }

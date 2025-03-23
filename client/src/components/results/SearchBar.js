@@ -90,9 +90,9 @@ const SearchBar = () => {
               className={"active"}
             >
               <div className="advance-content-style1">
-                <div className="row">
-                  <div className="col-md-8 col-lg-9">
-                    <div className="advance-search-field position-relative text-start">
+                <div className="d-flex align-items-center resultsSearchCustomRow">
+                  <div className="resultsSearchBar">
+                    <div className="advance-search-field position-relative text-start w-100">
                     <form className="form-search position-relative" onSubmit={searchResult} action={"#"}>
                       <div className="box-search dropdown position-relative">
                         <span className="icon flaticon-home-1" />
@@ -116,10 +116,10 @@ const SearchBar = () => {
                   </div>
                   {/* End .col-md-8 */}
 
-                  <div className="col-md-4 col-lg-3">
-                    <div className="d-flex align-items-center justify-content-start justify-content-md-center mt-3 mt-md-0">
+                  <div className="resultsMenu">
+                    <div className="d-flex align-items-center justify-content-start justify-content-md-center mt-md-0">
                       <button
-                        className="advance-search-btn"
+                        className="advance-search-btn d-lg-block d-none"
                         type="button"
                         data-bs-toggle="modal"
                         data-bs-target="#advanceSeachModal"

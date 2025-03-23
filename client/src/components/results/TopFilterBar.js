@@ -23,7 +23,7 @@ const TopFilterBar = () => {
       <div className="w-100">
         <h3 className="resultsTitle">
           {
-            resultsTitle ? `Showing ${startData}-${endData} of ${lotalNumberOfData} Results for: ${resultsTitle}` : `55&UP Search`
+            resultsTitle && lotalNumberOfData > 0 ? `Showing ${startData}-${endData} of ${lotalNumberOfData} Results for: ${resultsTitle}` : `55&UP Search`
           }
         </h3>
       </div>
