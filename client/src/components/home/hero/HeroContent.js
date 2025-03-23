@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { addCommunityFilterValue } from "@/redux/communityFilterSlice";
 import { useDispatch } from "react-redux";
+import { addResultsFilterValue } from "@/redux/resultFilterSlice";
 
 
 let searchIntervel;
@@ -54,10 +55,10 @@ const HeroContent = () => {
 
   const searchResult = async (e) => {
     e.preventDefault();
-    dispatch(addCommunityFilterValue({
+    dispatch(addResultsFilterValue({
       titleSearch: search,
     }));
-    router.push("/summary");
+    router.push("/results");
   }
 
 
@@ -104,7 +105,7 @@ const HeroContent = () => {
                           <Link href={`/community/${community?.slug}`} key={community?.slug} passHref>
                             <li className="bdrt1 dropdown-item" tabIndex={-1}>
                               <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-cente">
-                                <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{community?.title}, {community?.state?.name}, USA</p>
+                                <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{community?.title}, {community?.state?.name}</p>
                                 <p className="mb-0">Community</p>
                               </div>
                             </li>
@@ -114,7 +115,7 @@ const HeroContent = () => {
                           <Link href={`/summary/${state?.slug}`} key={state?.slug} passHref>
                             <li className="bdrt1 dropdown-item" tabIndex={-1}>
                               <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-center">
-                                <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{state?.name}, USA</p>
+                                <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{state?.name}</p>
                                 <p className="mb-0">State</p>
                               </div>
                             </li>
@@ -124,7 +125,7 @@ const HeroContent = () => {
                           <Link href={`/summary/${area?.state?.slug}/${area?.slug}`} key={area?.slug} passHref>
                             <li className="bdrt1 dropdown-item" tabIndex={-1}>
                               <div className="d-flex flex-wrap gap-sm-0 gap-1 justify-content-between align-items-center">
-                                <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{area?.name}, {area?.state?.abbreviation}, USA</p>
+                                <p className="mb-0 text-capitalize text-wrap" style={{color: "#EE4C34", fontWeight: "500"}}>{area?.name}, {area?.state?.abbreviation}</p>
                                 <p className="mb-0">Area</p>
                               </div>
                             </li>

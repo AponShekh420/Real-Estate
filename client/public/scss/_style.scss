@@ -3272,11 +3272,16 @@ li {
     line-height: 55px;
     padding: 0;
     text-align: center;
-    width: 55px;
+    min-width: 55px !important;
 }
 .advance-content-style1.at-home8 .dropdown-menu li:first-child {
     display: none;
 }
+
+// .resultsMenu .advance-search-btn {
+//     padding-right: 10px;
+// }
+
 
 .advance-content-style1 .form-control,
 .advance-content-style3 .form-control {
@@ -7810,6 +7815,10 @@ li.mm-listitem:focus {
     position: relative;
     z-index: 2;
 }
+
+.advance-search-tab-result {
+    padding: 0px !important;
+}
 .advance-search-tab .nav.nav-tabs {
     background-color: #ffffff;
     border-bottom: 1px solid #dddddd;
@@ -9472,13 +9481,13 @@ input:focus-visible {
     -o-box-shadow: 0px 1px 4px rgba(24, 26, 32, 0.07);
     box-shadow: 0px 1px 4px rgba(24, 26, 32, 0.07);
     border-radius: 60px;
-    display: block;
+    // display: block;
     height: 40px;
     line-height: 40px;
-    position: absolute;
-    right: 0;
+    // position: absolute;
+    // right: 0;
     text-align: center;
-    top: 0;
+    // top: 0;
     width: 98px;
 }
 .mobile-filter-btn span {
@@ -9489,6 +9498,14 @@ input:focus-visible {
         top: 35px;
     }
 }
+
+@media (max-width: 1000.98px) {
+    .mobile-filter-btn-results-page {
+        top: 20px !important;
+    }
+}
+
+
 .mobile-filter-btn.map-page {
     border-radius: 12px;
     height: 55px;
@@ -9686,6 +9703,11 @@ input:focus-visible {
 }
 .dropdown-lists .dropdown-toggle:after {
     display: none;
+}
+.result-advance-filter {
+    width: 200%;
+    display: flex;
+    justify-content: space-between;
 }
 .dropdown-lists .open-btn {
     background-color: #ffffff;
@@ -10536,5 +10558,49 @@ input:focus-visible {
 
     .bb1-sm {
         border-bottom: 1px solid #dddddd;
+    }
+}
+
+
+
+
+// extranal code 
+.resultsTitle  {
+    color: #EB6753;
+    font-size: xx-large;
+    text-align: center;
+}
+
+
+@media (max-width: 768.98px) {
+    .resultsTitle  {
+        color: #EB6753;
+        font-size: x-large;
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 400.98px) {
+    .resultsTitle  {
+        color: #EB6753;
+        font-size: large;
+        text-align: center;
+    }
+}
+
+.resultsSearchCustomRow {
+    display: flex;
+}
+.resultsSearchBar {
+    width: 100% !important;
+}
+.resultsSearchBar .advance-search-field {
+    width: 100% !important;
+}
+
+@media (min-width: 992px) {
+    .resultsSearchCustomRow {
+        gap: 10px;
     }
 }
