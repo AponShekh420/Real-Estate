@@ -9,7 +9,7 @@ import AdvanceFilterModal from "@/components/common/advance-filter";
 import SearchBar from "@/components/results/SearchBar";
 const page = () => {
   return (
-    <>
+    <div className="bgc-f7">
       {/* Main Header Nav */}
       <DefaultHeader />
       {/* End Main Header Nav */}
@@ -34,29 +34,32 @@ const page = () => {
       {/* <!-- Advance Feature Modal End --> */}
 
 
+      <section className="pt50 pb25 pb15-md">
+        <div className="container">
+         <TopFilterBar />
+        </div>
+      </section>
 
-
-      <section className="pt0 pb90 bgc-f7 d-block d-lg-none">
+      <section className="pt0 pb0 mb0 d-block d-lg-none">
         <div className="container">
           {/* mobile filter and advance search */}
-          <div className="result-advance-filter">
+          <div className="result-advance-filter w-100 position-relative">
             <a
               className="filter-btn-left mobile-filter-btn d-block mt0 mobile-filter-btn-results-page"
               data-bs-toggle="offcanvas"
               href="#listingSidebarFilter"
               role="button"
               aria-controls="listingSidebarFilter"
+              style={{fontWeight: "500"}}
             >
-              <span className="flaticon-settings" /> Filter
+              <span className="flaticon-settings" style={{fontWeight: "500"}}/> Filter
             </a>
-          </div>
 
-          <div className="result-advance-filter" style={{paddingTop: "20px"}}>
-            <div className="dropdown-lists result-advance-filter">
-              <ul className="p-0 mb-0 result-advance-filter">
+            <div className="dropdown-lists">
+              <ul className="p-0 mb-0">
                 <li className="list-inline-item">
                   {/* Advance Features modal trigger */}
-                  <button
+                  <a
                     type="button"
                     className="open-btn mb15"
                     style={{position: "top 20px"}}
@@ -64,16 +67,20 @@ const page = () => {
                     data-bs-target="#advanceSeachModal"
                   >
                     <i className="flaticon-settings me-2" /> Advance Filter
-                  </button>
+                  </a>
                 </li>
               </ul>
             </div>
           </div>
+
+          {/* <div className="result-advance-filter" style={{paddingTop: "20px"}}>
+            
+          </div> */}
         </div>
       </section>
 
 
-      <section className="pt0 pb90 bgc-f7">
+      <section className="pt0 pb90">
         <div className="container">
           <div className="row gx-xl-5">
             <div className="col-lg-4 d-none d-lg-block">
@@ -103,9 +110,9 @@ const page = () => {
             {/* End mobile filter sidebar */}
 
             <div className="col-lg-8">
-              <div className="row align-items-center mb20">
+              {/* <div className="row align-items-center mb20">
                 <TopFilterBar />
-              </div>
+              </div> */}
               {/* End TopFilterBar */}
 
               <div className="row mt15">
@@ -137,7 +144,7 @@ const page = () => {
       <Footer />
     </section>
     {/* End Our Footer */}
-    </>
+    </div>
   );
 }
 

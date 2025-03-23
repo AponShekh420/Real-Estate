@@ -20,14 +20,12 @@ const TopFilterBar = () => {
   
   return (
     <>
-      <div className="col-7">
-        <div className="text-center text-xxl-center">
-          <p className="pagination_page_count mb-0">
-            {
-              resultsTitle ? `Showing ${startData}-${endData} of ${lotalNumberOfData} Results for: ${resultsTitle}` : `55&UP Search`
-            }
-          </p>
-        </div>
+      <div className="w-100">
+        <h3 className="resultsTitle">
+          {
+            resultsTitle ? `Showing ${startData}-${endData} of ${lotalNumberOfData} Results for: ${resultsTitle}` : `55&UP Search`
+          }
+        </h3>
       </div>
       {/* End .col-sm-6 */}
     </>
