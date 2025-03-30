@@ -41,7 +41,8 @@ const UploadPhotoGallery = () => {
 
     for (const file of files) {
       const fileName = file?.name
-      setThumbnailList([...thumbnailList, fileName])
+      // setThumbnailList([...thumbnailList, fileName]);
+      setThumbnailList((preArray) => [...preArray, fileName])
       console.log("file:", file)
       const reader = new FileReader();
       reader.onload = (e) => {
