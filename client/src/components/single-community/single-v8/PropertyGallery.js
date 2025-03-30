@@ -182,7 +182,7 @@ const PropertyGallery = ({ id, data }) => {
               className="mySwiper mt20"
             >
               {embedVideo && (
-                <SwiperSlide className="w-25">
+                <SwiperSlide style={{height: "90px", width: "130px"}}>
                   <div
                     className="h-auto bdrs12 pointer videoEmbed-thumb overflow-hidden"
                     dangerouslySetInnerHTML={{ __html: embedVideo }}
@@ -190,13 +190,15 @@ const PropertyGallery = ({ id, data }) => {
                 </SwiperSlide>
               )}
               {thumbnail && (
-                <SwiperSlide className="w-25">
+                <SwiperSlide style={{height: "90px", width: "130px"}}>
                   <Image
-                    height={90}
-                    width={83}
+                    // height={90}
+                    // width={83}
+                    fill
+                    objectFit="cover"
                     src={thumbnail}
                     alt="image"
-                    className="w-100  bdrs12 cover pointer"
+                    className="bdrs12 cover pointer"
                   />
                 </SwiperSlide>
               )}
@@ -204,13 +206,15 @@ const PropertyGallery = ({ id, data }) => {
               {images.map(
                 (item, i) =>
                   item != thumbnail && (
-                    <SwiperSlide key={i} className="w-25">
+                    <SwiperSlide key={i} style={{height: "90px", width: "130px"}}>
                       <Image
-                        height={90}
-                        width={83}
+                        // height={90}
+                        // width={83}
+                        fill
+                        objectFit="cover"
                         src={item}
                         alt="image"
-                        className="w-100 bdrs12 cover pointer"
+                        className="bdrs12 cover pointer"
                       />
                     </SwiperSlide>
                   )
