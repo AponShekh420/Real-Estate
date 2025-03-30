@@ -70,7 +70,6 @@ const UploadPhotoGallery = () => {
   }, [imgs])
 
 
-
   return (
     <>
       <div
