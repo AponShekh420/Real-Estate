@@ -170,42 +170,27 @@ const PropertyGallery = ({ id, data }) => {
 
         <div className="row">
           <div
-            className={`${
-              controlLayout() < 4
-                ? controlLayout() < 3
-                  ? controlLayout() < 2
-                    ? "col-lg-3 col-md-4"
-                    : "col-lg-5 col-md-6"
-                  : "col-lg-7 col-md-8"
-                : "col-lg-8 col-md-9"
-            }`}
           >
             <Swiper
               onSwiper={setThumbsSwiper}
               loop={true}
               spaceBetween={10}
-              slidesPerView={
-                images.length < 4
-                  ? embedVideo
-                    ? images.length + 1
-                    : images.length
-                  : 4
-              }
+              slidesPerView={"auto"}
               freeMode={true}
               watchSlidesProgress={true}
               modules={[FreeMode, Navigation, Thumbs]}
               className="mySwiper mt20"
             >
               {embedVideo && (
-                <SwiperSlide>
+                <SwiperSlide className="w-25">
                   <div
-                    className="h-auto bdrs12 pointer videoEmbed-thumb"
+                    className="h-auto bdrs12 pointer videoEmbed-thumb overflow-hidden"
                     dangerouslySetInnerHTML={{ __html: embedVideo }}
                   />
                 </SwiperSlide>
               )}
               {thumbnail && (
-                <SwiperSlide>
+                <SwiperSlide className="w-25">
                   <Image
                     height={90}
                     width={83}
@@ -219,7 +204,7 @@ const PropertyGallery = ({ id, data }) => {
               {images.map(
                 (item, i) =>
                   item != thumbnail && (
-                    <SwiperSlide key={i}>
+                    <SwiperSlide key={i} className="w-25">
                       <Image
                         height={90}
                         width={83}

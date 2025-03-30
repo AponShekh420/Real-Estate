@@ -11,6 +11,7 @@
   cursor: pointer;
   pointer-events: none;
   object-fit: contain;
+  border-radius: 13px !important;
 }
 .slider-item-image {
   object-fit: cover;

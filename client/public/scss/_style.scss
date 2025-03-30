@@ -10604,3 +10604,19 @@ input:focus-visible {
         gap: 10px;
     }
 }
+
+
+
+
+
+// home state slider 
+.homeStateSliderPreBtn {
+    left: 0;
+    width: fit-content !important;
+}
+  
+.homeStateSliderNextBtn {
+    width: fit-content !important;
+    right: 0;
+}
+  
