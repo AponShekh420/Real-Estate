@@ -121,12 +121,15 @@ const CommunityByStates = () => {
         ))}
       </Swiper>
 
-      <div className="rounded-arrow arrowY-center-position">
+      <div className="rounded-arrow arrowY-center-position homeStateSliderPreBtn">
         <button className="property-by-city-prev__active swiper_button _prev">
           <i className="far fa-chevron-left" />
         </button>
         {/* End prev */}
+      </div>
 
+
+      <div className="rounded-arrow arrowY-center-position homeStateSliderNextBtn">
         <button className="property-by-city-next__active swiper_button _next">
           <i className="far fa-chevron-right" />
         </button>
