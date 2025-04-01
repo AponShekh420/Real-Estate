@@ -32,7 +32,7 @@ const checkCommunityHealth = (req, res, next) => {
   if (!homeTypes || homeTypes?.length <= 0) {
     healthValue = healthValue - 10;
   }
-  if (Number(minPrice) <= 0 || Number(maxPrice) <= 0) {
+  if (Number(minPrice) <= 0 && Number(maxPrice) <= 0) {
     healthValue = healthValue - 10;
   }
   if (ageRestrictions == "null") {
@@ -44,7 +44,7 @@ const checkCommunityHealth = (req, res, next) => {
   if (Number(communitySize) <= 0) {
     healthValue = healthValue - 10;
   }
-  if (!builtStart || !builtEnd) {
+  if ((!builtStart && !builtEnd) || (builtEnd && !builtStart)) {
     healthValue = healthValue - 10;
   }
 
