@@ -49,7 +49,7 @@ const PropertyDescription = () => {
       <div className="row">
         <div className="col-sm-12">
           <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">Title</label>
+            <label className="heading-color ff-heading fw600 mb10">Title <span className="text-danger fs-6">*</span></label>
             <input
               type="text"
               className="form-control"
@@ -71,7 +71,7 @@ const PropertyDescription = () => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Home Type
+              Home Type <sup className="text-danger fs-7">M</sup>
             </label>
             <div className="location-area">
               <Select
@@ -144,7 +144,7 @@ const PropertyDescription = () => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb30">
             <label className="heading-color ff-heading fw600 mb10">
-              Min Price in $
+              Min Price in $ <sup className="text-danger fs-7">M</sup>
             </label>
             <input
               type="number"
@@ -167,7 +167,7 @@ const PropertyDescription = () => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb30">
             <label className="heading-color ff-heading fw600 mb10">
-              Max Price in $
+              Max Price in $ <sup className="text-danger fs-7">M</sup>
             </label>
             <input
               type="number"
@@ -187,10 +187,10 @@ const PropertyDescription = () => {
         </div>
         {/* End .col-7 */}
 
-        <div className="col-sm-6 col-xl-12">
+        <div className="col-xl-12">
           <div className="mb30">
             <label className="heading-color ff-heading fw600 mb10">
-              Description
+              Description <sup className="text-danger fs-7">H</sup>
             </label>
             <div className="text-editor">
               <ReactQuill

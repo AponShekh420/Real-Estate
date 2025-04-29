@@ -74,7 +74,7 @@ const AdvanceFilterModal = () => {
     currentClosestHospital || "Any"
   );
   const [closestAirport, setClosestAirport] = useState(
-    currentClosestAirport || "Any"
+    currentClosestAirport || ""
   );
   const [closestMilitaryBase, setClosestMilitaryBase] = useState(
     currentClosestMilitaryBase || "Any"
@@ -98,9 +98,9 @@ const AdvanceFilterModal = () => {
     //added by shipon
     setCurrentHomeTypes([]);
     setIsNewContraction("No");
-    setClosestHospital(null);
-    setClosestAirport(null);
-    setClosestMilitaryBase(null);
+    setClosestHospital("");
+    setClosestAirport("");
+    setClosestMilitaryBase("");
     setBuilder("");
     setCountySearch("");
     setCommunitySize("");

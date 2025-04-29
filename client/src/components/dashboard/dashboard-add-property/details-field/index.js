@@ -50,7 +50,7 @@ const DetailsFiled = () => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Age Restrictions
+              Age Restrictions <sup className="text-danger fs-7">M</sup>
             </label>
             <div className="location-area">
               <Select
@@ -83,7 +83,7 @@ const DetailsFiled = () => {
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">Gated</label>
+            <label className="heading-color ff-heading fw600 mb10">Gated <sup className="text-danger fs-7">M</sup></label>
             <div className="location-area">
               <Select
                 id="afdasdfasd"
@@ -168,7 +168,7 @@ const DetailsFiled = () => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Community Size
+              Community Size <sup className="text-danger fs-7">M</sup>
             </label>
             <input
               type="text"
@@ -191,7 +191,7 @@ const DetailsFiled = () => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Built Start
+              Built Start <sup className="text-danger fs-7">M</sup>
             </label>
             <input
               type="date"
@@ -214,7 +214,7 @@ const DetailsFiled = () => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Built End
+              Built End <sup className="text-danger fs-7">M</sup>
             </label>
             <input
               type="date"

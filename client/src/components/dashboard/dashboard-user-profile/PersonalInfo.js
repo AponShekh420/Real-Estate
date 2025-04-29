@@ -108,6 +108,7 @@ const PersonalInfo = () => {
     formData.set("companyName", companyName);
     formData.set("taxNumber", taxNumber);
     formData.set("phone", phone);
+    formData.set("email", email);
     formData.set("id", id);
     formData.set("role", role);
     formData.set("about", about);
@@ -132,7 +133,8 @@ const PersonalInfo = () => {
         role,
         about,
         uploadedImageChanged,
-        uploadedImage
+        uploadedImage,
+        email
       })
     }
 
@@ -186,7 +188,7 @@ const PersonalInfo = () => {
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">Email</label>
             <input
-              disabled
+              disabled={!update}
               type="email"
               className="form-control"
               placeholder="Your Email"

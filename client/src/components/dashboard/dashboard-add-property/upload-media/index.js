@@ -30,7 +30,7 @@ const UploadMedia = () => {
               );
             }}
           />{" "}
-          <span>Picture Done</span>
+          <span>Picture Done <sup className="text-danger fs-7">H</sup></span>
         </label>
       </div>
       <div className="form-style1">

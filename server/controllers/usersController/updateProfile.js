@@ -6,7 +6,7 @@ const deleteFileFromSpace = require("../../utils/deleteFileFromSpace");
 // upload the user on database
 const updateProfile = async (req, res)=> {
   try {
-    const {id, role, firstName, lastName, address, phone, companyName, about, taxNumber, oldImgUrl, uploadedImageChanged, uploadedImage} = req.body;
+    const {id, role, email, firstName, lastName, address, phone, companyName, about, taxNumber, oldImgUrl, uploadedImageChanged, uploadedImage} = req.body;
 
     const queryObj = {};
 
@@ -18,6 +18,7 @@ const updateProfile = async (req, res)=> {
       companyName,
       about,
       taxNumber,
+      email,
       avatar: (uploadedImageChanged && uploadedImage) ? req?.files[0]?.location : uploadedImageChanged ? "/images/user_avatar.png" : oldImgUrl,
     }
 
