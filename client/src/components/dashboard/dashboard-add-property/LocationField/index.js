@@ -17,7 +17,7 @@ const LocationField = () => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Address
+              Address <span className="text-danger fs-6">*</span>
             </label>
             <input
               type="text"
@@ -33,7 +33,7 @@ const LocationField = () => {
         </div>
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">City</label>
+            <label className="heading-color ff-heading fw600 mb10">City <span className="text-danger fs-6">*</span></label>
             <input
               type="text"
               className="form-control"
@@ -50,7 +50,7 @@ const LocationField = () => {
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">Zip</label>
+            <label className="heading-color ff-heading fw600 mb10">Zip <span className="text-danger fs-6">*</span></label>
             <input
               type="text"
               className="form-control"

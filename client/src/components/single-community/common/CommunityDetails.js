@@ -115,7 +115,7 @@ const CommunityDetails = ({ data }) => {
   }
   if (data?.militaryBase && data?.militaryBase?.name) {
     columns.push({
-      label: "Closest Military Base",
+      label: "Closest VA",
       value: `${data.militaryBase.name} (${data.militaryBase.distance} miles)`,
       position: "right",
     });

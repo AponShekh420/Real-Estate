@@ -103,7 +103,7 @@ const SelectMultiField = () => {
     <>
       <div className="col-sm-6 col-xl-4">
         <div className="mb20">
-          <label className="heading-color ff-heading fw600 mb10">State</label>
+          <label className="heading-color ff-heading fw600 mb10">State <span className="text-danger fs-6">*</span></label>
           <div className="location-area">
             <Select
               styles={customStyles}

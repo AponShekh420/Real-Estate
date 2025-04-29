@@ -29,6 +29,7 @@ const gatedOptions = [
   { value: "Any", label: "Any" },
 ];
 const ClosestOptions = [
+  { label: "Select", value: "" },
   { label: "1 Miles", value: 1 },
   { label: "5 Miles", value: 5 },
   { label: "10 Miles", value: 10 },
@@ -38,6 +39,7 @@ const ClosestOptions = [
 const ConstractionOptions = [
   { label: "No", value: "No" },
   { label: "Yes", value: "Yes" },
+  { value: "Any", label: "Any" },
 ];
 const sizeOptions = [
   { label: "Select", value: "" },
@@ -366,7 +368,7 @@ const SelectMultiField = ({
       {/* Closest Military select start */}
       <div className="col-sm-6">
         <div className="widget-wrapper">
-          <h6 className="list-title">Closest Military Base</h6>
+          <h6 className="list-title">Closest VA</h6>
           <div className="d-flex">
             <Select
               instanceId="sdfkjalksdjf"

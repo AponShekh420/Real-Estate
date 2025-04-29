@@ -15,7 +15,7 @@ export default function ClosestSection() {
         <div>
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Hospital
+              Hospital <sup className="text-danger fs-7">L</sup>
             </label>
             <input
               type="text"
@@ -57,7 +57,7 @@ export default function ClosestSection() {
         <div className="">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Airport
+              Airport <sup className="text-danger fs-7">L</sup>
             </label>
             <input
               type="text"
@@ -95,16 +95,16 @@ export default function ClosestSection() {
         </div>
       </div>
       <div className="col-sm-6 col-xl-4">
-        <h4 className="title fz17 mb20">Closest Military Base for VA</h4>
+        <h4 className="title fz17 mb20">Closest VA Facility</h4>
         <div>
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Military Base
+              VA Facility <sup className="text-danger fs-7">L</sup>
             </label>
             <input
               type="text"
               className="form-control"
-              placeholder="Enter the hospital name"
+              placeholder="Enter VA Name"
               onChange={(e) => {
                 dispatch(
                   addCommunityFieldValue({

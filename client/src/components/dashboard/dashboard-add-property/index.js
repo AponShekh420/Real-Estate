@@ -590,7 +590,7 @@ const AddPropertyTabContent = ({
           aria-labelledby="nav-item7-tab"
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <h4 className="title fz17 mb30">Select Amenities</h4>
+            <h4 className="title fz17 mb30">Select Amenities <sup className="text-danger fs-7">H</sup></h4>
             <div className="row">
               <Amenities />
             </div>
