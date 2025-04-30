@@ -193,19 +193,27 @@ const DetailsFiled = () => {
             <label className="heading-color ff-heading fw600 mb10">
               Built Start <sup className="text-danger fs-7">M</sup>
             </label>
-            <input
-              type="date"
+            <select
               className="form-control"
-              placeholder="Type the date"
-              onChange={(e) => {
+              value={builtStart}
+              onChange={(e) =>
                 dispatch(
                   addCommunityFieldValue({
                     builtStart: e.target.value,
                   })
+                )
+              }
+            >
+              <option value="">Select Build Start Year</option>
+              {Array.from({ length: new Date().getFullYear() - 1799 }, (_, i) => {
+                const year = new Date().getFullYear() - i;
+                return (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
                 );
-              }}
-              value={builtStart}
-            />
+              })}
+            </select>
             <p className="text-danger">{errors?.builtStart?.msg}</p>
           </div>
         </div>
@@ -216,19 +224,27 @@ const DetailsFiled = () => {
             <label className="heading-color ff-heading fw600 mb10">
               Built End <sup className="text-danger fs-7">M</sup>
             </label>
-            <input
-              type="date"
+            <select
               className="form-control"
-              placeholder="Type the date"
-              onChange={(e) => {
+              value={builtEnd}
+              onChange={(e) =>
                 dispatch(
                   addCommunityFieldValue({
                     builtEnd: e.target.value,
                   })
+                )
+              }
+            >
+              <option value="">Select Build End Year</option>
+              {Array.from({ length: new Date().getFullYear() - 1799 }, (_, i) => {
+                const year = new Date().getFullYear() - i;
+                return (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
                 );
-              }}
-              value={builtEnd}
-            />
+              })}
+            </select>
             <p className="text-danger">{errors?.builtEnd?.msg}</p>
           </div>
         </div>
