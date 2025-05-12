@@ -38,6 +38,8 @@ const PropertyGallery = ({ id, data }) => {
         <div className="container-swipers-slider">
           <Gallery>
             <Swiper
+              // height={}
+              autoHeight={true}
               onSlideChange={enableVideoInteraction} // Also enable when slide changes
               loop={true}
               slidesPerView={"auto"}
@@ -54,7 +56,8 @@ const PropertyGallery = ({ id, data }) => {
                   thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
               }}
               modules={[FreeMode, Navigation, Thumbs]}
-              className="mySwiper2 position-relative sp-img-content"
+              className="mySwiper2 position-relative sp-img-content "
+              // style={{height: "auto"}}
             >
               {embedVideo && (
                 <SwiperSlide>
@@ -66,6 +69,7 @@ const PropertyGallery = ({ id, data }) => {
                   >
                     {({ ref, open }) => (
                       <div
+                        style={{height: "auto"}}
                         ref={ref}
                         className=" bdrs12 pointer videoEmbed"
                         dangerouslySetInnerHTML={{ __html: embedVideo }}
@@ -85,12 +89,13 @@ const PropertyGallery = ({ id, data }) => {
                     {({ ref, open }) => (
                       <Image
                         width={1206}
-                        height={550}
+                        height={0}
                         ref={ref}
                         onClick={open}
                         src={thumbnail}
                         alt="gallery"
-                        className="bdrs12 pointer slider-item-image"
+                        className="bdrs12 pointer slider-item-image community-single-page-slider-image-item"
+                        style={{height: "auto"}}
                       />
                     )}
                   </Item>
@@ -116,12 +121,13 @@ const PropertyGallery = ({ id, data }) => {
                         {({ ref, open }) => (
                           <Image
                             width={1206}
-                            height={550}
+                            height={0}
                             ref={ref}
                             onClick={open}
                             src={item}
                             alt="gallery"
-                            className=" bdrs12 pointer slider-item-image"
+                            className=" bdrs12 pointer slider-item-image community-single-page-slider-image-item"
+                            style={{height: "auto"}}
                           />
                         )}
                       </Item>
