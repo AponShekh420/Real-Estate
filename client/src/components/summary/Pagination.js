@@ -1,6 +1,6 @@
 "use client";
 import { addCommunityFilterValue } from "@/redux/communityFilterSlice";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Pagination = () => {
@@ -14,6 +14,12 @@ const Pagination = () => {
       currentPage: page,
     }))
   };
+
+  useEffect(()=> {
+    dispatch(addCommunityFilterValue({
+      currentPage: 1,
+    }))
+  }, [])
 
   const generatePageNumbers = () => {
     const pageNumbers = [];

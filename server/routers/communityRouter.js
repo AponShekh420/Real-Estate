@@ -28,6 +28,7 @@ const {
 } = require("../controllers/communityController/draftCommunity");
 const uploadDraftCommunityImages = require("../middleware/uploadDraftCommunity");
 const { checkCommunityHealth } = require("../middleware/checkCommunityHealth");
+const { default: exportCommunity } = require("../controllers/communityController/exportCommunity");
 
 // callback function of configure
 const router = express.Router();
@@ -84,5 +85,13 @@ router.post(
   addDraftCommunity
 );
 router.delete("/draft/:id", authCheck, adminAuthCheck, deleteDraftCommunity);
+
+
+
+
+
+// export communities
+router.post("/export", exportCommunity)
+
 
 module.exports = router;
