@@ -194,11 +194,11 @@ const Amenities = () => {
         </label>
       </div>
       <div
-        style={{ display: "flex", justifyContent: "start" }}
-        className="gap-sm-3 gap-lg-3 gap-0 d-sm-flex d-block"
+        style={{ display: "flex", justifyContent: "space-between" }}
+        className="gap-sm-3 gap-lg-3 gap-0 d-sm-flex d-block flex-wrap"
       >
         {Object.keys(unpopularAmenities).map((columnKey, index) => (
-          <div key={index} className="col-sm-5 col-lg-3 col-xxl-2 col-12">
+          <div key={index} className="col-sm-5 col-lg-5 col-xl-3 col-xxl-3 col-12">
             <div className="checkbox-style1">
               {unpopularAmenities[columnKey].map((amenity, amenityIndex) => (
                 <div
@@ -279,11 +279,11 @@ const Amenities = () => {
 
       {/* Popular Amenities Section */}
       <div
-        style={{ display: "flex", justifyContent: "start" }}
-        className="gap-sm-3 gap-lg-3 gap-0 d-sm-flex d-block"
+        style={{ display: "flex", justifyContent: "space-between" }}
+        className="gap-sm-3 gap-lg-3 gap-0 d-sm-flex d-block flex-wrap"
       >
         {Object.keys(popularAmenities).map((columnKey, index) => (
-          <div key={index} className="col-sm-5 col-lg-3 col-xxl-2 col-12">
+          <div key={index} className="col-sm-5 col-lg-5 col-xl-3 col-xxl-3 col-12">
             <div className="checkbox-style1">
               {popularAmenities[columnKey].map((amenity, amenityIndex) => (
                 <div
