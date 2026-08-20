@@ -56,6 +56,7 @@ const checkCommunityValidation = [
     .withMessage("Must be upload a Image")
     .trim(),
   check("phone")
+    .default("")
     .optional({ nullable: true, checkFalsy: true })
     .matches(/^\(\d{3}\) \d{3} \d{4}$/)
     .withMessage("Phone number must be in the format (111) 111 1234")
@@ -68,6 +69,7 @@ const checkCommunityValidation = [
     })
     .trim(),
   check("telephone")
+    .default("")
     .optional({ nullable: true, checkFalsy: true })
     .matches(/^\(\d{3}\) \d{3} \d{4}$/)
     .withMessage("Phone number must be in the format (111) 111 1234")

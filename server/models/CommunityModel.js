@@ -20,6 +20,7 @@ const CommunitySchema = mongoose.Schema(
     phone: {
       type: String,
       required: false,
+      default: "",
     },
     description: String,
     address: {
