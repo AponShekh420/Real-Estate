@@ -95,6 +95,7 @@ const AddPropertyTabContent = ({
           position: "top-right",
           autoClose: 1500,
         });
+        dispatch(removeAllCommunityFieldValue());
         setTimeout(() => {
           router.push(`/dashboard/edit-community/${dataRes?.data?.slug}`);
         }, 1500);
@@ -135,6 +136,7 @@ const AddPropertyTabContent = ({
           position: "top-right",
           autoClose: 1500,
         });
+        dispatch(removeAllCommunityFieldValue());
         setTimeout(() => {
           router.push("/dashboard/my-communities");
         }, 1500);
